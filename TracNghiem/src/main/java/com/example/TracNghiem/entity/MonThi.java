@@ -1,4 +1,4 @@
 package com.example.TracNghiem.entity;
 
-public class NguoiDung {
+public class MonThi {
 }
