@@ -2,6 +2,7 @@ package com.example.TracNghiem.services;
 
 import com.example.TracNghiem.entity.CauHoi;
 import com.example.TracNghiem.repository.ICauHoiRepository;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,5 +34,16 @@ public class CauHoiService {
             throw new IllegalStateException("Product with ID " + id + " does not exist.");
         }
         cauHoiRepository.deleteById(id);
+    }
+    public CauHoi updateCauHoi(@NotNull CauHoi cauHoi) {
+        CauHoi existingCauhoi = cauHoiRepository.findById(cauHoi.getId())
+                .orElseThrow(() -> new IllegalStateException("Product with ID " +
+                        cauHoi.getId() + " does not exist."));
+        existingCauhoi.setTen(cauHoi.getTen());
+//        existingSanpham.setGia(cauHoi.getGia());
+//        /*existingSanpham.setDescription(product.getDescription());*/
+//        existingSanpham.setImgUrl(sanPham.getImgUrl());
+//        existingSanpham.setTheloai(sanPham.getTheloai());
+        return cauHoiRepository.save(existingCauhoi);
     }
 }

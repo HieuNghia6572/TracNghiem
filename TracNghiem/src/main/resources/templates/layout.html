@@ -21,9 +21,9 @@
     <div style="padding-left: 20px">
         <a class="navbar-brand" th:href="@{/home}"> Trang chủ</a>
         <a  sec:authorize="hasAnyAuthority('ADMIN')">
-            <a class="navbar-brand" aria-current="page" href="/sanphams">Danh sách câu hỏi</a>
+            <a class="navbar-brand" aria-current="page" href="/cauhois">Danh sách câu hỏi</a>
             <a class="navbar-brand" aria-current="page" href="/theloais">Danh sách thể loại</a>
-            <a class="navbar-brand" aria-current="page" href="/sanphams/add">Thêm câu hỏi</a>
+            <a class="navbar-brand" aria-current="page" href="/cauhois/add">Thêm câu hỏi</a>
             <a class="navbar-brand" aria-current="page" href="/theloais/add">Thêm thể loại</a>
             <!--<a class="navbar-brand" aria-current="page" href="/order/list">Danh sách đơn hàng</a>-->
         </a>
