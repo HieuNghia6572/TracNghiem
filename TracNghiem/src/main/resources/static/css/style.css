@@ -1440,7 +1440,7 @@ h3 {
 /* line 29, ../../Arafath/CL/December/235. Job board/HTML/scss/_slider.scss */
 .slider_area .single_slider .slider_text h5 {
   font-size: 30px;
-  color: #fff;
+  color: black;
   font-weight: 400;
 }
 
@@ -1449,7 +1449,7 @@ h3 {
   font-family: "Roboto", sans-serif;
   font-size: 56px;
   font-weight: 500;
-  color: #fff;
+  color: black;
 }
 
 @media (max-width: 767px) {
@@ -1491,7 +1491,7 @@ h3 {
 .slider_area .single_slider .slider_text p {
   font-size: 16px;
   font-weight: 400;
-  color: #FFFFFF;
+  color: black;
   font-family: "Roboto", sans-serif;
   margin-bottom: 35px;
 }
