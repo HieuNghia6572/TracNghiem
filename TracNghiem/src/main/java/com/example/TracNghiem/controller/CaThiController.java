@@ -4,6 +4,8 @@ import com.example.TracNghiem.entity.CaThi;
 import com.example.TracNghiem.entity.CauHoi;
 import com.example.TracNghiem.services.CaThiService;
 import com.example.TracNghiem.services.CauHoiService;
+import com.example.TracNghiem.services.MonThiService;
+import com.example.TracNghiem.services.PhongThiService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,12 @@ import org.springframework.web.multipart.MultipartFile;
 public class CaThiController {
     @Autowired
     private CaThiService caThiService;
+
+    @Autowired
+    private MonThiService monThiService;
+
+    @Autowired
+    private PhongThiService phongThiService;
 //    @Autowired
 //    private TheLoaiService theLoaiService;
     // Đảm bảo bạn đã injectCategoryService
@@ -33,6 +41,8 @@ public class CaThiController {
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("cathi", new CaThi());
+        model.addAttribute("monthis", monThiService.getAllMonThi());
+        model.addAttribute("phongthis",phongThiService.getAllPhongThi() );
 //        model.addAttribute("theloais", theLoaiService.getAllTheloai()); //Load sanphams
       //  model.addAttribute("cathi", caThiService.getAllCaThi()); //Load sanphams
         return "/cathis/add-cathi";
@@ -67,6 +77,8 @@ public class CaThiController {
         CaThi caThi = caThiService.getCaThiById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid cathi Id:" + id));
         model.addAttribute("cathis", caThi);
+        model.addAttribute("monthis", monThiService.getAllMonThi());
+        model.addAttribute("phongthis",phongThiService.getAllPhongThi() );
 //        model.addAttribute("theloais", theLoaiService.getAllTheloai()); //Load theloais
         return "/cathis/update-cathi";
     }

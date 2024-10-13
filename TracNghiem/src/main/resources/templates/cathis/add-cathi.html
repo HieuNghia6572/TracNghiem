@@ -18,11 +18,26 @@
                  th:errors="*{tencathi}"></div>
         </div>
         <div class="mb-3">
+            <select class="form-control" id="monthi" name="monthi.id">
+                <option value="">-- Chon Mon Thi --</option>
+                <option th:each="monthi : ${monthis}" th:value="${monthi.id}"
+                        th:text="${monthi.tenmonthi}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <select class="form-control" id="phongthi" name="phongthi.id">
+                <option value="">-- Chon Phong Thi --</option>
+                <option th:each="phongthi : ${phongthis}" th:value="${phongthi.id}"
+                        th:text="${phongthi.tenPhong}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
             <label for="tenmonhoc" class="form-label">Tên môn học:</label>
             <input type="text" th:field="*{tenmonhoc}" class="form-control" id="tenmonhoc" required>
             <div class="text-danger" th:if="${#fields.hasErrors('tenmonhoc')}"
                  th:errors="*{tenmonhoc}"></div>
         </div>
+
         <div class="mb-3">
             <label for="tgbd" class="form-label">Thời gian bắt đầu:</label>
             <input type="datetime-local" th:field="*{tgbd}" class="form-control" id="tgbd" required>
@@ -35,6 +50,12 @@
             <div class="text-danger" th:if="${#fields.hasErrors('tgkt')}"
                  th:errors="*{tgkt}"></div>
         </div>
+
+<!--        <select class="form-control" id="monthi" name="monthi.id">-->
+<!--            <option value=""> chon mon Thi</option>-->
+<!--            <option th:each="monthi : ${categories}" th:value="${monthi.id}"-->
+<!--                    th:text="${monthi.name}"></option>-->
+<!--        </select>-->
 
         <!-- <div class="mb-3">
              <label for="theloai" class="form-label">Thể loại:</label>

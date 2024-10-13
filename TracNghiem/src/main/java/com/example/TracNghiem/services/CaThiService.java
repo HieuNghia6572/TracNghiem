@@ -1,8 +1,12 @@
 package com.example.TracNghiem.services;
 
 import com.example.TracNghiem.entity.CaThi;
+import com.example.TracNghiem.entity.MonThi;
+import com.example.TracNghiem.entity.PhongThi;
 import com.example.TracNghiem.repository.ICaThiRepository;
 
+import com.example.TracNghiem.repository.IMonThiRepository;
+import com.example.TracNghiem.repository.IPhongThiRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,20 +19,34 @@ import java.util.Optional;
 @Service
 public class CaThiService {
     private final ICaThiRepository caThiRepository;
-    // Retrieve all cauhoi from the database
+
+
     public List<CaThi> getAllCaThi() {
         return caThiRepository.findAll();
     }
-    // Retrieve a cauhoi by its id
+
+
     public Optional<CaThi> getCaThiById(Long id) {
         return caThiRepository.findById(id);
     }
-    // Add a new cauhoi to the database
+
+
     public CaThi addCaThi(CaThi caThi) {
         return caThiRepository.save(caThi);
     }
 
-    // Delete a cauhoi by its id
+
+    private final IMonThiRepository monThiRepository;
+    public List<MonThi> getAllMoThi() {
+        return monThiRepository.findAll();
+    }
+
+    private final IPhongThiRepository phongThiRepository;
+    public List<PhongThi> getAllPhongThi() {
+        return phongThiRepository.findAll();
+    }
+
+
     public void deleteCaThi(Long id) {
         if (!caThiRepository.existsById(id)) {
             throw new IllegalStateException("Product with ID " + id + " does not exist.");
@@ -46,5 +64,6 @@ public class CaThiService {
 
         return caThiRepository.save(existingCathi);
     }
+
 
 }

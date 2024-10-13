@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
+import java.util.List;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -33,4 +35,11 @@ public class CaThi {
     private String tgkt;
 
 
+    @ManyToOne
+    @JoinColumn(name= "phongthi_id")
+    private PhongThi phongthi;
+
+    @ManyToOne
+    @JoinColumn(name= "monthi_id")
+    private MonThi monthi;
 }
