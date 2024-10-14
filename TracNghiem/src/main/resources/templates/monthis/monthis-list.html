@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title th:text="${title} ?: 'Monthi'">Phòng Thi</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+<section layout:fragment="content">
+    <h1>Danh Sách Môn Thi </h1>
+
+    <input type="text" id="searchInput" placeholder="Search by name">
+    <button onclick="searchmonthis()" class="btn btn-primary">Tìm kiếm</button>
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Mã Môn Thi  </th>
+            <th>Tên Môn Thi</th>
+            <th> Chức Năng</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="monthi : ${monthis}">
+            <td th:text="${monthi.id}"></td>
+            <td th:text="${monthi.mamonthi}"></td>
+            <td th:text="${monthi.tenmonthi}"></td>
+
+            <!-- <td> <img th:src="${sanpham.ImgUrl}" width="100px" height="100px"></td>
+             <td th:text="${sanpham.theloai.ten}"></td>-->
+            <td>
+
+
+                    <a th:href="@{/monthis/edit/{id}(id=${monthi.id})}" class="btn btn-success btn-sm">Chỉnh sửa</a>
+                    <a th:href="@{/monthis/delete/{id}(id=${monthi.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Xóa</a>
+                </div>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>
+<script>
+    function searchmonthis() {
+        var searchInput = document.getElementById("searchInput");
+        var searchTerm = searchInput.value.toLowerCase();
+        var monthiRows = document.getElementsByTagName("tr");
+
+        for (var i = 1; i < monthiRows.length; i++) {
+            var nameCell = monthiRows[i].getElementsByTagName("td")[1];
+            var monthiName = nameCell.textContent.toLowerCase();
+
+            if (monthiName.includes(searchTerm)) {
+                monthiRows[i].style.display = "";
+            } else {
+                monthiRows[i].style.display = "none";
+            }
+        }
+    }
+</script>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title th:text="${title} ?: 'Phongthi'">Phòng Thi</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+<section layout:fragment="content">
+    <h1>Danh sách Phòng Thi </h1>
+
+    <input type="text" id="searchInput" placeholder="Search by name">
+    <button onclick="searchphongthis()" class="btn btn-primary">Tìm kiếm</button>
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Mã Phòng</th>
+            <th>Tên Phòng</th>
+            <th> Chức Năng</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="phongthi : ${phongthis}">
+            <td th:text="${phongthi.id}"></td>
+            <td th:text="${phongthi.maPhong}"></td>
+            <td th:text="${phongthi.tenPhong}"></td>
+
+            <!-- <td> <img th:src="${sanpham.ImgUrl}" width="100px" height="100px"></td>
+             <td th:text="${sanpham.theloai.ten}"></td>-->
+            <td>
+                <div>
+                    <a th:href="@{/phongthis/edit/{id}(id=${phongthi.id})}" class="btn btn-success btn-sm">Chỉnh sửa</a>
+                    <a th:href="@{/phongthis/delete/{id}(id=${phongthi.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Xóa</a>
+                </div>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>
+<script>
+    function searchphongthis() {
+        var searchInput = document.getElementById("searchInput");
+        var searchTerm = searchInput.value.toLowerCase();
+        var phongthiRows = document.getElementsByTagName("tr");
+
+        for (var i = 1; i < phongthiRows.length; i++) {
+            var nameCell = phongthiRows[i].getElementsByTagName("td")[1];
+            var phongthiName = nameCell.textContent.toLowerCase();
+
+            if (phongthiName.includes(searchTerm)) {
+                phongthiRows[i].style.display = "";
+            } else {
+                phongthiRows[i].style.display = "none";
+            }
+        }
+    }
+</script>

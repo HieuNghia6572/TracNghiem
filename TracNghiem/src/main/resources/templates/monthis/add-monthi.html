@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>Thêm Môn Thi</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<section layout:fragment="content" class="container mt-5">
+    <h1>Thêm Môn Thi Mới</h1>
+    <form th:action="@{/monthis/add}" th:object="${monthi}" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="mamonthi" class="form-label">Mã Môn Thi:</label>
+            <input type="text" th:field="*{mamonthi}" class="form-control" id="mamonthi" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('mamonthi')}"
+                 th:errors="*{mamonthi}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="tenmonthi" class="form-label">Tên  Môn Thi</label>
+            <input type="text" th:field="*{tenmonthi}" class="form-control" id="tenmonthi" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('tenmonthi')}"
+                 th:errors="*{tenmonthi}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Thêm</button>
+        <a th:href="@{/monthis}" class="btn btn-link">Trở về</a>
+    </form>
+</section>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
+</body>
+</html>
