@@ -20,9 +20,9 @@
         <tr>
             <th>ID</th>
             <th>Tên ca thi</th>
-            <th>Ten Mon hoc</th>
-            <th>Tên phong thi </th>
-            <th>ten mon thi</th>
+            <th>Ten môn học</th>
+            <th>Tên phòng thi </th>
+           <!-- <th>ten mon thi</th>-->
             <th>Thời gian bắt đầu thi</th>
             <th>Thời gian kết thúc thi</th>
 
@@ -34,7 +34,7 @@
         <tr th:each="cathi : ${cathis}">
             <td th:text="${cathi.id}"></td>
             <td th:text="${cathi.tencathi}"></td>
-            <td th:text="${cathi.tenmonhoc}"></td>
+            <!--<td th:text="${cathi.tenmonhoc}"></td>-->
             <td th:text="${cathi.phongthi.tenPhong}"></td>
             <td th:text="${cathi.monthi.tenmonthi}"></td>
             <td th:text="${cathi.tgbd}"></td>

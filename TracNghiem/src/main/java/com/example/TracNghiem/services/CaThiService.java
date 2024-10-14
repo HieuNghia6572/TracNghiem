@@ -58,7 +58,7 @@ public class CaThiService {
                 .orElseThrow(() -> new IllegalStateException("Product with ID " +
                         caThi.getId() + " does not exist."));
         existingCathi.setTencathi(caThi.getTencathi());
-        existingCathi.setTenmonhoc(caThi.getTenmonhoc());
+        /*existingCathi.setTenmonhoc(caThi.getTenmonhoc());*/
         existingCathi.setTgbd(caThi.getTgbd());
         existingCathi.setTgkt(caThi.getTgkt());
 

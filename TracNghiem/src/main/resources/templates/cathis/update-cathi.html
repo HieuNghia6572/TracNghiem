@@ -18,12 +18,12 @@
             <div class="text-danger" th:if="${#fields.hasErrors('tencathi')}"
                  th:errors="*{tencathi}"></div>
         </div>
-        <div class="mb-3">
+        <!--<div class="mb-3">
             <label for="tenmonhoc" class="form-label">Tên môn học:</label>
             <input type="text" th:field="*{tenmonhoc}" class="form-control" id="tenmonhoc" required>
             <div class="text-danger" th:if="${#fields.hasErrors('tenmonhoc')}"
                  th:errors="*{tenmonhoc}"></div>
-        </div>
+        </div>-->
         <div class="mb-3">
             <label for="tgbd" class="form-label">Thời gian bắt đầu:</label>
             <input type="datetime-local" th:field="*{tgbd}" class="form-control" id="tgbd" required>

@@ -22,9 +22,9 @@ public class CaThi {
     @NotEmpty(message = "Tên không được để trống")
     private String tencathi;
 
-    @Column(name = "tenmonhoc")
+    /*@Column(name = "tenmonhoc")
     @NotEmpty(message = "Đáp án không được để trống")
-    private String tenmonhoc;
+    private String tenmonhoc;*/
 
     @Column(name = "thoigianbatdauthi")
     @NotEmpty(message = "Đáp án không được để trống")

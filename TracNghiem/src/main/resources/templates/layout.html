@@ -21,10 +21,14 @@
     <div style="padding-left: 20px">
         <a class="navbar-brand" th:href="@{/home}"> Trang chủ</a>
         <a  sec:authorize="hasAnyAuthority('ADMIN')">
-            <a class="navbar-brand" aria-current="page" href="/cauhois">Danh sách câu hỏi</a>
-            <a class="navbar-brand" aria-current="page" href="/cathis">Danh sách ca thi</a>
+            <a class="navbar-brand" aria-current="page" href="/cauhois">DS câu hỏi</a>
             <a class="navbar-brand" aria-current="page" href="/cauhois/add">Thêm câu hỏi</a>
+            <a class="navbar-brand" aria-current="page" href="/cathis">DS ca thi</a>
             <a class="navbar-brand" aria-current="page" href="/cathis/add">Thêm ca thi</a>
+            <a class="navbar-brand" aria-current="page" href="/phongthis">DS phòng thi</a>
+            <a class="navbar-brand" aria-current="page" href="/phongthis/add">Thêm phòng thi</a>
+            <a class="navbar-brand" aria-current="page" href="/monthis">DS môn thi</a>
+            <a class="navbar-brand" aria-current="page" href="/monthis/add">Thêm môn thi</a>
             <!--<a class="navbar-brand" aria-current="page" href="/order/list">Danh sách đơn hàng</a>-->
         </a>
     </div>
