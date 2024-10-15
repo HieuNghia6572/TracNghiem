@@ -87,6 +87,9 @@
                                                 </ul>
                                             </li>
                                             <li><a href="contact.html">Contact</a></li>
+
+                                           <!-- <li> <a  sec:authorize="hasAnyAuthority('ADMIN')"><a href="http://localhost:8080/cauhois">Admin</a> </a></li>-->
+
                                         </ul>
                                     </nav>
                                 </div>
@@ -97,8 +100,15 @@
 <!--                                        <a href="#">Log in</a>-->
 <!--                                    </div>-->
                                     <div class="d-none d-lg-block">
+                                        <!--<h1>Chào mừng, <span th:text="${username}">dasdsad</span>!</h1>-->
                                         <form th:action="@{/logout}" method="post">
+                                            <!--<li> <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
+                                                <a href="http://localhost:8080/cauhois" class="boxed-btn3">Admin</a>
+                                            </div></li>-->
                                             <button class="btn btn-outline-light" style="background-color:blue" type="submit">Đăng xuất</button>
+                                            <a sec:authorize="hasAnyAuthority('ADMIN')">
+                                                <button class="btn btn-outline-light" style="background-color:blue" type="submit"><a style="color: white" href="http://localhost:8080/cauhois" >Admin</a> </button>
+                                            </a>
                                         </form>
                                     </div>
                                 </div>
