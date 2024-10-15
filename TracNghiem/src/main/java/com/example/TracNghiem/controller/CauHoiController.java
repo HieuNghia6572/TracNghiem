@@ -1,6 +1,7 @@
 package com.example.TracNghiem.controller;
 
 import com.example.TracNghiem.entity.CauHoi;
+import com.example.TracNghiem.repository.ICauHoiRepository;
 import com.example.TracNghiem.services.CauHoiService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,9 @@ import java.util.UUID;
 public class CauHoiController {
     @Autowired
     private CauHoiService cauHoiService;
+
+    @Autowired
+    private ICauHoiRepository cauHoiRepository;
 //    @Autowired
 //    private TheLoaiService theLoaiService;
     // Đảm bảo bạn đã injectCategoryService
@@ -43,71 +47,38 @@ public class CauHoiController {
 //        model.addAttribute("theloais", theLoaiService.getAllTheloai()); //Load sanphams
         return "/cauhois/add-cauhoi";
     }
-    // Process the form for adding a new product
-//    @PostMapping("/add")
-//    public String  addSanpham(@Valid SanPham sanPham, BindingResult result, @RequestParam("image") MultipartFile imageFile) {
-//        if (result.hasErrors()) {
-//            return "/sanphams/add-sanpham";
-//        }
-//        if (!imageFile.isEmpty()) {
-//            try {
-//                String imageName = saveImage(imageFile);
-//                sanPham.setImgUrl("/images/" +imageName);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        sanPhamService.addSanPham(sanPham);
-//        return "redirect:/sanphams";
-//    }
-//    private String saveImage(MultipartFile image) throws IOException {
-//        File saveFile = new ClassPathResource("static/images").getFile();
-//        String fileName = UUID.randomUUID()+ "." + StringUtils.getFilenameExtension(image.getOriginalFilename());
-//        Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + fileName);
-//        Files.copy(image.getInputStream(), path);
-//        return fileName;
-//    }
-    // For editing a product
+    @GetMapping("/")
+    public String showForm(Model model) {
+        model.addAttribute("cauhoi", new CauHoi());
+        return "form";
+    }
+
+    @PostMapping("/submit")
+    public String submitForm(@ModelAttribute CauHoi cauhoi, @RequestParam String correctOption,@RequestParam String capDo) {
+        cauhoi.setDapandung(correctOption); // Gán đáp án đúng
+        cauhoi.setCapDo(capDo); // Gán cấp độ
+        cauHoiRepository.save(cauhoi);
+        return "redirect:/cauhois"; // Chuyển hướng về danh sách câu hỏi
+    }
+
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
         CauHoi cauHoi = cauHoiService.getCauHoiById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid cauhoi Id:" + id));
+                .orElseThrow(() -> new IllegalArgumentException("Câu hỏi với ID " + id + " không tồn tại."));
         model.addAttribute("cauhoi", cauHoi);
-//        model.addAttribute("theloais", theLoaiService.getAllTheloai()); //Load theloais
-        return "/cauhois/update-cauhoi";
+        return "cauhois/update-cauhoi"; // Đường dẫn đến view
     }
-    // Process the form for updating a product
-//    @PostMapping("/update/{id}")
-//    public String updateSanPham(@PathVariable Long id, @Valid SanPham sanPham,
-//                                BindingResult result,@RequestParam("image") MultipartFile imageFile ) {
-//        if (result.hasErrors()) {
-//            sanPham.setId(id); // set id to keep it in the form in case of errors
-//            return "/sanphams/update-sanpham";
-//        }
-//        if (!imageFile.isEmpty()) {
-//            try {
-//                String imageName = saveImage(imageFile);
-//                sanPham.setImgUrl("/images/" +imageName);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        sanPhamService.updateSanPham(sanPham);
-//        return "redirect:/sanphams";
-//    }
+    @PostMapping("/update")
+    public String updateCauHoi(@ModelAttribute CauHoi cauHoi,
+                               @RequestParam String correctOption) {
+        cauHoiService.updateCauHoi(cauHoi, correctOption); // Gọi service để cập nhật
+        return "redirect:/cauhois"; // Chuyển hướng về danh sách câu hỏi
+    }
+
     // Handle request to delete a product
     @GetMapping("/delete/{id}")
     public String deleteCauHoi(@PathVariable Long id) {
         cauHoiService.deleteCauHoi(id);
         return "redirect:/cauhois";
     }
-    //TD Detail
-  /*  @GetMapping("/details/{id}")
-    public String Detail(@PathVariable Long id, Model model)
-    {
-        CauHoi cauHoi = cauHoiService.getCauHoiById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid product ID: " + id));
-        model.addAttribute("cauhoi", cauHoi);
-        return "cauhois/cauhoi-details";
-    }*/
 }

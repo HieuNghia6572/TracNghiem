@@ -19,37 +19,30 @@
         <thead class="table-dark">
         <tr>
             <th>ID</th>
-            <th>Tên</th>
-            <th>Giá</th>
-            <th>Mô tả</th>
-            <th>Hình ảnh</th>
-            <th>Tên thể loại</th>
-            <th>Chức Năng</th>
-            <th>Thêm vào giỏ hàng</th>
+            <th>Câu hỏi</th>
+            <th>Đáp án A </th>
+            <th>Đáp án B</th>
+            <th>Đáp án C</th>
+            <th>Đáp án D</th>
+            <th>Đáp án đúng</th>
+            <th>Cấp độ</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="cauhoi : ${cauhois}">
             <td th:text="${cauhoi.id}"></td>
             <td th:text="${cauhoi.ten}"></td>
-            <td th:text="${cauhoi.gia}"></td>
-            <td th:text="${cauhoi.mota}"></td>
-           <!-- <td> <img th:src="${sanpham.ImgUrl}" width="100px" height="100px"></td>
-            <td th:text="${sanpham.theloai.ten}"></td>-->
+            <td th:text="${cauhoi.dapanA}"></td>
+            <td th:text="${cauhoi.dapanB}"></td>
+            <td th:text="${cauhoi.dapanC}"></td>
+            <td th:text="${cauhoi.dapanD}"></td>
+            <td th:text="${cauhoi.dapandung}"></td>
+            <td th:text="${cauhoi.capDo}"></td> <!-- Hiển thị cấp độ -->
             <td>
                 <div sec:authorize="hasAuthority('ADMIN')">
                     <a th:href="@{/cauhois/edit/{id}(id=${cauhoi.id})}" class="btn btn-success btn-sm">Chỉnh sửa</a>
                     <a th:href="@{/cauhois/delete/{id}(id=${cauhoi.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Xóa</a>
                 </div>
-            </td>
-            <td>
-                <form th:action="@{/cart/add}" method="post">
-                    <input type="number" name="quantity" min="1" value="1"
-                           class="form-control d-inline-block" style="width: 70px;">
-                    <input type="hidden" th:value="${cauhoi.id}"
-                           name="productId"/>
-                    <button type="submit" class="btn btn-warning btn-sm">Thêm vào giỏ hàng</button>
-                </form>
             </td>
         </tr>
         </tbody>

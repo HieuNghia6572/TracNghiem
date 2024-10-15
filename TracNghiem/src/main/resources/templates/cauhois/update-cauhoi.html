@@ -10,40 +10,48 @@
 <body>
 <section layout:fragment="content" class="container mt-5">
     <h1>Chỉnh sửa câu hỏi</h1>
-    <form th:action="@{/cauhois/update/{id}(id=${cauhoi.id})}"
-          th:object="${cauhoi}" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="ten" class="form-label">Tên câu hỏi:</label>
-            <input type="text" th:field="*{ten}" class="form-control" id="ten"
-                   required>
-            <div class="text-danger" th:if="${#fields.hasErrors('ten')}"
-                 th:errors="*{ten}"></div>
+    <form action="/cauhois/update" method="post"> <!-- Đường dẫn đúng -->
+        <input type="hidden" name="id" th:value="${cauhoi.id}"> <!-- Giữ ID câu hỏi -->
+
+        <div style="margin-bottom: 15px;">
+            <label>Câu hỏi:</label>
+            <input type="text" name="ten" th:value="${cauhoi.ten}" required> <!-- Điền sẵn dữ liệu -->
         </div>
-        <div class="mb-3">
-            <label for="gia" class="form-label">Giá:</label>
-            <input type="text" th:field="*{gia}" class="form-control" id="gia"
-                   required>
+        <div style="margin-bottom: 15px;">
+            <label>Đáp án A:</label>
+            <input type="text" name="dapanA" th:value="${cauhoi.dapanA}" required>
         </div>
-<!--        <div class="mb-3">-->
-<!--            <label for="theloai" class="form-label"> Thể loại:</label>-->
-<!--            <select th:field="*{theloai}" class="form-control" id="theloai">-->
-<!--                <option th:each="theloai : ${theloais}"-->
-<!--                        th:value="${theloai.id}" th:text="${theloai.ten}" th:selected="${theloai.id == sanpham.theloai.id}"></option>-->
-<!--            </select>-->
-<!--        </div>-->
-        <div class="mb-3">
-            <label for="mota" class="form-label">Mô tả:</label>
-            <textarea th:field="*{mota}" class="form-control"
-                      id="mota" required></textarea>
+        <div style="margin-bottom: 15px;">
+            <label>Đáp án B:</label>
+            <input type="text" name="dapanB" th:value="${cauhoi.dapanB}" required>
         </div>
-        <div class="mb-3">
-            <label for="image"  class="form-label">Hình:</label>
-            <input type="file" name="image" class="form-control" id="image"
-                   required>
+        <div style="margin-bottom: 15px;">
+            <label>Đáp án C:</label>
+            <input type="text" name="dapanC" th:value="${cauhoi.dapanC}" required>
         </div>
-        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
-        <a th:href="@{/cauhois}" class="btn btn-link">Trở về</a>
+        <div style="margin-bottom: 15px;">
+            <label>Đáp án D:</label>
+            <input type="text" name="dapanD" th:value="${cauhoi.dapanD}" required>
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label>Chọn đáp án đúng:</label><br>
+            <input type="radio" name="correctOption" value="A" th:checked="${cauhoi.dapandung == 'A'}" required> Đáp án A<br>
+            <input type="radio" name="correctOption" value="B" th:checked="${cauhoi.dapandung == 'B'}"> Đáp án B<br>
+            <input type="radio" name="correctOption" value="C" th:checked="${cauhoi.dapandung == 'C'}"> Đáp án C<br>
+            <input type="radio" name="correctOption" value="D" th:checked="${cauhoi.dapandung == 'D'}"> Đáp án D<br>
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label>Cấp độ:</label>
+            <select name="capDo" required>
+                <option value="" th:selected="${cauhoi.capDo == null}">-- Chọn cấp độ --</option>
+                <option value="DE" th:selected="${cauhoi.capDo == 'DE'}">Dễ</option>
+                <option value="TRUNG_BINH" th:selected="${cauhoi.capDo == 'TRUNG_BINH'}">Trung bình</option>
+                <option value="KHO" th:selected="${cauhoi.capDo == 'KHO'}">Khó</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Cập Nhật Câu Hỏi</button>
     </form>
+
 </section>
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">

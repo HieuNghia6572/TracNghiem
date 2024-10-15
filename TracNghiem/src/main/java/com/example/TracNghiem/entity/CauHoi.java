@@ -37,8 +37,16 @@ public class CauHoi {
     @NotEmpty(message = "Đáp án không được để trống")
     private String dapanD;
 
+    @Enumerated(EnumType.STRING)
+    private CorrectOption correctOption;
+
     @Column(name = "dapandung")
     @NotEmpty(message = "Đáp án không được để trống")
     private String dapandung;
 
+    @Column(name = "capdo")
+    private String capDo;
+}
+enum CorrectOption {
+    A, B, C, D
 }

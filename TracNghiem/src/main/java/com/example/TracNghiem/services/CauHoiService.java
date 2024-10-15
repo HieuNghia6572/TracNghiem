@@ -35,15 +35,20 @@ public class CauHoiService {
         }
         cauHoiRepository.deleteById(id);
     }
-    public CauHoi updateCauHoi(@NotNull CauHoi cauHoi) {
+    public CauHoi updateCauHoi(@NotNull CauHoi cauHoi, String correctOption) {
         CauHoi existingCauhoi = cauHoiRepository.findById(cauHoi.getId())
-                .orElseThrow(() -> new IllegalStateException("Product with ID " +
-                        cauHoi.getId() + " does not exist."));
+                .orElseThrow(() -> new IllegalStateException("Câu hỏi với ID " +
+                        cauHoi.getId() + " không tồn tại."));
+
+        // Cập nhật thông tin
         existingCauhoi.setTen(cauHoi.getTen());
-//        existingSanpham.setGia(cauHoi.getGia());
-//        /*existingSanpham.setDescription(product.getDescription());*/
-//        existingSanpham.setImgUrl(sanPham.getImgUrl());
-//        existingSanpham.setTheloai(sanPham.getTheloai());
-        return cauHoiRepository.save(existingCauhoi);
+        existingCauhoi.setDapanA(cauHoi.getDapanA());
+        existingCauhoi.setDapanB(cauHoi.getDapanB());
+        existingCauhoi.setDapanC(cauHoi.getDapanC());
+        existingCauhoi.setDapanD(cauHoi.getDapanD());
+        existingCauhoi.setCapDo(cauHoi.getCapDo());
+        existingCauhoi.setDapandung(correctOption); // Gán đáp án đúng
+
+        return cauHoiRepository.save(existingCauhoi); // Lưu câu hỏi đã cập nhật
     }
 }
