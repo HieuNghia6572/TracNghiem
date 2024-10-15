@@ -3,53 +3,104 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-    <title>Cập nhật câu hoỏi</title>
+    <title>Cập nhật câu hỏi</title>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 10px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        .form-group {
+            display: flex; /* Sử dụng flexbox để căn chỉnh */
+            align-items: center; /* Căn giữa theo chiều dọc */
+        }
+        input[type="text"], textarea, select {
+            width: 80%; /* Chiều rộng 100% cho các ô nhập liệu */
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        textarea {
+            min-height: 20px; /* Chiều cao tối thiểu của khung nhập liệu */
+            max-height: 150px; /* Chiều cao tối đa khi người dùng nhập liệu */
+            resize: vertical; /* Cho phép người dùng thay đổi kích thước theo chiều dọc */
+        }
+        select {
+            width: 50%; /* Chiều rộng của ô chọn cấp độ */
+            margin-left: 10px; /* Khoảng cách giữa nhãn và ô chọn */
+        }
+        .radio-group {
+            display: flex; /* Sử dụng flexbox cho nhóm radio */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            margin-top: 10px; /* Khoảng cách trên */
+        }
+        .radio-group input {
+            margin-left: 40px; /* Khoảng cách giữa các nút radio */
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 <body>
 <section layout:fragment="content" class="container mt-5">
     <h1>Chỉnh sửa câu hỏi</h1>
-    <form action="/cauhois/update" method="post"> <!-- Đường dẫn đúng -->
-        <input type="hidden" name="id" th:value="${cauhoi.id}"> <!-- Giữ ID câu hỏi -->
+    <form action="/cauhois/update" method="post"> <!-- Đường dẫn đến controller -->
+        <input type="hidden" name="id" th:value="${cauhoi.id}"> <!-- ID câu hỏi -->
 
-        <div style="margin-bottom: 15px;">
-            <label>Câu hỏi:</label>
-            <input type="text" name="ten" th:value="${cauhoi.ten}" required> <!-- Điền sẵn dữ liệu -->
+        <label for="ten">Câu hỏi:</label>
+        <textarea id="ten" name="ten" required th:text="${cauhoi.ten}"></textarea>
+
+        <label for="dapanA">Đáp án A:</label>
+        <textarea id="dapanA" name="dapanA" required th:text="${cauhoi.dapanA}"></textarea>
+
+        <label for="dapanB">Đáp án B:</label>
+        <textarea id="dapanB" name="dapanB" required th:text="${cauhoi.dapanB}"></textarea>
+
+        <label for="dapanC">Đáp án C:</label>
+        <textarea id="dapanC" name="dapanC" required th:text="${cauhoi.dapanC}"></textarea>
+
+        <label for="dapanD">Đáp án D:</label>
+        <textarea id="dapanD" name="dapanD" required th:text="${cauhoi.dapanD}"></textarea>
+
+        <div class="form-group">
+            <label>Chọn đáp án đúng:</label>
+            <div class="radio-group"> <!-- Nhóm radio -->
+                <input type="radio" name="correctOption" value="A" th:checked="${cauhoi.dapandung == 'A'}" required> Đáp án A
+                <input type="radio" name="correctOption" value="B" th:checked="${cauhoi.dapandung == 'B'}"> Đáp án B
+                <input type="radio" name="correctOption" value="C" th:checked="${cauhoi.dapandung == 'C'}"> Đáp án C
+                <input type="radio" name="correctOption" value="D" th:checked="${cauhoi.dapandung == 'D'}"> Đáp án D
+            </div>
         </div>
-        <div style="margin-bottom: 15px;">
-            <label>Đáp án A:</label>
-            <input type="text" name="dapanA" th:value="${cauhoi.dapanA}" required>
-        </div>
-        <div style="margin-bottom: 15px;">
-            <label>Đáp án B:</label>
-            <input type="text" name="dapanB" th:value="${cauhoi.dapanB}" required>
-        </div>
-        <div style="margin-bottom: 15px;">
-            <label>Đáp án C:</label>
-            <input type="text" name="dapanC" th:value="${cauhoi.dapanC}" required>
-        </div>
-        <div style="margin-bottom: 15px;">
-            <label>Đáp án D:</label>
-            <input type="text" name="dapanD" th:value="${cauhoi.dapanD}" required>
-        </div>
-        <div style="margin-bottom: 15px;">
-            <label>Chọn đáp án đúng:</label><br>
-            <input type="radio" name="correctOption" value="A" th:checked="${cauhoi.dapandung == 'A'}" required> Đáp án A<br>
-            <input type="radio" name="correctOption" value="B" th:checked="${cauhoi.dapandung == 'B'}"> Đáp án B<br>
-            <input type="radio" name="correctOption" value="C" th:checked="${cauhoi.dapandung == 'C'}"> Đáp án C<br>
-            <input type="radio" name="correctOption" value="D" th:checked="${cauhoi.dapandung == 'D'}"> Đáp án D<br>
-        </div>
-        <div style="margin-bottom: 15px;">
-            <label>Cấp độ:</label>
-            <select name="capDo" required>
+
+        <div class="form-group">
+            <label for="capDo">Cấp độ:</label>
+            <select id="capDo" name="capDo" required>
                 <option value="" th:selected="${cauhoi.capDo == null}">-- Chọn cấp độ --</option>
-                <option value="DE" th:selected="${cauhoi.capDo == 'DE'}">Dễ</option>
-                <option value="TRUNG_BINH" th:selected="${cauhoi.capDo == 'TRUNG_BINH'}">Trung bình</option>
-                <option value="KHO" th:selected="${cauhoi.capDo == 'KHO'}">Khó</option>
+                <option value="Dễ" th:selected="${cauhoi.capDo == 'DE'}">Dễ</option>
+                <option value="Trung bình" th:selected="${cauhoi.capDo == 'TRUNG_BINH'}">Trung bình</option>
+                <option value="Khó" th:selected="${cauhoi.capDo == 'KHO'}">Khó</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Cập Nhật Câu Hỏi</button>
+
+        <button type="submit">Lưu Câu Hỏi</button>
+        <a th:href="@{/cauhois}" class="btn btn-link">Trở về</a>
+
     </form>
 
 </section>

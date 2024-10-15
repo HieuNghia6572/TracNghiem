@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 10px;
+            margin: 0px;
         }
         label {
             display: block;
@@ -60,7 +60,7 @@
 <body>
 <section layout:fragment="content" class="container mt-5">
     <h3>Nhập Câu Hỏi và Đáp Án</h3>
-    <form action="/cauhois/update" method="post"> <!-- Đường dẫn đến controller -->
+    <form action="/cauhois/submit" method="post"> <!-- Đường dẫn đến controller -->
         <input type="hidden" name="id" th:value="${cauhoi.id}"> <!-- ID câu hỏi -->
 
         <label for="ten">Câu hỏi:</label>
@@ -92,13 +92,13 @@
             <label for="capDo">Cấp độ:</label>
             <select id="capDo" name="capDo" required>
                 <option value="" th:selected="${cauhoi.capDo == null}">-- Chọn cấp độ --</option>
-                <option value="DE" th:selected="${cauhoi.capDo == 'DE'}">Dễ</option>
-                <option value="TRUNG_BINH" th:selected="${cauhoi.capDo == 'TRUNG_BINH'}">Trung bình</option>
-                <option value="KHOC" th:selected="${cauhoi.capDo == 'KHOC'}">Khó</option>
+                <option value="Dễ" th:selected="${cauhoi.capDo == 'DE'}">Dễ</option>
+                <option value="Trung bình" th:selected="${cauhoi.capDo == 'TRUNG_BINH'}">Trung bình</option>
+                <option value="Khó" th:selected="${cauhoi.capDo == 'KHO'}">Khó</option>
             </select>
         </div>
 
-        <button type="submit">Cập Nhật Câu Hỏi</button>
+        <button type="submit">Thêm Câu Hỏi</button>
         <a th:href="@{/cauhois}" class="btn btn-link">Trở về</a>
 
     </form>

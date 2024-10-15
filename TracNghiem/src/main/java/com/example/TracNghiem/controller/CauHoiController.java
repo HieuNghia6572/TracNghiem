@@ -47,6 +47,7 @@ public class CauHoiController {
 //        model.addAttribute("theloais", theLoaiService.getAllTheloai()); //Load sanphams
         return "/cauhois/add-cauhoi";
     }
+
     @GetMapping("/")
     public String showForm(Model model) {
         model.addAttribute("cauhoi", new CauHoi());
