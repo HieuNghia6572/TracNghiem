@@ -7,60 +7,61 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
   <style>
     body {
-              background-color: #f8f9fa; /* Light gray background */
-                background-image: url('images/bg4.jpg'); /* Đường dẫn tương đối đến tệp hình ảnh */
-                background-size: cover; /* Đảm bảo hình nền sẽ được hiển thị đầy đủ kích thước */
 
-        }
-    .register-container {
-        max-width: 400px;
-        margin: auto;
-        padding: 30px;
-        background-color: #ffffff;
-        border-radius: 15px;
-        box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        margin-top: 50px;
-    }
-    .register-title {
-        text-align: center;
-        margin-bottom: 30px;
-        color: #007bff; /* Blue title */
-        font-weight: bold;
-    }
-    .form-control {
-        border: 1px solid #ced4da; /* Gray border for inputs */
-        border-radius: 8px;
-        padding: 12px;
-        transition: border-color 0.3s ease;
-    }
-    .form-control:focus {
-        border-color: #007bff; /* Blue border on focus */
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Blue shadow on focus */
-    }
-    .btn-primary {
-        background-color: #007bff; /* Blue button */
-        border-color: #007bff; /* Blue border */
-        border-radius: 8px;
-        padding: 12px;
-        transition: background-color 0.3s ease, border-color 0.3s ease;
-    }
-    .btn-primary:hover {
-        background-color: #0056b3; /* Darker blue on hover */
-        border-color: #0056b3; /* Darker blue border on hover */
-    }
-    .login-link {
-        text-align: center;
-        margin-top: 15px;
-        color: #007bff; /* Blue link color */
-    }
-    .login-link a {
-        color: #007bff; /* Blue link color */
-        text-decoration: none;
-        font-weight: bold;
-    }
-    .login-link a:hover {
-        text-decoration: underline;
-    }
+             background-color: #f8f9fa; /* Light gray background */
+               background-image: url('images/test3.png'); /* Đường dẫn tương đối đến tệp hình ảnh */
+               background-size: center; /* Đảm bảo hình nền sẽ được hiển thị đầy đủ kích thước */
+
+       }
+   .register-container {
+    max-width: 700px; /* Tăng độ rộng của form */
+    margin: auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    margin-top: 50px;
+}
+   .register-title {
+       text-align: center;
+       margin-bottom: 30px;
+       color: #007bff; /* Blue title */
+       font-weight: bold;
+   }
+   .form-control {
+       border: 1px solid #ced4da; /* Gray border for inputs */
+       border-radius: 8px;
+       padding: 12px;
+       transition: border-color 0.3s ease;
+   }
+   .form-control:focus {
+       border-color: #007bff; /* Blue border on focus */
+       box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Blue shadow on focus */
+   }
+   .btn-primary {
+       background-color: #007bff; /* Blue button */
+       border-color: #007bff; /* Blue border */
+       border-radius: 8px;
+       padding: 12px;
+       transition: background-color 0.3s ease, border-color 0.3s ease;
+   }
+   .btn-primary:hover {
+       background-color: #0056b3; /* Darker blue on hover */
+       border-color: #0056b3; /* Darker blue border on hover */
+   }
+   .login-link {
+       text-align: center;
+       margin-top: 15px;
+       color: #007bff; /* Blue link color */
+   }
+   .login-link a {
+       color: #007bff; /* Blue link color */
+       text-decoration: none;
+       font-weight: bold;
+   }
+   .login-link a:hover {
+       text-decoration: underline;
+   }
   </style>
 </head>
 
@@ -78,35 +79,44 @@
       <div class="mb-4">
         <label for="email" class="form-label">Email</label>
         <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email của bạn">
+
       </div>
-      <div class="mb-4">
-        <label for="username" class="form-label">Tên đăng nhập</label>
-        <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên người dùng của bạn">
+      <div class="row mb-4">
+        <div class="col-6">
+          <label for="username" class="form-label">Tên đăng nhập</label>
+          <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên người dùng của bạn">
+        </div>
+        <div class="col-6">
+          <label for="phone" class="form-label">Số điện thoại</label>
+          <input type="tel" class="form-control" id="phone" name="phone" placeholder="Nhập điện thoại của bạn">
+        </div>
+
       </div>
-      <div class="form-group mb-4">
-        <label for="password">Mật khẩu</label>
-        <input type="password" class="form-control" id="password"
-               name="password" placeholder="Nhập mật khẩu của bạn">
+      <div class="row mb-4">
+        <div class="col-6">
+          <label for="password" class="form-label">Mật khẩu</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu của bạn">
+        </div>
+        <div class="col-6">
+          <label for="confirmPassword">Xác nhận mật khẩu</label>
+          <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu">
+          <div class="invalid-feedback">
+            Mất khẩu không hợp lệ.
+          </div>
+        </div>
+
       </div>
-      <div class="form-group mb-4">
-        <label for="confirmPassword">Xác nhận mật khẩu</label>
-        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu">
-        <div class="invalid-feedback">
-          Mất khẩu không hợp lệ.
+      <div class="row mb-4">
+        <div class="col-6">
+          <label for="address" class="form-label">Địa chỉ</label>
+          <input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ của bạn">
+        </div>
+        <div class="col-6">
+          <label for="birthday" class="form-label">Sinh nhật</label>
+          <input type="date" class="form-control" id="birthday" name="birthday" placeholder="Nhập ngày sinh của bạn">
         </div>
       </div>
-      <div class="mb-4">
-        <label for="phone" class="form-label">Số điện thoại</label>
-        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Nhập điện thoại của bạn">
-      </div>
-      <div class="mb-4">
-        <label for="address" class="form-label">Địa chỉ</label>
-        <input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ của bạn">
-      </div>
-      <div class="mb-4">
-        <label for="birthday" class="form-label">Sinh nhật</label>
-        <input type="date" class="form-control" id="birthday" name="birthday" placeholder="Nhập ngày sinh của bạn">
-      </div>
+
       <div class="d-grid gap-2 form-action mb-3">
         <button type="submit" class="btn btn-primary btn-lg">Đăng ký</button>
       </div>

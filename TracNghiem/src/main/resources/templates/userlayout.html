@@ -35,6 +35,38 @@
 
     </style>
     <script>
+        let remainingTime; // thời gian còn lại nhận từ server
+
+        // Hàm này sẽ được gọi khi trang được tải
+        window.onload = function () {
+            fetch('/time-remaining') // Lấy thời gian còn lại từ server
+                .then(response => response.json())
+                .then(data => {
+                    remainingTime = data.remainingTime;
+                    startCountdown();
+                });
+        };
+
+        function startCountdown() {
+            let countdownElement = document.getElementById("countdown");
+            let interval = setInterval(function () {
+                if (remainingTime <= 0) {
+                    clearInterval(interval);
+                    alert("Hết giờ!");
+                } else {
+                    remainingTime--;
+                    countdownElement.innerHTML = formatTime(remainingTime);
+                }
+            }, 1000);
+        }
+
+        function formatTime(seconds) {
+            let minutes = Math.floor(seconds / 60);
+            let secs = seconds % 60;
+            return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+    </script>
+    <script>
         function fetchTime() {
             fetch('/time')
                 .then(response => response.text())
@@ -101,10 +133,13 @@
 <!--                                    </div>-->
                                     <div class="d-none d-lg-block">
                                         <!--<h1>Chào mừng, <span th:text="${username}">dasdsad</span>!</h1>-->
+                                        <a style="font-weight:bold"><b>Chào mừng: </b></a><a sec:authentication="name" style="font-weight:bold" ></a>
                                         <form th:action="@{/logout}" method="post">
                                             <!--<li> <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
                                                 <a href="http://localhost:8080/cauhois" class="boxed-btn3">Admin</a>
                                             </div></li>-->
+
+
                                             <button class="btn btn-outline-light" style="background-color:blue" type="submit">Đăng xuất</button>
                                             <a sec:authorize="hasAnyAuthority('ADMIN')">
                                                 <button class="btn btn-outline-light" style="background-color:blue" type="submit"><a style="color: white" href="http://localhost:8080/cauhois" >Admin</a> </button>
@@ -155,6 +190,7 @@
     <!-- catagory_area -->
     <div>
         <p>Thời gian hiện tại:<span id="time"></span></p>
+        <p>Thời gian:<span id="countdown"></span></p>
     </div>
 
 
