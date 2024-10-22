@@ -55,6 +55,16 @@
         button:hover {
             background-color: #218838;
         }
+        .form-group {
+            display: flex; /* Sử dụng flexbox để căn chỉnh */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            margin-top: 10px; /* Khoảng cách trên */
+        }
+
+        .form-select {
+            width: auto; /* Đặt chiều rộng tự động để phù hợp với nội dung */
+            max-width: 200px; /* Chiều rộng tối đa cho select box */
+        }
     </style>
 </head>
 <body>
@@ -81,23 +91,31 @@
         <div class="form-group">
             <label>Chọn đáp án đúng:</label>
             <div class="radio-group"> <!-- Nhóm radio -->
-                <input type="radio" name="correctOption" value="A" th:checked="${cauhoi.dapandung == 'A'}" required> Đáp án A
-                <input type="radio" name="correctOption" value="B" th:checked="${cauhoi.dapandung == 'B'}"> Đáp án B
-                <input type="radio" name="correctOption" value="C" th:checked="${cauhoi.dapandung == 'C'}"> Đáp án C
-                <input type="radio" name="correctOption" value="D" th:checked="${cauhoi.dapandung == 'D'}"> Đáp án D
+                <input type="radio" name="dapandung" value="A" th:checked="${cauhoi.dapandung == 'A'}" required> Đáp án A
+                <input type="radio" name="dapandung" value="B" th:checked="${cauhoi.dapandung == 'B'}"> Đáp án B
+                <input type="radio" name="dapandung" value="C" th:checked="${cauhoi.dapandung == 'C'}"> Đáp án C
+                <input type="radio" name="dapandung" value="D" th:checked="${cauhoi.dapandung == 'D'}"> Đáp án D
             </div>
         </div>
 
         <div class="form-group">
-            <label for="capDo">Cấp độ:</label>
-            <select id="capDo" name="capDo" required>
-                <option value="" th:selected="${cauhoi.capDo == null}">-- Chọn cấp độ --</option>
+            <label for="capDo" class="mr-2">Cấp độ:</label>
+            <select id="capDo" name="capDo" required class="form-select"> <!-- Thêm class Bootstrap -->
+                <option value="" th:selected="${cauhoi.capDo == null}">-- Chỉnh sửa cấp độ --</option>
                 <option value="Dễ" th:selected="${cauhoi.capDo == 'DE'}">Dễ</option>
                 <option value="Trung bình" th:selected="${cauhoi.capDo == 'TRUNG_BINH'}">Trung bình</option>
                 <option value="Khó" th:selected="${cauhoi.capDo == 'KHO'}">Khó</option>
             </select>
         </div>
-
+        <div class="form-group align-items-center"> <!-- Thêm phần chọn môn thi -->
+            <label for="monthi" class="mr-2">Chỉnh sửa môn thi:</label>
+            <select id="monthi" name="monthiId" class="form-select me-2" required> <!-- Sử dụng monthiId -->
+                <option value="" disabled selected>-- Chỉnh sửa môn thi --</option>
+                <option th:each="monthi : ${monthis}"
+                        th:value="${monthi.id}"
+                        th:text="${monthi.tenmonthi}"></option>
+            </select>
+        </div>
         <button type="submit">Lưu Câu Hỏi</button>
         <a th:href="@{/cauhois}" class="btn btn-link">Trở về</a>
 

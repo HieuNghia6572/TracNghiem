@@ -1,8 +1,11 @@
 package com.example.TracNghiem.controller;
 
 import com.example.TracNghiem.entity.CauHoi;
+import com.example.TracNghiem.entity.MonThi;
 import com.example.TracNghiem.repository.ICauHoiRepository;
+import com.example.TracNghiem.repository.IMonThiRepository;
 import com.example.TracNghiem.services.CauHoiService;
+import com.example.TracNghiem.services.MonThiService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -30,6 +34,9 @@ public class CauHoiController {
 
     @Autowired
     private ICauHoiRepository cauHoiRepository;
+
+    @Autowired
+    private MonThiService monThiService;
 //    @Autowired
 //    private TheLoaiService theLoaiService;
     // Đảm bảo bạn đã injectCategoryService
@@ -43,9 +50,10 @@ public class CauHoiController {
     // For adding a new product
     @GetMapping("/add")
     public String showAddForm(Model model) {
-        model.addAttribute("cauhoi", new CauHoi());
-//        model.addAttribute("theloais", theLoaiService.getAllTheloai()); //Load sanphams
-        return "/cauhois/add-cauhoi";
+        model.addAttribute("cauhoi", new CauHoi()); // Tạo đối tượng CauHoi mới
+        List<MonThi> monthis = monThiService.getAllMonThi(); // Lấy danh sách môn thi
+        model.addAttribute("monthis", monthis); // Thêm danh sách môn thi vào mô hình
+        return "cauhois/add-cauhoi"; // Đảm bảo đường dẫn đúng
     }
 
     @GetMapping("/")
@@ -55,8 +63,24 @@ public class CauHoiController {
     }
 
     @PostMapping("/submit")
-    public String submitForm(@ModelAttribute CauHoi cauhoi, @RequestParam String correctOption,@RequestParam String capDo) {
-        cauhoi.setDapandung(correctOption); // Gán đáp án đúng
+//    public String submitForm(@ModelAttribute @Valid CauHoi cauhoi,
+//                             BindingResult bindingResult,
+//                             @RequestParam String correctOption, // Đổi từ correctOption thành dapandung
+//                             @RequestParam String capDo,
+//                             @RequestParam Long monthiId) {
+//        if (bindingResult.hasErrors()) {
+//            List<MonThi> monthis = monThiService.getAllMonThi();
+//            bindingResult.rejectValue("monthiId", "error.cauhoi", "Vui lòng chọn môn thi.");
+//            return "/cauhois/add-cauhoi"; // Trả về form nếu có lỗi
+//        }
+//        cauhoi.setDapandung(correctOption); // Gán đáp án đúng
+//        cauhoi.setCapDo(capDo);
+//        cauhoi.setMonthiId(monthiId);
+//        cauHoiRepository.save(cauhoi);
+//        return "redirect:/cauhois"; // Chuyển hướng về danh sách câu hỏi
+//    }
+    public String submitForm(@ModelAttribute CauHoi cauhoi, @RequestParam String dapandung,@RequestParam String capDo) {
+        cauhoi.setDapandung(dapandung); // Gán đáp án đúng
         cauhoi.setCapDo(capDo); // Gán cấp độ
         cauHoiRepository.save(cauhoi);
         return "redirect:/cauhois"; // Chuyển hướng về danh sách câu hỏi
@@ -66,13 +90,36 @@ public class CauHoiController {
     public String showEditForm(@PathVariable Long id, Model model) {
         CauHoi cauHoi = cauHoiService.getCauHoiById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Câu hỏi với ID " + id + " không tồn tại."));
+
         model.addAttribute("cauhoi", cauHoi);
+        List<MonThi> monthis = monThiService.getAllMonThi();
+        model.addAttribute("monthis", monthis); // Thêm danh sách môn thi vào mô hình
+
+        // Debug thông tin môn thi
+        System.out.println("Danh sách môn thi: " + monthis);
+
         return "cauhois/update-cauhoi"; // Đường dẫn đến view
     }
     @PostMapping("/update")
-    public String updateCauHoi(@ModelAttribute CauHoi cauHoi,
-                               @RequestParam String correctOption) {
-        cauHoiService.updateCauHoi(cauHoi, correctOption); // Gọi service để cập nhật
+    public String updateCauHoi(@ModelAttribute @Valid CauHoi cauHoi,
+                               @RequestParam String dapandung,
+                               @RequestParam Long monthiId,
+                               BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "cauhois/update-cauhoi"; // Trả về form nếu có lỗi
+        }
+
+        // Gán giá trị cho các trường
+        cauHoi.setMonthiId(monthiId);
+        cauHoi.setDapandung(dapandung);
+
+        // Debug thông tin
+        System.out.println("Updating CauHoi with ID: " + cauHoi.getId());
+        System.out.println("New monthiId: " + monthiId);
+
+        // Gọi service để cập nhật
+        cauHoiService.updateCauHoi(cauHoi, dapandung);
+
         return "redirect:/cauhois"; // Chuyển hướng về danh sách câu hỏi
     }
 
@@ -82,4 +129,4 @@ public class CauHoiController {
         cauHoiService.deleteCauHoi(id);
         return "redirect:/cauhois";
     }
-}
+}/////tới đậy

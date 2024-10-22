@@ -37,16 +37,17 @@ public class CauHoi {
     @NotEmpty(message = "Đáp án không được để trống")
     private String dapanD;
 
-    @Enumerated(EnumType.STRING)
-    private CorrectOption correctOption;
-
     @Column(name = "dapandung")
     @NotEmpty(message = "Đáp án không được để trống")
     private String dapandung;
 
     @Column(name = "capdo")
     private String capDo;
-}
-enum CorrectOption {
-    A, B, C, D
+
+    @Column(name = "monthi_id")
+    private Long monthiId; // ID của môn thi
+
+    @ManyToOne
+    @JoinColumn(name = "monthi_id", insertable = false, updatable = false)
+    private MonThi monthi; // Tham chiếu đến môn thi
 }

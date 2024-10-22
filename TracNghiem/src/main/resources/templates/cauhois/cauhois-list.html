@@ -36,7 +36,9 @@
             <th>Đáp án D</th>
             <th>Đáp án đúng</th>
             <th>Cấp độ</th>
+            <th>Môn thi</th>
             <th>Chức năng</th>
+
         </tr>
         </thead>
         <tbody>
@@ -49,6 +51,8 @@
             <td th:text="${cauhoi.dapanD}"></td>
             <td th:text="${cauhoi.dapandung}"></td>
             <td th:text="${cauhoi.capDo}"></td>
+            <td th:text="${cauhoi.monthi != null ? cauhoi.monthi.tenmonthi : 'Chưa có môn thi'}"></td>
+
             <td>
                 <div sec:authorize="hasAuthority('ADMIN')">
                     <a th:href="@{/cauhois/edit/{id}(id=${cauhoi.id})}" class="btn btn-success btn-sm">Chỉnh sửa</a>

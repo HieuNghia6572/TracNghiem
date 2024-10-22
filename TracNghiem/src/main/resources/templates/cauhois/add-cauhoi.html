@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
-        layout:decorate="~{layout}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
 <head>
     <title>Thêm câu hỏi</title>
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0px;
+            margin: 10px;
         }
         label {
             display: block;
@@ -55,56 +52,107 @@
         button:hover {
             background-color: #218838;
         }
+        .form-group {
+            display: flex; /* Sử dụng flexbox để căn chỉnh */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            margin-top: 10px; /* Khoảng cách trên */
+        }
+
+        .form-select {
+            width: auto; /* Đặt chiều rộng tự động để phù hợp với nội dung */
+            max-width: 200px; /* Chiều rộng tối đa cho select box */
+        }
     </style>
 </head>
 <body>
 <section layout:fragment="content" class="container mt-5">
     <h3>Nhập Câu Hỏi và Đáp Án</h3>
-    <form action="/cauhois/submit" method="post"> <!-- Đường dẫn đến controller -->
-        <input type="hidden" name="id" th:value="${cauhoi.id}"> <!-- ID câu hỏi -->
+    <form action="/cauhois/submit" method="post" th:object="${cauhoi}"> <!-- Sử dụng th:object -->
+        <input type="hidden" th:field="*{id}"/> <!-- ID câu hỏi -->
 
         <label for="ten">Câu hỏi:</label>
-        <textarea id="ten" name="ten" required th:text="${cauhoi.ten}"></textarea>
+        <textarea id="ten" th:field="*{ten}" required></textarea>
 
         <label for="dapanA">Đáp án A:</label>
-        <textarea id="dapanA" name="dapanA" required th:text="${cauhoi.dapanA}"></textarea>
+        <textarea id="dapanA" th:field="*{dapanA}" required></textarea>
 
         <label for="dapanB">Đáp án B:</label>
-        <textarea id="dapanB" name="dapanB" required th:text="${cauhoi.dapanB}"></textarea>
+        <textarea id="dapanB" th:field="*{dapanB}" required></textarea>
 
         <label for="dapanC">Đáp án C:</label>
-        <textarea id="dapanC" name="dapanC" required th:text="${cauhoi.dapanC}"></textarea>
+        <textarea id="dapanC" th:field="*{dapanC}" required></textarea>
 
         <label for="dapanD">Đáp án D:</label>
-        <textarea id="dapanD" name="dapanD" required th:text="${cauhoi.dapanD}"></textarea>
+        <textarea id="dapanD" th:field="*{dapanD}" required></textarea>
 
         <div class="form-group">
             <label>Chọn đáp án đúng:</label>
-            <div class="radio-group"> <!-- Nhóm radio -->
-                <input type="radio" name="correctOption" value="A" th:checked="${cauhoi.dapandung == 'A'}" required> Đáp án A
-                <input type="radio" name="correctOption" value="B" th:checked="${cauhoi.dapandung == 'B'}"> Đáp án B
-                <input type="radio" name="correctOption" value="C" th:checked="${cauhoi.dapandung == 'C'}"> Đáp án C
-                <input type="radio" name="correctOption" value="D" th:checked="${cauhoi.dapandung == 'D'}"> Đáp án D
+            <div class="radio-group">
+                <input type="radio" th:field="*{dapandung}" value="A" required> Đáp án A
+                <input type="radio" th:field="*{dapandung}" value="B"> Đáp án B
+                <input type="radio" th:field="*{dapandung}" value="C"> Đáp án C
+                <input type="radio" th:field="*{dapandung}" value="D"> Đáp án D
             </div>
         </div>
 
         <div class="form-group">
-            <label for="capDo">Cấp độ:</label>
-            <select id="capDo" name="capDo" required>
+            <label for="capDo" class="mr-2">Cấp độ:</label>
+            <select id="capDo" name="capDo" required class="form-select"> <!-- Thêm class Bootstrap -->
                 <option value="" th:selected="${cauhoi.capDo == null}">-- Chọn cấp độ --</option>
                 <option value="Dễ" th:selected="${cauhoi.capDo == 'DE'}">Dễ</option>
                 <option value="Trung bình" th:selected="${cauhoi.capDo == 'TRUNG_BINH'}">Trung bình</option>
                 <option value="Khó" th:selected="${cauhoi.capDo == 'KHO'}">Khó</option>
             </select>
         </div>
+        <div class="form-group align-items-center"> <!-- Thêm phần chọn môn thi -->
+            <label for="monthi" class="mr-2">Chọn môn thi:</label>
+            <select id="monthi" name="monthiId" class="form-select me-2" required> <!-- Sử dụng monthiId -->
+                <option value="" disabled selected>-- Chọn môn thi --</option>
+                <option th:each="monthi : ${monthis}"
+                        th:value="${monthi.id}"
+                        th:text="${monthi.tenmonthi}"></option>
+            </select>
+        </div>
 
         <button type="submit">Thêm Câu Hỏi</button>
         <a th:href="@{/cauhois}" class="btn btn-link">Trở về</a>
-
     </form>
 </section>
-<script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
-</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<!--<script src="https://cdn.tiny.cloud/1/j3xfvlrqd4anx8a8cmwz1xkkxum4wxdar6k95lp7yox7kace-->
+<!--    /tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>-->
+
+<!--<script>-->
+<!--    tinymce.init({-->
+<!--        selector: 'textarea',  // Chọn tất cả các textarea-->
+<!--        plugins: 'lists link image table',-->
+<!--        toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image',-->
+<!--        height: 300,-->
+<!--    });-->
+<!--</script>-->
+<!--<div>-->
+<!--    <label for="ten">Câu hỏi:</label>-->
+<!--    <textarea id="ten" th:field="*{ten}" required></textarea>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--    <label for="dapanA">Đáp án A:</label>-->
+<!--    <textarea id="dapanA" th:field="*{dapanA}" required></textarea>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--    <label for="dapanB">Đáp án B:</label>-->
+<!--    <textarea id="dapanB" th:field="*{dapanB}" required></textarea>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--    <label for="dapanC">Đáp án C:</label>-->
+<!--    <textarea id="dapanC" th:field="*{dapanC}" required></textarea>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--    <label for="dapanD">Đáp án D:</label>-->
+<!--    <textarea id="dapanD" th:field="*{dapanD}" required></textarea>-->
+<!--</div>-->

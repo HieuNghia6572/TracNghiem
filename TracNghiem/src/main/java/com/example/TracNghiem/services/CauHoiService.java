@@ -35,11 +35,10 @@ public class CauHoiService {
         }
         cauHoiRepository.deleteById(id);
     }
-    public CauHoi updateCauHoi(@NotNull CauHoi cauHoi, String correctOption) {
+    public CauHoi updateCauHoi(@NotNull CauHoi cauHoi, String dapandung) {
         CauHoi existingCauhoi = cauHoiRepository.findById(cauHoi.getId())
                 .orElseThrow(() -> new IllegalStateException("Câu hỏi với ID " +
                         cauHoi.getId() + " không tồn tại."));
-
         // Cập nhật thông tin
         existingCauhoi.setTen(cauHoi.getTen());
         existingCauhoi.setDapanA(cauHoi.getDapanA());
@@ -47,8 +46,8 @@ public class CauHoiService {
         existingCauhoi.setDapanC(cauHoi.getDapanC());
         existingCauhoi.setDapanD(cauHoi.getDapanD());
         existingCauhoi.setCapDo(cauHoi.getCapDo());
-        existingCauhoi.setDapandung(correctOption); // Gán đáp án đúng
-
+        existingCauhoi.setDapandung(dapandung); // Gán đáp án đúng
+        cauHoiRepository.save(cauHoi);
         return cauHoiRepository.save(existingCauhoi); // Lưu câu hỏi đã cập nhật
     }
 }
