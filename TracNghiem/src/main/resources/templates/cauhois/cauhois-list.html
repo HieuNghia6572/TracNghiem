@@ -4,8 +4,75 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout">
 <head>
-    <title th:text="${title} ?: 'Cauhoi'">Câu hỏi</title>
+    <title th:text="${title} ?: 'Câu hỏi'">Câu hỏi</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Màu nền nhẹ */
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            color: #343a40; /* Màu chữ */
+        }
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center; /* Căn giữa */
+            gap: 10px; /* Khoảng cách giữa các phần tử */
+        }
+        .custom-input, .custom-select {
+            border: 2px solid #0d6efd; /* Màu viền */
+            border-radius: 10px; /* Bo tròn các góc */
+            padding: 10px; /* Khoảng cách bên trong */
+        }
+        .table {
+            background-color: #fff; /* Màu nền bảng */
+            border-radius: 10px; /* Bo tròn các góc của bảng */
+            overflow: hidden; /* Ẩn phần viền bảng */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+        }
+        .table th {
+            background-color: #0d6efd; /* Nền cho tiêu đề bảng */
+            color: #fff; /* Màu chữ tiêu đề */
+        }
+        .text-ellipsis {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+        }
+    </style>
+    <style>
+        .dataTables_info,
+        .dataTables_empty,
+        .dataTables_processing,
+        .dataTables_length,
+        .dataTables_paginate {
+            background-color: rgba(255, 255, 255, 0.8); /* Màu nền trắng mờ */
+            padding: 5px; /* Khoảng cách bên trong */
+            border-radius: 5px; /* Bo tròn các góc */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+        }
+
+        .dataTables_processing {
+            font-weight: bold; /* Làm đậm chữ */
+        }
+        .dataTables_filter input[type="search"] {
+        border: 2px solid #0d6efd; /* Màu viền */
+        border-radius: 10px; /* Bo tròn các góc */
+        padding: 10px; /* Khoảng cách bên trong */
+        background-color: #ffffff; /* Màu nền */
+        color: #343a40; /* Màu chữ */
+    }
+
+    .dataTables_filter input[type="search"]:focus {
+        border-color: #0056b3; /* Màu viền khi ô tìm kiếm được chọn */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Đổ bóng khi chọn */
+    }
+    </style>
 </head>
 
 <body>
@@ -14,78 +81,107 @@
 
     <div class="mb-3">
         <div class="input-group">
-            <input type="text" id="searchInput" placeholder="Tìm kiếm theo câu hỏi" class="form-control" style="width: 200px;" onkeyup="searchCauhois()">
-            <select id="capDoSelect" class="form-select ms-2" onchange="searchCauhois()">
-                <option value="">Chọn cấp độ</option>
+<!--            <input type="text" id="searchInput" placeholder="Nhập từ khóa tìm kiếm" class="form-control custom-input" onkeyup="searchCauhois()">-->
+
+            <select id="capDoSelect" class="form-select ms-2 custom-select" onchange="searchCauhois()">
+                <option value="">Lọc theo cấp độ</option>
                 <option value="Dễ">Dễ</option>
                 <option value="Trung Bình">Trung Bình</option>
                 <option value="Khó">Khó</option>
             </select>
-            <button onclick="searchCauhois()" class="btn btn-primary ms-2">Tìm kiếm</button>
+            <select id="monThiSelect" class="form-select ms-2 custom-select" onchange="searchCauhois()">
+                <option value="">Lọc theo môn thi</option>
+                <tr th:each="monThi : ${monThiList}">
+                    <option th:value="${monThi.tenmonthi}" th:text="${monThi.tenmonthi}"></option>
+                </tr>
+            </select>
         </div>
     </div>
 
-    <table class="table table-bordered table-hover">
-        <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>Câu hỏi</th>
-            <th>Đáp án A</th>
-            <th>Đáp án B</th>
-            <th>Đáp án C</th>
-            <th>Đáp án D</th>
-            <th>Đáp án đúng</th>
-            <th>Cấp độ</th>
-            <th>Môn thi</th>
-            <th>Chức năng</th>
+    <section class="container mt-5">
+        <table id="questionTable" class="table table-bordered table-hover display">
+            <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Câu Hỏi</th>
+                <th>Đáp Án A</th>
+                <th>Đáp Án B</th>
+                <th>Đáp Án C</th>
+                <th>Đáp Án D</th>
+                <th>Đáp Án Đúng</th>
+                <th>Cấp Độ</th>
+                <th>Môn Thi</th>
+                <th>Chức Năng</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cauhoi : ${cauhois}">
+                <td th:text="${cauhoi.id}"></td>
+                <td class="text-ellipsis" th:text="${cauhoi.ten.length() > 20 ? #strings.substring(cauhoi.ten, 0, 20) + '...' : cauhoi.ten}"></td>
+                <td class="text-ellipsis" th:text="${cauhoi.dapanA.length() > 20 ? #strings.substring(cauhoi.dapanA, 0, 20) + '...' : cauhoi.dapanA}"></td>
+                <td class="text-ellipsis" th:text="${cauhoi.dapanB.length() > 20 ? #strings.substring(cauhoi.dapanB, 0, 20) + '...' : cauhoi.dapanB}"></td>
+                <td class="text-ellipsis" th:text="${cauhoi.dapanC.length() > 20 ? #strings.substring(cauhoi.dapanC, 0, 20) + '...' : cauhoi.dapanC}"></td>
+                <td class="text-ellipsis" th:text="${cauhoi.dapanD.length() > 20 ? #strings.substring(cauhoi.dapanD, 0, 20) + '...' : cauhoi.dapanD}"></td>
+                <td th:text="${cauhoi.dapandung}"></td>
+                <td th:text="${cauhoi.capDo}"></td>
+                <td th:text="${cauhoi.monthi != null ? cauhoi.monthi.tenmonthi : 'Chưa có môn thi'}"></td>
+                <td>
+                    <div sec:authorize="hasAuthority('ADMIN')">
+                        <a th:href="@{/cauhois/edit/{id}(id=${cauhoi.id})}" class="btn btn-success btn-sm">Chỉnh sửa</a>
+                        <a th:href="@{/cauhois/delete/{id}(id=${cauhoi.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="cauhoi : ${cauhois}">
-            <td th:text="${cauhoi.id}"></td>
-            <td th:text="${cauhoi.ten}"></td>
-            <td th:text="${cauhoi.dapanA}"></td>
-            <td th:text="${cauhoi.dapanB}"></td>
-            <td th:text="${cauhoi.dapanC}"></td>
-            <td th:text="${cauhoi.dapanD}"></td>
-            <td th:text="${cauhoi.dapandung}"></td>
-            <td th:text="${cauhoi.capDo}"></td>
-            <td th:text="${cauhoi.monthi != null ? cauhoi.monthi.tenmonthi : 'Chưa có môn thi'}"></td>
-
-            <td>
-                <div sec:authorize="hasAuthority('ADMIN')">
-                    <a th:href="@{/cauhois/edit/{id}(id=${cauhoi.id})}" class="btn btn-success btn-sm">Chỉnh sửa</a>
-                    <a th:href="@{/cauhois/delete/{id}(id=${cauhoi.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script>
-        function searchCauhois() {
-            var searchInput = document.getElementById("searchInput").value.toLowerCase();
-            var capDoSelect = document.getElementById("capDoSelect").value.toLowerCase();
-            var cauhoiRows = document.getElementsByTagName("tr");
-
-            for (var i = 1; i < cauhoiRows.length; i++) {
-                var nameCell = cauhoiRows[i].getElementsByTagName("td")[1];
-                var capDoCell = cauhoiRows[i].getElementsByTagName("td")[7]; // Cấp độ là ô thứ 8 (index 7)
-
-                if (nameCell && capDoCell) {
-                    var cauhoiName = nameCell.textContent.toLowerCase();
-                    var capDoName = capDoCell.textContent.toLowerCase();
-
-                    // Kiểm tra điều kiện tìm kiếm
-                    if (cauhoiName.includes(searchInput) && (capDoSelect === "" || capDoName.includes(capDoSelect))) {
-                        cauhoiRows[i].style.display = "";
-                    } else {
-                        cauhoiRows[i].style.display = "none";
+        $(document).ready(function() {
+            const table = $('#questionTable').DataTable({
+                language: {
+                    "decimal":        "",
+                    "emptyTable":     "Không có dữ liệu",
+                    "info":           "Hiển thị _START_ đến _END_ của _TOTAL_ mục",
+                    "infoEmpty":      "Hiển thị 0 đến 0 của 0 mục",
+                    "infoFiltered":   "(lọc từ _MAX_ mục)",
+                    "infoPostFix":    "",
+                    "thousands":      ",",
+                    "lengthMenu":     "Hiển thị _MENU_ mục",
+                    "loadingRecords": "Đang tải...",
+                    "processing":     "Đang xử lý...",
+                    "search":         "Tìm kiếm:",
+                    "zeroRecords":    "Không tìm thấy kết quả",
+                    "paginate": {
+                        "first":      "Đầu",
+                        "last":       "Cuối",
+                        "next":       "Tiếp theo",
+                        "previous":   "Trước"
+                    },
+                    "aria": {
+                        "sortAscending":  ": sắp xếp tăng dần",
+                        "sortDescending": ": sắp xếp giảm dần"
                     }
                 }
-            }
-        }
+            });
+
+            // Tìm kiếm theo nhóm
+            $('#searchInput').on('keyup', function() {
+                table.search(this.value).draw();
+            });
+
+            $('#capDoSelect').on('change', function() {
+                const capDoValue = this.value;
+                table.column(7).search(capDoValue).draw(); // Cột cấp độ
+            });
+
+            $('#monThiSelect').on('change', function() {
+                const monThiValue = this.value;
+                table.column(8).search(monThiValue).draw(); // Cột môn thi
+            });
+        });
     </script>
 </section>
 </body>

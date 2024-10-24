@@ -7,120 +7,153 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
+        html, body {
+            height: 100%; /* Đảm bảo chiều cao của html và body là 100% */
+            margin: 0; /* Bỏ margin mặc định */
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 10px;
+            background-image: url('/img/bg-admin.png'); /* Đường dẫn đến hình ảnh nền */
+            background-size: cover; /* Phủ kín toàn bộ diện tích */
+            background-position: center; /* Căn giữa hình nền */
+            background-repeat: no-repeat; /* Không lặp lại hình nền */
+            background-attachment: fixed; /* Giữ hình nền cố định khi cuộn */
         }
-        label {
-            display: block;
-            margin-top: 10px;
+
+        .container {
+            /* Không cần thêm thuộc tính gì cho container */
         }
+
+        .form-frame {
+            border: 1px solid #ccc; /* Đường viền quanh khung */
+            border-radius: 8px; /* Bo tròn các góc */
+            padding: 20px; /* Khoảng cách bên trong khung */
+            background-color: rgba(255, 255, 255, 0.9); /* Màu nền của khung */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ cho khung */
+        }
+
         .form-group {
-            display: flex; /* Sử dụng flexbox để căn chỉnh */
+            margin-bottom: 15px; /* Thêm khoảng cách dưới mỗi nhóm label và textarea */
+        }
+
+        .large-textarea {
+            min-height: 80px; /* Chiều cao tối thiểu cho khung câu hỏi */
+            max-height: 120px; /* Chiều cao tối đa cho khung câu hỏi */
+            width: 100%; /* Đặt chiều rộng của khung câu hỏi */
+        }
+
+        .small-textarea {
+            min-height: 60px; /* Chiều cao tối thiểu cho khung đáp án */
+            max-height: 150px; /* Chiều cao tối đa cho khung đáp án */
+            width: 100%; /* Đặt chiều rộng của khung đáp án */
+        }
+
+        .form-group-cd, .form-group-mt, .form-group-da {
+            display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử theo hàng */
             align-items: center; /* Căn giữa theo chiều dọc */
+            margin-bottom: 15px; /* Thêm khoảng cách dưới mỗi nhóm */
         }
-        input[type="text"], textarea, select {
-            width: 80%; /* Chiều rộng 100% cho các ô nhập liệu */
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        textarea {
-            min-height: 20px; /* Chiều cao tối thiểu của khung nhập liệu */
-            max-height: 150px; /* Chiều cao tối đa khi người dùng nhập liệu */
-            resize: vertical; /* Cho phép người dùng thay đổi kích thước theo chiều dọc */
-        }
-        select {
-            width: 50%; /* Chiều rộng của ô chọn cấp độ */
-            margin-left: 10px; /* Khoảng cách giữa nhãn và ô chọn */
-        }
-        .radio-group {
-            display: flex; /* Sử dụng flexbox cho nhóm radio */
-            align-items: center; /* Căn giữa theo chiều dọc */
-            margin-top: 10px; /* Khoảng cách trên */
-        }
-        .radio-group input {
-            margin-left: 40px; /* Khoảng cách giữa các nút radio */
-        }
-        button {
-            margin-top: 15px;
-            padding: 10px 15px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-        .form-group {
-            display: flex; /* Sử dụng flexbox để căn chỉnh */
-            align-items: center; /* Căn giữa theo chiều dọc */
-            margin-top: 10px; /* Khoảng cách trên */
+
+        .form-group-cd label, .form-group-mt label {
+            margin-right: 10px; /* Thêm khoảng cách giữa nhãn và ô chọn */
         }
 
         .form-select {
-            width: auto; /* Đặt chiều rộng tự động để phù hợp với nội dung */
-            max-width: 200px; /* Chiều rộng tối đa cho select box */
+            flex: 1; /* Cho phép ô chọn chiếm không gian còn lại */
+            max-width: 250px; /* Chiều rộng tối đa cho ô chọn (có thể điều chỉnh theo nhu cầu) */
+        }
+
+        .radio-group {
+            display: flex; /* Sử dụng flexbox cho nhóm radio */
+            margin-left: 100px; /* Thêm khoảng cách bên trái cho nhóm radio */
+        }
+
+        .radio-group input {
+            margin-right: 10px; /* Đặt khoảng cách nhỏ giữa nút radio và nhãn */
+        }
+
+        .radio-group label {
+            margin: 0; /* Bỏ khoảng cách mặc định cho nhãn */
+        }
+
+        .btn-custom {
+            background-color: #28a745; /* Màu xanh lá cây */
+            color: white; /* Màu chữ */
+            border: none; /* Bỏ viền */
+        }
+
+        .btn-custom:hover {
+            background-color: #218838; /* Màu khi hover */
+            color: white; /* Màu chữ khi hover */
         }
     </style>
 </head>
 <body>
 <section layout:fragment="content" class="container mt-5">
-    <h1>Chỉnh sửa câu hỏi</h1>
-    <form action="/cauhois/update" method="post"> <!-- Đường dẫn đến controller -->
-        <input type="hidden" name="id" th:value="${cauhoi.id}"> <!-- ID câu hỏi -->
+    <div class="form-frame"> <!-- Khung cho nội dung -->
+        <h3>Chỉnh sửa câu hỏi và đáp án</h3>
+        <form action="/cauhois/update" method="post" th:object="${cauhoi}"> <!-- Đường dẫn đến controller -->
+            <input type="hidden" th:field="*{id}"/> <!-- ID câu hỏi -->
 
-        <label for="ten">Câu hỏi:</label>
-        <textarea id="ten" name="ten" required th:text="${cauhoi.ten}"></textarea>
-
-        <label for="dapanA">Đáp án A:</label>
-        <textarea id="dapanA" name="dapanA" required th:text="${cauhoi.dapanA}"></textarea>
-
-        <label for="dapanB">Đáp án B:</label>
-        <textarea id="dapanB" name="dapanB" required th:text="${cauhoi.dapanB}"></textarea>
-
-        <label for="dapanC">Đáp án C:</label>
-        <textarea id="dapanC" name="dapanC" required th:text="${cauhoi.dapanC}"></textarea>
-
-        <label for="dapanD">Đáp án D:</label>
-        <textarea id="dapanD" name="dapanD" required th:text="${cauhoi.dapanD}"></textarea>
-
-        <div class="form-group">
-            <label>Chọn đáp án đúng:</label>
-            <div class="radio-group"> <!-- Nhóm radio -->
-                <input type="radio" name="dapandung" value="A" th:checked="${cauhoi.dapandung == 'A'}" required> Đáp án A
-                <input type="radio" name="dapandung" value="B" th:checked="${cauhoi.dapandung == 'B'}"> Đáp án B
-                <input type="radio" name="dapandung" value="C" th:checked="${cauhoi.dapandung == 'C'}"> Đáp án C
-                <input type="radio" name="dapandung" value="D" th:checked="${cauhoi.dapandung == 'D'}"> Đáp án D
+            <div class="form-group">
+                <label for="ten">Câu hỏi:</label>
+                <textarea id="ten" th:field="*{ten}" required class="large-textarea"></textarea>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="capDo" class="mr-2">Cấp độ:</label>
-            <select id="capDo" name="capDo" required class="form-select"> <!-- Thêm class Bootstrap -->
-                <option value="" th:selected="${cauhoi.capDo == null}">-- Chỉnh sửa cấp độ --</option>
-                <option value="Dễ" th:selected="${cauhoi.capDo == 'DE'}">Dễ</option>
-                <option value="Trung bình" th:selected="${cauhoi.capDo == 'TRUNG_BINH'}">Trung bình</option>
-                <option value="Khó" th:selected="${cauhoi.capDo == 'KHO'}">Khó</option>
-            </select>
-        </div>
-        <div class="form-group align-items-center"> <!-- Thêm phần chọn môn thi -->
-            <label for="monthi" class="mr-2">Chỉnh sửa môn thi:</label>
-            <select id="monthi" name="monthiId" class="form-select me-2" required> <!-- Sử dụng monthiId -->
-                <option value="" disabled selected>-- Chỉnh sửa môn thi --</option>
-                <option th:each="monthi : ${monthis}"
-                        th:value="${monthi.id}"
-                        th:text="${monthi.tenmonthi}"></option>
-            </select>
-        </div>
-        <button type="submit">Lưu Câu Hỏi</button>
-        <a th:href="@{/cauhois}" class="btn btn-link">Trở về</a>
+            <div class="form-group">
+                <label for="dapanA">Đáp án A:</label>
+                <textarea id="dapanA" th:field="*{dapanA}" required class="small-textarea"></textarea>
+            </div>
 
-    </form>
+            <div class="form-group">
+                <label for="dapanB">Đáp án B:</label>
+                <textarea id="dapanB" th:field="*{dapanB}" required class="small-textarea"></textarea>
+            </div>
 
+            <div class="form-group">
+                <label for="dapanC">Đáp án C:</label>
+                <textarea id="dapanC" th:field="*{dapanC}" required class="small-textarea"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="dapanD">Đáp án D:</label>
+                <textarea id="dapanD" th:field="*{dapanD}" required class="small-textarea"></textarea>
+            </div>
+
+            <div class="form-group-da">
+                <label class="mr-2">Chọn đáp án đúng:</label>
+                <div class="radio-group">
+                    <input type="radio" th:field="*{dapandung}" value="A" required> Đáp án A
+                    <input type="radio" th:field="*{dapandung}" value="B"> Đáp án B
+                    <input type="radio" th:field="*{dapandung}" value="C"> Đáp án C
+                    <input type="radio" th:field="*{dapandung}" value="D"> Đáp án D
+                </div>
+            </div>
+
+            <div class="form-group-cd">
+                <label for="capDo" class="mr-2">Cấp độ:</label>
+                <select id="capDo" th:field="*{capDo}" required class="form-select">
+                    <option value="" th:selected="${cauhoi.capDo == null}">-- Chọn cấp độ --</option>
+                    <option value="Dễ" th:selected="${cauhoi.capDo == 'DE'}">Dễ</option>
+                    <option value="Trung bình" th:selected="${cauhoi.capDo == 'TRUNG_BINH'}">Trung bình</option>
+                    <option value="Khó" th:selected="${cauhoi.capDo == 'KHO'}">Khó</option>
+                </select>
+            </div>
+
+            <div class="form-group-mt">
+                <label for="monthi" class="mr-2">Chọn môn thi:</label>
+                <select id="monthi" th:field="*{monthiId}" class="form-select me-2" required>
+                    <option value="" disabled selected>-- Chọn môn thi --</option>
+                    <option th:each="monthi : ${monthis}"
+                            th:value="${monthi.id}"
+                            th:text="${monthi.tenmonthi}"></option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-custom">Lưu Câu Hỏi</button>
+            <a th:href="@{/cauhois}" class="btn btn-link">Trở về</a>
+        </form>
+    </div> <!-- Kết thúc khung -->
 </section>
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
