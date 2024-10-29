@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Job Board</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/giaodienthi.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="row">
+    <div class="col-2">
+
+    </div>
+    <div class="col-8">
+        <h1 style="text-align: center" th:text="${dethi}"></h1>
+        <ul class="quiz">
+            <li th:each="baithi:${baithis}">
+                <h4 th:text="${baithi.cauhoi.ten}"></h4>
+                <ul  class="choices">
+
+                    <li>
+
+                        <label
+                        ><input type="radio" th:name="${baithi.cauhoi.id}" th:value="@{baithi.cauhoi.dapanA}" />
+                            <span th:text="${baithi.cauhoi.dapanA}"></span
+                        ></label
+                        >
+                    </li>
+                    <li>
+                        <label
+                        ><input type="radio" th:name="${baithi.cauhoi.id}" th:value="@{baithi.cauhoi.dapanB}" /><span
+                        th:text="${baithi.cauhoi.dapanB}" ></span
+                        ></label
+                        >
+                    </li>
+                    <li>
+                        <label
+                        ><input type="radio" th:name="${baithi.cauhoi.id}" th:value="@{baithi.cauhoi.dapanC}" />
+                            <span
+                                    th:text="${baithi.cauhoi.dapanC}"></span
+                        ></label
+                        >
+                    </li>
+                    <li>
+                        <label
+                        ><input type="radio" th:name="${baithi.cauhoi.id}" th:value="@{baithi.cauhoi.dapanD}" /><span
+                                th:text="${baithi.cauhoi.dapanD}"></span
+                        ></label
+                        >
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <button class="view-results" onclick="returnScore()">Nop Bai</button>
+    </div>
+    <div class="col-2">
+
+    </div>
+</div>
+
+
+
+</body>
+</html>
+
