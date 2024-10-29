@@ -17,7 +17,7 @@ public class ChiTietDeThi {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+ //
     @ManyToOne
     @JoinColumn(name= "dethi_id")
     private DeThi dethi;
