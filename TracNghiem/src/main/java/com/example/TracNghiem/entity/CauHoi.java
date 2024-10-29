@@ -2,8 +2,9 @@ package com.example.TracNghiem.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.*;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -50,4 +51,8 @@ public class CauHoi {
     @ManyToOne
     @JoinColumn(name = "monthi_id", insertable = false, updatable = false)
     private MonThi monthi; // Tham chiếu đến môn thi
+
+    @OneToMany(mappedBy = "cauhoi", cascade = CascadeType.ALL)
+    private List<ChiTietDeThi> chitietbaithi;
+
 }
