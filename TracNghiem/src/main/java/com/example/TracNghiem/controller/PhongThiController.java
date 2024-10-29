@@ -1,6 +1,7 @@
 package com.example.TracNghiem.controller;
 
 import com.example.TracNghiem.entity.PhongThi;
+import com.example.TracNghiem.services.CaThiService;
 import com.example.TracNghiem.services.PhongThiService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PhongThiController {
     @Autowired
     private PhongThiService phongThiService;
-
+    @Autowired
+    private CaThiService caThiService;
     @GetMapping
     public String showPhongthiList(Model model) {
         model.addAttribute("phongthis", phongThiService.getAllPhongThi());
@@ -28,6 +30,7 @@ public class PhongThiController {
     @GetMapping("/add")
     public String showAddPhongthi(Model model) {
         model.addAttribute("phongthi", new PhongThi());
+        model.addAttribute("cathis",caThiService.getAllCaThi() );
         return "/phongthis/add-phongthi";
     }
     @PostMapping("/add")
@@ -44,6 +47,7 @@ public class PhongThiController {
         PhongThi phongThi = phongThiService.getPhongThiById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid cauhoi Id:" + id));
         model.addAttribute("phongthi", phongThi);
+        model.addAttribute("cathis",caThiService.getAllCaThi());
 //        model.addAttribute("theloais", theLoaiService.getAllTheloai()); //Load theloais
         return "/phongthis/update-phongthi";
     }

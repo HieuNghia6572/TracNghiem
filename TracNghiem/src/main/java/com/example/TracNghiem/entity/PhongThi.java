@@ -21,8 +21,13 @@ public class PhongThi {
     @Column(name= "maPhong")
     private  String  maPhong;
 
-    @OneToMany(mappedBy = "phongthi", cascade = CascadeType.ALL)
-    private List<CaThi> Cathi;
+    @ManyToOne
+    @JoinColumn(name= "cathi_id")
+    private CaThi cathi;
+
+/*    @OneToMany(mappedBy = "phongthi", cascade = CascadeType.ALL)
+    private List<CaThi> Cathi;*/
+
 
 
 

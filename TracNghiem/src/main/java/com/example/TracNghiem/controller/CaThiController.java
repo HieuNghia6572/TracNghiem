@@ -25,8 +25,8 @@ public class CaThiController {
     @Autowired
     private MonThiService monThiService;
 
-    @Autowired
-    private PhongThiService phongThiService;
+    /*@Autowired
+    private PhongThiService phongThiService;*/
 //    @Autowired
 //    private TheLoaiService theLoaiService;
     // Đảm bảo bạn đã injectCategoryService
@@ -42,7 +42,7 @@ public class CaThiController {
     public String showAddForm(Model model) {
         model.addAttribute("cathi", new CaThi());
         model.addAttribute("monthis", monThiService.getAllMonThi());
-        model.addAttribute("phongthis",phongThiService.getAllPhongThi() );
+       // model.addAttribute("phongthis",phongThiService.getAllPhongThi() );
 //        model.addAttribute("theloais", theLoaiService.getAllTheloai()); //Load sanphams
       //  model.addAttribute("cathi", caThiService.getAllCaThi()); //Load sanphams
         return "/cathis/add-cathi";
@@ -78,7 +78,7 @@ public class CaThiController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid cathi Id:" + id));
         model.addAttribute("cathis", caThi);
         model.addAttribute("monthis", monThiService.getAllMonThi());
-        model.addAttribute("phongthis",phongThiService.getAllPhongThi() );
+        /*model.addAttribute("phongthis",phongThiService.getAllPhongThi() );*/
 //        model.addAttribute("theloais", theLoaiService.getAllTheloai()); //Load theloais
         return "/cathis/update-cathi";
     }

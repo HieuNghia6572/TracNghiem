@@ -21,7 +21,8 @@
             <th>ID</th>
             <th>Mã Phòng</th>
             <th>Tên Phòng</th>
-            <th> Chức Năng</th>
+            <th>Ca Thi</th>
+            <th>Chức Năng</th>
 
         </tr>
         </thead>
@@ -30,6 +31,8 @@
             <td th:text="${phongthi.id}"></td>
             <td th:text="${phongthi.maPhong}"></td>
             <td th:text="${phongthi.tenPhong}"></td>
+            <td th:text="${phongthi.cathi.tencathi}"></td>
+           <!-- <td th:text="${cathi.tencathi}"></td>-->
 
             <!-- <td> <img th:src="${sanpham.ImgUrl}" width="100px" height="100px"></td>
              <td th:text="${sanpham.theloai.ten}"></td>-->

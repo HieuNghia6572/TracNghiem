@@ -105,7 +105,23 @@
             <div class="text-danger" th:if="${#fields.hasErrors('tenPhong')}"
                  th:errors="*{tenPhong}"></div>
         </div>
-        <button type="submit" class="btn btn-primary">Cap Nhat</button>
+        <!--<div class="mb-3">
+            &lt;!&ndash; <label for="tencathi" class="form-label">Tên  Môn Thi</label>&ndash;&gt;
+            <select class="form-control" id="cathi" name="cathi.id">
+                <option value="">&#45;&#45; Chon Ca Thi &#45;&#45;</option>
+                <option th:each="cathi : ${cathis}" th:value="${cathi.id}"
+                        th:text="${cathi.tencathi}"></option>
+            </select>
+        </div>-->
+        <div class="mb-3">
+            <!--<label for="cauhoi" class="form-label">Mã cau hoi  </label>-->
+            <select th:field="*{cathi.id}" class="form-control"  id="cathi" name="cathi.id">
+                <option th:each="cathi : ${cathis}" th:value="${cathi.id}"
+                        th:text="${cathi.tencathi}" th:selected="${cathi.id ==phongthi.cathi.tencathi}"></option>
+
+            </select>
+
+        </div>        <button type="submit" class="btn btn-primary">Cap Nhat</button>
     </form>
 </section>
 <script

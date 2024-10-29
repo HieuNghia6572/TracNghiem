@@ -41,10 +41,10 @@ public class CaThiService {
         return monThiRepository.findAll();
     }
 
-    private final IPhongThiRepository phongThiRepository;
+    /*private final IPhongThiRepository phongThiRepository;
     public List<PhongThi> getAllPhongThi() {
         return phongThiRepository.findAll();
-    }
+    }*/
 
 
     public void deleteCaThi(Long id) {

@@ -19,7 +19,7 @@ public class CaThi {
     private Long id;
 
     @Column(name = "tencathi")
-    @NotEmpty(message = "Tên không được để trống")
+   /* @NotEmpty(message = "Tên không được để trống")*/
     private String tencathi;
 
     /*@Column(name = "tenmonhoc")
@@ -35,11 +35,10 @@ public class CaThi {
     private String tgkt;
 
 
-    @ManyToOne
-    @JoinColumn(name= "phongthi_id")
-    private PhongThi phongthi;
 
     @ManyToOne
     @JoinColumn(name= "monthi_id")
     private MonThi monthi;
+    @OneToMany(mappedBy = "cathi", cascade = CascadeType.ALL)
+    private List<PhongThi> Phongthi;
 }

@@ -142,7 +142,7 @@
 
                                             <button class="btn btn-outline-light" style="background-color:blue" type="submit">Đăng xuất</button>
                                             <a sec:authorize="hasAnyAuthority('ADMIN')">
-                                                <button class="btn btn-outline-light" style="background-color:blue" type="submit"><a style="color: white" href="http://localhost:8080/cauhois" >Admin</a> </button>
+                                                <button class="btn btn-outline-light" style="background-color:blue" type="submit"><a style="color: white" th:href="@{/cauhois}" >Admin</a> </button>
                                             </a>
                                         </form>
                                     </div>
