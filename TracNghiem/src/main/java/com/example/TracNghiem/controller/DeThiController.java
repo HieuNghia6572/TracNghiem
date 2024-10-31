@@ -1,7 +1,15 @@
 package com.example.TracNghiem.controller;
 
+import com.example.TracNghiem.entity.CauHoi;
 import com.example.TracNghiem.entity.DeThi;
+import com.example.TracNghiem.entity.MonThi;
+import com.example.TracNghiem.repository.ICapDoRepository;
+import com.example.TracNghiem.repository.ICauHoiRepository;
+import com.example.TracNghiem.repository.IDeThiRepository;
+import com.example.TracNghiem.repository.IMonThiRepository;
+import com.example.TracNghiem.services.CapDoService;
 import com.example.TracNghiem.services.DeThiService;
+import com.example.TracNghiem.services.MonThiService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,21 +18,32 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/dethis")
 public class DeThiController {
     @Autowired
-    private DeThiService deThiService;
-
+    private final DeThiService deThiService;
+    private final IDeThiRepository deThiRepository;
+    private final ICapDoRepository capDoRepository;
+    private final CapDoService capDoService;
+    private final MonThiService monThiService;
+    private final IMonThiRepository monThiRepository;
     @GetMapping
     public String showDethiList(Model model) {
         model.addAttribute("dethis", deThiService.getAllDeThi());
+        List<MonThi> monThiList = monThiRepository.findAll();
+        model.addAttribute("monThiList", monThiList);
         return "/dethis/dethis-list";
     }
     @GetMapping("/add")
     public String showAddDethi(Model model) {
         model.addAttribute("dethi", new DeThi());
+        model.addAttribute("capdos", capDoService.getAllCapDo());
+        List<MonThi> monthis = monThiService.getAllMonThi();
+        model.addAttribute("monthis", monthis);
         return "/dethis/add-dethi";
     }
     @PostMapping("/add")
@@ -36,22 +55,62 @@ public class DeThiController {
         return "redirect:/dethis";
 
     }
+    @PostMapping("/submit")
+    public String submitForm(@ModelAttribute @Valid DeThi dethi,
+                             BindingResult bindingResult,
+                             @RequestParam Long monthiId,
+
+                             Model model) { // Thêm Model vào đây
+        if (bindingResult.hasErrors()) {
+            List<MonThi> monthis = monThiService.getAllMonThi();
+            model.addAttribute("monthis", monthis); // Thêm danh sách môn thi vào mô hình nếu có lỗi
+            return "dethis/add-dethi"; // Trả về form nếu có lỗi
+        }
+        // Gán giá trị cho các trường
+//        cauhoi.setDapandung(dapandung);
+//        dethi.setCapDo(capDo);
+        dethi.setMonthiId(monthiId);
+        deThiRepository.save(dethi);
+        return "redirect:/dethis"; // Chuyển hướng về danh sách câu hỏi
+    }
+
     @GetMapping("/edit/{id}")
     public String EditDeThi (@PathVariable Long id, Model model) {
         DeThi deThi = deThiService.getDeThiById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid de thi Id:" + id));
         model.addAttribute("dethi", deThi);
+        List<MonThi> monthis = monThiService.getAllMonThi();
+        model.addAttribute("monthis", monthis);
         return "/dethis/update-deThi";
     }
-    @PostMapping("/update/{id}")
-    public String UpdateDethi(@Valid DeThi  deThi , BindingResult result, @PathVariable Long id, Model model) {
-        if(result.hasErrors()){
-            return"/dethis/update-dethi";
-        }
-        deThiService.updateDeThi(deThi);
-        return "redirect:/dethis";
 
+      @PostMapping("/update/{id}")
+    public String UpdateDethi(@PathVariable Long id, // Thêm ID vào đây
+                              @ModelAttribute @Valid DeThi deThi,
+                              BindingResult bindingResult,
+                              @RequestParam Long monthiId) {
+        if (bindingResult.hasErrors()) {
+            return "dethis/update-dethi"; // Trả về form nếu có lỗi
+        }
+
+        // Tìm đối tượng DeThi từ cơ sở dữ liệu
+        DeThi existingDeThi = deThiService.getDeThiById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid de thi Id:" + id));
+
+        // Cập nhật các thuộc tính// Giả sử bạn có thuộc tính "tenDeThi"
+        existingDeThi.setMonthiId(monthiId);
+        existingDeThi.setSlcauhoide(deThi.getSlcauhoide());
+        existingDeThi.setSlcauhoitb(deThi.getSlcauhoitb());
+        existingDeThi.setSlcauhoikho(deThi.getSlcauhoikho());
+
+        // Lưu đối tượng cập nhật
+        deThiService.updateDeThi(existingDeThi);
+        return "redirect:/dethis"; // Chuyển hướng về danh sách câu hỏi
     }
+
+
+
+
     @GetMapping("/delete/{id}")
     public String DeleteDethi (@PathVariable Long id, Model model) {
         deThiService.deleteDeThi(id);

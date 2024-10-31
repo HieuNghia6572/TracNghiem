@@ -13,7 +13,7 @@
         }
 
         body {
-            background-image: url('/img/bg-admin.png'); /* Đường dẫn đến hình ảnh nền */
+            background-color: #f8f9fa; /* Màu nền nhẹ */
             background-size: cover; /* Phủ kín toàn bộ diện tích */
             background-position: center; /* Căn giữa hình nền */
             background-repeat: no-repeat; /* Không lặp lại hình nền */
@@ -99,7 +99,36 @@
             <div class="text-danger" th:if="${#fields.hasErrors('madethi')}"
                  th:errors="*{madethi}"></div>
         </div>
+        <div class="form-group-mt">
+            <label for="monthi" class="mr-2">Chọn môn thi:</label>
+            <select id="monthi" th:field="*{monthiId}" class="form-select me-2" required>
+                <option value="" disabled selected>-- Chọn môn thi --</option>
+                <option th:each="monthi : ${monthis}"
+                        th:value="${monthi.id}"
+                        th:text="${monthi.tenmonthi}"></option>
+            </select>
+        </div>
 
+        <div class="mb-3">
+            <label for="slcauhoide" class="form-label">Nhâp Số Lượng Câu Hỏi Dễ </label>
+            <input type="text" th:field="*{slcauhoide}" class="form-control" id="slcauhoide" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('slcauhoide')}"
+                 th:errors="*{slcauhoide}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="slcauhoitb" class="form-label">Nhập Số Lượng Câu Hỏi Trung Bình</label>
+            <input type="text" th:field="*{slcauhoitb}" class="form-control" id="slcauhoitb" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('slcauhoitb')}"
+                 th:errors="*{slcauhoitb}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="slcauhoikho" class="form-label">Nhập Số Lượng Câu Hỏi Khó</label>
+            <input type="text" th:field="*{slcauhoikho}" class="form-control" id="slcauhoikho" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('slcauhoikho')}"
+                 th:errors="*{slcauhoikho}"></div>
+        </div>
 <!--        <div class="mb-3">-->
 <!--            <label for="tenmonthi" class="form-label">Tên Môn Thi:</label>-->
 <!--            <input type="text" th:field="*{tenmonthi}" class="form-control" id="tenmonthi" required>-->

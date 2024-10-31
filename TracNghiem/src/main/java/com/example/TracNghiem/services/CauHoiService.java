@@ -1,6 +1,7 @@
 package com.example.TracNghiem.services;
 
 import com.example.TracNghiem.entity.CauHoi;
+import com.example.TracNghiem.entity.DeThi;
 import com.example.TracNghiem.repository.ICauHoiRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +25,11 @@ public class CauHoiService {
         return cauHoiRepository.findById(id);
     }
     // Add a new cauhoi to the database
+
     public CauHoi addCauHoi(CauHoi cauHoi) {
         return cauHoiRepository.save(cauHoi);
     }
+
 
     // Delete a cauhoi by its id
     public void deleteCauHoi(Long id) {

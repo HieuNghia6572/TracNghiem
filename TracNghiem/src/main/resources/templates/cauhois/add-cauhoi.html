@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.w3.org/1999/xhtml"
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
     <title>Thêm câu hỏi</title>
@@ -12,7 +13,7 @@
         }
 
         body {
-            background-image: url('/img/bg-admin.png'); /* Đường dẫn đến hình ảnh nền */
+            background-color: #f8f9fa; /* Màu nền nhẹ */
             background-size: cover; /* Phủ kín toàn bộ diện tích */
             background-position: center; /* Căn giữa hình nền */
             background-repeat: no-repeat; /* Không lặp lại hình nền */

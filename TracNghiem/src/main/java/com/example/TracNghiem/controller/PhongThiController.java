@@ -61,7 +61,7 @@ public class PhongThiController {
 
     }
     @GetMapping("/delete/{id}")
-    public String DeletePhongthi (@PathVariable Long id, Model model) {
+    public String DeletePhongthi (@PathVariable Long id) {
         phongThiService.deletePhongThi(id);
         return "redirect:/phongthis";
     }

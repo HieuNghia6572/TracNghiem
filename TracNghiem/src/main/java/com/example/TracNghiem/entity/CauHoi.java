@@ -55,4 +55,7 @@ public class CauHoi {
     @OneToMany(mappedBy = "cauhoi", cascade = CascadeType.ALL)
     private List<ChiTietDeThi> chitietbaithi;
 
+   @ManyToOne
+   @JoinColumn(name="capdo_id",insertable = false,updatable = false)
+    private  CapDo capdo;
 }

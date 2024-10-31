@@ -20,7 +20,10 @@
         <tr>
             <th>ID</th>
             <th>Mã De Thi  </th>
-            <th>Tuy Chon</th>
+            <th>Tên môn thi</th>
+            <th>Số Lượng Câu Hỏi Dễ</th>
+            <th>Số Lượng Câu Hỏi Trung Bình</th>
+            <th>Số Lượng Câu Hỏi Khó</th>
             <th> Chức Năng</th>
 
         </tr>
@@ -29,7 +32,12 @@
         <tr th:each="dethi : ${dethis}">
             <td th:text="${dethi.id}"></td>
             <td th:text="${dethi.madethi}"></td>
-            <td><a th:href="@{/chitietdethis/giaodienthi/{made}(made=${dethi.madethi})}">Vao thi</a></td>
+            <td th:text="${dethi.monthi != null ? dethi.monthi.tenmonthi : 'Chưa có môn thi'}"></td>
+            <td th:text="${dethi.slcauhoide}"></td>
+            <td th:text="${dethi.slcauhoitb}"></td>
+            <td th:text="${dethi.slcauhoikho}"></td>
+
+<!--            <td><a th:href="@{/chitietdethis/giaodienthi/{made}(made=${dethi.madethi})}">Vao thi</a></td>-->
 
 
             <!-- <td> <img th:src="${sanpham.ImgUrl}" width="100px" height="100px"></td>
