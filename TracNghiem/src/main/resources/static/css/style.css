@@ -1136,7 +1136,7 @@ h3 {
 
 /* line 176, ../../Arafath/CL/December/235. Job board/HTML/scss/_header.scss */
 .header-area .main-header-area .main-menu ul li a {
-  color: #fff;
+  color: black;
   font-size: 15px;
   text-transform: capitalize;
   font-weight: 500;
