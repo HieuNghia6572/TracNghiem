@@ -17,7 +17,7 @@ public class CauHoi {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String ImgUrl;
     @Column(name = "ten")
     @NotEmpty(message = "Tên không được để trống")
     private String ten;

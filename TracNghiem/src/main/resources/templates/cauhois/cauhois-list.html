@@ -104,6 +104,7 @@
             <tr>
                 <th>ID</th>
                 <th>Câu Hỏi</th>
+                <th>Hình ảnh</th>
                 <th>Đáp Án A</th>
                 <th>Đáp Án B</th>
                 <th>Đáp Án C</th>
@@ -117,7 +118,8 @@
             <tbody>
             <tr th:each="cauhoi : ${cauhois}">
                 <td th:text="${cauhoi.id}"></td>
-                <td class="text-ellipsis" th:text="${cauhoi.ten.length() > 30 ? #strings.substring(cauhoi.ten, 0, 30) + '...' : cauhoi.ten}"></td>
+                <td class="text-ellipsis" th:utext="${cauhoi.ten.length() > 30 ? #strings.substring(cauhoi.ten, 0, 30) + '...' : cauhoi.ten}"></td>
+                <td><img th:src="${cauhoi.ImgUrl}" width="100px" height="100px"> </td>
                 <td class="text-ellipsis" th:text="${cauhoi.dapanA.length() > 10 ? #strings.substring(cauhoi.dapanA, 0, 10) + '...' : cauhoi.dapanA}"></td>
                 <td class="text-ellipsis" th:text="${cauhoi.dapanB.length() > 10 ? #strings.substring(cauhoi.dapanB, 0, 10) + '...' : cauhoi.dapanB}"></td>
                 <td class="text-ellipsis" th:text="${cauhoi.dapanC.length() > 10 ? #strings.substring(cauhoi.dapanC, 0, 10) + '...' : cauhoi.dapanC}"></td>

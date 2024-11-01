@@ -93,14 +93,21 @@
 <section layout:fragment="content" class="container mt-5">
     <div class="form-frame"> <!-- Khung cho nội dung -->
         <h3>Chỉnh sửa câu hỏi và đáp án</h3>
-        <form action="/cauhois/update" method="post" th:object="${cauhoi}"> <!-- Đường dẫn đến controller -->
+        <form th:action="@{/cauhois/update/{id}(id=${cauhoi.id})}" method="post" th:object="${cauhoi}" enctype="multipart/form-data"> <!-- Đường dẫn đến controller -->
             <input type="hidden" th:field="*{id}"/> <!-- ID câu hỏi -->
 
             <div class="form-group">
                 <label for="ten">Câu hỏi:</label>
                 <textarea id="ten" th:field="*{ten}" required class="large-textarea"></textarea>
             </div>
-
+            <div class="form-group">
+                <label for="image">Hình ảnh:</label>
+                <input type="file" id="image"  name="image" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="image"class="w-10 me-3 mb-0">Hình ảnh hiện tại</label>
+                <img th:src="@{${cauhoi.ImgUrl}}" width="150" height="150" alt="Sản phẩm" />
+            </div>
             <div class="form-group">
                 <label for="dapanA">Đáp án A:</label>
                 <textarea id="dapanA" th:field="*{dapanA}" required class="small-textarea"></textarea>

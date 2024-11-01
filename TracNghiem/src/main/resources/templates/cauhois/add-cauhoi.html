@@ -92,14 +92,17 @@
 <section layout:fragment="content" class="container mt-5">
     <div class="form-frame"> <!-- Khung cho nội dung -->
         <h3>Nhập câu hỏi và đáp án</h3>
-        <form action="/cauhois/submit" method="post" th:object="${cauhoi}">
+        <form th:action="@{/cauhois/add}" th:object="${cauhoi}"  method="post"  enctype="multipart/form-data">
             <input type="hidden" th:field="*{id}"/> <!-- ID câu hỏi -->
 
             <div class="form-group">
                 <label for="ten">Câu hỏi:</label>
-                <textarea id="ten" th:field="*{ten}" required class="large-textarea"></textarea>
+                <textarea id="ten" th:field="*{ten}" ></textarea>
             </div>
-
+            <div class="form-group">
+                <label for="image">Hình ảnh:</label>
+                <input type="file" id="image"  name="image" class="form-control" />
+            </div>
             <div class="form-group">
                 <label for="dapanA">Đáp án A:</label>
                 <textarea id="dapanA" th:field="*{dapanA}" required class="small-textarea"></textarea>

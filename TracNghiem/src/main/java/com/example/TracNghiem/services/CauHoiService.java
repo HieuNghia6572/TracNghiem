@@ -5,6 +5,7 @@ import com.example.TracNghiem.entity.DeThi;
 import com.example.TracNghiem.repository.ICauHoiRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +16,9 @@ import java.util.Optional;
 @Transactional
 @Service
 public class CauHoiService {
-    private final ICauHoiRepository cauHoiRepository;
+    @Autowired
+    private ICauHoiRepository cauHoiRepository;
+    //private final ICauHoiRepository cauHoiRepository;
     // Retrieve all cauhoi from the database
     public List<CauHoi> getAllCauHoi() {
         return cauHoiRepository.findAll();
@@ -23,6 +26,10 @@ public class CauHoiService {
     // Retrieve a cauhoi by its id
     public Optional<CauHoi> getCauHoiById(Long id) {
         return cauHoiRepository.findById(id);
+    }
+    public CauHoi getCauHoiById1(Long id) {
+        return cauHoiRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
     }
     // Add a new cauhoi to the database
 
@@ -44,6 +51,7 @@ public class CauHoiService {
                         cauHoi.getId() + " không tồn tại."));
         // Cập nhật thông tin
         existingCauhoi.setTen(cauHoi.getTen());
+        existingCauhoi.setImgUrl(cauHoi.getImgUrl());
         existingCauhoi.setDapanA(cauHoi.getDapanA());
         existingCauhoi.setDapanB(cauHoi.getDapanB());
         existingCauhoi.setDapanC(cauHoi.getDapanC());
