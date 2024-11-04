@@ -7,10 +7,18 @@
     <title>Web trắc nghiệm</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.0.1/tinymce.min.js" integrity="sha512-KGtsnWohFUg0oksKq7p7eDgA1Rw2nBfqhGJn463/rGhtUY825dBqGexj8eP04LwfnsSW6dNAHAlOqKJKquHsnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.0.1/tinymce.min.js" integrity="sha512-KGtsnWohFUg0oksKq7p7eDgA1Rw2nBfqhGJn463/rGhtUY825dBqGexj8eP04LwfnsSW6dNAHAlOqKJKquHsnw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    </script>
     <script>
         tinymce.init({
                 selector: '#ten'
+        });
+    </script>
+
+    <script>
+        tinymce.init({
+                selector: '#message'
         });
     </script>
     <style>
@@ -199,6 +207,18 @@
                 </div>
                 <div class="col-10">
                     <div class="d-flex align-items-center justify-content-center">
+                        <div class="dropdown-container">
+                            <div class="dropdown me-3">
+                                <img th:src="@{/img/anh_cauhoi_rbg.jpg}" alt="Ảnh Câu Hỏi">
+                                <a class="navbar-brand dropdown-toggle" href="#" role="button" id="dropdownNotice" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Thông Báo
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownNotice">
+                                    <li><a class="dropdown-item" aria-current="page" href="/thongbaos">Thông báo</a></li>
+                                    <li><a class="dropdown-item" aria-current="page" href="/thongbaos/add">Thêm thông báo</a></li>
+                                </ul>
+                            </div>
+                        </div>
                         <!-- Dropdown cho câu hỏi -->
                         <div class="dropdown-container">
                             <div class="dropdown me-3">
