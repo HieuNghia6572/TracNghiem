@@ -24,6 +24,7 @@ public class CauHoiService {
         return cauHoiRepository.findAll();
     }
     // Retrieve a cauhoi by its id
+
     public Optional<CauHoi> getCauHoiById(Long id) {
         return cauHoiRepository.findById(id);
     }
