@@ -96,6 +96,96 @@
         .main-menu a:hover {
             color: #007bff; /* Màu chữ khi hover */
         }
+        .video-container {
+            position: relative;
+            margin: 20px 0; /* Thêm margin để cách biệt với các phần tử khác */
+            border: 5px solid #007bff; /* Đặt khung cho video */
+            border-radius: 10px; /* Bo tròn các góc */
+            overflow: hidden; /* Đảm bảo bóng mờ không ra ngoài khung */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8); /* Bóng mờ */
+            width: 600px; /* Chiều rộng của khung */
+            height: 430px; /* Chiều cao của khung */
+        }
+
+        .video-container video {
+            width: 100%; /* Đảm bảo video chiếm toàn bộ chiều rộng của khung */
+            height: 100%; /* Đảm bảo video chiếm toàn bộ chiều cao của khung */
+            border-radius: 10px; /* Bo tròn các góc video */
+        }
+
+        .large-bold-text {
+            font-size: 32px; /* Kích thước chữ */
+            font-weight: bold; /* In đậm chữ */
+            text-align: center; /* Căn giữa theo chiều ngang */
+            margin: 0 auto; /* Tự động căn giữa */
+            width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng của container */
+        }
+         .icon-container {
+            display: flex;
+            justify-content: center; /* Căn giữa các icon */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            flex-wrap: wrap; /* Cho phép bọc dòng khi không đủ không gian */
+            margin: 20px auto; /* Đưa icon ra giữa màn hình */
+            width: 80%; /* Chiều rộng của khu vực icon */
+            text-align: center; /* Căn giữa văn bản trong icon-box */
+        }
+
+        .icon-box {
+            text-align: center;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px; /* Tăng padding để phóng to */
+            margin: 10px; /* Thêm margin giữa các icon */
+            transform: scale(1); /* Để không ảnh hưởng đến kích thước */
+        }
+
+        .icon {
+            font-size: 60px; /* Kích thước biểu tượng phóng to */
+            margin-bottom: 15px;
+        }
+
+        .text {
+            font-size: 32px; /* Kích thước chữ phóng to */
+            font-weight: bold; /* In đậm chữ */
+            margin: 5px 0;
+        }
+        .notification {
+            display: none; /* Ẩn thông báo ban đầu */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            z-index: 1000; /* Đảm bảo thông báo ở trên cùng */
+        }
+
+        .overlay {
+            display: none; /* Ẩn overlay ban đầu */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999; /* Đảm bảo overlay ở dưới thông báo */
+        }
+
+        .close-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+
+
     </style>
     <script>
         // Các script hiện tại khác của bạn
@@ -180,20 +270,25 @@
                                     <ul id="navigation">
                                         <li><a href="index.html">Trang chủ</a></li>
                                         <li><a href="jobs.html">Thông báo</a></li>
-                                        <li><a href="#">Pages <i class="ti-angle-down"></i></a>
+                                        <li><a href="#">Phòng thi<i class="ti-angle-down"></i></a>
                                             <ul class="submenu">
                                                 <li><a href="candidate.html">Candidates </a></li>
                                                 <li><a href="job_details.html">Job Details </a></li>
                                                 <li><a href="elements.html">Elements</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">Blog <i class="ti-angle-down"></i></a>
+                                        <li><a href="#">Ca Thi <i class="ti-angle-down"></i></a>
                                             <ul class="submenu">
                                                 <li><a href="blog.html">Blog</a></li>
                                                 <li><a href="single-blog.html">Single Blog</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="contact.html">Liên Hệ</a></li>
+                                        <li><a href="#">Môn thi<i class="ti-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="blog.html">Blog</a></li>
+                                                <li><a href="single-blog.html">Single Blog</a></li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
@@ -227,13 +322,9 @@
 <div class="sidebar" id="sidebar">
     <h3>Menu</h3>
     <ul class="sidebar-menu">
-        <li><a href="/cauhois">Quản lý câu hỏi</a></li>
-        <li><a href="/cathis">Quản lý ca thi</a></li>
-        <li><a href="/phongthis">Quản lý phòng thi</a></li>
-        <li><a href="/monthis">Quản lý môn thi</a></li>
-        <li><a href="/dethis">Quản lý đề thi</a></li>
-        <li><a href="https://thithu.edu.vn/login">Đăng Nhập</a></li>
-        <li><a href="https://thithu.edu.vn/register">Đăng Ký</a></li>
+        <li><a href="/cathis">Danh sách ca thi</a></li>
+        <li><a href="/phongthis">Danh sách phòng thi</a></li>
+        <li><a href="/monthis">Danh sách môn thi</a></li>
     </ul>
 </div>
 
@@ -246,7 +337,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-7 col-md-6">
-                        <h1 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">Thông Báo:</h1>
+                        <h1 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">Giới thiệu:</h1>
                         <tr th:each="thongbao : ${thongbaos}">
                             <td th:utext="${thongbao.message}"></td>
                         </tr>
@@ -257,7 +348,7 @@
                             <img src="img/logo_ntt_rbg.png" alt="" height="180" width="370">
                             <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">Nâng cao kiến thức nhé!!!!!</p>
                             <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
-                                <a href="#" class="boxed-btn3">Upload your Resume</a>
+                                <a href="#" class="boxed-btn3">Vào thi</a>
                             </div>
                         </div>
                     </div>
@@ -265,10 +356,12 @@
             </div>
         </div>
         <div class="ilstration_img wow fadeInRight d-none d-lg-block text-right" data-wow-duration="1s" data-wow-delay=".2s">
-            <video width="600" height="430" controls>
-                <source src="test/hutech.mp4" type="video/mp4">
-                Trình duyệt của bạn không hỗ trợ video.
-            </video>
+            <div class="video-container">
+                <video controls>
+                    <source src="test/hutech.mp4" type="video/mp4">
+                    Trình duyệt của bạn không hỗ trợ video.
+                </video>
+            </div>
         </div>
     </div>
     <!-- slider_area_end -->
@@ -278,11 +371,57 @@
         <p>Thời gian: <span id="countdown"></span></p>
     </div>
 </div>
+
+
+<div class="popular_catagory_area">
+    <div class="icon-container">
+        <div class="icon-container">
+            <div class="icon-box" data-message="website NTT Trắc nghiệm mang lại những câu hỏi đa dạng về các chủ đề  ">
+                <div class="icon">🌈</div>
+                <div class="text">Đa dạng</div>
+            </div>
+            <div class="icon-box" data-message="Bạn đã chọn Thông minh!">
+                <div class="icon">🧠</div>
+                <div class="text">Thông minh</div>
+            </div>
+            <div class="icon-box" data-message="Bạn đã chọn Chính xác!">
+                <div class="icon">✅</div>
+                <div class="text">Chính xác</div>
+            </div>
+        </div>
+        <div class="overlay"></div>
+        <div class="notification">
+            <p id="notification-message"></p>
+            <button class="close-btn">Đóng</button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section_title mb-40">
+                    <h3>Danh Sách Môn Thi</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-xl-3 col-md-6" th:each="monThi : ${monthis}">
+                <div class="single_catagory">
+                    <a href="jobs.html"><h4 th:text="${monThi.tenmonthi}">Tên Môn Thi</h4></a>
+                    <p><span th:text="${monThi.mamonthi}">Mã Môn Thi</span></p>
+                </div>
+            </div>
+            <div th:if="${#lists.isEmpty(monthis)}">
+                <p>Không có môn thi nào.</p> <!-- Hiển thị thông báo nếu danh sách rỗng -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- popular_catagory_area_end  -->
 <!-- end content -->
 
 <!-- footer start -->
 <footer class="bg-primary text-white text-center py-4 mt-5">
-    <div class="container d-flex justify-content-between">
+    <div class="container d-flex justify-content-between text-footer">
         <div class="footer-left">
             <h5 class="mb-0">Trắc nghiệm NTT</h5>
             <p class="mb-0">© 2024 Tất cả quyền được bảo lưu.</p>
@@ -339,6 +478,41 @@
             content.classList.remove('content-hidden');
             toggleButton.innerHTML = 'Ẩn'; // Thay đổi biểu tượng nút
         }
+    });
+</script>
+<script>
+    // Lấy tất cả các icon-box
+    const iconBoxes = document.querySelectorAll('.icon-box');
+    const notification = document.querySelector('.notification');
+    const overlay = document.querySelector('.overlay');
+    const notificationMessage = document.getElementById('notification-message');
+    const closeButton = document.querySelector('.close-btn');
+
+    // Hàm hiển thị thông báo
+    function showNotification(message) {
+        notificationMessage.textContent = message;
+        notification.style.display = 'block';
+        overlay.style.display = 'block';
+    }
+
+    // Thêm sự kiện click cho mỗi icon-box
+    iconBoxes.forEach(box => {
+        box.addEventListener('click', () => {
+            const message = box.getAttribute('data-message');
+            showNotification(message);
+        });
+    });
+
+    // Đóng thông báo
+    closeButton.addEventListener('click', () => {
+        notification.style.display = 'none';
+        overlay.style.display = 'none';
+    });
+
+    // Đóng thông báo khi click vào overlay
+    overlay.addEventListener('click', () => {
+        notification.style.display = 'none';
+        overlay.style.display = 'none';
     });
 </script>
 </body>

@@ -79,7 +79,7 @@ button {
 /* line 40, ../../Arafath/CL/December/235. Job board/HTML/scss/theme-default.scss */
 h1, h2, h3, h4, h5 {
   font-family: "Roboto", sans-serif;
-  color: #191d34;
+  /*color: #191d34;*/
 }
 
 /* line 44, ../../Arafath/CL/December/235. Job board/HTML/scss/theme-default.scss */
@@ -108,7 +108,7 @@ p {
   font-size: 16px;
   font-weight: 400;
   line-height: 28px;
-  color: #7A838B;
+  /*color: #7A838B;*/
   margin-bottom: 13px;
   font-family: "Roboto", sans-serif;
 }
@@ -2819,7 +2819,7 @@ h3 {
 /* line 1, ../../Arafath/CL/December/235. Job board/HTML/scss/_popular_catagory.scss */
 .popular_catagory_area {
   background: #F5F7FA;
-  padding: 100px 0;
+  padding: 0px 0;
 }
 
 /* line 4, ../../Arafath/CL/December/235. Job board/HTML/scss/_popular_catagory.scss */
