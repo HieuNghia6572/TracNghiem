@@ -15,7 +15,7 @@ public class ThongBao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
 
-    @Column(name= "message")
+    @Column(name= "message", columnDefinition = "TEXT")
     private String  message;
 
 
