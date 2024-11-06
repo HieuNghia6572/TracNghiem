@@ -42,6 +42,7 @@ public class MonThiService {
                 .orElseThrow(() -> new IllegalStateException("Product with ID " +
                         monThi.getId() + " does not exist."));
         existingMonThi.setTenmonthi(monThi.getTenmonthi());
+        existingMonThi.setImgUrl(monThi.getImgUrl());
         existingMonThi.setMamonthi(monThi.getMamonthi());
         return monThiRepository.save(existingMonThi);
     }}

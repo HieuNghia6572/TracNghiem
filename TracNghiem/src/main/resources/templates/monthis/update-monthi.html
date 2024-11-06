@@ -105,6 +105,14 @@
             <div class="text-danger" th:if="${#fields.hasErrors('tenmonthi')}"
                  th:errors="*{tenmonthi}"></div>
         </div>
+        <div class="form-group">
+            <label for="image">Hình ảnh:</label>
+            <input type="file" id="image"  name="image" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="image"class="w-10 me-3 mb-0">Hình ảnh hiện tại</label>
+            <img th:src="@{${monthi.ImgUrl}}" width="150" height="150" alt="Sản phẩm" />
+        </div>
         <button type="submit" class="btn btn-primary">Cập Nhật</button>
     </form>
 </section>

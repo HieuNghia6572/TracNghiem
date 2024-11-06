@@ -14,7 +14,7 @@ public class MonThi {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
-
+    private String ImgUrl;
     @Column(name= "tenmonthi")
     private String  tenmonthi;
 

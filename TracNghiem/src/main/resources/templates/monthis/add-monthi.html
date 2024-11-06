@@ -93,17 +93,21 @@
 <section layout:fragment="content" class="container mt-5">
     <h1>Thêm Môn Thi Mới</h1>
     <form th:action="@{/monthis/add}" th:object="${monthi}" method="post" enctype="multipart/form-data">
-        <div class="mb-3">
+        <div class="form-group">
             <label for="mamonthi" class="form-label">Mã Môn Thi:</label>
             <input type="text" th:field="*{mamonthi}" class="form-control" id="mamonthi" required>
             <div class="text-danger" th:if="${#fields.hasErrors('mamonthi')}"
                  th:errors="*{mamonthi}"></div>
         </div>
-        <div class="mb-3">
+        <div class="form-group">
             <label for="tenmonthi" class="form-label">Tên  Môn Thi</label>
             <input type="text" th:field="*{tenmonthi}" class="form-control" id="tenmonthi" required>
             <div class="text-danger" th:if="${#fields.hasErrors('tenmonthi')}"
                  th:errors="*{tenmonthi}"></div>
+        </div>
+        <div class="form-group">
+            <label for="image">Hình ảnh:</label>
+            <input type="file" id="image"  name="image" class="form-control" />
         </div>
 
         <button type="submit" class="btn btn-primary">Thêm</button>
