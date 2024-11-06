@@ -1,14 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Trắc nghiệm NTT</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta charset="UTF-8">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
@@ -21,22 +14,9 @@
     <link rel="stylesheet" href="css/animate.min.css">
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="css/style.css">
-
-    <style>
-
-
-
-
-    </style>
-
+    <title>Giao diện ca thi</title>
 </head>
-
 <body>
-<!--[if lte IE 9]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-<![endif]-->
-
-<!-- header-start -->
 <header>
     <div class="header-area">
         <div class="main-header-area shimmer-effect"> <!-- Thêm lớp shimmer-effect -->
@@ -104,63 +84,16 @@
         </div>
     </div>
 </header>
-<!-- header-end -->
-
-<!-- sidebar-menu -->
 <div class="sidebar" id="sidebar">
     <h3>Menu</h3>
     <ul class="sidebar-menu">
-        <li><a href="/giaodiencathi">Danh sách ca thi</a></li>
+        <li><a href="/cathis">Danh sách ca thi</a></li>
         <li><a href="/phongthis">Danh sách phòng thi</a></li>
         <li><a href="/monthis">Danh sách môn thi</a></li>
     </ul>
 </div>
-
-<!-- Nút đẩy ra và đưa vào -->
-
-<!-- slider_area_start -->
 <div class="content" id="content">
-    <div class="slider_area">
-        <div class="single_slider d-flex align-items-center slider_bg_2">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-7 col-md-6">
-                        <h1 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">Giới thiệu:</h1>
-                        <tr th:each="thongbao : ${thongbaos}">
-                            <td th:utext="${thongbao.message}"></td>
-                        </tr>
-                        <!--<td th:utext="${thongbao.message}"></td>-->
-                        <div class="slider_text">
-
-                            <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">Hãy cùng</h5>
-                            <img src="img/logo_ntt_rbg.png" alt="" height="180" width="370">
-                            <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">Nâng cao kiến thức nhé!!!!!</p>
-                            <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
-                                <a href="#" class="boxed-btn3">Vào thi</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="ilstration_img wow fadeInRight d-none d-lg-block text-right" data-wow-duration="1s" data-wow-delay=".2s">
-            <div class="video-container">
-                <video controls>
-                    <source src="test/hutech.mp4" type="video/mp4">
-                    Trình duyệt của bạn không hỗ trợ video.
-                </video>
-            </div>
-        </div>
-    </div>
-    <!-- slider_area_end -->
-
-    <div>
-        <p>Thời gian hiện tại: <span id="time"></span></p>
-        <p>Thời gian: <span id="countdown"></span></p>
-    </div>
 </div>
-
-
 <div class="popular_catagory_area">
     <div class="icon-container">
         <div class="icon-container">
@@ -193,16 +126,9 @@
         </div>
         <div class="row">
             <div class="col-lg-4 col-xl-3 col-md-6" th:each="monThi : ${monthis}">
-                <div class="single_category">
-                    <div class="text-container"> <!-- Khối chứa chữ -->
-                        <a th:href="@{/monthi/{id}(id=${monThi.id})}">
-                            <h4 th:text="${monThi.tenmonthi}">Tên Môn Thi</h4>
-                            <p><span th:text="${monThi.mamonthi}">Mã Môn Thi</span></p>
-                        </a>
-                    </div>
-                    <div class="inner-container"> <!-- Khung bên trong chứa hình ảnh -->
-                        <img th:src="@{${monThi.imgUrl}}" alt="${monThi.tenmonthi}" class="category-image">
-                    </div>
+                <div class="single_catagory">
+                    <a href="jobs.html"><h4 th:text="${monThi.tenmonthi}">Tên Môn Thi</h4></a>
+                    <p><span th:text="${monThi.mamonthi}">Mã Môn Thi</span></p>
                 </div>
             </div>
             <div th:if="${#lists.isEmpty(monthis)}">
@@ -211,30 +137,7 @@
         </div>
     </div>
 </div>
-<div class="phongthi">
-    <h1>Chọn Phòng Thi</h1>
-    <div class="phongthi">
-        <div class="row">
-            <th:block th:each="phongThi : ${phongThiList}">
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h2 th:text="'Phòng số: ' + ${phongThi.tenPhong}">Tên Phòng</h2>
-                            <p th:text="'Mã phòng: ' + ${phongThi.maPhong}">Thông tin chi tiết về phòng thi.</p>
-                            <p th:text="'Tên Ca Thi: ' + ${phongThi.cathi.tencathi}">Tên Ca Thi</p>
-                            <p th:text="'Thời gian bắt đầu: ' + ${phongThi.cathi.tgbd}">Thời gian bắt đầu</p>
-                            <p th:text="'Thời gian kết thúc: ' + ${phongThi.cathi.tgkt}">Thời gian kết thúc</p>
-                        </div>
-                    </div>
-                </div>
-            </th:block>
-        </div>
-    </div>
-</div>
-<!-- popular_catagory_area_end  -->
-<!-- end content -->
 
-<!-- footer start -->
 <footer class="bg-primary text-white text-center py-4 mt-5">
     <div class="container d-flex justify-content-between text-footer">
         <div class="footer-left">
@@ -247,9 +150,6 @@
         </div>
     </div>
 </footer>
-<!-- /footer end -->
-
-<!-- JS here -->
 <script src="js/vendor/modernizr-3.5.0.min.js"></script>
 <script src="js/vendor/jquery-1.12.4.min.js"></script>
 <script src="js/popper.min.js"></script>
@@ -275,5 +175,6 @@
 <script src="js/mail-script.js"></script>
 <script src="js/main.js"></script>
 <script src="js/scripts.js"></script>
+
 </body>
 </html>

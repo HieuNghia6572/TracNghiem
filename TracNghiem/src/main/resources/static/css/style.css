@@ -25,10 +25,16 @@
 /* small mobile :320px. */
 /* Large Mobile :480px. */
 /* line 6, ../../Arafath/CL/December/235. Job board/HTML/scss/theme-default.scss */
+html, body {
+    height: 100%; /* Đảm bảo chiều cao 100% cho html và body */
+    margin: 0; /* Loại bỏ margin mặc định NGHIA */
+}
 body {
   font-family: "Roboto", sans-serif;
   font-weight: normal;
   font-style: normal;
+  display: flex; /* Sử dụng flexbox  NGHIA*/
+  flex-direction: column; /* Đặt chiều dọc cho flexbox */
 }
 
 /* line 13, ../../Arafath/CL/December/235. Job board/HTML/scss/theme-default.scss */
@@ -2221,6 +2227,13 @@ h3 {
   background-repeat: no-repeat;
   background-size: cover;
   background: #001D38;
+  background-color: #007bff; /* Màu nền */
+  color: white; /* Màu chữ */
+  text-align: center; /* Căn giữa */
+  padding: 1rem; /* Padding cho footer */
+  margin-top: 0; /* Bỏ margin trên */
+  margin-bottom: 0; /* Bỏ margin dưới */
+
 }
 
 /* line 7, ../../Arafath/CL/December/235. Job board/HTML/scss/_footer.scss */
@@ -7472,3 +7485,215 @@ h6 {
 }
 
 /*# sourceMappingURL=style.css.map */
+/*css trang chu*/
+.phongthi {
+    background-color: #ffffff; /* Màu nền trắng cho khung */
+    border-radius: 10px; /* Bo tròn viền */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Bóng mờ */
+    padding: 20px; /* Khoảng cách bên trong khung */
+    width: calc(100% - 40px); /* Chiều rộng 100% trừ đi lề 20px mỗi bên */
+    height: calc(100% - 40px); /* Chiều cao 100% trừ đi lề 20px mỗi bên */
+    text-align: center; /* Căn giữa nội dung */
+    top: 20px; /* Đặt từ trên cùng 20px */
+    left: 20px; /* Đặt từ bên trái 20px */
+    margin-left: 20px; /* Lề trái 20px */
+    margin-right: 20px; /* Lề phải 20px */
+}
+@keyframes shimmer {
+    0% {
+        background-color: white;
+    }
+    50% {
+        background-color: #00BFFF; /* Màu xanh dương */
+    }
+    100% {
+        background-color: white;
+    }
+}
+
+.shimmer-effect {
+    animation: shimmer 5s infinite; /* Thời gian và kiểu lặp lại */
+}
+.header-area {
+    height: 100px; /* Chiều cao của header */
+    position: fixed; /* Giữ header ở vị trí cố định */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Đảm bảo header ở trên cùng */
+                transition: opacity 0.5s; /* Hiệu ứng chuyển đổi cho độ mờ */
+
+}
+.header-hidden {
+    opacity: 0.9; /* Độ mờ header khi cuộn xuống */
+}
+.sidebar {
+    width: 250px; /* Chiều rộng của sidebar */
+    background: #f8f9fa; /* Màu nền của sidebar */
+    height: 100vh; /* Chiều cao bằng chiều cao viewport */
+    position: fixed; /* Gắn sidebar ở vị trí cố định */
+    overflow-y: auto; /* Cuộn dọc nếu cần */
+    padding: 20px; /* Padding cho sidebar */
+    z-index: 1000; /* Đảm bảo sidebar nằm trên cùng */
+    transition: transform 0.3s ease; /* Hiệu ứng chuyển đổi cho sidebar */
+}
+
+.sidebar-hidden {
+    transform: translateX(-100%); /* Đưa sidebar ra ngoài màn hình */
+}
+
+.content {
+    margin-left: 250px; /* Đảm bảo nội dung không bị che bởi sidebar */
+    padding: 20px; /* Padding cho nội dung */
+    transition: margin-left 0.3s; /* Hiệu ứng chuyển đổi cho nội dung */
+    padding-top: 100px; /* Điều chỉnh giá trị này dựa trên chiều cao của header */
+    flex: 1; /* Cho phép container chiếm toàn bộ không gian còn lại */
+}
+.text-footer {
+    margin-top: auto; /* Đẩy footer xuống dưới cùng */
+}
+.content-hidden {
+    margin-left: 0; /* Đảm bảo nội dung chiếm toàn bộ không gian khi sidebar ẩn */
+}
+
+.toggle-btn {
+    position: absolute;
+    left: 250px; /* Vị trí của nút */
+    top: 20px; /* Vị trí trên cùng */
+    background-color: #007bff; /* Màu nền của nút */
+    color: white; /* Màu chữ của nút */
+    border: none; /* Bỏ viền */
+    padding: 10px; /* Padding cho nút */
+    cursor: pointer; /* Con trỏ khi hover */
+    border-radius: 5px; /* Bo tròn các góc */
+    z-index: 1001; /* Đảm bảo nút nằm trên sidebar */
+    transition: left 0.3s; /* Hiệu ứng chuyển đổi cho vị trí nút */
+}
+
+.main-menu a {
+    color: black; /* Màu chữ liên kết sẽ là màu đen */
+}
+
+.main-menu a:hover {
+    color: #007bff; /* Màu chữ khi hover */
+}
+.video-container {
+    position: relative;
+    margin: 0 0; /* Thêm margin để cách biệt với các phần tử khác */
+    border: 5px solid #007bff; /* Đặt khung cho video */
+    border-radius: 10px; /* Bo tròn các góc */
+    overflow: hidden; /* Đảm bảo bóng mờ không ra ngoài khung */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8); /* Bóng mờ */
+    width: 600px; /* Chiều rộng của khung */
+    height: 430px; /* Chiều cao của khung */
+}
+
+.video-container video {
+    width: 100%; /* Đảm bảo video chiếm toàn bộ chiều rộng của khung */
+    height: 100%; /* Đảm bảo video chiếm toàn bộ chiều cao của khung */
+    border-radius: 10px; /* Bo tròn các góc video */
+}
+
+.large-bold-text {
+    font-size: 32px; /* Kích thước chữ */
+    font-weight: bold; /* In đậm chữ */
+    text-align: center; /* Căn giữa theo chiều ngang */
+    margin: 0 auto; /* Tự động căn giữa */
+    width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng của container */
+}
+ .icon-container {
+    display: flex;
+    justify-content: center; /* Căn giữa các icon */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    flex-wrap: wrap; /* Cho phép bọc dòng khi không đủ không gian */
+    margin: 20px auto; /* Đưa icon ra giữa màn hình */
+    width: 80%; /* Chiều rộng của khu vực icon */
+    text-align: center; /* Căn giữa văn bản trong icon-box */
+}
+
+.icon-box {
+    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px; /* Tăng padding để phóng to */
+    margin: 10px; /* Thêm margin giữa các icon */
+    transform: scale(1); /* Để không ảnh hưởng đến kích thước */
+}
+
+.icon {
+    font-size: 60px; /* Kích thước biểu tượng phóng to */
+    margin-bottom: 15px;
+}
+
+.text {
+    font-size: 32px; /* Kích thước chữ phóng to */
+    font-weight: bold; /* In đậm chữ */
+    margin: 5px 0;
+}
+.notification {
+    display: none; /* Ẩn thông báo ban đầu */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    z-index: 1000; /* Đảm bảo thông báo ở trên cùng */
+}
+
+.overlay {
+    display: none; /* Ẩn overlay ban đầu */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999; /* Đảm bảo overlay ở dưới thông báo */
+}
+
+.close-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+/* Hình ảnh môn thi*/
+.single_category {
+    display: flex; /* Sử dụng Flexbox */
+    justify-content: space-between; /* Căn giữa giữa chữ và hình ảnh */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    width: 240px; /* Chiều rộng của khung */
+    height: 160px; /* Chiều cao của khung */
+    border: 1px solid #ccc; /* Viền cho mỗi khung */
+    border-radius: 5px; /* Bo góc */
+    padding: 5px; /* Khoảng cách bên trong khung */
+    margin-bottom: 20px; /* Khoảng cách giữa các ô */
+    overflow: hidden; /* Ẩn phần nội dung ra ngoài khung */
+}
+
+.text-container {
+    flex: 1; /* Cho phép khối chữ chiếm không gian còn lại */
+    text-align: left; /* Căn trái cho chữ */
+}
+
+.inner-container {
+    width: 80%; /* Đặt chiều rộng khung bên trong là 40% */
+    height: 80%; /* Đặt chiều cao khung bên trong là 100% */
+    overflow: hidden; /* Ẩn phần hình ảnh ra ngoài khung nếu cần */
+    display: flex; /* Sử dụng flexbox để căn giữa hình ảnh */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.category-image {
+    max-width: 100%; /* Đặt chiều rộng tối đa hình ảnh là 100% của khung bên trong */
+    max-height: 100%; /* Đặt chiều cao tối đa hình ảnh là 100% của khung bên trong */
+    display: block; /* Đảm bảo hình ảnh không có khoảng trắng dưới */
+}
