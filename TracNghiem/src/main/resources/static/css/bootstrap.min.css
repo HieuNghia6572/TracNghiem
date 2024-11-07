@@ -3677,7 +3677,7 @@ tbody.collapse.show {
     position: relative;
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
+    flex: 0.2 0.2 auto;
     width: 1%;
     margin-bottom: 0
 }

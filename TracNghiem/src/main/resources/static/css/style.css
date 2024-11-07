@@ -7606,7 +7606,7 @@ h6 {
     justify-content: center; /* Căn giữa các icon */
     align-items: center; /* Căn giữa theo chiều dọc */
     flex-wrap: wrap; /* Cho phép bọc dòng khi không đủ không gian */
-    margin: 20px auto; /* Đưa icon ra giữa màn hình */
+    margin:     0px auto; /* Đưa icon ra giữa màn hình */
     width: 80%; /* Chiều rộng của khu vực icon */
     text-align: center; /* Căn giữa văn bản trong icon-box */
 }
@@ -7666,11 +7666,13 @@ h6 {
 }
 /* Hình ảnh môn thi*/
 .single_category {
+    background-color: #FFFAF0;
     display: flex; /* Sử dụng Flexbox */
-    justify-content: space-between; /* Căn giữa giữa chữ và hình ảnh */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    width: 240px; /* Chiều rộng của khung */
-    height: 160px; /* Chiều cao của khung */
+    flex-direction: column; /* Đặt chiều hướng là cột */
+    justify-content: flex-start; /* Căn đều từ trên xuống */
+    align-items: center; /* Căn giữa theo chiều ngang */
+    width: 220px; /* Chiều rộng của khung */
+    height: 300px; /* Chiều cao của khung */
     border: 1px solid #ccc; /* Viền cho mỗi khung */
     border-radius: 5px; /* Bo góc */
     padding: 5px; /* Khoảng cách bên trong khung */
@@ -7678,16 +7680,10 @@ h6 {
     overflow: hidden; /* Ẩn phần nội dung ra ngoài khung */
 }
 
-.text-container {
-    flex: 1; /* Cho phép khối chữ chiếm không gian còn lại */
-    text-align: left; /* Căn trái cho chữ */
-}
-
 .inner-container {
-    width: 80%; /* Đặt chiều rộng khung bên trong là 40% */
-    height: 80%; /* Đặt chiều cao khung bên trong là 100% */
-    overflow: hidden; /* Ẩn phần hình ảnh ra ngoài khung nếu cần */
-    display: flex; /* Sử dụng flexbox để căn giữa hình ảnh */
+    width: 100%; /* Đặt chiều rộng khung bên trong là 100% */
+    flex-grow: 1; /* Cho phép khung hình ảnh chiếm không gian còn lại */
+    display: flex; /* Sử dụng Flexbox để căn giữa hình ảnh */
     justify-content: center; /* Căn giữa theo chiều ngang */
     align-items: center; /* Căn giữa theo chiều dọc */
 }
@@ -7696,4 +7692,54 @@ h6 {
     max-width: 100%; /* Đặt chiều rộng tối đa hình ảnh là 100% của khung bên trong */
     max-height: 100%; /* Đặt chiều cao tối đa hình ảnh là 100% của khung bên trong */
     display: block; /* Đảm bảo hình ảnh không có khoảng trắng dưới */
+}
+
+.text-container {
+    text-align: center; /* Căn giữa chữ */
+    margin-top: 5px; /* Khoảng cách giữa hình ảnh và chữ */
+}
+.inner-container:hover .category-image {
+    border: 2px solid blue; /* Viền màu xanh lá cây khi di chuột */
+    box-shadow: 0 0 5px blue, 0 0 10px blue; /* Tạo hiệu ứng phát sáng */
+}
+/* chon mon*/
+.chon-mon {
+    text-align: center; /* Căn giữa nội dung */
+    margin: 20px 0; /* Khoảng cách trên và dưới */
+}
+
+.dropdown-button {
+    background-color: #F0FFFF; /* Màu nền cho nút */
+    color: black; /* Màu chữ */
+    border: none; /* Không có viền */
+    padding: 10px 20px; /* Khoảng cách bên trong nút */
+    font-size: 24px; /* Kích thước phông chữ */
+    cursor: pointer; /* Con trỏ chuột khi di chuột vào nút */
+    display: flex; /* Sử dụng flexbox để căn giữa */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    border-radius: 5px; /* Bo góc cho nút */
+    position: relative; /* Để định vị cho mũi tên */
+}
+
+.glow-text {
+    animation: glow 0.5s infinite alternate; /* Hiệu ứng lấp lánh */
+}
+
+.arrow {
+    margin-left: 8px; /* Khoảng cách giữa chữ và mũi tên */
+}
+
+@keyframes glow {
+    0% { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #4CAF50, 0 0 20px #4CAF50; }
+    100% { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #4CAF50, 0 0 40px #4CAF50; }
+}
+/*css datatable userphongthi*/
+.form-select1 {
+  height: 44px;
+  width: 100%;
+}
+.mb-3-1{
+    margin-bottom: 1rem !important;
+    margin-top: 20px;
 }

@@ -1,8 +1,11 @@
 package com.example.TracNghiem.controller;
 
+import com.example.TracNghiem.entity.CaThi;
 import com.example.TracNghiem.entity.CauHoi;
 import com.example.TracNghiem.entity.MonThi;
 import com.example.TracNghiem.entity.PhongThi;
+import com.example.TracNghiem.repository.ICaThiRepository;
+import com.example.TracNghiem.repository.IMonThiRepository;
 import com.example.TracNghiem.services.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,10 @@ public class CustomerController {
     private CaThiService caThiService;
     @Autowired
     private PhongThiService phongThiService;
+    @Autowired
+    private IMonThiRepository monThiRepository;
+    @Autowired
+    private ICaThiRepository caThiRepository;
     @GetMapping("/home")
     public String showCauhoiList(Model model) {
         model.addAttribute("cauhois", cauHoiService.getAllCauHoi());
@@ -41,5 +48,13 @@ public class CustomerController {
     public String showGiaoDienCaThi (Model model) {
         model.addAttribute("cathis", caThiService.getAllCaThi());
         return "/cathis/giaodiencathi";
+    }
+    @GetMapping("/userphongthi")
+    public String showGiaoDienPhongThi (Model model) {
+        model.addAttribute("phongthis", phongThiService.getAllPhongThi());
+        model.addAttribute("cathis", caThiService.getAllCaThi());
+        model.addAttribute("monthis", monThiService.getAllMonThi());
+
+        return "/phongthis/userphongthi";
     }
 }
