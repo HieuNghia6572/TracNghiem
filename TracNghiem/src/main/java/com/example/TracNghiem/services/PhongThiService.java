@@ -17,6 +17,8 @@ import java.util.Optional;
 @Service
 public class PhongThiService {
     private final IPhongThiRepository phongThiRepository;
+    private final ICaThiRepository caThiRepository;
+
     // Retrieve all phongthi from the database
     public List<PhongThi> getAllPhongThi() {
         return phongThiRepository.findAll();
@@ -29,9 +31,7 @@ public class PhongThiService {
     public PhongThi addPhongThi(PhongThi phongThi) {
         phongThi.setMaPhong(phongThi.getMaPhong());
         return phongThiRepository.save(phongThi);
-
     }
-    private final ICaThiRepository caThiRepository;
     public List<CaThi> getAllCaThi() {
         return caThiRepository.findAll();
     }
