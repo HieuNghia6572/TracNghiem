@@ -134,12 +134,11 @@
             </div>
 
             <div class="form-group-cd">
-                <label for="capDo" class="mr-2">Cấp độ:</label>
-                <select id="capDo" name="capDo" required class="form-select">
-                    <option value="" th:selected="${cauhoi.capDo == null}">-- Chọn cấp độ --</option>
-                    <option value="Dễ" th:selected="${cauhoi.capDo == 'DE'}">Dễ</option>
-                    <option value="Trung bình" th:selected="${cauhoi.capDo == 'TRUNG_BINH'}">Trung bình</option>
-                    <option value="Khó" th:selected="${cauhoi.capDo == 'KHO'}">Khó</option>
+                <p><label class="form-label" for="capdo">Cap Do:</label></p>
+                <select class="form-control" id="capdo" name="capdoId">
+                    <option value="">-- Chon Cap Do --</option>
+                    <option th:each="capdo : ${capdos}" th:value="${capdo.id}"
+                            th:text="${capdo.tencapdo}"></option>
                 </select>
             </div>
 

@@ -1,11 +1,9 @@
 package com.example.TracNghiem.services;
 
 import com.example.TracNghiem.entity.CauHoi;
-import com.example.TracNghiem.entity.DeThi;
 import com.example.TracNghiem.repository.ICauHoiRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,10 +14,14 @@ import java.util.Optional;
 @Transactional
 @Service
 public class CauHoiService {
-    @Autowired
-    private ICauHoiRepository cauHoiRepository;
+
+    private final ICauHoiRepository cauHoiRepository;
     //private final ICauHoiRepository cauHoiRepository;
     // Retrieve all cauhoi from the database
+
+
+
+
     public List<CauHoi> getAllCauHoi() {
         return cauHoiRepository.findAll();
     }
@@ -32,6 +34,9 @@ public class CauHoiService {
         return cauHoiRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
     }
+//    public List<CauHoi> getRandomCauHoiByCapDo(Long capdoId, int limit) {
+//        return cauHoiRepository.findRandomCauHoiByCapDo(capdoId, limit);
+//    }
     // Add a new cauhoi to the database
 
     public CauHoi addCauHoi(CauHoi cauHoi) {
@@ -57,9 +62,10 @@ public class CauHoiService {
         existingCauhoi.setDapanB(cauHoi.getDapanB());
         existingCauhoi.setDapanC(cauHoi.getDapanC());
         existingCauhoi.setDapanD(cauHoi.getDapanD());
-        existingCauhoi.setCapDo(cauHoi.getCapDo());
+//        existingCauhoi.setCapDo(cauHoi.getCapDo());
         existingCauhoi.setDapandung(dapandung); // Gán đáp án đúng
         cauHoiRepository.save(cauHoi);
-        return cauHoiRepository.save(existingCauhoi); // Lưu câu hỏi đã cập nhật
+        return cauHoiRepository.save(existingCauhoi);
+        // Lưu câu hỏi đã cập nhật
     }
 }

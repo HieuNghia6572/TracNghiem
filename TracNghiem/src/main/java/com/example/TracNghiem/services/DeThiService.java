@@ -4,18 +4,18 @@ import com.example.TracNghiem.entity.CauHoi;
 import com.example.TracNghiem.entity.ChiTietDeThi;
 import com.example.TracNghiem.entity.DeThi;
 import com.example.TracNghiem.entity.MonThi;
-import com.example.TracNghiem.repository.ICauHoiRepository;
-import com.example.TracNghiem.repository.IChiTietDeThiRepository;
-import com.example.TracNghiem.repository.IDeThiRepository;
-import com.example.TracNghiem.repository.IMonThiRepository;
+import com.example.TracNghiem.repository.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Transactional
@@ -23,7 +23,8 @@ import java.util.Optional;
 public class DeThiService {
     private final IDeThiRepository deThiRepository;
     private final IChiTietDeThiRepository chiTietDeThiRepository;
-
+    private final ICauHoiRepository cauHoiRepository;
+    private final ICapDoRepository capDoRepository;
 
     public List<DeThi> getAllDeThi() {
         return deThiRepository.findAll();
@@ -36,6 +37,38 @@ public class DeThiService {
     public DeThi addDeThi(DeThi deThi) {
         deThi.setMadethi(deThi.getMadethi());
         return deThiRepository.save(deThi);
+    }
+
+    public List<CauHoi> getAllCauHoiByDeThi(DeThi deThi){
+
+
+        String str1 = deThi.getSlcauhoide();
+        String str2 = deThi.getSlcauhoitb();
+        String str3 = deThi.getSlcauhoikho();
+        if(str1.isEmpty()){
+            str1 = "0";
+        }
+        if(str2.isEmpty()){
+            str2 = "0";
+        }
+        if(str3.isEmpty()){
+            str3 = "0";
+        }
+        int soLuong = Integer.parseInt(str1) + Integer.parseInt(str2) + Integer.parseInt(str3);
+//        List<CauHoi> listCauHoi = cauHoiRepository.findAll();
+//        listCauHoi = listCauHoi.stream().filter(p->p.getMonthi().equals(deThi.getMonthi())).limit(soLuong).toList();
+
+        Long idmonthi = Long.parseLong(deThi.getMonthiId().toString());
+
+        List<CauHoi> listCauHoiDe = cauHoiRepository.findRandomCauHoiByCapDoAndMonThi(Long.parseLong("1"),idmonthi, Integer.parseInt(str1));
+        List<CauHoi> listCauHoiTB = cauHoiRepository.findRandomCauHoiByCapDoAndMonThi(Long.parseLong("2"),idmonthi, Integer.parseInt(str2));
+        List<CauHoi> listCauHoiKho = cauHoiRepository.findRandomCauHoiByCapDoAndMonThi(Long.parseLong("3"),idmonthi, Integer.parseInt(str3));
+
+        List<CauHoi> allCauHoi = Stream.of(listCauHoiDe, listCauHoiTB, listCauHoiKho)
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+        int i =0 ;
+        return allCauHoi;
     }
 
     public void deleteDeThi(Long id) {
@@ -58,7 +91,5 @@ public class DeThiService {
     public List<ChiTietDeThi> getBaiThi(String made){
         return chiTietDeThiRepository.findAll().stream().filter(p->p.getDethi().getMadethi().equals(made)).toList();
     }
-
-
 
 }

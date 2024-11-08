@@ -125,7 +125,7 @@
                 <td class="text-ellipsis" th:text="${cauhoi.dapanC.length() > 10 ? #strings.substring(cauhoi.dapanC, 0, 10) + '...' : cauhoi.dapanC}"></td>
                 <td class="text-ellipsis" th:text="${cauhoi.dapanD.length() > 10 ? #strings.substring(cauhoi.dapanD, 0, 10) + '...' : cauhoi.dapanD}"></td>
                 <td th:text="${cauhoi.dapandung}"></td>
-                <td th:text="${cauhoi.capDo}"></td>
+                <td th:text="${cauhoi.capdo.tencapdo}"></td>
                 <td th:text="${cauhoi.monthi != null ? cauhoi.monthi.tenmonthi : 'Chưa có môn thi'}"></td>
                 <td>
                     <div sec:authorize="hasAuthority('ADMIN')">

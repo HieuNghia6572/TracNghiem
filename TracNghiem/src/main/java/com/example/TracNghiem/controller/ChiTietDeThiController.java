@@ -74,9 +74,9 @@ public class ChiTietDeThiController {
 
 
 
-    @GetMapping("/giaodienthi/{made}") public String giaoDienThi (@PathVariable String made, Model model) {
+    @GetMapping("/hienthidethi/{made}") public String hienthiDeThi (@PathVariable String made, Model model) {
         model.addAttribute("baithis", deThiService.getBaiThi(made));
         model.addAttribute("dethi", made);
-        return "/chitietdethis/giaodienthi";
+        return "/chitietdethis/hienthidethi";
     }
 }

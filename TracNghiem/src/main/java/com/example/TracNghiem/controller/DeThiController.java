@@ -1,5 +1,6 @@
 package com.example.TracNghiem.controller;
 
+import com.example.TracNghiem.entity.CapDo;
 import com.example.TracNghiem.entity.CauHoi;
 import com.example.TracNghiem.entity.DeThi;
 import com.example.TracNghiem.entity.MonThi;
@@ -8,6 +9,7 @@ import com.example.TracNghiem.repository.ICauHoiRepository;
 import com.example.TracNghiem.repository.IDeThiRepository;
 import com.example.TracNghiem.repository.IMonThiRepository;
 import com.example.TracNghiem.services.CapDoService;
+import com.example.TracNghiem.services.CauHoiService;
 import com.example.TracNghiem.services.DeThiService;
 import com.example.TracNghiem.services.MonThiService;
 import jakarta.validation.Valid;
@@ -24,13 +26,15 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/dethis")
 public class DeThiController {
-    @Autowired
     private final DeThiService deThiService;
     private final IDeThiRepository deThiRepository;
     private final ICapDoRepository capDoRepository;
     private final CapDoService capDoService;
     private final MonThiService monThiService;
     private final IMonThiRepository monThiRepository;
+    private  final CauHoiService cauHoiService;
+
+
     @GetMapping
     public String showDethiList(Model model) {
         model.addAttribute("dethis", deThiService.getAllDeThi());
@@ -84,7 +88,7 @@ public class DeThiController {
         return "/dethis/update-deThi";
     }
 
-      @PostMapping("/update/{id}")
+    @PostMapping("/update/{id}")
     public String UpdateDethi(@PathVariable Long id, // Thêm ID vào đây
                               @ModelAttribute @Valid DeThi deThi,
                               BindingResult bindingResult,
@@ -109,11 +113,56 @@ public class DeThiController {
     }
 
 
-
-
     @GetMapping("/delete/{id}")
-    public String DeleteDethi (@PathVariable Long id, Model model) {
-        deThiService.deleteDeThi(id);
-        return "redirect:/dethis";
+    public String themCauHoi(@PathVariable Long id, Model model) {
+        DeThi deThi = deThiService.getDeThiById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid de thi Id:" + id));
+
+        // Số lượng câu hỏi theo cấp độ (giả sử bạn có các thuộc tính này trong `DeThi`)
+
+        String slcauhoide = deThi.getSlcauhoide();
+        String  slcauhoitb = deThi.getSlcauhoitb();
+        String  slcauhoikho = deThi.getSlcauhoikho();
+
+//        // Lấy câu hỏi ngẫu nhiên theo cấp độ và số lượng
+//        CapDo capDoDe = capDoRepository.findByName("dễ");
+//        CapDo capDoTB = capDoRepository.findByName("trung bình");
+//        CapDo capDoKho = capDoRepository.findByName("khó");
+//
+//        if (capDoDe == null || capDoTB == null || capDoKho == null) {
+//            throw new IllegalArgumentException("Không tìm thấy cấp độ yêu cầu: dễ, trung bình hoặc khó.");
+//        }
+//
+//        Long capDoDeId = capDoDe.getId();
+//        Long capDoTBId = capDoTB.getId();
+//        Long capDoKhoId = capDoKho.getId();
+//
+//        List<CauHoi> cauHoiDe = cauHoiService.getRandomCauHoiByCapDo(capDoDeId, slcauhoide);
+//        List<CauHoi> cauHoiTrungBinh = cauHoiService.getRandomCauHoiByCapDo(capDoTBId, slcauhoitb);
+//        List<CauHoi> cauHoiKho = cauHoiService.getRandomCauHoiByCapDo(capDoKhoId, slcauhoikho);
+//
+//        // Đưa vào model để hiển thị
+//        model.addAttribute("dethi", deThi);
+//        model.addAttribute("cauHoiDe", cauHoiDe);
+//        model.addAttribute("cauHoiTrungBinh", cauHoiTrungBinh);
+//        model.addAttribute("cauHoiKho", cauHoiKho);
+
+        return "/dethis/hienthidethi";
     }
+
+
+
+    @GetMapping("hienthidethi/{id}")
+    public String hienThiDeThi(@PathVariable Long id, Model model){
+
+        DeThi deThi = deThiService.getDeThiById(id).orElseThrow(null);
+        model.addAttribute("thongtinde", deThi);
+        model.addAttribute("dethis", deThiService.getAllCauHoiByDeThi(deThi));
+        return "/dethis/hienthidethi";
+    }
+
+
+
+
+
 }

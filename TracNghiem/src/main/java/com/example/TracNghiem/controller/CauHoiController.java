@@ -1,11 +1,15 @@
     package com.example.TracNghiem.controller;
 
+    import com.example.TracNghiem.entity.CapDo;
     import com.example.TracNghiem.entity.CauHoi;
     import com.example.TracNghiem.entity.MonThi;
+    import com.example.TracNghiem.repository.ICapDoRepository;
     import com.example.TracNghiem.repository.ICauHoiRepository;
     import com.example.TracNghiem.repository.IMonThiRepository;
+    import com.example.TracNghiem.services.CapDoService;
     import com.example.TracNghiem.services.CauHoiService;
     import com.example.TracNghiem.services.MonThiService;
+    import jakarta.transaction.Transactional;
     import jakarta.validation.Valid;
     import lombok.RequiredArgsConstructor;
     import org.springframework.beans.factory.annotation.Autowired;
@@ -29,21 +33,25 @@
 
     @Controller
     @RequiredArgsConstructor
+    @Transactional
     @RequestMapping("/cauhois")
     public class CauHoiController {
-        @Autowired
-        private  CauHoiService cauHoiService;
-        @Autowired
-        private  ICauHoiRepository cauHoiRepository;
-        @Autowired
-        private  MonThiService monThiService;
-        @Autowired
-        private  IMonThiRepository monThiRepository;
+
+        private final   CauHoiService cauHoiService;
+
+        private final   ICauHoiRepository cauHoiRepository;
+
+        private final   MonThiService monThiService;
+
+        private final IMonThiRepository monThiRepository;
+
+        private final CapDoService capDoService;
 
         // Hiển thị danh sách câu hỏi
         @GetMapping
         public String showCauhoiList(Model model) {
             model.addAttribute("cauhois", cauHoiService.getAllCauHoi());
+            List<CauHoi> list = cauHoiService.getAllCauHoi();
             List<MonThi> monThiList = monThiRepository.findAll();
             model.addAttribute("monThiList", monThiList);
             return "/cauhois/cauhois-list";
@@ -54,8 +62,9 @@
         public String showAddForm(Model model) {
             model.addAttribute("cauhoi", new CauHoi());
             List<MonThi> monthis = monThiService.getAllMonThi();
+            List<CapDo> capdos = capDoService.getAllCapDo();
             model.addAttribute("monthis", monthis);
-
+            model.addAttribute("capdos", capdos );
             return "cauhois/add-cauhoi";
 
         }
@@ -114,6 +123,7 @@
             model.addAttribute("cauhoi", cauHoi);
             List<MonThi> monthis = monThiService.getAllMonThi();
             model.addAttribute("monthis", monthis); // Thêm danh sách môn thi vào mô hình
+            model.addAttribute("capdos", capDoService.getAllCapDo() );
             return "cauhois/update-cauhoi";
         }
 

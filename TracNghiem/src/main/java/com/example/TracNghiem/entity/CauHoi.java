@@ -42,11 +42,14 @@ public class CauHoi {
     @NotEmpty(message = "Đáp án không được để trống")
     private String dapandung;
 
-    @Column(name = "capdo")
-    private String capDo;
+//    @Column(name = "capdo")
+//    private String capDo;
 
     @Column(name = "monthi_id")
     private Long monthiId; // ID của môn thi
+
+    @Column(name = "capdo_id")
+    private Long capdoId; // ID của môn thi
 
     @ManyToOne
     @JoinColumn(name = "monthi_id", insertable = false, updatable = false)
@@ -57,5 +60,6 @@ public class CauHoi {
 
    @ManyToOne
    @JoinColumn(name="capdo_id",insertable = false,updatable = false)
-    private  CapDo capdo;
+   private  CapDo capdo;
+
 }
