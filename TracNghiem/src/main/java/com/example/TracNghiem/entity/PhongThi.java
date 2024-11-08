@@ -25,12 +25,6 @@ public class PhongThi {
     @JoinColumn(name= "cathi_id")
     private CaThi cathi;
 
-/*    @OneToMany(mappedBy = "phongthi", cascade = CascadeType.ALL)
-    private List<CaThi> Cathi;*/
-
-
-
-
 
 }
 
