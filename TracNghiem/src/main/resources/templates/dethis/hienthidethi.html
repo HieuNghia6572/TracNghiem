@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<head>
+<!--    ///-->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>De Thi</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/giaodienthi.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="row">
+    <div class="col-2">
+
+    </div>
+    <div class="col-8">
+        <h1 style="text-align: center" th:text="${'Ma De: '+thongtinde.madethi}"></h1>
+        <h1 style="text-align: center" th:text="${'Ten Mon Thi: '+thongtinde.monthi.tenmonthi}"></h1>
+        <ul class="quiz">
+            <li th:each="baithi:${dethis}">
+                <h4 th:utext="${baithi.ten}"></h4>
+                <ul  class="choices">
+                    <li>
+<!--//-->
+                        <label
+                        ><input type="radio" th:name="${baithi.id}" th:value="@{baithi.dapanA}" />
+                            <span th:text="${'A.  '+baithi.dapanA}"></span
+                            ></label
+                        >
+                    </li>
+                    <li>
+                        <label
+                        ><input type="radio" th:name="${baithi.id}" th:value="@{baithi.dapanB}" /><span
+                                th:text="${'B.  '+baithi.dapanB}" ></span
+                        ></label
+                        >
+                    </li>
+                    <li>
+                        <label
+                        ><input type="radio" th:name="${baithi.id}" th:value="@{baithi.dapanC}" />
+                            <span
+                                    th:text="${'C.  '+baithi.dapanC}"></span
+                            ></label
+                        >
+                    </li>
+                    <li>
+                        <label
+                        ><input type="radio" th:name="${baithi.id}" th:value="@{baithi.dapanD}" /><span
+                                th:text="${'D.  '+baithi.dapanD}"></span
+                        ></label
+                        >
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <button class="view-results" onclick="returnScore()">Nop Bai</button>
+    </div>
+    <div class="col-2">
+
+    </div>
+</div>
+
+
+
+</body>
+</html>
+
