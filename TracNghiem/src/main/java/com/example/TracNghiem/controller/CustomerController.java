@@ -1,9 +1,6 @@
 package com.example.TracNghiem.controller;
 
-import com.example.TracNghiem.entity.CaThi;
-import com.example.TracNghiem.entity.CauHoi;
-import com.example.TracNghiem.entity.MonThi;
-import com.example.TracNghiem.entity.PhongThi;
+import com.example.TracNghiem.entity.*;
 import com.example.TracNghiem.repository.ICaThiRepository;
 import com.example.TracNghiem.repository.IMonThiRepository;
 import com.example.TracNghiem.services.*;
@@ -12,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -32,6 +30,8 @@ public class CustomerController {
     private IMonThiRepository monThiRepository;
     @Autowired
     private ICaThiRepository caThiRepository;
+    @Autowired
+    private DeThiService deThiService;
     @GetMapping("/home")
     public String showCauhoiList(Model model) {
         model.addAttribute("cauhois", cauHoiService.getAllCauHoi());
@@ -56,5 +56,13 @@ public class CustomerController {
         model.addAttribute("monthis", monThiService.getAllMonThi());
 
         return "/phongthis/userphongthi";
+    }
+    @GetMapping("/hienthidethi/{id}")
+    public String hienThiDeThi(@PathVariable Long id, Model model){
+
+        DeThi deThi = deThiService.getDeThiById(id).orElseThrow(null);
+        model.addAttribute("thongtinde", deThi);
+        model.addAttribute("dethis", deThiService.getAllCauHoiByDeThi(deThi));
+        return "/dethis/hienthidethi";
     }
 }

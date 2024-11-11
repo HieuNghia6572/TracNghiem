@@ -26,14 +26,14 @@ public class PhongThiController {
     @GetMapping
     public String showPhongthiList(Model model) {
         model.addAttribute("phongthis", phongThiService.getAllPhongThi());
-        return "phongthis/phongthis-list"; // Không cần dấu /
+        return "phongthis/phongthis-list";
     }
 
     @GetMapping("/add")
     public String showAddPhongthi(Model model) {
         model.addAttribute("phongthi", new PhongThi());
         model.addAttribute("cathis", caThiService.getAllCaThi());
-        return "phongthis/add-phongthi"; // Không cần dấu /
+        return "phongthis/add-phongthi";
     }
 
     @PostMapping("/add")

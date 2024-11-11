@@ -152,14 +152,7 @@ public class DeThiController {
 
 
 
-    @GetMapping("hienthidethi/{id}")
-    public String hienThiDeThi(@PathVariable Long id, Model model){
 
-        DeThi deThi = deThiService.getDeThiById(id).orElseThrow(null);
-        model.addAttribute("thongtinde", deThi);
-        model.addAttribute("dethis", deThiService.getAllCauHoiByDeThi(deThi));
-        return "/dethis/hienthidethi";
-    }
 
 
 
