@@ -19,5 +19,4 @@ public class ThongBao {
     private String  message;
 
 
-
 }

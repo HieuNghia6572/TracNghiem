@@ -13,13 +13,14 @@
 <section layout:fragment="content">
     <h1>Giới thiệu </h1>
 
-    <input type="text" id="searchInput" placeholder="Search by name">
-    <button onclick="searchphongthis()" class="btn btn-primary">Tìm kiếm</button>
+    <!--<input type="text" id="searchInput" placeholder="Search by name">
+    <button onclick="searchphongthis()" class="btn btn-primary">Tìm kiếm</button>-->
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
         <tr>
             <th>ID</th>
             <th>Thông Báo</th>
+
             <th>Chức Năng</th>
 
         </tr>
@@ -28,6 +29,7 @@
         <tr th:each="thongbao : ${thongbaos}">
             <td th:text="${thongbao.id}"></td>
             <td th:utext="${thongbao.message}"></td>
+
 
             <!-- <td th:text="${cathi.tencathi}"></td>-->
 
@@ -47,20 +49,5 @@
 </body>
 </html>
 <script>
-    function searchphongthis() {
-        var searchInput = document.getElementById("searchInput");
-        var searchTerm = searchInput.value.toLowerCase();
-        var phongthiRows = document.getElementsByTagName("tr");
 
-        for (var i = 1; i < phongthiRows.length; i++) {
-            var nameCell = phongthiRows[i].getElementsByTagName("td")[1];
-            var phongthiName = nameCell.textContent.toLowerCase();
-
-            if (phongthiName.includes(searchTerm)) {
-                phongthiRows[i].style.display = "";
-            } else {
-                phongthiRows[i].style.display = "none";
-            }
-        }
-    }
 </script>

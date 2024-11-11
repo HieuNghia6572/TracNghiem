@@ -30,9 +30,13 @@ public class ThongBaoController {
         return "/thongbaos/add-thongbao";
     }
     @PostMapping("/add")
-    public String addThongbao(@Valid ThongBao thongbao, BindingResult result) {
-        if(result.hasErrors()){
-            return"/thongbaos/add-thongbao";
+    public String addThongbao(@Valid ThongBao thongbao, BindingResult result, Model model) {
+        // Nếu có lỗi xác thực hoặc đã tồn tại một thông báo
+        if (result.hasErrors() || thongBaoService.hasThongBao()) {
+            if (thongBaoService.hasThongBao()) {
+                model.addAttribute("error", "Chỉ có thể thêm một thông báo. Đã tồn tại thông báo trong hệ thống.");
+            }
+            return "/thongbaos/add-thongbao";
         }
         thongBaoService.addThongBao(thongbao);
         return "redirect:/thongbaos";

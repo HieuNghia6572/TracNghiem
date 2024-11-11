@@ -94,7 +94,7 @@
     <form th:action="@{/thongbaos/update/{id}(id=${thongbao.id})}"
           th:object="${thongbao}" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
         <div class="mb-3">
-            <label for="message" class="form-label">Ma phòng thi:</label>
+
             <input type="text" th:field="*{message}" class="form-control" id="message" required>
             <div class="text-danger" th:if="${#fields.hasErrors('message')}"
                  th:errors="*{message}"></div>

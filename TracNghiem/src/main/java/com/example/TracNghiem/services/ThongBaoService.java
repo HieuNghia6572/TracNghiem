@@ -7,7 +7,13 @@ import com.example.TracNghiem.repository.IThongBaoRepository;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +34,9 @@ public class ThongBaoService {
         return thongBaoRepository.save(thongBao);
 
     }
+    public boolean hasThongBao() {
+        return thongBaoRepository.count() > 0;
+    }
     public ThongBao updateThongBao(@NotNull ThongBao thongBao){
         ThongBao existingThongBao = thongBaoRepository.findById(thongBao.getId())
                 .orElseThrow(() -> new IllegalStateException("Product with ID " +
@@ -42,5 +51,6 @@ public class ThongBaoService {
         }
         thongBaoRepository .deleteById(id);
     }
+
 }
 

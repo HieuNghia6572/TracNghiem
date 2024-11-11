@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.*;
 public class PhongThiController {
     @Autowired
     private  PhongThiService phongThiService;
+    @Autowired
     private  CaThiService caThiService;
+    @Autowired
     private  MonThiService monThiService;
 
     @GetMapping
