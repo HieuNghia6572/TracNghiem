@@ -1,5 +1,6 @@
 package com.example.TracNghiem.services;
 
+import com.example.TracNghiem.entity.CauHoi;
 import com.example.TracNghiem.entity.ChiTietDeThi;
 import com.example.TracNghiem.entity.DeThi;
 import com.example.TracNghiem.repository.IChiTietDeThiRepository;
@@ -9,6 +10,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -50,4 +52,32 @@ public class ChiTietDeThiService {
 
         return chiTietDeThiRepository.save(existingChiTietDeThi);
     }
+
+    public  void  saveDeThi(List<CauHoi> listCauHoi, DeThi deThi){
+
+        for(CauHoi cauHoi: listCauHoi){
+            ChiTietDeThi chiTietDeThi = new ChiTietDeThi();
+            chiTietDeThi.setCauhoi(cauHoi);
+            chiTietDeThi.setDethi(deThi);
+            chiTietDeThiRepository.save(chiTietDeThi);
+        }
+
+
+    }
+
+
+    public List<ChiTietDeThi> getDeThi(String made){
+        return chiTietDeThiRepository.findAll().stream().filter(p->p.getDethi().getMadethi().equals(made)).toList();
+    }
+
+
+    public void deleteBaiThiCu(DeThi deThi){
+
+        List<ChiTietDeThi> deletList = chiTietDeThiRepository.findAll().stream().filter(p->p.getDethi().getMadethi().equals(deThi.getMadethi())).toList();
+        chiTietDeThiRepository.deleteAll(deletList);
+
+    }
+
+
+
 }

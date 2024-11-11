@@ -8,10 +8,7 @@ import com.example.TracNghiem.repository.ICapDoRepository;
 import com.example.TracNghiem.repository.ICauHoiRepository;
 import com.example.TracNghiem.repository.IDeThiRepository;
 import com.example.TracNghiem.repository.IMonThiRepository;
-import com.example.TracNghiem.services.CapDoService;
-import com.example.TracNghiem.services.CauHoiService;
-import com.example.TracNghiem.services.DeThiService;
-import com.example.TracNghiem.services.MonThiService;
+import com.example.TracNghiem.services.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +30,7 @@ public class DeThiController {
     private final MonThiService monThiService;
     private final IMonThiRepository monThiRepository;
     private  final CauHoiService cauHoiService;
+    private final ChiTietDeThiService chiTietDeThiService;
 
 
     @GetMapping
@@ -109,44 +107,28 @@ public class DeThiController {
 
         // Lưu đối tượng cập nhật
         deThiService.updateDeThi(existingDeThi);
+        chiTietDeThiService.deleteBaiThiCu(deThi);
+
         return "redirect:/dethis"; // Chuyển hướng về danh sách câu hỏi
     }
 
 
     @GetMapping("/delete/{id}")
-    public String themCauHoi(@PathVariable Long id, Model model) {
+    public String xoaCauHoi(@PathVariable Long id, Model model) {
         DeThi deThi = deThiService.getDeThiById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid de thi Id:" + id));
+        deThiService.deleteDeThi(deThi.getId());
+        chiTietDeThiService.deleteBaiThiCu(deThi);
+        return "redirect:/dethis";
+    }
 
-        // Số lượng câu hỏi theo cấp độ (giả sử bạn có các thuộc tính này trong `DeThi`)
 
-        String slcauhoide = deThi.getSlcauhoide();
-        String  slcauhoitb = deThi.getSlcauhoitb();
-        String  slcauhoikho = deThi.getSlcauhoikho();
+    @GetMapping("hienthidethi/{id}")
+    public String hienThiDeThi(@PathVariable Long id, Model model){
 
-//        // Lấy câu hỏi ngẫu nhiên theo cấp độ và số lượng
-//        CapDo capDoDe = capDoRepository.findByName("dễ");
-//        CapDo capDoTB = capDoRepository.findByName("trung bình");
-//        CapDo capDoKho = capDoRepository.findByName("khó");
-//
-//        if (capDoDe == null || capDoTB == null || capDoKho == null) {
-//            throw new IllegalArgumentException("Không tìm thấy cấp độ yêu cầu: dễ, trung bình hoặc khó.");
-//        }
-//
-//        Long capDoDeId = capDoDe.getId();
-//        Long capDoTBId = capDoTB.getId();
-//        Long capDoKhoId = capDoKho.getId();
-//
-//        List<CauHoi> cauHoiDe = cauHoiService.getRandomCauHoiByCapDo(capDoDeId, slcauhoide);
-//        List<CauHoi> cauHoiTrungBinh = cauHoiService.getRandomCauHoiByCapDo(capDoTBId, slcauhoitb);
-//        List<CauHoi> cauHoiKho = cauHoiService.getRandomCauHoiByCapDo(capDoKhoId, slcauhoikho);
-//
-//        // Đưa vào model để hiển thị
-//        model.addAttribute("dethi", deThi);
-//        model.addAttribute("cauHoiDe", cauHoiDe);
-//        model.addAttribute("cauHoiTrungBinh", cauHoiTrungBinh);
-//        model.addAttribute("cauHoiKho", cauHoiKho);
-
+        DeThi deThi = deThiService.getDeThiById(id).orElseThrow(null);
+        model.addAttribute("thongtinde", deThi);
+        model.addAttribute("dethis", deThiService.getAllCauHoiByDeThi(deThi));
         return "/dethis/hienthidethi";
     }
 
