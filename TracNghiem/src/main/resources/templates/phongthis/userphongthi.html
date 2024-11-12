@@ -1,281 +1,291 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/themify-icons.css">
-    <link rel="stylesheet" href="css/nice-select.css">
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/gijgo.css">
-    <link rel="stylesheet" href="css/animate.min.css">
-    <link rel="stylesheet" href="css/slicknav.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-    <style>
-        body {
-            background-color: #f8f9fa; /* Màu nền nhẹ */
-        }
-        .section-title {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2.5rem;
-            color: #343a40; /* Màu chữ */
-        }
-        .search-container {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: center; /* Căn giữa */
-            gap: 10px; /* Khoảng cách giữa các phần tử */
-        }
-        .custom-input, .custom-select {
-            border: 2px solid #0d6efd; /* Màu viền */
-            border-radius: 10px; /* Bo tròn các góc */
-            padding: 10px; /* Khoảng cách bên trong */
-        }
-        .table {
-            background-color: #fff; /* Màu nền bảng */
-            border-radius: 10px; /* Bo tròn các góc của bảng */
-            overflow: hidden; /* Ẩn phần viền bảng */
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Đổ bóng */
-        }
-        .table th {
-            background-color: #0d6efd; /* Nền cho tiêu đề bảng */
-            color: #fff; /* Màu chữ tiêu đề */
-        }
-        .text-ellipsis {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 150px;
-        }
-    </style>
-    <style>
-        .dataTables_info,
-        .dataTables_empty,
-        .dataTables_processing,
-        .dataTables_length,
-        .dataTables_paginate {
-            background-color: rgba(255, 255, 255, 0.8); /* Màu nền trắng mờ */
-            padding: 5px; /* Khoảng cách bên trong */
-            border-radius: 5px; /* Bo tròn các góc */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
-        }
+    <!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+          xmlns:sec="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <link rel="stylesheet" href="css/magnific-popup.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/themify-icons.css">
+        <link rel="stylesheet" href="css/nice-select.css">
+        <link rel="stylesheet" href="css/flaticon.css">
+        <link rel="stylesheet" href="css/gijgo.css">
+        <link rel="stylesheet" href="css/animate.min.css">
+        <link rel="stylesheet" href="css/slicknav.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+        <style>
+            body {
+                background-color: #f8f9fa; /* Màu nền nhẹ */
+            }
+            .section-title {
+                text-align: center;
+                margin-bottom: 30px;
+                font-size: 2.5rem;
+                color: #343a40; /* Màu chữ */
+            }
+            .search-container {
+                margin-bottom: 20px;
+                display: flex;
+                justify-content: center; /* Căn giữa */
+                gap: 10px; /* Khoảng cách giữa các phần tử */
+            }
+            .custom-input, .custom-select {
+                border: 2px solid #0d6efd; /* Màu viền */
+                border-radius: 10px; /* Bo tròn các góc */
+                padding: 10px; /* Khoảng cách bên trong */
+            }
+            .table {
+                background-color: #fff; /* Màu nền bảng */
+                border-radius: 10px; /* Bo tròn các góc của bảng */
+                overflow: hidden; /* Ẩn phần viền bảng */
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+            }
+            .table th {
+                background-color: #0d6efd; /* Nền cho tiêu đề bảng */
+                color: #fff; /* Màu chữ tiêu đề */
+            }
+            .text-ellipsis {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 150px;
+            }
+        </style>
+        <style>
+            .dataTables_info,
+            .dataTables_empty,
+            .dataTables_processing,
+            .dataTables_length,
+            .dataTables_paginate {
+                background-color: rgba(255, 255, 255, 0.8); /* Màu nền trắng mờ */
+                padding: 5px; /* Khoảng cách bên trong */
+                border-radius: 5px; /* Bo tròn các góc */
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+            }
 
-        .dataTables_processing {
-            font-weight: bold; /* Làm đậm chữ */
-        }
-        .dataTables_filter input[type="search"] {
-            border: 2px solid #0d6efd; /* Màu viền */
-            border-radius: 10px; /* Bo tròn các góc */
-            padding: 10px; /* Khoảng cách bên trong */
-            background-color: #ffffff; /* Màu nền */
-            color: #343a40; /* Màu chữ */
-        }
+            .dataTables_processing {
+                font-weight: bold; /* Làm đậm chữ */
+            }
+            .dataTables_filter input[type="search"] {
+                border: 2px solid #0d6efd; /* Màu viền */
+                border-radius: 10px; /* Bo tròn các góc */
+                padding: 10px; /* Khoảng cách bên trong */
+                background-color: #ffffff; /* Màu nền */
+                color: #343a40; /* Màu chữ */
+            }
 
-        .dataTables_filter input[type="search"]:focus {
-            border-color: #0056b3; /* Màu viền khi ô tìm kiếm được chọn */
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Đổ bóng khi chọn */
-        }
-    </style>
-    <title>Giao diện ca thi</title>
-</head>
-<body>
+            .dataTables_filter input[type="search"]:focus {
+                border-color: #0056b3; /* Màu viền khi ô tìm kiếm được chọn */
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Đổ bóng khi chọn */
+            }
+        </style>
+        <title>Danh sách phòng thi</title>
+    </head>
+    <body>
 
-<header>
-    <div class="header-area">
-        <div class="main-header-area shimmer-effect">
-            <div class="container-fluid">
-                <div class="header_bottom_border">
-                    <div class="row align-items-center">
-                        <div class="col-xl-3 col-lg-2">
-                            <div class="logo">
-                                <button class="toggle-btn" id="toggleButton">Hiển thị</button>
-                                <a href="index.html">
-                                    <img src="img/logo_khongnen.png" alt="" height="100" width="180">
-                                </a>
+    <header>
+        <div class="header-area">
+            <div class="main-header-area shimmer-effect">
+                <div class="container-fluid">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-3 col-lg-2">
+                                <div class="logo">
+                                    <button class="toggle-btn" id="toggleButton">&#9776;</button>
+                                    <a href="index.html">
+                                        <img src="img/logo_khongnen.png" alt="" height="100" width="180">
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-7">
-                            <div class="main-menu d-none d-lg-block">
-                                <nav>
-                                    <ul id="navigation">
-                                        <li><a href="/home">Trang chủ</a></li>
-                                        <li><a href="/home">Thông báo</a></li>
-                                        <li><a href="#">Phòng thi<i class="ti-angle-down"></i></a>
-                                            <ul class="submenu">
-                                                <li><a href="candidate.html">Candidates </a></li>
-                                                <li><a href="job_details.html">Job Details </a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Ca Thi <i class="ti-angle-down"></i></a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="single-blog.html">Single Blog</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Môn thi<i class="ti-angle-down"></i></a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="single-blog.html">Single Blog</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </nav>
+                            <div class="col-xl-6 col-lg-7">
+                                <div class="main-menu d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="/home">Trang chủ</a></li>
+                                            <li><a href="/home">Thông báo</a></li>
+                                            <li><a href="#">Phòng thi<i class="ti-angle-down"></i></a>
+                                                <ul class="submenu">
+                                                    <li><a href="candidate.html">Candidates </a></li>
+                                                    <li><a href="job_details.html">Job Details </a></li>
+                                                    <li><a href="elements.html">Elements</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Ca Thi <i class="ti-angle-down"></i></a>
+                                                <ul class="submenu">
+                                                    <li><a href="blog.html">Blog</a></li>
+                                                    <li><a href="single-blog.html">Single Blog</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Môn thi<i class="ti-angle-down"></i></a>
+                                                <ul class="submenu">
+                                                    <li><a href="blog.html">Blog</a></li>
+                                                    <li><a href="single-blog.html">Single Blog</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 d-none d-lg-block">
-                            <div class="Appointment d-flex align-items-center">
-                                <span style="font-weight:bold; white-space: nowrap;"><b>Chào mừng: </b></span>
-                                <a sec:authentication="name" style="font-weight:bold" class="mx-2"></a>
-                                <form th:action="@{/logout}" method="post" class="mb-0">
-                                    <button class="btn btn-outline-light" style="background-color:blue" type="submit">Đăng xuất</button>
-                                </form>
-                                <a sec:authorize="hasAnyAuthority('ADMIN')" class="ml-2">
-                                    <button class="btn btn-outline-light" style="background-color:blue" type="submit">
-                                        <a style="color: white" th:href="@{/cauhois}">Admin</a>
-                                    </button>
-                                </a>
+                            <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                                <div class="Appointment d-flex align-items-center">
+                                    <span style="font-weight:bold; white-space: nowrap;"><b>Chào mừng: </b></span>
+                                    <a sec:authentication="name" style="font-weight:bold" class="mx-2"></a>
+                                    <form th:action="@{/logout}" method="post" class="mb-0">
+                                        <button class="btn btn-outline-light" style="background-color:blue" type="submit">Đăng xuất</button>
+                                    </form>
+                                    <a sec:authorize="hasAnyAuthority('ADMIN')" class="ml-2">
+                                        <button class="btn btn-outline-light" style="background-color:blue" type="submit">
+                                            <a style="color: white" th:href="@{/cauhois}">Admin</a>
+                                        </button>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
 
-<div class="sidebar" id="sidebar">
-    <h3>Menu</h3>
-    <ul class="sidebar-menu">
-        <li><a href="/cathis">Danh sách ca thi</a></li>
-        <li><a href="/phongthis">Danh sách phòng thi</a></li>
-        <li><a href="/monthis">Danh sách môn thi</a></li>
-    </ul>
-</div>
-
-<div class="content" id="content">
-    <div class="mb-3-1">
-        <div class="input-group">
-            <select id="monThiSelect" class="form-select1 ms-2 custom-select" onchange="searchCauhois()">
-                <option value="">Lọc theo môn thi</option>
-                <option th:each="monThi : ${monthis}" th:value="${monThi.tenmonthi}" th:text="${monThi.tenmonthi}"></option>
-            </select>
-            <select id="caThiSelect" class="form-select1 ms-2 custom-select" onchange="searchCauhois()">
-                <option value="">Lọc theo ca thi</option>
-                <option th:each="caThi : ${cathis}" th:value="${caThi.tencathi}" th:text="${caThi.tencathi}"></option>
-            </select>
-            <select id="maPhongThiSelect" class="form-select1 ms-2 custom-select" onchange="searchCauhois()">
-                <option value="">Lọc theo mã phòng thi</option>
-                <option th:each="phongThi : ${phongthis}" th:value="${phongThi.maPhong}" th:text="${phongThi.maPhong}"></option>
-            </select>
-            <select id="soPhongThiSelect" class="form-select1 ms-2 custom-select" onchange="searchCauhois()">
-                <option value="">Lọc theo số phòng thi</option>
-                <option th:each="phongThi : ${phongthis}" th:value="${phongThi.tenPhong}" th:text="${phongThi.tenPhong}"></option>
-            </select>
-        </div>
+    <div class="sidebar" id="sidebar">
+        <h3>Menu</h3>
+        <ul class="sidebar-menu">
+            <li><a href="/cathis">Thông tin người dùng</a></li>
+            <li><a href="#">Danh sách phòng thi</a></li>
+            <li><a href="/monthis">Danh sách môn thi</a></li>
+        </ul>
     </div>
 
-    <section class="container mt-5">
-        <table id="questionTable" class="table table-bordered table-hover display">
-            <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>Mã Phòng</th>
-                <th>Tên Phòng</th>
-                <th>Ca Thi</th>
-                <th>Môn Thi</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="phongthi : ${phongthis}">
-                <td th:text="${phongthi.id}">1</td>
-                <td th:text="${phongthi.maPhong}">Mã Phòng</td>
-                <td th:text="${phongthi.tenPhong}">Tên Phòng</td>
-                <td th:text="${phongthi.cathi.tencathi}">Tên Ca</td>
-                <td th:text="${phongthi.cathi.monthi.tenmonthi}">Tên Môn Thi</td>
-            </tr>
-            </tbody>
-        </table>
-    </section>
-</div>
+    <div class="content" id="content">
+        <div class="mb-3-1">
+            <h2 style="text-align: center;">Danh sách phòng thi</h2>
 
-<footer class="bg-primary text-white text-center py-4 mt-5">
-    <div class="container d-flex justify-content-between text-footer">
-        <div class="footer-left">
-            <h5 class="mb-0">Trắc nghiệm NTT</h5>
-            <p class="mb-0">© 2024 Tất cả quyền được bảo lưu.</p>
+            <div class="input-group" style="display: flex;
+                                            justify-content: center;
+                                            align-items: center;  ">
+                <select id="monThiSelect" class="form-select1 ms-2 custom-select" onchange="searchCauhois()">
+                    <option value="">Lọc theo môn thi</option>
+                    <option th:each="monThi : ${monthis}" th:value="${monThi.tenmonthi}" th:text="${monThi.tenmonthi}"></option>
+                </select>
+                <select id="caThiSelect" class="form-select1 ms-2 custom-select" onchange="searchCauhois()">
+                    <option value="">Lọc theo ca thi</option>
+                    <option th:each="caThi : ${cathis}" th:value="${caThi.tencathi}" th:text="${caThi.tencathi}"></option>
+                </select>
+                <select id="maPhongThiSelect" class="form-select1 ms-2 custom-select" onchange="searchCauhois()">
+                    <option value="">Lọc theo mã phòng thi</option>
+                    <option th:each="phongThi : ${phongthis}" th:value="${phongThi.maPhong}" th:text="${phongThi.maPhong}"></option>
+                </select>
+                <select id="soPhongThiSelect" class="form-select1 ms-2 custom-select" onchange="searchCauhois()">
+                    <option value="">Lọc theo số phòng thi</option>
+                    <option th:each="phongThi : ${phongthis}" th:value="${phongThi.tenPhong}" th:text="${phongThi.tenPhong}"></option>
+                </select>
+            </div>
         </div>
-        <div class="footer-content">
-            <h5 class="mb-0">Thông tin liên hệ</h5>
-            <p class="mb-0">Liên hệ: phanhieunghia1054@gmail.com</p>
-        </div>
+
+        <section class="container mt-5">
+            <table id="questionTable" class="table table-bordered table-hover display">
+                <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Mã Phòng</th>
+                    <th>Tên Phòng</th>
+                    <th>Ca Thi</th>
+                    <th>Thời Gian Thi</th>
+                    <th>Môn Thi</th>
+                    <th>Chức năng</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="phongthi : ${phongthis}">
+                    <td th:text="${phongthi.id}">1</td>
+                    <td th:text="${phongthi.maPhong}">Mã Phòng</td>
+                    <td th:text="${phongthi.tenPhong}">Tên Phòng</td>
+                    <td th:text="${phongthi.cathi.tencathi}">Tên Ca</td>
+                    <td th:text="${phongthi.cathi.tgbd} + ' - ' + ${phongthi.cathi.tgkt}">Thời Gian</td>
+                    <td th:text="${phongthi.cathi.monthi.tenmonthi}">Tên Môn Thi</td>
+                    <td>
+                        <a th:href="@{/hienthidethi/{id}(id=${phongthi.id})}" th:text="'vào thi'"></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
     </div>
-</footer>
+
+    <footer class="bg-primary text-white text-center py-4 mt-5">
+        <div class="container d-flex justify-content-between text-footer">
+            <div class="footer-left">
+                <h5 class="mb-0">Trắc nghiệm NTT</h5>
+                <p class="mb-0">© 2024 Tất cả quyền được bảo lưu.</p>
+            </div>
+            <div class="footer-content">
+                <h5 class="mb-0">Thông tin liên hệ</h5>
+                <p class="mb-0">Liên hệ: phanhieunghia1054@gmail.com</p>
+            </div>
+        </div>
+    </footer>
 
 
-<script src="js/scripts.js"></script>
+    <script src="js/scripts.js"></script>
 
-<script>
-    $(document).ready(function() {
-            const table = $('#questionTable').DataTable({
-                language: {
-                    "decimal":        "",
-                    "emptyTable":     "Không có dữ liệu",
-                    "info":           "Hiển thị _START_ đến _END_ của _TOTAL_ mục",
-                    "infoEmpty":      "Hiển thị 0 đến 0 của 0 mục",
-                    "infoFiltered":   "(lọc từ _MAX_ mục)",
-                    "infoPostFix":    "",
-                    "thousands":      ",",
-                    "lengthMenu":     "Hiển thị _MENU_ mục",
-                    "loadingRecords": "Đang tải...",
-                    "processing":     "Đang xử lý...",
-                    "search":         "Tìm kiếm:",
-                    "zeroRecords":    "Không tìm thấy kết quả",
-                    "paginate": {
-                        "first":      "Đầu",
-                        "last":       "Cuối",
-                        "next":       "Tiếp theo",
-                        "previous":   "Trước"
-                    },
-                    "aria": {
-                        "sortAscending":  ": sắp xếp tăng dần",
-                        "sortDescending": ": sắp xếp giảm dần"
+    <script>
+        $(document).ready(function() {
+                const table = $('#questionTable').DataTable({
+                    language: {
+                        "decimal":        "",
+                        "emptyTable":     "Không có dữ liệu",
+                        "info":           "Hiển thị _START_ đến _END_ của _TOTAL_ mục",
+                        "infoEmpty":      "Hiển thị 0 đến 0 của 0 mục",
+                        "infoFiltered":   "(lọc từ _MAX_ mục)",
+                        "infoPostFix":    "",
+                        "thousands":      ",",
+                        "lengthMenu":     "Hiển thị _MENU_ mục",
+                        "loadingRecords": "Đang tải...",
+                        "processing":     "Đang xử lý...",
+                        "search":         "Tìm kiếm:",
+                        "zeroRecords":    "Không tìm thấy kết quả",
+                        "paginate": {
+                            "first":      "Đầu",
+                            "last":       "Cuối",
+                            "next":       "Tiếp theo",
+                            "previous":   "Trước"
+                        },
+                        "aria": {
+                            "sortAscending":  ": sắp xếp tăng dần",
+                            "sortDescending": ": sắp xếp giảm dần"
+                        }
                     }
-                }
+                });
+
+                // Tìm kiếm theo nhóm
+
             });
+    </script>
+    <script>
+        function searchCauhois() {
+            const caThiValue = $('#caThiSelect').val();
+            const monThiValue = $('#monThiSelect').val();
+            const maPhongThiValue = $('#maPhongThiSelect').val();
+            const soPhongThiValue = $('#soPhongThiSelect').val();
 
-            // Tìm kiếm theo nhóm
+            const table = $('#questionTable').DataTable();
 
-        });
-</script>
-<script>
-    function searchCauhois() {
-        const caThiValue = $('#caThiSelect').val();
-        const monThiValue = $('#monThiSelect').val();
-        const maPhongThiValue = $('#maPhongThiSelect').val();
-        const soPhongThiValue = $('#soPhongThiSelect').val();
+            table.column(3).search(caThiValue); // Cột Tên Ca
+            table.column(5).search(monThiValue); // Cột Tên Môn Thi
+            table.column(1).search(maPhongThiValue); // Cột Mã Phòng
+            table.column(2).search(soPhongThiValue); // Cột Tên Phòng
 
-        const table = $('#questionTable').DataTable();
+            table.draw(); // Cập nhật lại bảng
+        }
+    </script>
 
-        table.column(3).search(caThiValue); // Cột Tên Ca
-        table.column(4).search(monThiValue); // Cột Tên Môn Thi
-        table.column(1).search(maPhongThiValue); // Cột Mã Phòng
-        table.column(2).search(soPhongThiValue); // Cột Tên Phòng
-
-        table.draw(); // Cập nhật lại bảng
-    }
-</script>
-
-</body>
-</html>
+    </body>
+    </html>

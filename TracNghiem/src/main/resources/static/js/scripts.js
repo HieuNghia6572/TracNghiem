@@ -7,14 +7,17 @@
 
     toggleButton.addEventListener('click', () => {
         isHidden = !isHidden;
+
         if (isHidden) {
             sidebar.classList.add('sidebar-hidden');
             content.classList.add('content-hidden');
-            toggleButton.innerHTML = 'Hiển thị'; // Thay đổi biểu tượng nút
+            toggleButton.innerHTML = '&#9776;'; // Biểu tượng nút
+            toggleButton.classList.add('active'); // Thêm lớp active
         } else {
             sidebar.classList.remove('sidebar-hidden');
             content.classList.remove('content-hidden');
-            toggleButton.innerHTML = 'Ẩn'; // Thay đổi biểu tượng nút
+            toggleButton.innerHTML = '&#9776;'; // Biểu tượng nút
+            toggleButton.classList.remove('active'); // Xóa lớp active
         }
     });
 
