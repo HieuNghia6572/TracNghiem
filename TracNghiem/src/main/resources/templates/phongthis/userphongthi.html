@@ -212,7 +212,7 @@
                     <td th:text="${phongthi.cathi.tgbd} + ' - ' + ${phongthi.cathi.tgkt}">Thời Gian</td>
                     <td th:text="${phongthi.cathi.monthi.tenmonthi}">Tên Môn Thi</td>
                     <td>
-                        <a th:href="@{/hienthidethi/{id}(id=${phongthi.id})}" th:text="'vào thi'"></a>
+                        <a th:href="@{/hienthidethi/{id}(id=${phongthi.id})}" class="btn btn-success btn-sm">Hien Thi De Thi</a>
                     </td>
                 </tr>
                 </tbody>

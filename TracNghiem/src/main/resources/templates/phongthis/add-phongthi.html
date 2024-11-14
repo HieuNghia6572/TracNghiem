@@ -120,6 +120,14 @@
                         th:text="${cathi.tencathi}"></option>
             </select>
         </div>
+
+        <div class="mb-3">
+            <select class="form-control" id="dethi" name="dethi.id">
+                <option value="">-- Chon De Thi --</option>
+                <option th:each="dethi : ${dethis}" th:value="${dethi.id}"
+                        th:text="${dethi.madethi}"></option>
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Thêm Phòng Thi</button>
         <a th:href="@{/phongthis}" class="btn btn-link">Trở về</a>
     </form>

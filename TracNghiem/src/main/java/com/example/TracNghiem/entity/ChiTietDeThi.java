@@ -25,4 +25,7 @@ public class ChiTietDeThi {
     @ManyToOne
     @JoinColumn(name= "cauhoi_id")
     private CauHoi cauhoi;
+
+    @Column(name = "dapan_chon")
+    private String dapanChon; // Đáp án đã chọn
 }

@@ -19,6 +19,9 @@ public class DeThi {
     @Column(name = "madethi")
     private String madethi;
 
+    @Column(name = "tendethi")
+    private String tendethi;
+
     @Column(name = "slcauhoide")
     private String slcauhoide;
 
@@ -38,7 +41,8 @@ public class DeThi {
     @JoinColumn(name = "monthi_id", insertable = false, updatable = false)
     private MonThi monthi; // Tham chiếu đến môn thi
 
-
+    @OneToMany(mappedBy = "dethi", cascade = CascadeType.ALL)
+    private List<PhongThi> Phongthi;
 }
 
 

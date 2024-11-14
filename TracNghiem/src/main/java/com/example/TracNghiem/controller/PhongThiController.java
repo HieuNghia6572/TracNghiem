@@ -1,7 +1,9 @@
 package com.example.TracNghiem.controller;
 
+import com.example.TracNghiem.entity.DeThi;
 import com.example.TracNghiem.entity.PhongThi;
 import com.example.TracNghiem.services.CaThiService;
+import com.example.TracNghiem.services.DeThiService;
 import com.example.TracNghiem.services.MonThiService;
 import com.example.TracNghiem.services.PhongThiService;
 import jakarta.validation.Valid;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,6 +26,8 @@ public class PhongThiController {
     private  CaThiService caThiService;
     @Autowired
     private  MonThiService monThiService;
+    @Autowired
+    private DeThiService deThiService;
 
     @GetMapping
     public String showPhongthiList(Model model) {
@@ -33,6 +39,8 @@ public class PhongThiController {
     public String showAddPhongthi(Model model) {
         model.addAttribute("phongthi", new PhongThi());
         model.addAttribute("cathis", caThiService.getAllCaThi());
+        model.addAttribute("dethis", deThiService.getAllDeThi());
+
         return "phongthis/add-phongthi";
     }
 

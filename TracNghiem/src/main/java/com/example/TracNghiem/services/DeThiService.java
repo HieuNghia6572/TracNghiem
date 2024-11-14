@@ -67,6 +67,11 @@ public class DeThiService {
                     .flatMap(List::stream)
                     .collect(Collectors.toList());
 
+            // Xáo trộn từng danh sách câu hỏi N
+            Collections.shuffle(listCauHoiDe);
+            Collections.shuffle(listCauHoiTB);
+            Collections.shuffle(listCauHoiKho);
+            // N
             chiTietDeThiService.saveDeThi(allCauHoi, deThi);
 
         }

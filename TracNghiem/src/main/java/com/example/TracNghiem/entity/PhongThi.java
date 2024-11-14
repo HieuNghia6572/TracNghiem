@@ -25,6 +25,9 @@ public class PhongThi {
     @JoinColumn(name= "cathi_id")
     private CaThi cathi;
 
+    @ManyToOne
+    @JoinColumn(name= "dethi_id")
+    private DeThi dethi;
 
 }
 
