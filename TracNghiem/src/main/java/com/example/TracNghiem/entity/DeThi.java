@@ -9,8 +9,7 @@ import java.util.List;
 @Data
 @Entity
 @ToString
-@Table(name="dethi")
-
+@Table(name = "dethi")
 public class DeThi {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,20 +30,16 @@ public class DeThi {
     @Column(name = "slcauhoikho")
     private String slcauhoikho;
 
-    @OneToMany(mappedBy = "dethi", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "deThi", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChiTietDeThi> chitietbaithi;
 
     @Column(name = "monthi_id")
-    private Long monthiId; // ID của môn thi
+    private Long monthiId;
 
     @ManyToOne
     @JoinColumn(name = "monthi_id", insertable = false, updatable = false)
-    private MonThi monthi; // Tham chiếu đến môn thi
+    private MonThi monthi;
 
     @OneToMany(mappedBy = "dethi", cascade = CascadeType.ALL)
-    private List<PhongThi> Phongthi;
+    private List<PhongThi> phongThi;
 }
-
-
-
-

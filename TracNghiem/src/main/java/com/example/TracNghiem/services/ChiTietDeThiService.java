@@ -3,16 +3,16 @@ package com.example.TracNghiem.services;
 import com.example.TracNghiem.entity.CauHoi;
 import com.example.TracNghiem.entity.ChiTietDeThi;
 import com.example.TracNghiem.entity.DeThi;
+import com.example.TracNghiem.entity.User;
 import com.example.TracNghiem.repository.IChiTietDeThiRepository;
-import com.example.TracNghiem.repository.IDeThiRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -20,64 +20,63 @@ public class ChiTietDeThiService {
 
     private final IChiTietDeThiRepository chiTietDeThiRepository;
 
-    public List<ChiTietDeThi> getAllChiTietDeThi() { return chiTietDeThiRepository.findAll();
+    // Lấy tất cả các chi tiết đề thi
+    public List<ChiTietDeThi> getAllChiTietDeThi() {
+        return chiTietDeThiRepository.findAll();
     }
 
-
-
+    // Lấy chi tiết đề thi theo ID
     public Optional<ChiTietDeThi> getChiTietDeThiById(Long id) {
-         return chiTietDeThiRepository.findById(id);
+        return chiTietDeThiRepository.findById(id);
     }
 
-    public ChiTietDeThi addChiTietDeThi(ChiTietDeThi chiTietDeThi) {
-//        chiTietDeThi.setDethi(chiTietDeThi.getDethi());
-//        chiTietDeThi.setCauhoi(chiTietDeThi.getCauhoi());
+    // Thêm chi tiết đề thi mới
+    public ChiTietDeThi addChiTietDeThi(@NotNull ChiTietDeThi chiTietDeThi) {
         return chiTietDeThiRepository.save(chiTietDeThi);
     }
 
+    // Xóa chi tiết đề thi theo ID
     public void deleteChiTietDeThi(Long id) {
         if (!chiTietDeThiRepository.existsById(id)) {
-            throw new IllegalStateException("De Thi voi id " + id + " khong hop le");
+            throw new IllegalStateException("Chi tiết đề thi với ID " + id + " không hợp lệ.");
         }
         chiTietDeThiRepository.deleteById(id);
     }
 
+    // Cập nhật chi tiết đề thi
     public ChiTietDeThi updateChiTietDeThi(@NotNull ChiTietDeThi chiTietDeThi) {
         ChiTietDeThi existingChiTietDeThi = chiTietDeThiRepository.findById(chiTietDeThi.getId())
-                .orElseThrow(() -> new IllegalStateException("Product with ID " +
-                        chiTietDeThi.getId() + " does not exist."));
-        existingChiTietDeThi.setDethi(chiTietDeThi.getDethi());
-        existingChiTietDeThi.setCauhoi(chiTietDeThi.getCauhoi());
-
+                .orElseThrow(() -> new IllegalStateException("Chi tiết đề thi với ID " +
+                        chiTietDeThi.getId() + " không tồn tại."));
+        existingChiTietDeThi.setDeThi(chiTietDeThi.getDeThi());
+        existingChiTietDeThi.setCauHoi(chiTietDeThi.getCauHoi());
 
         return chiTietDeThiRepository.save(existingChiTietDeThi);
     }
 
-    public  void  saveDeThi(List<CauHoi> listCauHoi, DeThi deThi){
-
-        for(CauHoi cauHoi: listCauHoi){
+    // Lưu chi tiết đề thi từ danh sách câu hỏi
+    public void saveDeThi(List<CauHoi> listCauHoi, DeThi deThi, User user) {
+        for (CauHoi cauHoi : listCauHoi) {
             ChiTietDeThi chiTietDeThi = new ChiTietDeThi();
-            chiTietDeThi.setCauhoi(cauHoi);
-            chiTietDeThi.setDethi(deThi);
+            chiTietDeThi.setCauHoi(cauHoi);
+            chiTietDeThi.setDeThi(deThi);
+            chiTietDeThi.setUser(user);
             chiTietDeThiRepository.save(chiTietDeThi);
         }
-
-
     }
 
-
-    public List<ChiTietDeThi> getDeThi(String made){
-        return chiTietDeThiRepository.findAll().stream().filter(p->p.getDethi().getMadethi().equals(made)).toList();
+    // Lấy tất cả chi tiết đề thi theo mã đề
+    public List<ChiTietDeThi> getDeThi(String made) {
+        return chiTietDeThiRepository.findAll().stream()
+                .filter(p -> p.getDeThi() != null && p.getDeThi().getMadethi().equals(made))
+                .toList();
     }
 
-
-    public void deleteBaiThiCu(DeThi deThi){
-
-        List<ChiTietDeThi> deletList = chiTietDeThiRepository.findAll().stream().filter(p->p.getDethi().getMadethi().equals(deThi.getMadethi())).toList();
-        chiTietDeThiRepository.deleteAll(deletList);
-
+    // Xóa tất cả câu hỏi của một đề thi cụ thể
+    public void deleteBaiThiCu(DeThi deThi) {
+        List<ChiTietDeThi> deleteList = chiTietDeThiRepository.findAll().stream()
+                .filter(p -> p.getDeThi() != null && p.getDeThi().getMadethi().equals(deThi.getMadethi()))
+                .toList();
+        chiTietDeThiRepository.deleteAll(deleteList);
     }
-
-
-
 }

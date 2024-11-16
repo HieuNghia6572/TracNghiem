@@ -1,9 +1,6 @@
 package com.example.TracNghiem.controller;
 
-import com.example.TracNghiem.entity.CapDo;
-import com.example.TracNghiem.entity.CauHoi;
-import com.example.TracNghiem.entity.DeThi;
-import com.example.TracNghiem.entity.MonThi;
+import com.example.TracNghiem.entity.*;
 import com.example.TracNghiem.repository.ICapDoRepository;
 import com.example.TracNghiem.repository.ICauHoiRepository;
 import com.example.TracNghiem.repository.IDeThiRepository;
@@ -12,6 +9,8 @@ import com.example.TracNghiem.services.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,7 +30,8 @@ public class DeThiController {
     private final IMonThiRepository monThiRepository;
     private  final CauHoiService cauHoiService;
     private final ChiTietDeThiService chiTietDeThiService;
-
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public String showDethiList(Model model) {
@@ -123,13 +123,25 @@ public class DeThiController {
     }
 
 
-    @GetMapping("hienthidethi/{id}")
-    public String hienThiDeThi(@PathVariable Long id, Model model){
+    @GetMapping("/hienthidethi/{id}")
+    public String hienThiDeThi(@PathVariable Long id, Model model) {
+        // Lấy đề thi theo ID
+        DeThi deThi = deThiService.getDeThiById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy đề thi với ID: " + id));
 
-        DeThi deThi = deThiService.getDeThiById(id).orElseThrow(null);
+        // Lấy tên người dùng từ Security Context
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName(); // Tên người dùng đã đăng nhập
+
+        // Lấy thông tin người dùng
+        User currentUser = userService.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy người dùng"));
+
+        // Gọi phương thức với cả DeThi và User
         model.addAttribute("thongtinde", deThi);
-        model.addAttribute("dethis", deThiService.getAllCauHoiByDeThi(deThi));
-        return "/dethis/hienthidethi";
+        model.addAttribute("dethis", deThiService.getAllCauHoiByDeThi(deThi, currentUser));
+
+        return "dethis/hienthidethi";
     }
 
 

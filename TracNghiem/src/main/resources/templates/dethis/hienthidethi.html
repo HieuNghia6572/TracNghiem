@@ -145,39 +145,39 @@
             <h1 style="text-align: center" th:text="${'Ten Mon Thi: '+thongtinde.monthi.tenmonthi}"></h1>
             <ul class="quiz">
                 <li th:each="baithi, stat : ${dethis}" class="li-container">
-                   <span class="part1">
+                    <span class="part1">
                         <div class="question-container">
-                            <h4 th:utext="${'Câu hỏi ' + (stat.index + 1) + ': ' + baithi.cauhoi.ten}"></h4>
+                            <h4 th:utext="${'Câu hỏi ' + (stat.index + 1) + ': ' + (baithi.cauHoi.ten != null ? baithi.cauHoi.ten : '')}"></h4>
                         </div>
-                    <ul class="choices">
-                        <li>
-                            <label class="choice-label">
-                                <input type="radio" th:name="${baithi.id}" th:value="${baithi.cauhoi.dapanA}" />
-                                <span th:text="${'A.  '+baithi.cauhoi.dapanA}"></span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="choice-label">
-                                <input type="radio" th:name="${baithi.cauhoi.id}" th:value="${baithi.cauhoi.dapanB}" />
-                                <span th:text="${'B.  '+baithi.cauhoi.dapanB}"></span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="choice-label">
-                                <input type="radio" th:name="${baithi.cauhoi.id}" th:value="${baithi.cauhoi.dapanC}" />
-                                <span th:text="${'C.  '+baithi.cauhoi.dapanC}"></span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="choice-label">
-                                <input type="radio" th:name="${baithi.cauhoi.id}" th:value="${baithi.cauhoi.dapanD}" />
-                                <span th:text="${'D.  '+baithi.cauhoi.dapanD}"></span>
-                            </label>
-                        </li>
-                    </ul>
-                   </span>
-                    <span class="image-part" th:if="${baithi.cauhoi.imgUrl != null and baithi.cauhoi.imgUrl != ''}">
-                        <img th:src="${baithi.cauhoi.imgUrl}" alt="Hình ảnh câu hỏi" height="180" width="180" />
+                        <ul class="choices">
+                            <li>
+                                <label class="choice-label">
+                                    <input type="radio" th:name="${'question_' + baithi.id}" th:value="${baithi.cauHoi.dapanA != null ? baithi.cauHoi.dapanA : ''}" />
+                                    <span th:text="${'A.  ' + (baithi.cauHoi.dapanA != null ? baithi.cauHoi.dapanA : '')}"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="choice-label">
+                                    <input type="radio" th:name="${'question_' + baithi.id}" th:value="${baithi.cauHoi.dapanB != null ? baithi.cauHoi.dapanB : ''}" />
+                                    <span th:text="${'B.  ' + (baithi.cauHoi.dapanB != null ? baithi.cauHoi.dapanB : '')}"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="choice-label">
+                                    <input type="radio" th:name="${'question_' + baithi.id}" th:value="${baithi.cauHoi.dapanC != null ? baithi.cauHoi.dapanC : ''}" />
+                                    <span th:text="${'C.  ' + (baithi.cauHoi.dapanC != null ? baithi.cauHoi.dapanC : '')}"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="choice-label">
+                                    <input type="radio" th:name="${'question_' + baithi.id}" th:value="${baithi.cauHoi.dapanD != null ? baithi.cauHoi.dapanD : ''}" />
+                                    <span th:text="${'D.  ' + (baithi.cauHoi.dapanD != null ? baithi.cauHoi.dapanD : '')}"></span>
+                                </label>
+                            </li>
+                        </ul>
+                    </span>
+                    <span class="image-part" th:if="${baithi.cauHoi != null and baithi.cauHoi.ImgUrl != null and baithi.cauHoi.ImgUrl != ''}">
+                        <img th:src="${baithi.cauHoi.ImgUrl}" alt="Hình ảnh câu hỏi" height="180" width="180" />
                     </span>
                 </li>
             </ul>

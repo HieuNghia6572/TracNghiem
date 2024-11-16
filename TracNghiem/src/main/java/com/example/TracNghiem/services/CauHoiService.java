@@ -52,9 +52,11 @@ public class CauHoiService {
         cauHoiRepository.deleteById(id);
     }
     public CauHoi updateCauHoi(@NotNull CauHoi cauHoi, String dapandung) {
+        // Tìm thực thể CauHoi hiện tại dựa trên ID
         CauHoi existingCauhoi = cauHoiRepository.findById(cauHoi.getId())
                 .orElseThrow(() -> new IllegalStateException("Câu hỏi với ID " +
                         cauHoi.getId() + " không tồn tại."));
+
         // Cập nhật thông tin
         existingCauhoi.setTen(cauHoi.getTen());
         existingCauhoi.setImgUrl(cauHoi.getImgUrl());
@@ -62,10 +64,9 @@ public class CauHoiService {
         existingCauhoi.setDapanB(cauHoi.getDapanB());
         existingCauhoi.setDapanC(cauHoi.getDapanC());
         existingCauhoi.setDapanD(cauHoi.getDapanD());
-//        existingCauhoi.setCapDo(cauHoi.getCapDo());
         existingCauhoi.setDapandung(dapandung); // Gán đáp án đúng
-        cauHoiRepository.save(cauHoi);
-        return cauHoiRepository.save(existingCauhoi);
+
         // Lưu câu hỏi đã cập nhật
+        return cauHoiRepository.save(existingCauhoi);
     }
 }

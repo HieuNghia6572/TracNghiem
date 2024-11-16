@@ -2,6 +2,7 @@
 
     import com.example.TracNghiem.entity.CapDo;
     import com.example.TracNghiem.entity.CauHoi;
+    import com.example.TracNghiem.entity.ChiTietDeThi;
     import com.example.TracNghiem.entity.MonThi;
     import com.example.TracNghiem.repository.ICapDoRepository;
     import com.example.TracNghiem.repository.ICauHoiRepository;
@@ -82,7 +83,6 @@
                 }
             }
             cauHoiService.addCauHoi(cauHoi);
-
             return "redirect:/cauhois";  // Chuyển hướng lại danh sách sản phẩm
         }
         private String saveImage(MultipartFile image) throws IOException {
@@ -152,23 +152,38 @@
             return "redirect:/cauhois"; // Chuyển hướng về danh sách câu hỏi
         }
         @PostMapping("/update/{id}")
-        public String updateProduct(@PathVariable Long id, @Valid CauHoi cauHoi,@RequestParam String dapandung,
-                                    BindingResult result,@RequestParam("image") MultipartFile imageFile
-        ){
+        public String updateCauHoi(@PathVariable Long id, @Valid CauHoi cauHoi, BindingResult result) {
             if (result.hasErrors()) {
-                cauHoi.setId(id); // set id to keep it in the form in case of errors
-                return "/cauhois/update-cauhoi";
+                return "cauhois/update-cauhoi"; // Trả về form nếu có lỗi
             }
-            if (!imageFile.isEmpty()) {
-                try {
-                    String imageName = saveImage(imageFile);
-                    cauHoi.setImgUrl("/img/" +imageName);
-                } catch (IOException e) {
-                    e.printStackTrace();
+
+            // Lấy thực thể hiện tại từ cơ sở dữ liệu
+            CauHoi existingCauHoi = cauHoiService.getCauHoiById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid CauHoi Id:" + id));
+
+            // Cập nhật các thuộc tính của existingCauHoi
+            existingCauHoi.setTen(cauHoi.getTen());
+            existingCauHoi.setDapanA(cauHoi.getDapanA());
+            existingCauHoi.setDapanB(cauHoi.getDapanB());
+            existingCauHoi.setDapanC(cauHoi.getDapanC());
+            existingCauHoi.setDapanD(cauHoi.getDapanD());
+            existingCauHoi.setImgUrl(cauHoi.getImgUrl());
+
+            // Cập nhật danh sách chitietbaithi nếu cần
+            List<ChiTietDeThi> updatedChitietbaithi = cauHoi.getChitietbaithi();
+
+            // Kiểm tra xem updatedChitietbaithi có null không
+            if (updatedChitietbaithi != null) {
+                existingCauHoi.getChitietbaithi().clear(); // Xóa tất cả các phần tử cũ
+
+                for (ChiTietDeThi chiTiet : updatedChitietbaithi) {
+                    chiTiet.setCauHoi(existingCauHoi); // Thiết lập tham chiếu ngược
+                    existingCauHoi.addChiTietDeThi(chiTiet); // Thêm vào danh sách
                 }
             }
 
-            cauHoiService.updateCauHoi(cauHoi, dapandung);
+            // Lưu cập nhật với tham số thứ hai
+            cauHoiService.updateCauHoi(existingCauHoi, cauHoi.getDapandung()); // Cung cấp tham số thứ hai
             return "redirect:/cauhois";
         }
     }

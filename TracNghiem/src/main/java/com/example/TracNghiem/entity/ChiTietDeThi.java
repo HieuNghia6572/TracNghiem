@@ -11,21 +11,25 @@ import lombok.Setter;
 @RequiredArgsConstructor
 @Setter
 @Getter
-@Table (name="chitietdethi")
+@Table(name = "chitietdethi")
 public class ChiTietDeThi {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
- //
-    @ManyToOne
-    @JoinColumn(name= "dethi_id")
-    private DeThi dethi;
+    @Column(name = "dapanchon")
+    private String dapanchon;
 
     @ManyToOne
-    @JoinColumn(name= "cauhoi_id")
-    private CauHoi cauhoi;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @Column(name = "dapan_chon")
-    private String dapanChon; // Đáp án đã chọn
+    @ManyToOne
+    @JoinColumn(name = "cauhoi_id", nullable = false)
+    private CauHoi cauHoi;
+
+    @ManyToOne
+    @JoinColumn(name = "dethi_id", nullable = false)
+    private DeThi deThi;
+
 }

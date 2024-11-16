@@ -6,6 +6,8 @@ import com.example.TracNghiem.repository.IMonThiRepository;
 import com.example.TracNghiem.services.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +36,9 @@ public class CustomerController {
     private ICaThiRepository caThiRepository;
     @Autowired
     private DeThiService deThiService;
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/home")
     public String showCauhoiList(Model model) {
         model.addAttribute("cauhois", cauHoiService.getAllCauHoi());
@@ -60,13 +65,23 @@ public class CustomerController {
         return "/phongthis/userphongthi";
     }
     @GetMapping("/hienthidethi/{id}")
-    public String hienThiDeThi(@PathVariable Long id, Model model){
+    public String hienThiDeThi(@PathVariable Long id, Model model) {
+        // Lấy đề thi theo ID
+        DeThi deThi = deThiService.getDeThiById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy đề thi với ID: " + id));
 
-        DeThi deThi = deThiService.getDeThiById(id).orElseThrow(null);
+        // Lấy tên người dùng từ Security Context
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName(); // Tên người dùng đã đăng nhập
+
+        // Lấy thông tin người dùng
+        User currentUser = userService.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy người dùng"));
+
+        // Gọi phương thức với cả DeThi và User
         model.addAttribute("thongtinde", deThi);
-        model.addAttribute("dethis", deThiService.getAllCauHoiByDeThi(deThi));
+        model.addAttribute("dethis", deThiService.getAllCauHoiByDeThi(deThi, currentUser));
 
         return "/dethis/hienthidethi";
     }
-
 }

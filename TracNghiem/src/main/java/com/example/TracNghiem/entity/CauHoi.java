@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -17,7 +18,9 @@ public class CauHoi {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String ImgUrl;
+
     @Column(name = "ten")
     @NotEmpty(message = "Tên không được để trống")
     private String ten;
@@ -42,24 +45,25 @@ public class CauHoi {
     @NotEmpty(message = "Đáp án không được để trống")
     private String dapandung;
 
-//    @Column(name = "capdo")
-//    private String capDo;
-
     @Column(name = "monthi_id")
-    private Long monthiId; // ID của môn thi
+    private Long monthiId;
 
     @Column(name = "capdo_id")
-    private Long capdoId; // ID của môn thi
+    private Long capdoId;
 
     @ManyToOne
     @JoinColumn(name = "monthi_id", insertable = false, updatable = false)
-    private MonThi monthi; // Tham chiếu đến môn thi
+    private MonThi monthi;
 
-    @OneToMany(mappedBy = "cauhoi", cascade = CascadeType.ALL)
-    private List<ChiTietDeThi> chitietbaithi;
+    @ManyToOne
+    @JoinColumn(name = "capdo_id", insertable = false, updatable = false)
+    private CapDo capdo;
 
-   @ManyToOne
-   @JoinColumn(name="capdo_id",insertable = false,updatable = false)
-   private  CapDo capdo;
-
-}
+    @OneToMany(mappedBy = "cauHoi", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ChiTietDeThi> chitietbaithi = new ArrayList<>(); // Khởi tạo danh sách
+    // Phương thức để thêm ChiTietDeThi
+    public void addChiTietDeThi(ChiTietDeThi chiTiet) {
+        chitietbaithi.add(chiTiet);
+        chiTiet.setCauHoi(this); // Thiết lập tham chiếu ngược
+    }
+}//còn loi chinh sua
