@@ -90,6 +90,7 @@ public class DeThiService {
                 .orElseThrow(() -> new IllegalStateException("Product with ID " +
                         deThi.getId() + " does not exist."));
         existingDeThi.setMadethi(deThi.getMadethi());
+        existingDeThi.setTendethi(deThi.getTendethi());
 
 
         return deThiRepository.save(existingDeThi);

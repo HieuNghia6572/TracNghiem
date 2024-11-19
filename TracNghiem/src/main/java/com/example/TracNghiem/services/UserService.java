@@ -3,6 +3,7 @@ package com.example.TracNghiem.services;
 import com.example.TracNghiem.Role;
 import com.example.TracNghiem.entity.ChiTietDeThi;
 import com.example.TracNghiem.entity.DeThi;
+import com.example.TracNghiem.entity.MonThi;
 import com.example.TracNghiem.entity.User;
 import com.example.TracNghiem.repository.IUserRepository;
 import com.example.TracNghiem.repository.IRoleRepository;
@@ -10,6 +11,9 @@ import com.example.TracNghiem.repository.UserRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -40,6 +44,10 @@ public class UserService implements UserDetailsService {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
         log.info("User {} saved successfully.", user.getUsername());
+    }
+
+    public  List<User> getAllUser(){
+        return  userRepository.findAll();
     }
 
     // Gán vai trò mặc định cho người dùng dựa trên tên người dùng.
@@ -92,4 +100,24 @@ public class UserService implements UserDetailsService {
         user1Repository.deleteById(id);
     }
 
+
+    public User updateUser(@NotNull User user){
+        User existingUser = userRepository.findById(String.valueOf(user.getId()))
+                .orElseThrow(() -> new IllegalStateException("Id user  " +
+                        user.getId() + " khong ton tai."));
+        existingUser.setEmail(user.getEmail());
+        existingUser.setFullname(user.getFullname());
+        existingUser.setUsername(user.getUsername());
+        return userRepository.save(existingUser);
+    }
+
+    public User getUserLogin(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof AnonymousAuthenticationToken)
+            return null;
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        return userRepository.findByUsername(userDetails.getUsername()).orElseThrow(null);
+    }
 }
+
+

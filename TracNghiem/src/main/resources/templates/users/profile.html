@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Profile</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/profile.css">
+
+</head>
+
+<body>
+<br>
+<br>
+<h2 style="text-align:center">THÔNG TIN TÀI KHOẢN</h2>
+<form th:action="@{/update-profile}"
+      th:object="${user}" method="post">
+<div class="card">
+    <img src="https://scontent.fsgn10-1.fna.fbcdn.net/v/t39.30808-6/412995977_1014410132966668_8135852515188066648_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=wXMuQkdzq8AQ7kNvgEyuqkv&_nc_zt=23&_nc_ht=scontent.fsgn10-1.fna&_nc_gid=A-fGDogLHPo4zG6TBugHNOB&oh=00_AYCoubfG5f7HVrzqyt33t_Kshz9eevrDlXRXLX9zfmm-0w&oe=67421059" alt="John" style="width:100%">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" th:field="*{username}" class="form-control" id="username" disabled>
+            <div class="text-danger" th:if="${#fields.hasErrors('username')}"
+                 th:errors="*{username}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" th:field="*{email}" class="form-control" id="email" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('email')}"
+                 th:errors="*{email}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="fullname" class="form-label"> Full name:</label>
+            <input type="text" th:field="*{fullname}" class="form-control" id="fullname" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('fullname')}"
+                 th:errors="*{fullname}"></div>
+        </div>
+
+
+        <input th:field="*{password}" type="hidden">
+        <input th:field="*{id}" type="hidden">
+        <input th:field="*{username}" type="hidden">
+    <div style="margin: 24px 0;">
+        <a href="#"><i class="fa fa-dribbble"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-linkedin"></i></a>
+        <a href="#"><i class="fa fa-facebook"></i></a>
+    </div>
+    <p><button type="submit">Cập Nhật</button></p>
+</div>
+</form>
+
+</body>
+
+</html>

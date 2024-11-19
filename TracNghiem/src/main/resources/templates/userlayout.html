@@ -85,6 +85,8 @@
                             <div class="Appointment d-flex align-items-center"> <!-- Sử dụng d-flex để căn chỉnh ngang -->
                                 <span style="font-weight:bold; white-space: nowrap;"><b>Chào mừng: </b></span> <!-- Sử dụng span để không xuống dòng -->
                                 <a sec:authentication="name" style="font-weight:bold" class="mx-2"></a> <!-- Thêm class mx-2 để tạo khoảng cách -->
+                                <span style="font-weight:bold; white-space: nowrap;"><a th:href="@{/profile}"><img style="width:40px; height:40px" alt="profile" th:src="@{/img/profile.png}"> </img></a></span>
+                                <span>&ensp;</span>
                                 <form th:action="@{/logout}" method="post" class="mb-0"> <!-- mb-0 để loại bỏ margin dưới form -->
                                     <button class="btn btn-outline-light" style="background-color:blue" type="submit">Đăng xuất</button>
                                 </form>

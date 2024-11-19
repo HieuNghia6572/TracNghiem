@@ -101,6 +101,7 @@ public class DeThiController {
 
         // Cập nhật các thuộc tính// Giả sử bạn có thuộc tính "tenDeThi"
         existingDeThi.setMonthiId(monthiId);
+        existingDeThi.setTendethi(deThi.getTendethi());
         existingDeThi.setSlcauhoide(deThi.getSlcauhoide());
         existingDeThi.setSlcauhoitb(deThi.getSlcauhoitb());
         existingDeThi.setSlcauhoikho(deThi.getSlcauhoikho());
