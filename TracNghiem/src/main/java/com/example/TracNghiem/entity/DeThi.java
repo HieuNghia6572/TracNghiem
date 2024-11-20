@@ -34,7 +34,7 @@ public class DeThi {
     private List<ChiTietDeThi> chitietbaithi;
 
     @Column(name = "monthi_id")
-    private Long monthiId;
+    private Long monthiId;//khong can thiet
 
     @ManyToOne
     @JoinColumn(name = "monthi_id", insertable = false, updatable = false)

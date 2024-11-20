@@ -79,4 +79,37 @@ public class ChiTietDeThiService {
                 .toList();
         chiTietDeThiRepository.deleteAll(deleteList);
     }
+    public List<ChiTietDeThi> findAll() {//them dong nay
+        return chiTietDeThiRepository.findAll();
+    }
+    public ChiTietDeThi save(ChiTietDeThi chiTietDeThi) {//them dong nay
+        return chiTietDeThiRepository.save(chiTietDeThi);
+    }
+    public List<ChiTietDeThi> findByDeThiId(Long deThiId) {
+        return chiTietDeThiRepository.findByDeThiId(deThiId);
+    }
+
+//    public Optional<ChiTietDeThi> findByUserAndCauHoi(User user, CauHoi cauHoi) {
+//        return chiTietDeThiRepository.findByUserAndCauHoi(user, cauHoi);
+//    }
+    public Optional<ChiTietDeThi> findById(Long id) {
+        return chiTietDeThiRepository.findById(id);
+    }
+    public List<ChiTietDeThi> findByDeThiIdAndUserId(Long deThiId, Long userId) {
+        return chiTietDeThiRepository.findByDeThiIdAndUserId(deThiId, userId);
+    }
+    // Phương thức tìm tất cả ChiTietDeThi theo ID đề thi
+    public List<ChiTietDeThi> findByDeThi(Long deThiId) {
+        return chiTietDeThiRepository.findByDeThiId(deThiId);
+    }
+    public ChiTietDeThi saveChiTietDeThi(ChiTietDeThi chiTietDeThi) {
+        return chiTietDeThiRepository.save(chiTietDeThi);
+    }
+
+    public ChiTietDeThi updateDapanchon(Long id, String dapanchon) {
+        ChiTietDeThi chiTietDeThi = chiTietDeThiRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Chi tiết đề thi không tồn tại"));
+        chiTietDeThi.setDapanchon(dapanchon);
+        return chiTietDeThiRepository.save(chiTietDeThi);
+    }
 }

@@ -94,26 +94,6 @@
             return fileName;
         }
 
-        // Xử lý form thêm câu hỏi
-        /*@PostMapping("/submit")
-        public String submitForm(@ModelAttribute @Valid CauHoi cauhoi,
-                                 BindingResult bindingResult,
-                                 @RequestParam String dapandung,
-                                 @RequestParam String capDo,
-                                 @RequestParam Long monthiId,
-                                 Model model) { // Thêm Model vào đây
-            if (bindingResult.hasErrors()) {
-                List<MonThi> monthis = monThiService.getAllMonThi();
-                model.addAttribute("monthis", monthis); // Thêm danh sách môn thi vào mô hình nếu có lỗi
-                return "cauhois/add-cauhoi"; // Trả về form nếu có lỗi
-            }
-            // Gán giá trị cho các trường
-            cauhoi.setDapandung(dapandung);
-            cauhoi.setCapDo(capDo);
-            cauhoi.setMonthiId(monthiId);
-            cauHoiRepository.save(cauhoi);
-            return "redirect:/cauhois"; // Chuyển hướng về danh sách câu hỏi
-        }*/
 
         // Hiển thị form chỉnh sửa câu hỏi
         @GetMapping("/edit/{id}")
@@ -128,23 +108,6 @@
         }
 
 
-        // Xử lý cập nhật câu hỏi
-        /*@PostMapping("/update")
-        public String updateCauHoi(@ModelAttribute @Valid CauHoi cauHoi,
-                                   BindingResult bindingResult,
-                                   @RequestParam String dapandung,
-                                   @RequestParam Long monthiId) {
-            if (bindingResult.hasErrors()) {
-                return "cauhois/update-cauhoi"; // Trả về form nếu có lỗi
-            }
-
-            // Gán giá trị cho các trường
-            cauHoi.setMonthiId(monthiId);
-            cauHoi.setDapandung(dapandung);
-            cauHoiService.updateCauHoi(cauHoi, dapandung);
-            return "redirect:/cauhois"; // Chuyển hướng về danh sách câu hỏi
-        }*/
-
         // Xử lý yêu cầu xóa câu hỏi
         @GetMapping("/delete/{id}")
         public String deleteCauHoi(@PathVariable Long id) {
@@ -152,7 +115,8 @@
             return "redirect:/cauhois"; // Chuyển hướng về danh sách câu hỏi
         }
         @PostMapping("/update/{id}")
-        public String updateCauHoi(@PathVariable Long id, @Valid CauHoi cauHoi, BindingResult result) {
+        public String updateCauHoi(@PathVariable Long id, @Valid CauHoi cauHoi,
+                                   BindingResult result, @RequestParam("image") MultipartFile imageFile) {
             if (result.hasErrors()) {
                 return "cauhois/update-cauhoi"; // Trả về form nếu có lỗi
             }
@@ -167,23 +131,30 @@
             existingCauHoi.setDapanB(cauHoi.getDapanB());
             existingCauHoi.setDapanC(cauHoi.getDapanC());
             existingCauHoi.setDapanD(cauHoi.getDapanD());
-            existingCauHoi.setImgUrl(cauHoi.getImgUrl());
 
-            // Cập nhật danh sách chitietbaithi nếu cần
-            List<ChiTietDeThi> updatedChitietbaithi = cauHoi.getChitietbaithi();
-
-            // Kiểm tra xem updatedChitietbaithi có null không
-            if (updatedChitietbaithi != null) {
-                existingCauHoi.getChitietbaithi().clear(); // Xóa tất cả các phần tử cũ
-
-                for (ChiTietDeThi chiTiet : updatedChitietbaithi) {
-                    chiTiet.setCauHoi(existingCauHoi); // Thiết lập tham chiếu ngược
-                    existingCauHoi.addChiTietDeThi(chiTiet); // Thêm vào danh sách
+            // Xử lý tệp hình ảnh nếu có
+            if (!imageFile.isEmpty()) {
+                try {
+                    String imageName = saveImage(imageFile);
+                    existingCauHoi.setImgUrl("/img/" + imageName); // Cập nhật đường dẫn hình ảnh
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
-            // Lưu cập nhật với tham số thứ hai
-            cauHoiService.updateCauHoi(existingCauHoi, cauHoi.getDapandung()); // Cung cấp tham số thứ hai
+            // Cập nhật danh sách chitietbaithi nếu cần
+            List<ChiTietDeThi> updatedChitietbaithi = cauHoi.getChitietbaithi();
+            if (updatedChitietbaithi != null) {
+                existingCauHoi.getChitietbaithi().clear();
+                for (ChiTietDeThi chiTiet : updatedChitietbaithi) {
+                    chiTiet.setCauHoi(existingCauHoi);
+                    existingCauHoi.addChiTietDeThi(chiTiet);
+                }
+            }
+
+            // Lưu cập nhật
+            cauHoiService.updateCauHoi(existingCauHoi, cauHoi.getDapandung());
             return "redirect:/cauhois";
         }
+        // toi day
     }

@@ -69,4 +69,8 @@ public class CauHoiService {
         // Lưu câu hỏi đã cập nhật
         return cauHoiRepository.save(existingCauhoi);
     }
+
+    public Optional<CauHoi> findById(Long id) {
+        return cauHoiRepository.findById(id);
+    }
 }

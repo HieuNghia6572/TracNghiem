@@ -86,7 +86,7 @@
         <tr>
             <th>ID</th>
             <th>Mã De Thi  </th>
-            <th>Tên De Thi  </th>
+<!--            <th>Tên De Thi  </th>-->
             <th>Tên môn thi</th>
             <th>Số Lượng Câu Hỏi Dễ</th>
             <th>Số Lượng Câu Hỏi Trung Bình</th>
@@ -99,7 +99,7 @@
         <tr th:each="dethi : ${dethis}">
             <td th:text="${dethi.id}"></td>
             <td th:text="${dethi.madethi}"></td>
-            <td th:text="${dethi.tendethi}"></td>
+<!--            <td th:text="${dethi.tendethi}"></td>-->
             <td th:text="${dethi.monthi != null ? dethi.monthi.tenmonthi : 'Chưa có môn thi'}"></td>
             <td th:text="${dethi.slcauhoide}"></td>
             <td th:text="${dethi.slcauhoitb}"></td>

@@ -108,6 +108,12 @@
             flex: 1; /* Chiếm không gian còn lại */
             /* Thêm các thuộc tính khác nếu cần */
         }
+        .duongke {
+            height: 4px; /* Độ dày của đường kẻ */
+            background-color: #000; /* Màu đen cho đường kẻ */
+            margin: 20px 0; /* Khoảng cách trên và dưới đường kẻ */
+        }
+
     </style>
     <title>Giao diện thi</title>
 </head>
@@ -141,46 +147,53 @@
 
         </div>
         <div class="col-8">
-            <h1 style="text-align: center" th:text="${'Ma De: '+thongtinde.madethi}"></h1>
-            <h1 style="text-align: center" th:text="${'Ten Mon Thi: '+thongtinde.monthi.tenmonthi}"></h1>
-            <ul class="quiz">
-                <li th:each="baithi, stat : ${dethis}" class="li-container">
-                    <span class="part1">
-                        <div class="question-container">
-                            <h4 th:utext="${'Câu hỏi ' + (stat.index + 1) + ': ' + (baithi.cauHoi.ten != null ? baithi.cauHoi.ten : '')}"></h4>
-                        </div>
-                        <ul class="choices">
-                            <li>
-                                <label class="choice-label">
-                                    <input type="radio" th:name="${'question_' + baithi.id}" th:value="${baithi.cauHoi.dapanA != null ? baithi.cauHoi.dapanA : ''}" />
-                                    <span th:text="${'A.  ' + (baithi.cauHoi.dapanA != null ? baithi.cauHoi.dapanA : '')}"></span>
-                                </label>
-                            </li>
-                            <li>
-                                <label class="choice-label">
-                                    <input type="radio" th:name="${'question_' + baithi.id}" th:value="${baithi.cauHoi.dapanB != null ? baithi.cauHoi.dapanB : ''}" />
-                                    <span th:text="${'B.  ' + (baithi.cauHoi.dapanB != null ? baithi.cauHoi.dapanB : '')}"></span>
-                                </label>
-                            </li>
-                            <li>
-                                <label class="choice-label">
-                                    <input type="radio" th:name="${'question_' + baithi.id}" th:value="${baithi.cauHoi.dapanC != null ? baithi.cauHoi.dapanC : ''}" />
-                                    <span th:text="${'C.  ' + (baithi.cauHoi.dapanC != null ? baithi.cauHoi.dapanC : '')}"></span>
-                                </label>
-                            </li>
-                            <li>
-                                <label class="choice-label">
-                                    <input type="radio" th:name="${'question_' + baithi.id}" th:value="${baithi.cauHoi.dapanD != null ? baithi.cauHoi.dapanD : ''}" />
-                                    <span th:text="${'D.  ' + (baithi.cauHoi.dapanD != null ? baithi.cauHoi.dapanD : '')}"></span>
-                                </label>
-                            </li>
-                        </ul>
-                    </span>
-                    <span class="image-part" th:if="${baithi.cauHoi != null and baithi.cauHoi.ImgUrl != null and baithi.cauHoi.ImgUrl != ''}">
-                        <img th:src="${baithi.cauHoi.ImgUrl}" alt="Hình ảnh câu hỏi" height="180" width="180" />
-                    </span>
-                </li>
-            </ul>
+            <h1 style="text-align: center" th:text="${'Mã đề: '+thongtinde.madethi}"></h1>
+            <h1 style="text-align: center" th:text="${'Tên môn thi: '+thongtinde.monthi.tenmonthi}"></h1>
+            <form id="quiz-form" method="post" action="/submitQuiz">
+                <input type="hidden" name="deThiId" th:value="${thongtinde.id}"/> <!-- Gán giá trị cho deThiId -->
+                <ul class="quiz">
+                    <li th:each="baithi, stat : ${chiTietDeThiList}" class="li-container">
+            <span class="part1">
+                <div class="questionz-container">
+                    <div class="duongke"></div>
+                    <h4 th:utext="${'Câu hỏi ' + (stat.index + 1) + ': ' + (baithi.cauHoi.ten != null ? baithi.cauHoi.ten : '')}"></h4>
+                </div>
+
+                <span class="image-part" th:if="${baithi.cauHoi != null and baithi.cauHoi.ImgUrl != null and baithi.cauHoi.ImgUrl != ''}" style="margin-left: 100px !important">
+                    <img th:src="${baithi.cauHoi.ImgUrl}" alt="Hình ảnh câu hỏi" height="110" width="110" />
+                </span>
+
+                <ul class="choices" style="margin-left: 50px !important">
+                    <li>
+                        <label class="choice-label">
+                            <input type="radio" th:name="${'question_' + baithi.id}" th:value="'A'" th:checked="${baithi.dapanchon == 'A'}" />
+                            <span th:text="${'A.  ' + (baithi.cauHoi.dapanA != null ? baithi.cauHoi.dapanA : '')}"></span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="choice-label">
+                            <input type="radio" th:name="${'question_' + baithi.id}" th:value="'B'" th:checked="${baithi.dapanchon == 'B'}" />
+                            <span th:text="${'B.  ' + (baithi.cauHoi.dapanB != null ? baithi.cauHoi.dapanB : '')}"></span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="choice-label">
+                            <input type="radio" th:name="${'question_' + baithi.id}" th:value="'C'" th:checked="${baithi.dapanchon == 'C'}" />
+                            <span th:text="${'C.  ' + (baithi.cauHoi.dapanC != null ? baithi.cauHoi.dapanC : '')}"></span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="choice-label">
+                            <input type="radio" th:name="${'question_' + baithi.id}" th:value="'D'" th:checked="${baithi.dapanchon == 'D'}" />
+                            <span th:text="${'D.  ' + (baithi.cauHoi.dapanD != null ? baithi.cauHoi.dapanD : '')}"></span>
+                        </label>
+                    </li>
+                </ul>
+            </span>
+                    </li>
+                </ul>
+                <button type="submit" class="save-progress">Lưu tiến trình</button>
+            </form>
             <button class="view-results" onclick="returnScore()">Nop Bai</button>
         </div>
         <div class="col-2"style="background-color: #f8f9fa;">
@@ -215,6 +228,33 @@
     setInterval(fetchTime, 1000); // Cập nhật mỗi giây
 </script>
 <script src="js/scripts.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function saveProgress() {
+    var formData = {};
+    $('#quiz-form input[type="radio"]:checked').each(function() {
+        var questionId = $(this).attr('name').split('_')[1]; // Lấy ID câu hỏi
+        var selectedValue = $(this).val(); // Giá trị đã chọn
+        formData['question_' + questionId] = selectedValue; // Lưu vào formData
+    });
 
+    // Gửi dữ liệu đến server
+    $.ajax({
+        url: '/submitQuiz', // Địa chỉ endpoint để lưu dữ liệu
+        type: 'POST',
+        data: {
+            deThiId: $('input[name="deThiId"]').val(), // Gửi deThiId
+            ...formData // Gửi tất cả các câu trả lời
+        },
+        success: function(response) {
+            alert('Lưu tiến trình thành công!');
+        },
+        error: function(xhr, status, error) {
+            alert('Có lỗi xảy ra: ' + error);
+        }
+    });
+}
+</script>
+<!--toi day-->
 </body>
 </html>
