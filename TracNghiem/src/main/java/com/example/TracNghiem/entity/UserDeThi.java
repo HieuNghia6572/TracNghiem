@@ -32,4 +32,9 @@ public class UserDeThi {
         this.user = user;
         this.deThi = deThi;
     }
+    public double calculateTotalPoints() {
+        int soCau = deThi.getTotalQuestions(); // Lấy số câu từ phương thức mới
+        return (soCau > 0) ? (10.0 / soCau) * diem : 0; // Tính tổng điểm
+    }
+
 }

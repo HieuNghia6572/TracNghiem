@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/css/gijgo.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/css/slicknav.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa; /* Màu nền nhẹ */
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            color: #343a40; /* Màu chữ */
+        }
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center; /* Căn giữa */
+            gap: 10px; /* Khoảng cách giữa các phần tử */
+        }
+        .custom-input, .custom-select {
+            border: 2px solid #0d6efd; /* Màu viền */
+            border-radius: 10px; /* Bo tròn các góc */
+            padding: 10px; /* Khoảng cách bên trong */
+        }
+        .table {
+            background-color: #fff; /* Màu nền bảng */
+            border-radius: 10px; /* Bo tròn các góc của bảng */
+            overflow: hidden; /* Ẩn phần viền bảng */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+        }
+        .table th {
+            background-color: #0d6efd; /* Nền cho tiêu đề bảng */
+            color: #fff; /* Màu chữ tiêu đề */
+        }
+        .text-ellipsis {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+        }
+    </style>
+    <style>
+        .dataTables_info,
+        .dataTables_empty,
+        .dataTables_processing,
+        .dataTables_length,
+        .dataTables_paginate {
+            background-color: rgba(255, 255, 255, 0.8); /* Màu nền trắng mờ */
+            padding: 5px; /* Khoảng cách bên trong */
+            border-radius: 5px; /* Bo tròn các góc */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+        }
+
+        .dataTables_processing {
+            font-weight: bold; /* Làm đậm chữ */
+        }
+        .dataTables_filter input[type="search"] {
+            border: 2px solid #0d6efd; /* Màu viền */
+            border-radius: 10px; /* Bo tròn các góc */
+            padding: 10px; /* Khoảng cách bên trong */
+            background-color: #ffffff; /* Màu nền */
+            color: #343a40; /* Màu chữ */
+        }
+
+        .dataTables_filter input[type="search"]:focus {
+            border-color: #0056b3; /* Màu viền khi ô tìm kiếm được chọn */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Đổ bóng khi chọn */
+        }
+    </style>
+    <title>Danh sách phòng thi</title>
+</head>
+<body>
+
+<header>
+    <div class="header-area">
+        <div class="main-header-area shimmer-effect">
+            <div class="container-fluid">
+                <div class="header_bottom_border">
+                    <div class="row align-items-center">
+                        <div class="col-xl-3 col-lg-2">
+                            <div class="logo">
+                                <button class="toggle-btn" id="toggleButton">&#9776;</button>
+                                <a href="index.html">
+                                    <img th:src="@{/img/logo_khongnen.png}" alt="" height="100" width="180">
+
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-7">
+                            <div class="main-menu d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a href="/home">Trang chủ</a></li>
+                                        <li><a href="/home">Thông báo</a></li>
+                                        <li><a href="#">Phòng thi<i class="ti-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="candidate.html">Candidates </a></li>
+                                                <li><a href="job_details.html">Job Details </a></li>
+                                                <li><a href="elements.html">Elements</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Ca Thi <i class="ti-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="blog.html">Blog</a></li>
+                                                <li><a href="single-blog.html">Single Blog</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Môn thi<i class="ti-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="blog.html">Blog</a></li>
+                                                <li><a href="single-blog.html">Single Blog</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                            <div class="Appointment d-flex align-items-center">
+                                <span style="font-weight:bold; white-space: nowrap;"><b>Chào mừng: </b></span>
+                                <a sec:authentication="name" style="font-weight:bold" class="mx-2"></a>
+                                <form th:action="@{/logout}" method="post" class="mb-0">
+                                    <button class="btn btn-outline-light" style="background-color:blue" type="submit">Đăng xuất</button>
+                                </form>
+                                <a sec:authorize="hasAnyAuthority('ADMIN')" class="ml-2">
+                                    <button class="btn btn-outline-light" style="background-color:blue" type="submit">
+                                        <a style="color: white" th:href="@{/cauhois}">Admin</a>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="sidebar" id="sidebar">
+    <h3>Menu</h3>
+    <ul class="sidebar-menu">
+        <li><a href="/cathis">Thông tin người dùng</a></li>
+        <li><a href="#">Danh sách phòng thi</a></li>
+        <li><a href="/monthis">Danh sách môn thi</a></li>
+    </ul>
+</div>
+
+<div class="content" id="content">
+    <div class="container mt-5">
+        <h2 class="text-center">Kết Quả Thi</h2>
+
+        <div class="message" th:if="${message}" th:text="${message}"></div>
+
+        <table class="table table-striped mt-4" th:if="${userDeThi != null}">
+            <thead>
+            <tr>
+                <th>Tên Đề Thi</th>
+                <th>Số Câu Đúng</th>
+                <th>Tổng Điểm</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${userDeThi.deThi.madethi}">Tên Đề Thi</td>
+                <td th:text="${userDeThi.diem} + ' / ' + ${userDeThi.deThi.getTotalQuestions()}">Tổng Số Câu Hỏi Đúng</td>
+                <td th:text="${userDeThi.calculateTotalPoints()}">Tổng Điểm</td> <!-- Hiển thị tổng điểm -->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<footer class="bg-primary text-white text-center py-4 mt-5">
+    <div class="container d-flex justify-content-between text-footer">
+        <div class="footer-left">
+            <h5 class="mb-0">Trắc nghiệm NTT</h5>
+            <p class="mb-0">© 2024 Tất cả quyền được bảo lưu.</p>
+        </div>
+        <div class="footer-content">
+            <h5 class="mb-0">Thông tin liên hệ</h5>
+            <p class="mb-0">Liên hệ: phanhieunghia1054@gmail.com</p>
+        </div>
+    </div>
+</footer>
+
+
+<script th:src="@{/js/scripts.js}"></script>
+
+
+</body>
+</html>

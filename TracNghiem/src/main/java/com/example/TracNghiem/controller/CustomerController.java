@@ -96,6 +96,7 @@ public class CustomerController {
         model.addAttribute("thongtinde", deThi);
         model.addAttribute("dethis", deThiService.getAllCauHoiByDeThi(deThi, currentUser));
         model.addAttribute("chiTietDeThiList", chiTietDeThiList); // Hiển thị tất cả câu hỏi
+        model.addAttribute("userId", currentUser.getId()); // Thêm userId vào model
 
         return "/dethis/hienthidethi"; // Đường dẫn tới template
     }
@@ -136,42 +137,68 @@ public class CustomerController {
     }
 
 private void saveChiTietDeThi(Long deThiId, User user, Long id, String selectedAnswer) {
-    // Tìm ChiTietDeThi từ cơ sở dữ liệu dựa trên id
-    ChiTietDeThi chiTietDeThi = chiTietDeThiRepository.findById(id)
-            .orElseGet(() -> {
-                // Nếu không tìm thấy, tạo mới một ChiTietDeThi
-                ChiTietDeThi newChiTietDeThi = new ChiTietDeThi();
-                newChiTietDeThi.setId(id);
+    // Tìm ChiTietDeThi từ cơ sở dữ liệu dựa trên id và user_id
+    Optional<ChiTietDeThi> existingChiTietDeThi = chiTietDeThiRepository.findByCauHoiIdAndUserId(id, user.getId());
 
-                // Lấy DeThi từ cơ sở dữ liệu
-                DeThi deThi = deThiRepository.findById(deThiId)
-                        .orElseThrow(() -> new RuntimeException("Đề thi không tồn tại"));
+    ChiTietDeThi chiTietDeThi;
 
-                // Lấy CauHoi từ ChiTietDeThi
-                CauHoi cauHoi = chiTietDeThiService.findById(id)
-                        .map(ChiTietDeThi::getCauHoi)
-                        .orElseThrow(() -> new RuntimeException("Câu hỏi không tồn tại"));
+    if (existingChiTietDeThi.isPresent()) {
+        ChiTietDeThi existingDetail = existingChiTietDeThi.get();
 
-                newChiTietDeThi.setDeThi(deThi);
-                newChiTietDeThi.setCauHoi(cauHoi);
-                newChiTietDeThi.setUser(user);
-                return newChiTietDeThi;
-            });
+        // Kiểm tra xem user_id có trùng với user đang thực hiện hay không
+        if (!existingDetail.getUser().getId().equals(user.getId())) {
+            // Nếu user_id không trùng, tạo mới một ChiTietDeThi
+            chiTietDeThi = new ChiTietDeThi();
+            chiTietDeThi.setId(id);
+
+            // Lấy DeThi từ cơ sở dữ liệu
+            DeThi deThi = deThiRepository.findById(deThiId)
+                    .orElseThrow(() -> new RuntimeException("Đề thi không tồn tại"));
+            CauHoi cauHoi = chiTietDeThiService.findById(id)
+                    .map(ChiTietDeThi::getCauHoi)
+                    .orElseThrow(() -> new RuntimeException("Câu hỏi không tồn tại"));
+
+            chiTietDeThi.setDeThi(deThi);
+            chiTietDeThi.setCauHoi(cauHoi);
+            chiTietDeThi.setUser(user);
+            System.out.println("Đã tạo mới ChiTietDeThi cho user_id: " + user.getId());
+        } else {
+            // Nếu user_id trùng, sử dụng đối tượng đã tồn tại
+            chiTietDeThi = existingDetail;
+            System.out.println("ChiTietDeThi đã tồn tại cho user_id: " + user.getId());
+        }
+    } else {
+        // Nếu không tìm thấy, tạo mới một ChiTietDeThi
+        chiTietDeThi = new ChiTietDeThi();
+        chiTietDeThi.setId(id);
+
+        // Lấy DeThi từ cơ sở dữ liệu
+        DeThi deThi = deThiRepository.findById(deThiId)
+                .orElseThrow(() -> new RuntimeException("Đề thi không tồn tại"));
+        CauHoi cauHoi = chiTietDeThiService.findById(id)
+                .map(ChiTietDeThi::getCauHoi)
+                .orElseThrow(() -> new RuntimeException("Câu hỏi không tồn tại"));
+
+        chiTietDeThi.setDeThi(deThi);
+        chiTietDeThi.setCauHoi(cauHoi);
+        chiTietDeThi.setUser(user);
+        System.out.println("Đã tạo mới ChiTietDeThi cho user_id: " + user.getId());
+    }
 
     // Cập nhật giá trị "dapanchon"
     if (selectedAnswer != null && !selectedAnswer.trim().isEmpty()) {
         chiTietDeThi.setDapanchon(selectedAnswer);
-        System.out.println("Đã cập nhật dapanchon: " + chiTietDeThi.getDapanchon());
+        System.out.println("Đã cập nhật dapanchon: " + chiTietDeThi.getDapanchon() + " cho user_id: " + user.getId());
     } else {
         chiTietDeThi.setDapanchon(null);
-        System.out.println("Đã cập nhật dapanchon: null");
+        System.out.println("Đã cập nhật dapanchon: null cho user_id: " + user.getId());
     }
 
     // Lưu ChiTietDeThi vào cơ sở dữ liệu
     chiTietDeThiRepository.save(chiTietDeThi);
 }
+// tới đây user_id vẫn chua sua dc
     // Phương thức tính điểm
-
     private int calculateScore(UserDeThi userDeThi) {
         int score = 0;
 
@@ -188,6 +215,33 @@ private void saveChiTietDeThi(Long deThiId, User user, Long id, String selectedA
         }
 
         return score;
+    }
+
+    @GetMapping("/ketquathi/{userId}/{deThiId}")
+    public String showKetQuaThi(@PathVariable Long userId, @PathVariable Long deThiId, Model model) {
+        UserDeThi userDeThi = userDeThiRepository.findByUserIdAndDeThiId(userId, deThiId);
+
+        if (userDeThi == null) {
+            model.addAttribute("message", "Không tìm thấy kết quả cho người dùng với ID: " + userId + " và đề thi ID: " + deThiId);
+        } else {
+            model.addAttribute("userDeThi", userDeThi);
+            model.addAttribute("totalPoints", userDeThi.calculateTotalPoints()); // Thêm tổng điểm vào model
+        }
+
+        model.addAttribute("userId", userId);
+        model.addAttribute("deThiId", deThiId);
+
+        return "users/ketquathi";
+    }
+    // toi day
+
+    private Long getUserIdFromPrincipal(String username) {
+        Optional<User> optionalUser = userService.findByUsername(username); // Lưu ý là Optional
+        if (optionalUser.isPresent()) {
+            return optionalUser.get().getId(); // Lấy ID nếu có
+        } else {
+            return null; // Hoặc xử lý trường hợp không tìm thấy người dùng
+        }
     }
 
 }

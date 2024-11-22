@@ -42,4 +42,18 @@ public class DeThi {
 
     @OneToMany(mappedBy = "dethi", cascade = CascadeType.ALL)
     private List<PhongThi> phongThi;
+    // Phương thức để lấy tổng số câu hỏi
+    public int getTotalQuestions() {
+        int total = 0;
+        if (slcauhoide != null) {
+            total += Integer.parseInt(slcauhoide);
+        }
+        if (slcauhoitb != null) {
+            total += Integer.parseInt(slcauhoitb);
+        }
+        if (slcauhoikho != null) {
+            total += Integer.parseInt(slcauhoikho);
+        }
+        return total;
+    }
 }

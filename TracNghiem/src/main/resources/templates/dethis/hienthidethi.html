@@ -150,7 +150,9 @@
             <h1 style="text-align: center" th:text="${'Mã đề: '+thongtinde.madethi}"></h1>
             <h1 style="text-align: center" th:text="${'Tên môn thi: '+thongtinde.monthi.tenmonthi}"></h1>
             <form id="quiz-form" method="post" action="/submitQuiz">
-                <input type="hidden" name="deThiId" th:value="${thongtinde.id}"/> <!-- Gán giá trị cho deThiId -->
+                <input type="hidden" name="deThiId" th:value="${thongtinde.id}"/>
+                <input type="hidden" id="userId" th:value="${userId}" />
+                <!-- Gán giá trị cho deThiId -->
                 <ul class="quiz">
                     <li th:each="baithi, stat : ${chiTietDeThiList}" class="li-container">
             <span class="part1">
@@ -194,7 +196,7 @@
                 </ul>
                 <button type="submit" class="save-progress">Lưu tiến trình</button>
             </form>
-            <button class="view-results" onclick="returnScore()">Nop Bai</button>
+            <button type="button" class="view-results" onclick="viewKetQuaThi()">Nộp Bài</button>
         </div>
         <div class="col-2"style="background-color: #f8f9fa;">
 
@@ -254,6 +256,13 @@
         }
     });
 }
+</script>
+<script>
+    function viewKetQuaThi() {
+       var userId = document.getElementById('userId').value; // Lấy giá trị userId
+       var deThiId = $('input[name="deThiId"]').val(); // Lấy giá trị deThiId
+       window.location.href = "/ketquathi/" + userId + "/" + deThiId;
+   }
 </script>
 <!--toi day-->
 </body>

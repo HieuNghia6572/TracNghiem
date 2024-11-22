@@ -14,4 +14,6 @@ public interface IChiTietDeThiRepository extends JpaRepository<ChiTietDeThi, Lon
     List<ChiTietDeThi> findByUserAndCauHoi(User user, CauHoi cauHoi);
     Optional<ChiTietDeThi> findByUserIdAndId(Long userId, Long id);
     List<ChiTietDeThi> findByDeThiIdAndUserId(Long deThiId, Long userId);
+    Optional<ChiTietDeThi> findByCauHoiIdAndUserId(Long cauHoiId, Long userId);
+
 }
