@@ -47,6 +47,9 @@ public class CaThiController {
       //  model.addAttribute("cathi", caThiService.getAllCaThi()); //Load sanphams
         return "/cathis/add-cathi";
     }
+
+
+
     // Process the form for adding a new product
     @PostMapping("/add")
     public String  addCathi(@Valid CaThi caThi, BindingResult result) {
@@ -64,7 +67,15 @@ public class CaThiController {
         caThiService.addCaThi(caThi);
         return "redirect:/cathis";
     }
-//    private String saveImage(MultipartFile image) throws IOException {
+
+
+
+
+
+
+
+
+    //    private String saveImage(MultipartFile image) throws IOException {
 //        File saveFile = new ClassPathResource("static/images").getFile();
 //        String fileName = UUID.randomUUID()+ "." + StringUtils.getFilenameExtension(image.getOriginalFilename());
 //        Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + fileName);
@@ -101,12 +112,18 @@ public class CaThiController {
         caThiService.updateCaThi(caThi);
         return "redirect:/cathis";
     }
+
+
+
+
+
     // Handle request to delete a product
     @GetMapping("/delete/{id}")
     public String deleteCauHoi(@PathVariable Long id) {
         caThiService.deleteCaThi(id);
         return "redirect:/cathis";
     }
+
     //TD Detail
   /*  @GetMapping("/details/{id}")
     public String Detail(@PathVariable Long id, Model model)

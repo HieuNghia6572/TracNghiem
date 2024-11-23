@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp; // Sửa từ java.security.Timestamp sang java.sql.Timestamp
+import java.time.LocalDateTime;
 
 @NoArgsConstructor // Thêm annotation này để tạo constructor không tham số
 @Data
@@ -26,7 +27,7 @@ public class UserDeThi {
     private int diem; // Có thể giữ lại nếu bạn muốn
     private int score; // Nếu không cần, có thể xóa
 
-    private Timestamp thoiGianLam;
+    private LocalDateTime thoiGianLam;
     // Constructor với tham số
     public UserDeThi(User user, DeThi deThi) {
         this.user = user;

@@ -52,5 +52,6 @@ public class ThongBaoService {
         thongBaoRepository .deleteById(id);
     }
 
+
 }
 

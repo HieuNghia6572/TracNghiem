@@ -18,5 +18,7 @@ public class ThongBao {
     @Column(name= "message", columnDefinition = "TEXT")
     private String  message;
 
+    @Lob  // Để lưu trữ HTML dưới dạng văn bản lớn
+    private String content;
 
 }

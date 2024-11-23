@@ -10,17 +10,82 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.0.1/tinymce.min.js" integrity="sha512-KGtsnWohFUg0oksKq7p7eDgA1Rw2nBfqhGJn463/rGhtUY825dBqGexj8eP04LwfnsSW6dNAHAlOqKJKquHsnw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
     </script>
-    <script>
-        tinymce.init({
-                selector: '#ten'
-        });
-    </script>
 
     <script>
         tinymce.init({
-                selector: '#message'
+          selector: '#message',
+          plugins: [
+            // Core editing features
+            'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+            // Your account includes a free trial of TinyMCE premium features
+            // Try the most popular premium features until Nov 25, 2024:
+            'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown',
+            // Early access to document converters
+            'importword', 'exportword', 'exportpdf'
+          ],
+          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+          tinycomments_mode: 'embedded',
+          tinycomments_author: 'Author name',
+          mergetags_list: [
+            { value: 'First.Name', title: 'First Name' },
+            { value: 'Email', title: 'Email' },
+          ],
+          ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+          exportpdf_converter_options: { 'format': 'Letter', 'margin_top': '1in', 'margin_right': '1in', 'margin_bottom': '1in', 'margin_left': '1in' },
+          exportword_converter_options: { 'document': { 'size': 'Letter' } },
+          importword_converter_options: { 'formatting': { 'styles': 'inline', 'resets': 'inline',	'defaults': 'inline', } },
         });
     </script>
+    <!--<script>
+        tinymce.init({
+  selector: 'textarea#message',
+  plugins: 'image media link tinydrive code editimage lists',
+  height: 600,
+  tinydrive_token_provider: 'https://cdn.tiny.cloud/1/372l1do709y82dsxb2oappvol9ubzpm8cynl5tsmedh3v3bj/tinymce/7/tinymce.min.js',
+  toolbar: 'insertfile image link | code',
+  menu: {
+    insert: { title: 'Insert', items: 'image link media insertfile' },
+  }
+});
+    </script>-->
+    <script>
+        tinymce.init({
+          selector: '#ten',
+          plugins: [
+            // Core editing features
+            'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+            // Your account includes a free trial of TinyMCE premium features
+            // Try the most popular premium features until Nov 25, 2024:
+            'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown',
+            // Early access to document converters
+            'importword', 'exportword', 'exportpdf'
+          ],
+          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+          tinycomments_mode: 'embedded',
+          tinycomments_author: 'Author name',
+          mergetags_list: [
+            { value: 'First.Name', title: 'First Name' },
+            { value: 'Email', title: 'Email' },
+          ],
+          ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+          exportpdf_converter_options: { 'format': 'Letter', 'margin_top': '1in', 'margin_right': '1in', 'margin_bottom': '1in', 'margin_left': '1in' },
+          exportword_converter_options: { 'document': { 'size': 'Letter' } },
+          importword_converter_options: { 'formatting': { 'styles': 'inline', 'resets': 'inline',	'defaults': 'inline', } },
+        });
+    </script>
+
+
+    <!--<script>
+        tinymce.init({
+                selector: '#ten'
+        });
+    </script>-->
+
+    <!--<script>
+        tinymce.init({
+                selector: '#message'
+        });
+    </script>-->
     <style>
         html, body {
             height: 100%; /* Đảm bảo chiều cao 100% */
@@ -178,7 +243,9 @@
             </div>
             <div class="text-black">
                 <p class="mb-0"><strong>| Thời gian hiện tại: <span id="time"></span> |</strong></p>
+
             </div>
+
             <ul class="navbar-nav navbar-nav-custom ms-auto mb-2 mb-lg-0 align-items-center text-black">
                 <li class="nav-item d-flex align-items-center" sec:authorize="isAuthenticated()">
                     <span class="navbar-text text-black me-3">
@@ -210,7 +277,7 @@
                         <div class="dropdown-container">
                             <div class="dropdown me-3">
                                 <img th:src="@{/img/anh_thongbao_rbg.jpg}" alt="Ảnh Câu Hỏi">
-                                <a class="navbar-brand dropdown-toggle" href="#" role="button" id="dropdownNotice" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="navbar-brand dropdown-toggle" href="javascript:void(0);" role="button" id="dropdownNotice" data-bs-toggle="dropdown" aria-expanded="false">
                                     Thông Báo
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownNotice">
@@ -224,7 +291,7 @@
                         <div class="dropdown-container">
                             <div class="dropdown me-3">
                                 <img th:src="@{/img/anh_cauhoi_rbg.jpg}" alt="Ảnh Câu Hỏi">
-                                <a class="navbar-brand dropdown-toggle" href="#" role="button" id="dropdownQuestions" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="navbar-brand dropdown-toggle"  role="button" id="dropdownQuestions" data-bs-toggle="dropdown" aria-expanded="false">
                                     Quản lý câu hỏi
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownQuestions">

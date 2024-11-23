@@ -1,10 +1,7 @@
 package com.example.TracNghiem.controller;
 
 import com.example.TracNghiem.entity.*;
-import com.example.TracNghiem.repository.ICapDoRepository;
-import com.example.TracNghiem.repository.ICauHoiRepository;
-import com.example.TracNghiem.repository.IDeThiRepository;
-import com.example.TracNghiem.repository.IMonThiRepository;
+import com.example.TracNghiem.repository.*;
 import com.example.TracNghiem.services.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,14 +29,20 @@ public class DeThiController {
     private final IMonThiRepository monThiRepository;
     private  final CauHoiService cauHoiService;
     private final ChiTietDeThiService chiTietDeThiService;
+
+
+
     @Autowired
     private UserService userService;
+    @Autowired
+    private CaThiService caThiService;
 
     @GetMapping
     public String showDethiList(Model model) {
         model.addAttribute("dethis", deThiService.getAllDeThi());
         List<MonThi> monThiList = monThiRepository.findAll();
         model.addAttribute("monThiList", monThiList);
+
         return "/dethis/dethis-list";
     }
     @GetMapping("/add")
@@ -138,13 +143,16 @@ public class DeThiController {
         User currentUser = userService.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy người dùng"));
 
+        // Lấy thông tin ca thi từ database
+
+
         // Gọi phương thức với cả DeThi và User
+
         model.addAttribute("thongtinde", deThi);
         model.addAttribute("dethis", deThiService.getAllCauHoiByDeThi(deThi, currentUser));
 
         return "dethis/hienthidethi";
     }
-
 
 
 

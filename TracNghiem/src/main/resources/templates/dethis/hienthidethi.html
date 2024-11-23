@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
     <style>
+
+
+
         body {
             padding:0px;
         }
@@ -133,7 +137,10 @@
                 </p>
                 <div class="ml-3" style="color:black; margin-left: 100px !important ;font-weight: bold;">
                     <p class="mb-0">| Thời gian hiện tại: <span id="time"></span> |</p>
+                    <p>Thời gian thi: <span id="countdown"></span></p>
                 </div>
+
+
             </div>
 
 
@@ -263,6 +270,39 @@
        var deThiId = $('input[name="deThiId"]').val(); // Lấy giá trị deThiId
        window.location.href = "/ketquathi/" + userId + "/" + deThiId;
    }
+</script>
+<script>
+    let remainingTime;
+
+    // Hàm này sẽ được gọi khi trang được tải
+    window.onload = function () {
+        startCountdown();
+    };
+
+    function startCountdown() {
+        let countdownElement = document.getElementById("countdown");
+        let interval = setInterval(function () {
+            fetch('/time-remaining') // Gửi yêu cầu đến backend để lấy thời gian còn lại
+                .then(response => response.json())
+                .then(data => {
+                    remainingTime = data.remainingTime;
+                    countdownElement.innerHTML = formatTime(remainingTime);
+
+                    // Kiểm tra nếu hết giờ
+                    if (remainingTime <= 0) {
+                        clearInterval(interval);
+                        alert("Hết giờ!");
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }, 1000); // Gọi mỗi giây
+    }
+
+    function formatTime(seconds) {
+        let minutes = Math.floor(seconds / 60);
+        let secs = seconds % 60;
+        return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
 </script>
 <!--toi day-->
 </body>
