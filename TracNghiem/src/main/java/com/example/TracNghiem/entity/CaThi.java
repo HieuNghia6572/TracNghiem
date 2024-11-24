@@ -45,6 +45,8 @@ public class CaThi {
     private MonThi monthi;
     @OneToMany(mappedBy = "cathi", cascade = CascadeType.ALL)
     private List<PhongThi> Phongthi;
+    @OneToMany(mappedBy = "caThi", cascade = CascadeType.ALL, orphanRemoval = true)
+
 
     // Tính thời lượng thi
     @PrePersist

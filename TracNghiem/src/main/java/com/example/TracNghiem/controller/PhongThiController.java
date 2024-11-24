@@ -2,6 +2,8 @@ package com.example.TracNghiem.controller;
 
 import com.example.TracNghiem.entity.DeThi;
 import com.example.TracNghiem.entity.PhongThi;
+import com.example.TracNghiem.entity.User;
+import com.example.TracNghiem.repository.IPhongThiRepository;
 import com.example.TracNghiem.services.CaThiService;
 import com.example.TracNghiem.services.DeThiService;
 import com.example.TracNghiem.services.MonThiService;
@@ -28,7 +30,8 @@ public class PhongThiController {
     private  MonThiService monThiService;
     @Autowired
     private DeThiService deThiService;
-
+    @Autowired
+    private IPhongThiRepository phongThiRepository;
     @GetMapping
     public String showPhongthiList(Model model) {
         model.addAttribute("phongthis", phongThiService.getAllPhongThi());
@@ -76,5 +79,8 @@ public class PhongThiController {
         phongThiService.deletePhongThi(id);
         return "redirect:/phongthis";
     }
-    
+
+
+
+
 }

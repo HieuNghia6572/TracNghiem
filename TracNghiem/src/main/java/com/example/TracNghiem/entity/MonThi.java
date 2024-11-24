@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -23,4 +24,7 @@ public class MonThi {
 
     @OneToMany(mappedBy = "monthi", cascade = CascadeType.ALL)
     private List<CaThi> Cathi;
+
+
+
 }

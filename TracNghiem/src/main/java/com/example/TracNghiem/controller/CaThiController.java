@@ -15,6 +15,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/cathis")
@@ -47,6 +50,13 @@ public class CaThiController {
       //  model.addAttribute("cathi", caThiService.getAllCaThi()); //Load sanphams
         return "/cathis/add-cathi";
     }
+
+
+
+
+
+
+
 
 
 

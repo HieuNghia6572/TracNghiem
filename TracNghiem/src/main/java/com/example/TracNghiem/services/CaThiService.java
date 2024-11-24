@@ -2,25 +2,29 @@ package com.example.TracNghiem.services;
 
 import com.example.TracNghiem.entity.CaThi;
 import com.example.TracNghiem.entity.MonThi;
-import com.example.TracNghiem.entity.PhongThi;
 import com.example.TracNghiem.repository.ICaThiRepository;
 
 import com.example.TracNghiem.repository.IMonThiRepository;
-import com.example.TracNghiem.repository.IPhongThiRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @Transactional
 @Service
 public class CaThiService {
 
     private final ICaThiRepository caThiRepository;
+
+
+
 
 
     public List<CaThi> getAllCaThi() {
@@ -69,6 +73,5 @@ public class CaThiService {
 
         return caThiRepository.save(existingCathi);
     }
-
 
 }

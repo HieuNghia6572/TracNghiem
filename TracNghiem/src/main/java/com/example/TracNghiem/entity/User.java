@@ -49,6 +49,10 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<Role> userRoles = this.getRoles();
@@ -102,4 +106,10 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChiTietDeThi> chitietbaithi;
+
+
+    private String name;
+
+    @ManyToMany(mappedBy = "user")
+    private List<PhongThi> Phongthi; // Các phòng thi mà user tham gia
 }

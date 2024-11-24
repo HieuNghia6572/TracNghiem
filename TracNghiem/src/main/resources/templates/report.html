@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Báo cáo ca thi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<section layout:fragment="content" class="container mt-5">
+<div class="container mt-5">
+    <h2>Báo cáo ca thi</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Tên ca thi</th>
+            <th>Tên môn thi</th>
+            <th>Thời gian bắt đầu</th>
+            <th>Thời gian kết thúc</th>
+            <th>Số lượng thí sinh</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="report : ${reports}">
+            <td th:text="${report.tenCaThi}"></td>
+            <td th:text="${report.tenMonThi}"></td>
+            <td th:text="${report.tgbd}"></td>
+            <td th:text="${report.tgkt}"></td>
+            <td th:text="${report.soLuongThiSinh}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+    </section>
+</body>
+</html>

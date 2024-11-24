@@ -28,6 +28,15 @@ public class PhongThi {
     @ManyToOne
     @JoinColumn(name= "dethi_id")
     private DeThi dethi;
+    @ManyToMany
+    @JoinTable(
+            name = "user_phongthi",
+            joinColumns = @JoinColumn(name = "phongthi_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> user; // Danh sách người dùng tham gia phòng thi
+
+
 
 }
 
