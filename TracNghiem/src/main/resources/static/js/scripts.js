@@ -1,8 +1,23 @@
 
+
+    document.querySelectorAll('.toggle-submenu').forEach(function (link) {
+        link.addEventListener('click', function (event) {
+            event.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
+            const submenu = this.nextElementSibling; // Lấy submenu ngay sau thẻ <a>
+
+            // Kiểm tra xem submenu có đang hiển thị không
+            if (submenu.style.display === 'block') {
+                submenu.style.display = 'none'; // Ẩn submenu
+            } else {
+                submenu.style.display = 'block'; // Hiện submenu
+            }
+        });
+    });
     // Thay đổi trạng thái của sidebar khi nhấn nút
     let isHidden = false;
     const sidebar = document.getElementById('sidebar');
     const content = document.getElementById('content');
+    const area = document.getElementById('area'); // Lấy phần tử popular_catagory_area
     const toggleButton = document.getElementById('toggleButton');
 
     toggleButton.addEventListener('click', () => {
@@ -11,11 +26,13 @@
         if (isHidden) {
             sidebar.classList.add('sidebar-hidden');
             content.classList.add('content-hidden');
+            area.classList.add('area-hidden'); // Thêm lớp để ẩn popular category
             toggleButton.innerHTML = '&#9776;'; // Biểu tượng nút
             toggleButton.classList.add('active'); // Thêm lớp active
         } else {
             sidebar.classList.remove('sidebar-hidden');
             content.classList.remove('content-hidden');
+            area.classList.remove('area-hidden'); // Xóa lớp để hiện popular category
             toggleButton.innerHTML = '&#9776;'; // Biểu tượng nút
             toggleButton.classList.remove('active'); // Xóa lớp active
         }

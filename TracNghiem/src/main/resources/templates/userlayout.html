@@ -32,9 +32,9 @@
 </head>
 
 <body>
-<!--[if lte IE 9]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-<![endif]-->
+<!--&lt;!&ndash;[if lte IE 9]>-->
+<!--<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>-->
+<!--<![endif]&ndash;&gt;-->
 
 <!-- header-start -->
 <header>
@@ -52,30 +52,23 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-lg-7">
-                            <div class="main-menu d-none d-lg-block">
+                        <div class="col-xl-6 col-lg-7" >
+                            <div class="main-menu d-none d-lg-block" >
                                 <nav>
-                                    <ul id="navigation">
+                                    <ul id="navigation" style="transform: translateX(-130px);">
                                         <li><a href="/home">Trang chủ</a></li>
                                         <li><a href="/home">Thông báo</a></li>
-                                        <li><a href="#">Phòng thi<i class="ti-angle-down"></i></a>
-                                            <ul class="submenu">
-                                                <li><a href="candidate.html">Candidates </a></li>
-                                                <li><a href="job_details.html">Job Details </a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Ca Thi <i class="ti-angle-down"></i></a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="single-blog.html">Single Blog</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Môn thi<i class="ti-angle-down"></i></a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="single-blog.html">Single Blog</a></li>
-                                            </ul>
+                                        <li><a href="/userphongthi">Phòng thi</a></li>
+
+                                        <!--                                            <li><a href="#">Phòng thi<i class="ti-angle-down"></i></a>-->
+                                        <!--                                                <ul class="submenu">-->
+                                        <!--                                                    <li><a href="candidate.html">Candidates </a></li>-->
+                                        <!--                                                    <li><a href="job_details.html">Job Details </a></li>-->
+                                        <!--                                                    <li><a href="elements.html">Elements</a></li>-->
+                                        <!--                                                </ul>-->
+                                        <!--                                            </li>-->
+                                        <li><a href="/profile">Thông tin cá nhân</a></li>
+                                        <li>
                                         </li>
                                     </ul>
                                 </nav>
@@ -110,11 +103,21 @@
 
 <!-- sidebar-menu -->
 <div class="sidebar" id="sidebar">
-    <h3>Menu</h3>
+    <img src="img/logo_khongnen.png" alt="" height="100" width="180">
+    <h2>Chức năng</h2>
     <ul class="sidebar-menu">
-        <li><a href="/giaodiencathi">Thông tin người dùng</a></li>
-        <li><a href="/userphongthi">Danh sách phòng thi</a></li>
-        <li><a href="/monthis">Danh sách môn thi</a></li>
+        <li><a href="#">🏠 Trang chủ</a></li>
+
+        <li>
+            <a href="#" class="toggle-submenu">👨‍🎓 Thông tin người dùng ⬇</a>
+            <ul class="submenu">
+                <li><a href="/thongtincanhan">➣ Thông tin cá nhân</a></li>
+                <li><a href="/chinhsuathongtin">➣ Chỉnh sửa thông tin</a></li>
+                <li><a href="/xemdiemthi">➣ Xem điểm thi</a></li>
+            </ul>
+        </li>
+        <li><a href="/userphongthi">🏫 Danh sách phòng thi</a></li>
+        <li><a href="/monthis">📖 Danh sách tài liệu</a></li>
     </ul>
 </div>
 
@@ -122,11 +125,11 @@
 
 <!-- slider_area_start -->
 <div class="content" id="content">
-    <div class="slider_area">
+    <div class="slider_area" style="background-image: url('img/anh_nen1.jpg');">
         <div class="single_slider d-flex align-items-center slider_bg_2">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-7 col-md-6">
+                    <div class="col-lg-7 col-md-6" style="transform: translateX(-60px);">
                         <h1 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">Giới thiệu:</h1>
                         <tr th:each="thongbao : ${thongbaos}">
                             <td th:utext="${thongbao.message}"></td>
@@ -163,7 +166,7 @@
 </div>
 
 
-<div class="popular_catagory_area">
+<div class="popular_catagory_area" id="area">
     <div class="icon-container">
         <div class="icon-container">
             <div class="icon-box" data-message="Website NTT Trắc nghiệm mang lại những câu hỏi đa dạng về các chủ đề  ">
@@ -216,7 +219,7 @@
         </div>
     </div>
 </div>
-<div class="phongthi">
+<div class="phongthi" id="room">
     <h1>Chọn Phòng Thi</h1>
     <div class="phongthi">
         <div class="row">

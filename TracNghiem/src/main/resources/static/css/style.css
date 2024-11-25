@@ -442,8 +442,8 @@ h3 {
 /* line 24, ../../Arafath/CL/December/235. Job board/HTML/scss/_btn.scss */
 .boxed-btn3 {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#F91842+0,fd8e5e+100 */
-  background: #00D363;
-  color: #fff;
+  background: #00FF00;
+  color: black;
   display: inline-block;
   padding: 13px 29px 13px 29px;
   font-family: "Roboto", sans-serif;
@@ -7501,13 +7501,13 @@ h6 {
 }
 @keyframes shimmer {
     0% {
-        background-color: white;
+        background-color: #7FFFD4;
     }
     50% {
         background-color: #00BFFF; /* Màu xanh dương */
     }
     100% {
-        background-color: white;
+        background-color: #7FFFD4;
     }
 }
 
@@ -7704,19 +7704,70 @@ h6 {
 /* doi mau nut sidebar*/
 .sidebar {
     width: 250px; /* Chiều rộng của sidebar */
-    background: #f8f9fa; /* Màu nền của sidebar */
+    background: #e3ffbc; /* Màu nền của sidebar */
     height: 100vh; /* Chiều cao bằng chiều cao viewport */
     position: fixed; /* Gắn sidebar ở vị trí cố định */
     overflow-y: auto; /* Cuộn dọc nếu cần */
-    padding: 20px; /* Padding cho sidebar */
+    padding: 10px; /* Padding cho sidebar */
     z-index: 1000; /* Đảm bảo sidebar nằm trên cùng */
     transition: transform 0.3s ease; /* Hiệu ứng chuyển đổi cho sidebar */
+/*  transform: translateY(100px); */
 }
 
 .sidebar-hidden {
     transform: translateX(-100%); /* Đưa sidebar ra ngoài màn hình */
 }
 
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    background-color: #808080; /* Màu nền xám cho menu */
+    border-radius: 10px; /* Bo tròn các góc */
+    padding: 15px; /* Padding cho menu */
+    margin: 0; /* Bỏ khoảng cách mặc định */
+}
+
+.sidebar-menu li {
+    margin-bottom: 12px; /* Tạo khoảng cách 12px giữa các mục */
+    position: relative;
+}
+
+/* Bỏ khoảng cách cho mục cuối cùng để tránh lấn ra ngoài */
+.sidebar-menu li:last-child {
+    margin-bottom: 0; /* Bỏ khoảng cách dưới cùng cho mục cuối cùng */
+}
+
+.submenu {
+    display: none; /* Ẩn menu con mặc định */
+    margin-top: 5px; /* Tạo khoảng cách giữa mục chính và menu con */
+    background-color: #808080; /* Màu nền cho menu con */
+    list-style: none;
+    padding: 10px; /* Padding cho menu con */
+    border-radius: 5px; /* Bo tròn các góc của menu con */
+}
+
+.submenu li {
+    margin-top: 7px; /* Tạo khoảng cách giữa các mục con */
+}
+
+.sidebar h2 {
+    background-color: #808080; /* Màu nền xám cho tiêu đề */
+    border-radius: 10px; /* Bo tròn các góc */
+    padding: 10px; /* Padding cho tiêu đề */
+    text-align: center; /* Canh giữa nội dung */
+    margin: 20px 0; /* Tạo khoảng cách phía trên và dưới */
+}
+
+.sidebar h2,
+.sidebar-menu a {
+    color: white; /* Màu chữ là trắng */
+    text-decoration: none; /* Bỏ gạch chân cho liên kết */
+}
+
+.sidebar-menu a:hover {
+    color: #007bff; /* Màu chữ khi di chuột (có thể tùy chỉnh) */
+}
+/**/
 .content {
     margin-left: 250px; /* Đảm bảo nội dung không bị che bởi sidebar */
     padding: 20px; /* Padding cho nội dung */
@@ -7730,14 +7781,24 @@ h6 {
 .content-hidden {
     margin-left: 0; /* Đảm bảo nội dung chiếm toàn bộ không gian khi sidebar ẩn */
 }
+.popular_catagory_area {
+    margin-left: 250px; /* Đẩy content sang phải */
+    transition: margin 0.3s ease;
+}
+
+.popular_catagory_area.area-hidden {
+    margin-left: 0; /* Đảm bảo nội dung chiếm toàn bộ không gian khi sidebar ẩn */
+}
 
 .toggle-btn {
     position: absolute;
     left: 250px; /* Vị trí của nút */
     top: 26px; /* Vị trí trên cùng */
-    background-color: #007bff; /* Màu nền của nút */
-    color: white; /* Màu chữ của nút */
+    background: none; /* Không có nền */
+    color: gray; /* Màu chữ đen */
     border: none; /* Bỏ viền */
+    font-size: 16px; /* Kích thước chữ (có thể tùy chỉnh) */
+
     padding: 10px; /* Padding cho nút */
     cursor: pointer; /* Con trỏ khi hover */
     border-radius: 5px; /* Bo tròn các góc */
@@ -7746,6 +7807,6 @@ h6 {
 }
 
 .toggle-btn.active {
-    background-color: #00008B; /* Màu nền mới khi nút được nhấn */
-    color: white; /* Màu chữ mới */
+    background: none; /* Không có nền */
+    color: black; /* Màu chữ mới */
 }
