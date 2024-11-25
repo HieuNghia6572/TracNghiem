@@ -3,6 +3,7 @@ package com.example.TracNghiem.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -40,8 +41,14 @@ public class User implements UserDetails {
     @Email
     private String email;
 
-    @Column(name = "fullname", length = 250)
-    private String fullname;
+    @Column(name = "phone", length = 10)
+    @Pattern(regexp = "0\\d{9}", message = "Phone number must start with 0 and be exactly 10 digits")
+    @NotBlank(message = "Phone number is required")
+    private String phone;
+
+    @Column(name = "address", length = 250)
+    @Size(max = 250, message = "Address must not exceed 250 characters")
+    private String address;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",

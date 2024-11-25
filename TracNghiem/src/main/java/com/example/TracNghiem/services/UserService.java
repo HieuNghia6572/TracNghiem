@@ -107,7 +107,8 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new IllegalStateException("Id user  " +
                         user.getId() + " khong ton tai."));
         existingUser.setEmail(user.getEmail());
-        existingUser.setFullname(user.getFullname());
+        existingUser.setPhone(user.getPhone());
+        existingUser.setAddress(user.getAddress());
         existingUser.setUsername(user.getUsername());
         return userRepository.save(existingUser);
     }

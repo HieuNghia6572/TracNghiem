@@ -94,6 +94,14 @@
     <h1>Chỉnh sửa User</h1>
     <form th:action="@{/update-user/{id}(id=${user.id})}"
           th:object="${user}" method="post">
+
+        <div class="mb-3">
+            <label for="username" class="form-label">Tên tài khoản</label>
+            <input type="text" th:field="*{username}" class="form-control" id="username" readonly>
+            <div class="text-danger" th:if="${#fields.hasErrors('username')}"
+                 th:errors="*{username}"></div>
+        </div>
+
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="text" th:field="*{email}" class="form-control" id="email" required>
@@ -102,17 +110,17 @@
         </div>
 
         <div class="mb-3">
-            <label for="fullname" class="form-label"> Ho Ten</label>
-            <input type="text" th:field="*{fullname}" class="form-control" id="fullname" required>
-            <div class="text-danger" th:if="${#fields.hasErrors('fullname')}"
-                 th:errors="*{fullname}"></div>
+            <label for="phone" class="form-label"> Số điện thoại</label>
+            <input type="text" th:field="*{phone}" class="form-control" id="phone" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('phone')}"
+                 th:errors="*{phone}"></div>
         </div>
 
         <div class="mb-3">
-            <label for="username" class="form-label"> Ten</label>
-            <input type="text" th:field="*{username}" class="form-control" id="username" required>
-            <div class="text-danger" th:if="${#fields.hasErrors('username')}"
-                 th:errors="*{username}"></div>
+            <label for="address" class="form-label">Địa chỉ</label>
+            <input type="text" th:field="*{address}" class="form-control" id="address" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('address')}"
+                 th:errors="*{address}"></div>
         </div>
         <input th:field="*{password}" type="hidden">
         <button type="submit" class="btn btn-primary">Cap Nhat</button>

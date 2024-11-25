@@ -9,29 +9,18 @@ body {
     flex-direction: column; /* Sắp xếp nội dung theo cột */
     justify-content: center; /* Căn giữa dọc */
     align-items: center; /* Căn giữa ngang */
-    background: linear-gradient(45deg, #ff6b6b, #f8cdda, #6a11cb, #2575fc);
-    background-size: 300% 300%; /* Mở rộng gradient */
+    background-image: url('../img/profile/hinhanhprofile.jpg');
+    background-size: 100% 100%; /* Mở rộng gradient */
     animation: bgNebulaEffect 10s ease infinite; /* Hiệu ứng chuyển động */
     text-align: center; /* Căn giữa toàn bộ nội dung */
 }
 
 /* Hiệu ứng gradient động - Nebula */
-@keyframes bgNebulaEffect {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
 
 /* Tiêu đề */
 h2 {
-    font-size: 28px;
-    color: #fff;
+    font-size: 40px;
+    color: #E6E6FA;
     margin-bottom: 20px; /* Khoảng cách giữa h2 và card */
     font-weight: bold;
     text-transform: uppercase;
@@ -108,20 +97,6 @@ button:active {
 }
 /* Hình ảnh profile */
 /* Hình ảnh profile */
-.card img {
-    width: 120px; /* Kích thước ảnh */
-    height: 125px;
-    border-radius: 5%; /* Bo tròn hình ảnh */
-    object-fit: cover;
-    position: relative; /* Để tạo hiệu ứng lớp */
-    border: none;
-    background: linear-gradient(135deg, #1e90ff, #00c6ff);
-    padding: 4px; /* Viền gradient */
-    animation: floatEffect 3s ease-in-out infinite; /* Hiệu ứng nổi */
-    box-shadow: 0 8px 30px rgba(0, 136, 255, 0.4); /* Bóng xanh mềm */
-    margin-bottom: 20px;
-    z-index: 1;
-}
 
 /* Hiệu ứng nổi và di chuyển nhẹ */
 @keyframes floatEffect {
@@ -152,4 +127,10 @@ button:active {
     transform: scale(1.1); /* Phóng to nhẹ */
     box-shadow: 0 12px 40px rgba(0, 136, 255, 0.6); /* Tăng bóng */
     filter: brightness(1.2); /* Làm sáng ảnh */
+}
+input:focus {
+    outline: none; /* Loại bỏ viền mặc định */
+    box-shadow: 0 0 8px rgba(50, 150, 250, 0.8); /* Ánh sáng xanh lam */
+    border: 1px solid rgba(50, 150, 250, 0.8); /* Viền xanh lam */
+    transition: box-shadow 0.3s ease, border 0.3s ease; /* Hiệu ứng mượt */
 }
