@@ -29,7 +29,7 @@ public class DeThiController {
     private final IMonThiRepository monThiRepository;
     private  final CauHoiService cauHoiService;
     private final ChiTietDeThiService chiTietDeThiService;
-
+    private final UserDeThiService userDeThiService;
 
 
     @Autowired
@@ -152,6 +152,24 @@ public class DeThiController {
         model.addAttribute("dethis", deThiService.getAllCauHoiByDeThi(deThi, currentUser));
 
         return "dethis/hienthidethi";
+    }
+
+
+    @GetMapping("/ketquathi")
+    public String ketQuaThi(Model model){
+
+        // Lấy tên người dùng từ Security Context
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName(); // Tên người dùng đã đăng nhập
+
+        // Lấy thông tin người dùng
+        User currentUser = userService.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy người dùng"));
+
+        model.addAttribute("ketquas", userDeThiService.findAllDeThiByUser(currentUser));
+
+        return "/danhsachketquathi";
+
     }
 
 

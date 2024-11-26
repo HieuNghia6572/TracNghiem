@@ -111,9 +111,9 @@
         <li>
             <a href="#" class="toggle-submenu">👨‍🎓 Thông tin người dùng ⬇</a>
             <ul class="submenu">
-                <li><a href="/thongtincanhan">➣ Thông tin cá nhân</a></li>
-                <li><a href="/chinhsuathongtin">➣ Chỉnh sửa thông tin</a></li>
-                <li><a href="/xemdiemthi">➣ Xem điểm thi</a></li>
+                <li><a th:href="@{/profile}">➣ Thông tin cá nhân</a></li>
+                <li><a th:href="@{/profile-information}">➣ Chỉnh sửa thông tin</a></li>
+                <li><a th:href="@{/dethis/ketquathi}">➣ Xem điểm thi</a></li>
             </ul>
         </li>
         <li><a href="/userphongthi">🏫 Danh sách phòng thi</a></li>
@@ -283,5 +283,7 @@
 <script src="js/mail-script.js"></script>
 <script src="js/main.js"></script>
 <script src="js/scripts.js"></script>
+
+
 </body>
 </html>

@@ -20,7 +20,7 @@
 <h2 style="text-align:center">THÔNG TIN TÀI KHOẢN</h2>
 <form th:action="@{/update-profile}"
       th:object="${user}" method="post">
-<div class="card">
+    <div class="card">
         <div class="mb-3">
             <label for="username" class="form-label">Tên tài khoản:</label>
             <input type="text" th:field="*{username}" class="form-control" id="username" readonly>
@@ -29,39 +29,31 @@
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="text" th:field="*{email}" class="form-control" id="email" readonly>
+            <input type="text" th:field="*{email}" class="form-control" id="email" required>
             <div class="text-danger" th:if="${#fields.hasErrors('email')}"
                  th:errors="*{email}"></div>
         </div>
 
-       <div class="mb-3">
-        <label for="phone" class="form-label">Số điện thoại</label>
-        <input type="text" th:field="*{phone}" class="form-control" id="phone" readonly>
-        <div class="text-danger" th:if="${#fields.hasErrors('phone')}"
-             th:errors="*{phone}"></div>
-       </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Số điện thoại</label>
+            <input type="text" th:field="*{phone}" class="form-control" id="phone" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('phone')}"
+                 th:errors="*{phone}"></div>
+        </div>
 
-    <div class="mb-3">
-        <label for="address" class="form-label">Địa chỉ</label>
-        <input type="text" th:field="*{address}" class="form-control" id="address" readonly>
-        <div class="text-danger" th:if="${#fields.hasErrors('address')}"
-             th:errors="*{address}"></div>
-    </div>
-
-
+        <div class="mb-3">
+            <label for="address" class="form-label">Địa chỉ</label>
+            <input type="text" th:field="*{address}" class="form-control" id="address" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('address')}"
+                 th:errors="*{address}"></div>
+        </div>
         <input th:field="*{password}" type="hidden">
         <input th:field="*{id}" type="hidden">
-
-    <div style="margin: 24px 0;">
-        <a href="#"><i class="fa fa-dribbble"></i></a>
-        <a href="#"><i class="fa fa-twitter"></i></a>
-        <a href="#"><i class="fa fa-linkedin"></i></a>
-        <a href="#"><i class="fa fa-facebook"></i></a>
+        <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+            <a th:href="@{/home}" class="btn btn-secondary">Trở về</a>
+            <button type="submit" class="btn btn-primary">Cập Nhật</button>
+        </div>
     </div>
-    <div style="display: flex; justify-content: center; margin-top:5px;">
-        <button onclick="window.location.href='/home'" class="btn btn-back">Trở về</button>
-    </div>
-</div>
 </form>
 
 </body>

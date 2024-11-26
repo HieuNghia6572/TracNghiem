@@ -174,9 +174,7 @@
     <div class="container mt-5">
         <h2 class="text-center">Kết Quả Thi</h2>
 
-        <div class="message" th:if="${message}" th:text="${message}"></div>
-
-        <table class="table table-striped mt-4" th:if="${userDeThi != null}">
+        <table class="table table-striped mt-4" >
             <thead>
             <tr>
                 <th>Tên Đề Thi</th>
@@ -185,10 +183,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td th:text="${userDeThi.deThi.madethi}">Tên Đề Thi</td>
-                <td th:text="${userDeThi.diem} + ' / ' + ${userDeThi.deThi.getTotalQuestions()}">Tổng Số Câu Hỏi Đúng</td>
-                <td th:text="${userDeThi.calculateTotalPoints()}">Tổng Điểm</td> <!-- Hiển thị tổng điểm -->
+            <tr th:each="ketqua : ${ketquas}">
+                <td th:text="${ketqua.deThi.madethi}">Tên Đề Thi</td>
+                <td th:text="${ketqua.diem} + ' / ' + ${ketqua.deThi.getTotalQuestions()}">Tổng Số Câu Hỏi Đúng</td>
+                <td th:text="${ketqua.calculateTotalPoints()}">Tổng Điểm</td> <!-- Hiển thị tổng điểm -->
             </tr>
             </tbody>
         </table>

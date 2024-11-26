@@ -44,4 +44,9 @@ public class UserDeThiService {
         userDeThiRepository.deleteById(id);
     }
 
+
+    public List<UserDeThi> findAllDeThiByUser(User user){
+        return userDeThiRepository.findAll().stream().filter(p->p.getUser().getId().equals(user.getId())).toList();
+    }
+
 }

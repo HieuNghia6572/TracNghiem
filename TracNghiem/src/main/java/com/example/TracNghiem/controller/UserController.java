@@ -81,6 +81,13 @@ public class UserController {
         return "/users/profile";
     }
 
+    @GetMapping("profile-information")
+    public  String  getInformation(Model model){
+        User user = userService.getUserLogin();
+        model.addAttribute("user",user);
+        return "/users/profile-information";
+    }
+
 
     @PostMapping("update-profile")
     public String UpdateProfile(@Valid User  user , BindingResult result) {

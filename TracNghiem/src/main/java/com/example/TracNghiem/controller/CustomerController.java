@@ -51,6 +51,7 @@ public class CustomerController {
 
     @GetMapping("/home")
     public String showCauhoiList(Model model) {
+
         model.addAttribute("cauhois", cauHoiService.getAllCauHoi());
         model.addAttribute("thongbaos", thongBaoService.getAllThongBao());
         List<PhongThi> phongThiList = phongThiService.getAllPhongThi();

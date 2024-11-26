@@ -43,58 +43,38 @@ h2 {
     transform: translateY(-8px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
-button {
-    background: linear-gradient(90deg, #1e90ff, #00c6ff); /* Hiệu ứng gradient xanh dương */
-    color: white; /* Màu chữ */
+.btn {
+    padding: 12px 24px; /* Tăng kích thước nút */
+    font-size: 16px;
+    font-weight: bold;
     border: none;
-    padding: 12px 20px; /* Kích thước nút */
-    font-size: 16px; /* Tăng kích thước chữ */
-    font-weight: bold; /* Chữ in đậm */
-    border-radius: 25px; /* Góc bo tròn nhiều hơn */
-    cursor: pointer; /* Thay đổi con trỏ chuột */
-    width: 100%; /* Độ rộng full */
-    transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.2s ease;
-    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.2); /* Bóng mờ nhẹ */
-    position: relative;
-    overflow: hidden; /* Giữ hiệu ứng gọn trong nút */
+    border-radius: 8px; /* Bo góc mềm mại */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Thêm hiệu ứng chuyển đổi mượt mà */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng */
 }
 
-/* Hiệu ứng hover */
-button:hover {
-    background: linear-gradient(90deg, #00c6ff, #1e90ff); /* Đảo gradient khi hover */
-    box-shadow: 0 8px 25px rgba(30, 144, 255, 0.4); /* Tăng bóng */
-    transform: translateY(-3px); /* Hiệu ứng nổi */
+.btn-primary {
+    background-color: #007bff; /* Màu xanh */
+    color: white;
 }
 
-/* Hiệu ứng ánh sáng chạy ngang */
-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%; /* Bắt đầu từ ngoài nút */
-    width: 200%; /* Đủ lớn để chạy qua nút */
-    height: 100%;
-    background: rgba(255, 255, 255, 0.4); /* Ánh sáng trắng mờ */
-    transform: skewX(-45deg); /* Nghiêng ánh sáng */
-    transition: all 0.4s ease;
+.btn-secondary {
+    background-color: #6c757d; /* Màu xám */
+    color: white;
 }
 
-/* Ánh sáng khi hover */
-button:hover::before {
-    left: 100%; /* Chạy qua nút */
+.btn:hover {
+    opacity: 0.9; /* Làm mờ nhẹ khi hover */
+    transform: translateY(-2px); /* Nổi nhẹ lên khi hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Tăng đổ bóng khi hover */
 }
 
-/* Hiệu ứng ánh sáng khi focus */
-button:focus {
-    outline: none;
-    box-shadow: 0 0 12px rgba(0, 191, 255, 0.7), 0 0 20px rgba(30, 144, 255, 0.5);
+.btn:active {
+    transform: translateY(1px); /* Nhấn xuống nhẹ khi click */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* Đổ bóng giảm khi click */
 }
 
-/* Tăng hiệu ứng bóng khi nhấn */
-button:active {
-    transform: translateY(1px); /* Nhấn chìm nhẹ */
-    box-shadow: 0 3px 10px rgba(30, 144, 255, 0.3);
-}
 /* Hình ảnh profile */
 /* Hình ảnh profile */
 
