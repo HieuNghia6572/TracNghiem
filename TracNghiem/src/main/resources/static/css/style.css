@@ -7768,6 +7768,7 @@ h6 {
     color: #007bff; /* Màu chữ khi di chuột (có thể tùy chỉnh) */
 }
 /**/
+/*ẩn hiện sidebar*/
 .content {
     margin-left: 250px; /* Đảm bảo nội dung không bị che bởi sidebar */
     padding: 20px; /* Padding cho nội dung */
@@ -7782,14 +7783,14 @@ h6 {
     margin-left: 0; /* Đảm bảo nội dung chiếm toàn bộ không gian khi sidebar ẩn */
 }
 .popular_catagory_area {
-    margin-left: 250px; /* Đẩy content sang phải */
+    margin-left: 250px; /* Đẩy opular_catagory_area sang phải */
     transition: margin 0.3s ease;
 }
 
 .popular_catagory_area.area-hidden {
     margin-left: 0; /* Đảm bảo nội dung chiếm toàn bộ không gian khi sidebar ẩn */
 }
-
+/**/
 .toggle-btn {
     position: absolute;
     left: 250px; /* Vị trí của nút */
@@ -7809,4 +7810,61 @@ h6 {
 .toggle-btn.active {
     background: none; /* Không có nền */
     color: black; /* Màu chữ mới */
+}
+.huongdan {
+    flex-wrap: wrap; /* Cho phép bọc dòng khi không đủ không gian */
+    display: flex; /* Sử dụng Flexbox để chia phần */
+    height: 500px; /* Chiều cao tự động */
+    width: 100%; /* Chiều rộng ban đầu là 100% */
+    background-color: #e5fff3; /* Màu nền đã chỉ định */
+    padding: 30px;
+    transition: margin-left 0.3s; /* Thêm hiệu ứng chuyển tiếp cho margin-left */
+    margin-left: 0; /* Đặt margin-left là 0 ban đầu */
+    margin-left: 250px; /* Đẩy opular_catagory_area sang phải */
+    transition: margin 0.4s ease;
+    width: calc(100% - 250px); /* Chiều rộng giảm 250px khi sidebar hiện */
+
+}
+.huongdan.huongdan-hidden {
+    margin-left: 0; /* Đảm bảo nội dung chiếm toàn bộ không gian khi sidebar ẩn */
+    width: 100%; /* Đặt chiều rộng lại về 100% khi sidebar ẩn */
+
+}
+
+.videophongthi {
+    display: flex; /* Sử dụng Flexbox cho phần video và sidebar */
+    height: 100%; /* Chiều cao 80% của huongdan */
+    width: 100%; /* Chiều rộng full của phần này */
+}
+
+.video-container1 {
+    flex: 0 0 70%; /* Chiếm 70% chiều rộng */
+    background-color: #e5fff3; /* Màu nền cho phần video */
+    display: flex;
+    align-items: center; /* Căn giữa nội dung theo chiều dọc */
+    justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+    overflow: hidden; /* Ẩn phần video tràn ra ngoài */
+}
+
+video {
+    width: 80%; /* Đặt chiều rộng video là 100% chiều rộng của phần chứa */
+    height: 100%; /* Đặt chiều cao video là 100% chiều cao của phần chứa */
+    object-fit: cover; /* Đảm bảo video lấp đầy phần chứa mà không bị biến dạng */
+}
+
+.sidebar1 {
+    flex: 0 0 30%; /* Chiếm 30% chiều rộng */
+    background-color: #e5fff3; /* Màu nền cho phần sidebar */
+    display: flex;
+    flex-direction: column; /* Xếp theo chiều dọc */
+    align-items: flex-start; /* Căn lề trái cho nội dung */
+    justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+    padding: 0px; /* Thêm padding nếu cần để nội dung không chạm lề */
+    text-align: justify; /* Căn đều hai bên cho văn bản */
+    transition: width 0.3s; /* Thêm hiệu ứng chuyển tiếp cho chiều rộng */
+}
+
+/* Thêm một thuộc tính nếu cần căn lề cho tiêu đề */
+.sidebar1 h2 {
+    margin: 0; /* Để loại bỏ margin mặc định, giúp căn đều hơn */
 }

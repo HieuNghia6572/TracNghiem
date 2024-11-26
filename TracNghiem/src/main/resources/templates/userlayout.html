@@ -165,6 +165,23 @@
     </div>
 </div>
 
+<div class="huongdan" id="huongdan">
+    <div class="videophongthi">
+        <div class="video-container1">
+            <video controls>
+                <source src="test/video_phongthi.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="sidebar1">
+            <h2>HƯỚNG DẪN VÀO PHÒNG THI</h2>
+            <hr>
+            <h2>Cách 1:</h2>
+            <p>Nhìn lên phía trên thanh tiêu đề => chọn "Phong Thi"</p>
+            <h2>Cách 2:</h2>
+            <p>Nhìn lên phía trên thanh tiêu đề => chọn "&#9776;" sẽ hiện ra thanh bên => chọn "Danh sách phòng thi"</p>
+        </div>
+    </div>
+</div>
 
 <div class="popular_catagory_area" id="area">
     <div class="icon-container">
@@ -186,56 +203,6 @@
         <div class="notification">
             <p id="notification-message"></p>
             <button class="close-btn">Đóng</button>
-        </div>
-    </div>
-    <div class="container" style="background-color:white !important;">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="chon-mon">
-                    <button class="dropdown-button">
-                        <span class="glow-text">Chọn Môn Thi</span>
-                        <span class="arrow">▼</span> <!-- Mũi tên chỉ xuống -->
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-xl-3 col-md-6" th:each="monThi : ${monthis}">
-                <div class="single_category">
-                    <div class="text-container"> <!-- Khối chứa chữ -->
-                        <a th:href="@{/monthi/{id}(id=${monThi.id})}">
-                            <h4 th:text="${monThi.tenmonthi}">Tên Môn Thi</h4>
-                            <p><span th:text="${monThi.mamonthi}">Mã Môn Thi</span></p>
-                        </a>
-                    </div>
-                    <div class="inner-container"> <!-- Khung bên trong chứa hình ảnh -->
-                        <img th:src="@{${monThi.imgUrl}}" alt="${monThi.tenmonthi}" class="category-image">
-                    </div>
-                </div>
-            </div>
-            <div th:if="${#lists.isEmpty(monthis)}">
-                <p>Không có môn thi nào.</p> <!-- Hiển thị thông báo nếu danh sách rỗng -->
-            </div>
-        </div>
-    </div>
-</div>
-<div class="phongthi" id="room">
-    <h1>Chọn Phòng Thi</h1>
-    <div class="phongthi">
-        <div class="row">
-            <th:block th:each="phongThi : ${phongThiList}">
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h2 th:text="'Phòng số: ' + ${phongThi.tenPhong}">Tên Phòng</h2>
-                            <p th:text="'Mã phòng: ' + ${phongThi.maPhong}">Thông tin chi tiết về phòng thi.</p>
-                            <p th:text="'Tên Ca Thi: ' + ${phongThi.cathi.tencathi}">Tên Ca Thi</p>
-                            <p th:text="'Thời gian bắt đầu: ' + ${phongThi.cathi.tgbd}">Thời gian bắt đầu</p>
-                            <p th:text="'Thời gian kết thúc: ' + ${phongThi.cathi.tgkt}">Thời gian kết thúc</p>
-                        </div>
-                    </div>
-                </div>
-            </th:block>
         </div>
     </div>
 </div>

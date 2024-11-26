@@ -17,6 +17,8 @@
     let isHidden = false;
     const sidebar = document.getElementById('sidebar');
     const content = document.getElementById('content');
+    const huongdan = document.getElementById('huongdan');
+
     const area = document.getElementById('area'); // Lấy phần tử popular_catagory_area
     const toggleButton = document.getElementById('toggleButton');
 
@@ -26,13 +28,16 @@
         if (isHidden) {
             sidebar.classList.add('sidebar-hidden');
             content.classList.add('content-hidden');
+            content.classList.add('huongdan-hidden');
             area.classList.add('area-hidden'); // Thêm lớp để ẩn popular category
+            huongdan.classList.add('huongdan-hidden'); // Thêm lớp để ẩn popular category
             toggleButton.innerHTML = '&#9776;'; // Biểu tượng nút
             toggleButton.classList.add('active'); // Thêm lớp active
         } else {
             sidebar.classList.remove('sidebar-hidden');
             content.classList.remove('content-hidden');
             area.classList.remove('area-hidden'); // Xóa lớp để hiện popular category
+            huongdan.classList.remove('huongdan-hidden'); // Xóa lớp để hiện popular category
             toggleButton.innerHTML = '&#9776;'; // Biểu tượng nút
             toggleButton.classList.remove('active'); // Xóa lớp active
         }
