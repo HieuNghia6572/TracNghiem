@@ -47,8 +47,8 @@
                             <div class="logo">
                                 <button class="toggle-btn" id="toggleButton">&#9776;</button>
 
-                                <a href="index.html">
-                                    <img src="img/logo_khongnen.png" alt="" height="100" width="180">
+                                <a href="home.html">
+                                    <img src="test/gif_logo.gif" alt="GIF" height="110" width="180" style="max-width: 100%; height: auto; border-radius: 15px;">
                                 </a>
                             </div>
                         </div>
@@ -59,14 +59,6 @@
                                         <li><a href="/home">Trang chủ</a></li>
                                         <li><a href="/home">Thông báo</a></li>
                                         <li><a href="/userphongthi">Phòng thi</a></li>
-
-                                        <!--                                            <li><a href="#">Phòng thi<i class="ti-angle-down"></i></a>-->
-                                        <!--                                                <ul class="submenu">-->
-                                        <!--                                                    <li><a href="candidate.html">Candidates </a></li>-->
-                                        <!--                                                    <li><a href="job_details.html">Job Details </a></li>-->
-                                        <!--                                                    <li><a href="elements.html">Elements</a></li>-->
-                                        <!--                                                </ul>-->
-                                        <!--                                            </li>-->
                                         <li><a href="/profile">Thông tin cá nhân</a></li>
                                         <li>
                                         </li>
@@ -103,8 +95,12 @@
 
 <!-- sidebar-menu -->
 <div class="sidebar" id="sidebar">
-    <img src="img/logo_khongnen.png" alt="" height="100" width="180">
-    <h2>Chức năng</h2>
+    <img src="test/gif_logo.gif" alt="GIF" height="110" width="180" style="max-width: 100%; height: auto; border-radius: 15px;margin-left: 24px;">
+    <h2 style="font-family: 'Times New Roman', serif;">
+        <span style="color: #00FFFF;">C</span><span style="color: #00F4F4;">h</span><span style="color: #00E9EA;">ứ</span><span style="color: #00DEE0;">c</span>
+        <span style="color: #00D3D6;"> </span>
+        <span style="color: #00D3D6;">n</span><span style="color: #00DEE0;">ă</span><span style="color: #00E9EA;">n</span><span style="color: #00F4F4;">g</span>
+    </h2>
     <ul class="sidebar-menu">
         <li><a href="#">🏠 Trang chủ</a></li>
 
@@ -130,7 +126,11 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-7 col-md-6" style="transform: translateX(-60px);">
-                        <h1 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">Giới thiệu:</h1>
+                        <h1 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s" style="font-family: 'Times New Roman', serif; font-style: italic;">
+                            <span style="color: #FF0059;">G</span><span style="color: #FF3300;">i</span><span style="color: #FEA600;">ớ</span><span style="color: #CEFF00;">i</span>
+                            <span style="color: #47FF00;"> </span>
+                            <span style="color: #00FE57;">t</span><span style="color: #00FFDD;">h</span><span style="color: #009AFF;">i</span><span style="color: #0024FF;">ệ</span><span style="color: #6700FF;">u</span>
+                        </h1>
                         <tr th:each="thongbao : ${thongbaos}">
                             <td th:utext="${thongbao.message}"></td>
                         </tr>
@@ -168,16 +168,26 @@
 <div class="huongdan" id="huongdan">
     <div class="videophongthi">
         <div class="video-container1">
-            <video controls>
+            <video controls autoplay loop>
                 <source src="test/video_phongthi.mp4" type="video/mp4">
             </video>
         </div>
         <div class="sidebar1">
-            <h2>HƯỚNG DẪN VÀO PHÒNG THI</h2>
-            <hr>
-            <h2>Cách 1:</h2>
+            <h2>
+                <span style="color: #0000FF;">H</span><span style="color: #0000F5;">Ư</span><span style="color: #0000EB;">Ớ</span><span style="color: #0000E2;">N</span><span style="color: #0000D8;">G</span>
+                <span style="color: #0000CE;"> </span>
+                <span style="color: #0000C5;">D</span><span style="color: #0000BB;">Ẫ</span><span style="color: #0000B1;">N</span>
+                <span style="color: #0000A8;"> </span>
+                <span style="color: #00009E;">V</span><span style="color: #000094;">À</span><span style="color: #00008B;">O</span>
+                <span style="color: #000094;"> </span>
+                <span style="color: #00009E;">P</span><span style="color: #0000A8;">H</span><span style="color: #0000B1;">Ò</span><span style="color: #0000BB;">N</span><span style="color: #0000C5;">G</span>
+                <span style="color: #0000CE;"> </span>
+                <span style="color: #0000D8;">T</span><span style="color: #0000E2;">H</span><span style="color: #0000EB;">I</span>
+
+            </h2>            <hr>
+            <h4>Cách 1:</h4>
             <p>Nhìn lên phía trên thanh tiêu đề => chọn "Phong Thi"</p>
-            <h2>Cách 2:</h2>
+            <h4>Cách 2:</h4>
             <p>Nhìn lên phía trên thanh tiêu đề => chọn "&#9776;" sẽ hiện ra thanh bên => chọn "Danh sách phòng thi"</p>
         </div>
     </div>
@@ -211,14 +221,39 @@
 
 <!-- footer start -->
 <footer class="bg-primary text-white text-center py-4 mt-5">
-    <div class="container d-flex justify-content-between text-footer">
-        <div class="footer-left">
-            <h5 class="mb-0">Trắc nghiệm NTT</h5>
-            <p class="mb-0">© 2024 Tất cả quyền được bảo lưu.</p>
+    <div class="container d-flex" style="margin: 0px;">
+        <!-- Cột 1: Hình ảnh -->
+        <div class="footer-image" style="flex: 0 0 20%; max-width: 20%;">
+            <img src="test/gif_logo.gif" alt="GIF" height="110" width="180" style="max-width: 100%; height: auto; border-radius: 15px;">
+            <img src="img/gvhs.png" alt="" height="130" width="130">
         </div>
-        <div class="footer-content">
-            <h5 class="mb-0">Thông tin liên hệ</h5>
-            <p class="mb-0">Liên hệ: phanhieunghia1054@gmail.com</p>
+
+        <!-- Cột 2: Nội dung Trắc nghiệm NTT -->
+        <div class="footer-left" style="flex: 0 0 25%; max-width: 25%; text-align: center;">
+            <h3 class="mb-0" style="text-align: center;">Trắc nghiệm NTT</h3>
+            <br>
+            <p class="mb-0" style="line-height: 2.3;">Nền tảng thi trắc nghiệm online</p>
+            <p class="mb-0" style="line-height: 2.3;"> đáng tin cậy</p>
+            <p class="mb-0" style="line-height: 2.3;">© Website 2024 .</p>
+        </div>
+
+        <!-- Cột giữa: Thông tin thêm -->
+        <div class="footer-middle" style="flex: 0 0 25%; max-width: 25%; text-align: left;margin-left: 100px;">
+            <h3 class="mb-0">Tài nguyên:</h3>
+            <br>
+            <p class="mb-0" style="line-height: 2.3;">➢ Hướng dẫn chi tiết </p>
+            <p class="mb-0" style="line-height: 2.3;">➢ Giới thiệu </p>
+            <p class="mb-0" style="line-height: 2.3;">➢ Thông tin người dùng</p>
+
+        </div>
+
+        <!-- Cột 3: Thông tin liên hệ -->
+        <div class="footer-content" style="flex: 0 0 30%; max-width: 30%; text-align: left; margin-left: 200px;">
+            <h3 class="mb-0">Thông tin liên hệ:</h3>
+            <br>
+            <p class="mb-0" style="line-height: 2.3;">🌐 Liên hệ: phanhieunghia1054@gmail.com</p>
+            <p class="mb-0" style="line-height: 2.3;">☎ Số điện thoại: 090525xxx</p>
+            <p class="mb-0" style="line-height: 2.3;">🏡 Địa chỉ: 9, Nguyễn Thị Minh Khai, Phường Bến Nghé, Quận 1, Hồ Chí Minh</p>
         </div>
     </div>
 </footer>

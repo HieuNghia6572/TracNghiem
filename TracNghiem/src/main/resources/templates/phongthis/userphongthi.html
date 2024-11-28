@@ -99,7 +99,7 @@
                                     <button class="toggle-btn" id="toggleButton">&#9776;</button>
 
                                     <a href="index.html">
-                                        <img src="img/logo_khongnen.png" alt="" height="100" width="180">
+                                        <img src="test/gif_logo.gif" alt="GIF" height="110" width="180" style="max-width: 100%; height: auto; border-radius: 15px;">
                                     </a>
                                 </div>
                             </div>
@@ -152,16 +152,16 @@
     </header>
 
     <div class="sidebar" id="sidebar">
-        <img src="img/logo_khongnen.png" alt="" height="100" width="180">
+        <img src="test/gif_logo.gif" alt="GIF" height="110" width="180" style="max-width: 100%; height: auto; border-radius: 15px;margin-left: 24px;">
         <h2>Chức năng</h2>
         <ul class="sidebar-menu">
             <li><a href="/home">🏠 Trang chủ</a></li>
             <li>
                 <a href="#" class="toggle-submenu">👨‍🎓 Thông tin người dùng ⬇</a>
                 <ul class="submenu">
-                    <li><a href="/thongtincanhan">➣ Thông tin cá nhân</a></li>
-                    <li><a href="/chinhsuathongtin">➣ Chỉnh sửa thông tin</a></li>
-                    <li><a href="/xemdiemthi">➣ Xem điểm thi</a></li>
+                    <li><a th:href="@{/profile}">➣ Thông tin cá nhân</a></li>
+                    <li><a th:href="@{/profile-information}">➣ Chỉnh sửa thông tin</a></li>
+                    <li><a th:href="@{/dethis/ketquathi}">➣ Xem điểm thi</a></li>
                 </ul>
             </li>
             <li><a href="#">🏫 Danh sách phòng thi</a></li>

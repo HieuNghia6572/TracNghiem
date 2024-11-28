@@ -37,7 +37,7 @@ public class SecurityConfig {
         return http
                 .csrf(p -> p.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/images/**", "/fonts/**", "/vendor/**","/img/**",
+                        .requestMatchers("/images/**","/test/**", "/fonts/**", "/vendor/**","/img/**",
                                 "/Job Board DOC/**","/scss/**", "/css/**", "/", "/oauth/**", "/register", "/error")
                         .permitAll()
                         .requestMatchers("/cauhois/edit/**","/cauhois", "/cauhois/add", "/cauhois/delete",

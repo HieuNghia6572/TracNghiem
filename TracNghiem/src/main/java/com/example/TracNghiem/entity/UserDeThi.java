@@ -35,7 +35,12 @@ public class UserDeThi {
     }
     public double calculateTotalPoints() {
         int soCau = deThi.getTotalQuestions(); // Lấy số câu từ phương thức mới
-        return (soCau > 0) ? (10.0 / soCau) * diem : 0; // Tính tổng điểm
+        double totalPoints = (soCau > 0) ? (10.0 / soCau) * diem : 0; // Tính tổng điểm
+
+        // Làm tròn lên với 1 chữ số sau dấu phẩy
+        totalPoints = Math.ceil(totalPoints * 10) / 10; // Nhân với 10, làm tròn lên, sau đó chia lại cho 10
+
+        return totalPoints; // Trả về giá trị đã làm tròn
     }
 
 }

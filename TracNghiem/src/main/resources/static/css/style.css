@@ -7794,7 +7794,7 @@ h6 {
 .toggle-btn {
     position: absolute;
     left: 250px; /* Vị trí của nút */
-    top: 26px; /* Vị trí trên cùng */
+    top: 13px; /* Vị trí trên cùng */
     background: none; /* Không có nền */
     color: gray; /* Màu chữ đen */
     border: none; /* Bỏ viền */
