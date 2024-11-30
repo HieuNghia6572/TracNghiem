@@ -217,7 +217,10 @@
                     <td th:text="${phongthi.cathi.tgbd} + ' - ' + ${phongthi.cathi.tgkt}">Thời Gian</td>
                     <td th:text="${phongthi.cathi.monthi.tenmonthi}">Tên Môn Thi</td>
                     <td>
-                        <a th:href="@{/hienthidethi/{id}(id=${phongthi.dethi.id})}" class="btn btn-success btn-sm">
+                       <!-- <a th:href="@{/hienthidethi/{id}(id=${phongthi.dethi.id})}" class="btn btn-success btn-sm">
+                            Hiện Thi Đề Thi - Mã Đề: <span th:text="${phongthi.dethi.id}"></span>
+                        </a>-->
+                        <a th:href="@{/hienthidethi/{id}/{cathiId}(id=${phongthi.dethi.id}, cathiId=${phongthi.cathi.id})}" class="btn btn-success btn-sm">
                             Hiện Thi Đề Thi - Mã Đề: <span th:text="${phongthi.dethi.id}"></span>
                         </a>                    </td>
                 </tr>

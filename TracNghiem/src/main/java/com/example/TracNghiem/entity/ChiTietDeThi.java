@@ -31,5 +31,11 @@ public class ChiTietDeThi {
     @ManyToOne
     @JoinColumn(name = "dethi_id", nullable = false)
     private DeThi deThi;
+    /*@ManyToOne
+    @JoinColumn(name = "cathi_id", nullable = false)
+    private CaThi caThi;*/
+    @ManyToOne
+    @JoinColumn(name = "cathi_id")
+    private CaThi caThi;
 
 }

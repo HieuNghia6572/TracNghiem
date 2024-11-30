@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -72,6 +73,9 @@ public class CaThiService {
         existingCathi.setTgkt(caThi.getTgkt());
 
         return caThiRepository.save(existingCathi);
+    }
+    public int calculateThoiLuong(LocalDateTime tgbd, LocalDateTime tgkt) {
+        return (int) java.time.Duration.between(tgbd, tgkt).toMinutes();
     }
 
 }

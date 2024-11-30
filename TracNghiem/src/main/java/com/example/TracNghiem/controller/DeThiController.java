@@ -143,9 +143,6 @@ public class DeThiController {
         User currentUser = userService.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy người dùng"));
 
-        // Lấy thông tin ca thi từ database
-
-
         // Gọi phương thức với cả DeThi và User
 
         model.addAttribute("thongtinde", deThi);
@@ -171,12 +168,6 @@ public class DeThiController {
         return "/danhsachketquathi";
 
     }
-
-
-
-
-
-
 
 
 }

@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -52,7 +53,20 @@ public class CaThiController {
     }
 
 
+    @GetMapping("/countdown/{id}")
+    public String countdown(@PathVariable Long id, Model model) {
+        CaThi caThi = caThiService.getCaThiById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy CaThi với ID: " + id));
+        int thoiLuong = caThiService.calculateThoiLuong(caThi.getTgbd(), caThi.getTgkt());
 
+        // Tính thời gian còn lại theo phút
+        long minutesLeft = java.time.Duration.between(LocalDateTime.now(), caThi.getTgkt()).toMinutes();
+
+        model.addAttribute("caThi", caThi);
+        model.addAttribute("minutesLeft", minutesLeft);
+        model.addAttribute("thoiLuong", thoiLuong);
+        return "/cathis/countdown";  // Tên file HTML để hiển thị đếm ngược
+    }
 
 
 

@@ -8,7 +8,30 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <title>Hiển Thị Đề Thi</title>
+    <script>
+        function startCountdown(duration) {
+            console.log("Bắt đầu đếm ngược với thời gian:", duration); // Log thời gian bắt đầu
+            let timer = duration * 60;  // Chuyển đổi phút thành giây
+            let interval = setInterval(function () {
+                let minutes = Math.floor(timer / 60);
+                let seconds = timer % 60;
+                document.getElementById("countdown").innerHTML = minutes + " phút " + seconds + " giây";
 
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    document.getElementById("countdown").innerHTML = "Đã hết thời gian!";
+                    // Thêm logic kết thúc bài thi hoặc chuyển trang nếu cần
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            let thoiLuong = [[${minutesLeft}]]; // Giá trị từ server
+            console.log("Thời gian còn lại (phút):", thoiLuong); // Log giá trị minutesLeft
+            startCountdown(thoiLuong);
+        };
+    </script>
     <style>
 
 
@@ -138,7 +161,9 @@
                 </p>
                 <div class="ml-3" style="color:black; margin-left: 100px !important ;font-weight: bold;">
                     <p class="mb-0">| Thời gian hiện tại: <span id="time"></span> |</p>
-                    <p>Thời gian thi: <span id="countdown"></span></p>
+                    <p class="mb-0">| Thời gian thi còn: <span id="countdown"></span> |</p>
+
+
                 </div>
 
 
@@ -159,6 +184,9 @@
             <h1 style="text-align: center" th:text="${'Tên môn thi: '+thongtinde.monthi.tenmonthi}"></h1>
             <form id="quiz-form" method="post" action="/submitQuiz">
                 <input type="hidden" name="deThiId" th:value="${thongtinde.id}"/>
+
+                <input type="hidden" name="cathiId" th:value="${caThi.id}">
+
                 <input type="hidden" id="userId" th:value="${userId}" />
                 <!-- Gán giá trị cho deThiId -->
                 <ul class="quiz">
@@ -211,6 +239,71 @@
         </div>
     </div>
 </div>
+<!--<div class="content" id="content">
+    <div class="row">
+        <div class="col-2" style="background-color: #f8f9fa;">
+
+        </div>
+        <div class="col-8">
+            <h1 style="text-align: center" th:text="${'Mã đề: '+thongtinde.madethi}"></h1>
+            <h1 style="text-align: center" th:text="${'Tên môn thi: '+thongtinde.monthi.tenmonthi}"></h1>
+            <form id="quiz-form" method="post" action="/submitQuiz">
+                <input type="hidden" name="deThiId" th:value="${thongtinde.id}"/>
+
+
+
+                <input type="hidden" id="userId" th:value="${userId}" />
+                &lt;!&ndash; Gán giá trị cho deThiId &ndash;&gt;
+                <ul class="quiz">
+                    <li th:each="baithi, stat : ${chiTietDeThiList}" class="li-container">
+            <span class="part1">
+                <div class="questionz-container">
+                    <div class="duongke"></div>
+                    <h4 th:utext="${'Câu hỏi ' + (stat.index + 1) + ': ' + (baithi.cauHoi.ten != null ? baithi.cauHoi.ten : '')}"></h4>
+                </div>
+
+                <span class="image-part" th:if="${baithi.cauHoi != null and baithi.cauHoi.ImgUrl != null and baithi.cauHoi.ImgUrl != ''}" style="margin-left: 100px !important">
+                    <img th:src="${baithi.cauHoi.ImgUrl}" alt="Hình ảnh câu hỏi" height="110" width="110" />
+                </span>
+
+                <ul class="choices" style="margin-left: 50px !important">
+                    <li>
+                        <label class="choice-label">
+                            <input type="radio" th:name="${'question_' + baithi.id}" th:value="'A'" th:checked="${baithi.dapanchon == 'A'}" />
+                            <span th:text="${'A.  ' + (baithi.cauHoi.dapanA != null ? baithi.cauHoi.dapanA : '')}"></span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="choice-label">
+                            <input type="radio" th:name="${'question_' + baithi.id}" th:value="'B'" th:checked="${baithi.dapanchon == 'B'}" />
+                            <span th:text="${'B.  ' + (baithi.cauHoi.dapanB != null ? baithi.cauHoi.dapanB : '')}"></span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="choice-label">
+                            <input type="radio" th:name="${'question_' + baithi.id}" th:value="'C'" th:checked="${baithi.dapanchon == 'C'}" />
+                            <span th:text="${'C.  ' + (baithi.cauHoi.dapanC != null ? baithi.cauHoi.dapanC : '')}"></span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="choice-label">
+                            <input type="radio" th:name="${'question_' + baithi.id}" th:value="'D'" th:checked="${baithi.dapanchon == 'D'}" />
+                            <span th:text="${'D.  ' + (baithi.cauHoi.dapanD != null ? baithi.cauHoi.dapanD : '')}"></span>
+                        </label>
+                    </li>
+                </ul>
+            </span>
+                    </li>
+                </ul>
+                <button type="submit" class="save-progress">Lưu tiến trình</button>
+            </form>
+            <button type="button" class="view-results" onclick="viewKetQuaThi()">Nộp Bài</button>
+        </div>
+        <div class="col-2"style="background-color: #f8f9fa;">
+
+        </div>
+    </div>
+</div>-->
 
 <footer class="bg-primary text-white text-center py-4 mt-5" style="margin:0px !important;">
     <div class="container d-flex justify-content-between text-footer">
@@ -254,6 +347,7 @@
         type: 'POST',
         data: {
             deThiId: $('input[name="deThiId"]').val(), // Gửi deThiId
+            cathiId: $('input[name="cathiId"]').val(), // ID ca thi
             ...formData // Gửi tất cả các câu trả lời
         },
         success: function(response) {
@@ -272,39 +366,7 @@
        window.location.href = "/ketquathi/" + userId + "/" + deThiId;
    }
 </script>
-<script>
-    let remainingTime;
 
-    // Hàm này sẽ được gọi khi trang được tải
-    window.onload = function () {
-        startCountdown();
-    };
-
-    function startCountdown() {
-        let countdownElement = document.getElementById("countdown");
-        let interval = setInterval(function () {
-            fetch('/time-remaining') // Gửi yêu cầu đến backend để lấy thời gian còn lại
-                .then(response => response.json())
-                .then(data => {
-                    remainingTime = data.remainingTime;
-                    countdownElement.innerHTML = formatTime(remainingTime);
-
-                    // Kiểm tra nếu hết giờ
-                    if (remainingTime <= 0) {
-                        clearInterval(interval);
-                        alert("Hết giờ!");
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        }, 1000); // Gọi mỗi giây
-    }
-
-    function formatTime(seconds) {
-        let minutes = Math.floor(seconds / 60);
-        let secs = seconds % 60;
-        return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-    }
-</script>
 <!--toi day-->
 </body>
 </html>
