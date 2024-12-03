@@ -1,26 +1,114 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Profile</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/css/gijgo.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/css/slicknav.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/test.css}">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
 
 </head>
-
 <body>
-<br>
-<br>
+<header>
+    <div class="header-area">
+        <div class="main-header-area shimmer-effect"> <!-- Thêm lớp shimmer-effect -->
+            <div class="container-fluid">
+                <div class="header_bottom_border">
+                    <div class="row align-items-center">
+                        <div class="col-xl-3 col-lg-2">
+                            <div class="logo">
+                                <button class="toggle-btn" id="toggleButton">&#9776;</button>
+
+                                <a href="index.html">
+                                    <img th:src="@{/test/gif_logo.gif}" alt="GIF" height="110" width="180" style="max-width: 100%; height: auto; border-radius: 15px;">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-7" >
+                            <div class="main-menu d-none d-lg-block" >
+                                <nav>
+                                    <ul id="navigation" style="transform: translateX(-130px);">
+                                        <li><a href="/home">Trang chủ</a></li>
+                                        <li><a href="/home">Thông báo</a></li>
+                                        <li><a href="/userphongthi">Phòng thi</a></li>
+
+                                        <!--                                            <li><a href="#">Phòng thi<i class="ti-angle-down"></i></a>-->
+                                        <!--                                                <ul class="submenu">-->
+                                        <!--                                                    <li><a href="candidate.html">Candidates </a></li>-->
+                                        <!--                                                    <li><a href="job_details.html">Job Details </a></li>-->
+                                        <!--                                                    <li><a href="elements.html">Elements</a></li>-->
+                                        <!--                                                </ul>-->
+                                        <!--                                            </li>-->
+                                        <li><a href="/profile">Thông tin cá nhân</a></li>
+                                        <li>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                            <div class="Appointment d-flex align-items-center"> <!-- Sử dụng d-flex để căn chỉnh ngang -->
+                                <span style="font-weight:bold; white-space: nowrap;"><b>Chào mừng: </b></span> <!-- Sử dụng span để không xuống dòng -->
+                                <a sec:authentication="name" style="font-weight:bold" class="mx-2"></a> <!-- Thêm class mx-2 để tạo khoảng cách -->
+                                <span style="font-weight:bold; white-space: nowrap;"><a th:href="@{/profile}"><img style="width:40px; height:40px" alt="profile" th:src="@{/img/profile.png}"> </img></a></span>
+                                <span>&ensp;</span>
+                                <form th:action="@{/logout}" method="post" class="mb-0"> <!-- mb-0 để loại bỏ margin dưới form -->
+                                    <button class="btn btn-outline-light" style="background-color:blue" type="submit">Đăng xuất</button>
+                                </form>
+                                <a sec:authorize="hasAnyAuthority('ADMIN')" class="ml-2"> <!-- Thêm class ml-2 để tạo khoảng cách -->
+                                    <button class="btn btn-outline-light" style="background-color:blue" type="submit">
+                                        <a style="color: white" th:href="@{/cauhois}">Admin</a>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="sidebar" id="sidebar">
+    <img th:src="@{/test/gif_logo.gif}" alt="GIF" height="110" width="180" style="max-width: 100%; height: auto; border-radius: 15px;margin-left: 24px;">
+    <h2>Chức năng</h2>
+    <ul class="sidebar-menu">
+        <li><a href="/home">🏠 Trang chủ</a></li>
+        <li>
+            <a href="#" class="toggle-submenu">👨‍🎓 Thông tin người dùng ⬇</a>
+            <ul class="submenu">
+                <li><a th:href="@{/profile}">➣ Thông tin cá nhân</a></li>
+                <li><a th:href="@{/profile-information}">➣ Chỉnh sửa thông tin</a></li>
+                <li><a th:href="@{/dethis/ketquathi}">➣ Xem điểm thi</a></li>
+            </ul>
+        </li>
+        <li><a href="/userphongthi">🏫 Danh sách phòng thi</a></li>
+        <li><a href="/monthis">📖 Danh sách tài liệu</a></li>
+    </ul>
+</div>
+<div class="content" style="background-color:#c0faff78;" id="content">
+    <div class="container mt-3">
 <h2 style="text-align:center">THÔNG TIN TÀI KHOẢN</h2>
 <form th:action="@{/update-profile}"
-      th:object="${user}" method="post">
-    <div class="card">
+      th:object="${user}" method="post" style="display:grid; place-items:center">
+    <div class="card1">
         <div class="mb-3">
             <label for="username" class="form-label">Tên tài khoản:</label>
             <input type="text" th:field="*{username}" class="form-control" id="username" readonly>
@@ -55,6 +143,22 @@
         </div>
     </div>
 </form>
+    </div>
+</div>
+<footer class="bg-primary text-white text-center py-4">
+    <div class="container d-flex justify-content-between text-footer">
+        <div class="footer-left">
+            <h5 class="mb-0">Trắc nghiệm NTT</h5>
+            <p class="mb-0">© 2024 Tất cả quyền được bảo lưu.</p>
+        </div>
+        <div class="footer-content">
+            <h5 class="mb-0">Thông tin liên hệ</h5>
+            <p class="mb-0">Liên hệ: phanhieunghia1054@gmail.com</p>
+        </div>
+
+    </div>
+</footer>
+<script th:src="@{/js/scripts.js}"></script>
 
 </body>
 
