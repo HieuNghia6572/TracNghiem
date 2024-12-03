@@ -24,6 +24,10 @@ public class UserDeThi {
     @JoinColumn(name = "de_thi_id")
     private DeThi deThi;
 
+    @ManyToOne
+    @JoinColumn(name = "ca_thi_id")
+    private CaThi caThi;
+
     private int diem; // Có thể giữ lại nếu bạn muốn
     private int score; // Nếu không cần, có thể xóa
 

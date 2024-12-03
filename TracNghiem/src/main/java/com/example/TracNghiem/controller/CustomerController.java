@@ -388,6 +388,31 @@ private void saveChiTietDeThi(Long deThiId, User user, Long id, String selectedA
 
         return "users/ketquathi";
     }
+    /*@GetMapping("/ketquathi/{userId}/{deThiId}")
+    public String showKetQuaThi(@PathVariable Long userId, @PathVariable Long deThiId, Model model) {
+        UserDeThi userDeThi = userDeThiRepository.findByUserIdAndDeThiId(userId, deThiId);
+
+        if (userDeThi == null) {
+            model.addAttribute("message", "Không tìm thấy kết quả cho người dùng với ID: " + userId + " và đề thi ID: " + deThiId);
+        } else {
+            model.addAttribute("userDeThi", userDeThi);
+            model.addAttribute("totalPoints", userDeThi.calculateTotalPoints()); // Thêm tổng điểm vào model
+
+            // Lấy thông tin CaThi
+            CaThi caThi = userDeThi.getCaThi(); // Sử dụng phương thức getCaThi
+            if (caThi != null) {
+                LocalDateTime tgbd = caThi.getTgbd();
+                LocalDateTime tgkt = caThi.getTgkt();
+                long thoiGianLamBai = java.time.Duration.between(tgbd, tgkt).toMinutes();
+                model.addAttribute("thoiGianLamBai", thoiGianLamBai);
+            }
+        }
+
+        model.addAttribute("userId", userId);
+        model.addAttribute("deThiId", deThiId);
+
+        return "users/ketquathi";
+    }*/
     // toi day
 
     private Long getUserIdFromPrincipal(String username) {

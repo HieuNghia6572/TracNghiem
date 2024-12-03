@@ -9,6 +9,32 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <title>Hiển Thị Đề Thi</title>
+    <!--<script>
+        function startCountdown(duration) {
+            console.log("Bắt đầu đếm ngược với thời gian:", duration); // Log thời gian bắt đầu
+            let timer = duration * 60;  // Chuyển đổi phút thành giây
+            let interval = setInterval(function () {
+                let minutes = Math.floor(timer / 60);
+                let seconds = timer % 60;
+                document.getElementById("countdown").innerHTML = minutes + " phút " + seconds + " giây";
+
+                if (&#45;&#45;timer < 0) {
+                    clearInterval(interval);
+                    document.getElementById("countdown").innerHTML = "Đã hết thời gian!";
+                    // Thêm logic kết thúc bài thi hoặc chuyển trang nếu cần
+                     document.getElementById("saveBtn").click();
+                    // Tự động nộp bài khi hết thời gian (nếu có)
+                    document.getElementById("submitBtn").click();
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            let thoiLuong = [[${minutesLeft}]]; // Giá trị từ server
+            console.log("Thời gian còn lại (phút):", thoiLuong); // Log giá trị minutesLeft
+            startCountdown(thoiLuong);
+        };
+    </script>-->
     <script>
         function startCountdown(duration) {
             console.log("Bắt đầu đếm ngược với thời gian:", duration); // Log thời gian bắt đầu
@@ -21,9 +47,27 @@
                 if (--timer < 0) {
                     clearInterval(interval);
                     document.getElementById("countdown").innerHTML = "Đã hết thời gian!";
-                    // Thêm logic kết thúc bài thi hoặc chuyển trang nếu cần
+
+                    // Thực hiện lưu tiến trình trước khi nộp bài
+                    saveProgress();
+
+                    // Sau khi lưu tiến trình, thực hiện nộp bài
+                    submitTest();
                 }
             }, 1000);
+        }
+
+        function saveProgress() {
+            console.log("Lưu tiến trình...");
+            // Gọi hành động lưu tiến trình, có thể là submit form hoặc gọi API
+            // Nếu có nút lưu, tự động nhấn vào nút này:
+            document.getElementById("saveBtn").click();
+        }
+
+        function submitTest() {
+            console.log("Nộp bài...");
+            // Sau khi lưu tiến trình, nộp bài
+            document.getElementById("submitBtn").click();
         }
 
         window.onload = function () {
@@ -230,9 +274,9 @@
             </span>
                     </li>
                 </ul>
-                <button type="submit" class="save-progress">Lưu tiến trình</button>
+                <button type="submit" class="save-progress" id="saveBtn">Lưu tiến trình</button>
             </form>
-            <button type="button" class="view-results" onclick="viewKetQuaThi()">Nộp Bài</button>
+            <button type="button" class="view-results" id="submitBtn" onclick="viewKetQuaThi()">Nộp Bài</button>
         </div>
         <div class="col-2"style="background-color: #f8f9fa;">
 
