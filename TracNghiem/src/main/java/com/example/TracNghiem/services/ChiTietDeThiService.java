@@ -112,4 +112,7 @@ public class ChiTietDeThiService {
         chiTietDeThi.setDapanchon(dapanchon);
         return chiTietDeThiRepository.save(chiTietDeThi);
     }
+    public Optional<ChiTietDeThi> findByCauHoiIdAndUserIdAndCaThiId(Long cauHoiId, Long userId, Long caThiId) {
+        return chiTietDeThiRepository.findByCauHoiIdAndUserIdAndCaThiId(cauHoiId, userId, caThiId);
+    }
 }

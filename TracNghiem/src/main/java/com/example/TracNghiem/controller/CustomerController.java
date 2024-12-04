@@ -287,17 +287,15 @@ private void saveChiTietDeThi(Long deThiId, User user, Long id, String selectedA
 
     private void saveChiTietDeThi(Long deThiId, Long cathiId, User user, Long id, String selectedAnswer) {
         // Tìm ChiTietDeThi từ cơ sở dữ liệu dựa trên id và user_id
-        CaThi caThi = caThiService.getCaThiById(cathiId)
-                .orElseThrow(() -> new RuntimeException("Ca thi không tồn tại"));
-        Optional<ChiTietDeThi> existingChiTietDeThi = chiTietDeThiRepository.findByCauHoiIdAndUserId(id, user.getId());
 
-        ChiTietDeThi chiTietDeThi;
+        Optional<ChiTietDeThi> existingChiTietDeThi = chiTietDeThiRepository.findByIdAndUserIdAndDeThiId(id, user.getId(), deThiId) ;       ChiTietDeThi chiTietDeThi;
 
         if (existingChiTietDeThi.isPresent()) {
             ChiTietDeThi existingDetail = existingChiTietDeThi.get();
 
             // Kiểm tra xem user_id có trùng với user đang thực hiện hay không
-            if (!existingDetail.getUser().getId().equals(user.getId())) {
+            if (!existingDetail.getUser().getId().equals(user.getId()) &&
+                    !existingDetail.getDeThi().getId().equals(deThiId)) {
                 // Nếu user_id không trùng, tạo mới một ChiTietDeThi
                 chiTietDeThi = new ChiTietDeThi();
                 chiTietDeThi.setId(id);
@@ -308,7 +306,8 @@ private void saveChiTietDeThi(Long deThiId, User user, Long id, String selectedA
                 CauHoi cauHoi = chiTietDeThiService.findById(id)
                         .map(ChiTietDeThi::getCauHoi)
                         .orElseThrow(() -> new RuntimeException("Câu hỏi không tồn tại"));
-
+                CaThi caThi = caThiService.getCaThiById(cathiId)
+                        .orElseThrow(() -> new RuntimeException("Ca thi không tồn tại"));
 
 
                 chiTietDeThi.setDeThi(deThi);
@@ -332,6 +331,8 @@ private void saveChiTietDeThi(Long deThiId, User user, Long id, String selectedA
             CauHoi cauHoi = chiTietDeThiService.findById(id)
                     .map(ChiTietDeThi::getCauHoi)
                     .orElseThrow(() -> new RuntimeException("Câu hỏi không tồn tại"));
+            CaThi caThi = caThiService.getCaThiById(cathiId)
+                    .orElseThrow(() -> new RuntimeException("Ca thi không tồn tại"));
 
             chiTietDeThi.setDeThi(deThi);
             chiTietDeThi.setCauHoi(cauHoi);
