@@ -288,7 +288,8 @@ private void saveChiTietDeThi(Long deThiId, User user, Long id, String selectedA
     private void saveChiTietDeThi(Long deThiId, Long cathiId, User user, Long id, String selectedAnswer) {
         // Tìm ChiTietDeThi từ cơ sở dữ liệu dựa trên id và user_id
 
-        Optional<ChiTietDeThi> existingChiTietDeThi = chiTietDeThiRepository.findByIdAndUserIdAndDeThiId(id, user.getId(), deThiId) ;       ChiTietDeThi chiTietDeThi;
+        Optional<ChiTietDeThi> existingChiTietDeThi = chiTietDeThiRepository.findByIdAndUserIdAndDeThiId(id, user.getId(), deThiId) ;
+        ChiTietDeThi chiTietDeThi;
 
         if (existingChiTietDeThi.isPresent()) {
             ChiTietDeThi existingDetail = existingChiTietDeThi.get();

@@ -69,7 +69,8 @@
         }
 
         .radio-group input {
-            margin-right: 10px; /* Đặt khoảng cách nhỏ giữa nút radio và nhãn */
+            margin-right: 5px; /* Đặt khoảng cách nhỏ giữa nút radio và nhãn */
+            margin-left: 40px;
         }
 
         .radio-group label {
@@ -134,9 +135,9 @@
             </div>
 
             <div class="form-group-cd">
-                <p><label class="form-label" for="capdo">Cap Do:</label></p>
-                <select class="form-control" id="capdo" name="capdoId">
-                    <option value="">-- Chon Cap Do --</option>
+                <p><label class="form-label" style="margin-top: 20px !important" for="capdo">Cấp độ câu hỏi:</label></p>
+                <select class="form-control" style="width:30% !important" id="capdo" name="capdoId">
+                    <option value="">-- Chọn cấp độ --</option>
                     <option th:each="capdo : ${capdos}" th:value="${capdo.id}"
                             th:text="${capdo.tencapdo}"></option>
                 </select>

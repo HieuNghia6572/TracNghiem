@@ -41,8 +41,14 @@ public class UserDeThi {
         int soCau = deThi.getTotalQuestions(); // Lấy số câu từ phương thức mới
         double totalPoints = (soCau > 0) ? (10.0 / soCau) * diem : 0; // Tính tổng điểm
 
-        // Làm tròn lên với 1 chữ số sau dấu phẩy
-        totalPoints = Math.ceil(totalPoints * 10) / 10; // Nhân với 10, làm tròn lên, sau đó chia lại cho 10
+        // Làm tròn theo quy tắc yêu cầu
+        if (totalPoints % 1 >= 0.25 && totalPoints % 1 < 0.75) {
+            totalPoints = Math.floor(totalPoints) + 0.5; // Làm tròn lên 0.5
+        } else if (totalPoints % 1 >= 0.75) {
+            totalPoints = Math.ceil(totalPoints); // Làm tròn lên số nguyên
+        } else {
+            totalPoints = Math.floor(totalPoints); // Làm tròn xuống nếu dưới 0.25
+        }
 
         return totalPoints; // Trả về giá trị đã làm tròn
     }

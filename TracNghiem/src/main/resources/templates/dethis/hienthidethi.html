@@ -184,6 +184,37 @@
             background-color: #000; /* Màu đen cho đường kẻ */
             margin: 20px 0; /* Khoảng cách trên và dưới đường kẻ */
         }
+        .save-progress {
+            background-color: green; /* Màu xanh lá cây */
+            color: white; /* Màu chữ trắng */
+            border: none; /* Không viền */
+            border-radius: 5px; /* Bo tròn góc */
+            padding: 10px 20px; /* Padding: 10px cho trên/dưới, 20px cho trái/phải */
+            font-size: 16px; /* Kích thước chữ */
+            cursor: pointer; /* Con trỏ chuột thay đổi khi hover */
+            transition: background-color 0.3s; /* Hiệu ứng chuyển màu */
+            margin-top: 10px; /* Khoảng cách 10px phía trên nút */
+        }
+
+        .save-progress:hover {
+            background-color: darkgreen; /* Màu khi hover */
+        }
+        .view-results {
+            background-color: blue; /* Màu xanh lá cây */
+            color: white; /* Màu chữ trắng */
+            border: none; /* Không viền */
+            border-radius: 5px; /* Bo tròn góc */
+            padding: 10px 20px; /* Padding: 10px cho trên/dưới, 20px cho trái/phải */
+            font-size: 16px; /* Kích thước chữ */
+            cursor: pointer; /* Con trỏ chuột thay đổi khi hover */
+            transition: background-color 0.3s; /* Hiệu ứng chuyển màu */
+            margin-top: 10px; /* Khoảng cách 10px phía trên nút */
+            margin-bottom: 10px;
+        }
+
+        .view-results:hover {
+            background-color: darkblue; /* Màu khi hover */
+        }
 
     </style>
     <title>Giao diện thi</title>
@@ -219,7 +250,7 @@
 </header>
 
 <div class="content" id="content">
-    <div class="row">
+    <div class="row" style="margin-right: 0px !important">
         <div class="col-2" style="background-color: #f8f9fa;">
 
         </div>
@@ -349,15 +380,40 @@
     </div>
 </div>-->
 
-<footer class="bg-primary text-white text-center py-4 mt-5" style="margin:0px !important;">
-    <div class="container d-flex justify-content-between text-footer">
-        <div class="footer-left">
-            <h5 class="mb-0">Trắc nghiệm NTT</h5>
-            <p class="mb-0">© 2024 Tất cả quyền được bảo lưu.</p>
+<footer class="bg-primary text-white text-center" style="padding:20px">
+    <div class="container d-flex" style="margin: 0px;">
+        <!-- Cột 1: Hình ảnh -->
+        <div class="footer-image" style="flex: 0 0 20%; max-width: 20%;">
+            <img th:src="@{/test/gif_logo.gif}" alt="GIF" height="110" width="180" style="max-width: 100%; height: auto; border-radius: 15px;">
+            <img th:src="@{/img/gvhs.png}" alt="" height="130" width="130">
         </div>
-        <div class="footer-content">
-            <h5 class="mb-0">Thông tin liên hệ</h5>
-            <p class="mb-0">Liên hệ: phanhieunghia1054@gmail.com</p>
+
+        <!-- Cột 2: Nội dung Trắc nghiệm NTT -->
+        <div class="footer-left" style="flex: 0 0 25%; max-width: 25%; text-align: center;">
+            <h4 class="mb-0" style="text-align: center;">Trắc nghiệm NTT</h4>
+            <br>
+            <p class="mb-0" style="line-height: 2.3;">Nền tảng thi trắc nghiệm online</p>
+            <p class="mb-0" style="line-height: 2.3;"> đáng tin cậy</p>
+            <p class="mb-0" style="line-height: 2.3;">© Website 2024 .</p>
+        </div>
+
+        <!-- Cột giữa: Thông tin thêm -->
+        <div class="footer-middle" style="flex: 0 0 25%; max-width: 25%; text-align: left;margin-left: 100px;">
+            <h4 class="mb-0">Tài nguyên:</h4>
+            <br>
+            <p class="mb-0" style="line-height: 2.3;">➢ Hướng dẫn chi tiết </p>
+            <p class="mb-0" style="line-height: 2.3;">➢ Giới thiệu </p>
+            <p class="mb-0" style="line-height: 2.3;">➢ Thông tin người dùng</p>
+
+        </div>
+
+        <!-- Cột 3: Thông tin liên hệ -->
+        <div class="footer-content" style="flex: 0 0 30%; max-width: 30%; text-align: left; margin-left: 200px;">
+            <h4 class="mb-0">Thông tin liên hệ:</h4>
+            <br>
+            <p class="mb-0" style="line-height: 2.3;">🌐 Liên hệ: phanhieunghia1054@gmail.com</p>
+            <p class="mb-0" style="line-height: 2.3;">☎ Số điện thoại: 090525xxx</p>
+            <p class="mb-0" style="line-height: 2.3;">🏡 Địa chỉ: 9, Nguyễn Thị Minh Khai, Phường Bến Nghé, Quận 1, Hồ Chí Minh</p>
         </div>
     </div>
 </footer>

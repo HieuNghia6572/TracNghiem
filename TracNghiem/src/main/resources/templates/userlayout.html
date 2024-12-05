@@ -113,7 +113,7 @@
             </ul>
         </li>
         <li><a href="/userphongthi">🏫 Danh sách phòng thi</a></li>
-        <li><a href="/monthis">📖 Danh sách tài liệu</a></li>
+        <li><a href="/monthis">📖 Hướng dẫn thi</a></li>
     </ul>
 </div>
 
@@ -131,10 +131,19 @@
                             <span style="color: #47FF00;"> </span>
                             <span style="color: #00FE57;">t</span><span style="color: #00FFDD;">h</span><span style="color: #009AFF;">i</span><span style="color: #0024FF;">ệ</span><span style="color: #6700FF;">u</span>
                         </h1>
-                        <tr th:each="thongbao : ${thongbaos}">
-                            <td th:utext="${thongbao.message}"></td>
-                        </tr>
-                        <!--<td th:utext="${thongbao.message}"></td>-->
+<!--                        <tr th:each="thongbao : ${thongbaos}">-->
+<!--                            <td th:utext="${thongbao.message}"></td>-->
+<!--                        </tr>-->
+                        <p class="gioithieu" style="text-align: justify;
+                                                    font-family: Arial, sans-serif;
+                                                    margin: 20px;">
+                            Trang <span class="gioithieu1" style="font-weight: bold;
+                                                            font-style: italic;">NTT Trắc Nghiệm</span> là nền tảng học tập trực tuyến chuyên cung cấp các bài trắc nghiệm và tài liệu ôn thi cho học sinh, sinh viên.
+                            Với giao diện thân thiện và dễ sử dụng, người dùng có thể tiếp cận hàng ngàn câu hỏi trắc nghiệm đa dạng về các môn học như Toán, Văn, Anh, Lý, Hóa, và Sinh.
+                            Ngoài ra, trang còn cung cấp các bài kiểm tra định kỳ và phân tích kết quả, giúp người học nắm bắt kiến thức hiệu quả hơn.
+                            <span class="gioithieu1" style="font-weight: bold;
+                                                            font-style: italic;">NTT Trắc Nghiệm</span> cam kết đồng hành cùng học sinh trên con đường chinh phục tri thức.
+                        </p>                        <!--<td th:utext="${thongbao.message}"></td>-->
                         <div class="slider_text">
 
                             <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">Hãy cùng</h5>
@@ -159,10 +168,6 @@
     </div>
     <!-- slider_area_end -->
 
-    <div>
-        <p>Thời gian hiện tại: <span id="time"></span></p>
-        <p>Thời gian: <span id="countdown"></span></p>
-    </div>
 </div>
 
 <div class="huongdan" id="huongdan">
@@ -284,8 +289,87 @@
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/mail-script.js"></script>
 <script src="js/main.js"></script>
-<script src="js/scripts.js"></script>
+<!--<script src="js/scripts.js"></script>-->
+<script>
+    document.querySelectorAll('.toggle-submenu').forEach(function (link) {
+        link.addEventListener('click', function (event) {
+            event.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
+            const submenu = this.nextElementSibling; // Lấy submenu ngay sau thẻ <a>
 
+            // Kiểm tra xem submenu có đang hiển thị không
+            if (submenu.style.display === 'block') {
+                submenu.style.display = 'none'; // Ẩn submenu
+            } else {
+                submenu.style.display = 'block'; // Hiện submenu
+            }
+        });
+    });
+    // Thay đổi trạng thái của sidebar khi nhấn nút
+    let isHidden = false;
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    const huongdan = document.getElementById('huongdan');
+
+    const area = document.getElementById('area'); // Lấy phần tử popular_catagory_area
+    const toggleButton = document.getElementById('toggleButton');
+
+    toggleButton.addEventListener('click', () => {
+        isHidden = !isHidden;
+
+        if (isHidden) {
+            sidebar.classList.add('sidebar-hidden');
+            content.classList.add('content-hidden');
+            content.classList.add('huongdan-hidden');
+            area.classList.add('area-hidden'); // Thêm lớp để ẩn popular category
+            huongdan.classList.add('huongdan-hidden'); // Thêm lớp để ẩn popular category
+            toggleButton.innerHTML = '&#9776;'; // Biểu tượng nút
+            toggleButton.classList.add('active'); // Thêm lớp active
+        } else {
+            sidebar.classList.remove('sidebar-hidden');
+            content.classList.remove('content-hidden');
+            area.classList.remove('area-hidden'); // Xóa lớp để hiện popular category
+            huongdan.classList.remove('huongdan-hidden'); // Xóa lớp để hiện popular category
+            toggleButton.innerHTML = '&#9776;'; // Biểu tượng nút
+            toggleButton.classList.remove('active'); // Xóa lớp active
+        }
+    });
+
+    // Lấy tất cả các icon-box
+    const iconBoxes = document.querySelectorAll('.icon-box');
+    const notification = document.querySelector('.notification');
+    const overlay = document.querySelector('.overlay');
+    const notificationMessage = document.getElementById('notification-message');
+    const closeButton = document.querySelector('.close-btn');
+
+    // Hàm hiển thị thông báo
+    function showNotification(message) {
+        notificationMessage.textContent = message;
+        notification.style.display = 'block';
+        overlay.style.display = 'block';
+    }
+
+    // Thêm sự kiện click cho mỗi icon-box
+    iconBoxes.forEach(box => {
+        box.addEventListener('click', () => {
+            const message = box.getAttribute('data-message');
+            showNotification(message);
+        });
+    });
+
+    // Đóng thông báo
+    closeButton.addEventListener('click', () => {
+        notification.style.display = 'none';
+        overlay.style.display = 'none';
+    });
+
+    // Đóng thông báo khi click vào overlay
+    overlay.addEventListener('click', () => {
+        notification.style.display = 'none';
+        overlay.style.display = 'none';
+    });
+
+
+</script>
 
 </body>
 </html>

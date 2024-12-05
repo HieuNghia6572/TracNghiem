@@ -154,30 +154,44 @@
 
 <div class="sidebar" id="sidebar">
     <img th:src="@{/test/gif_logo.gif}" alt="GIF" height="110" width="180" style="max-width: 100%; height: auto; border-radius: 15px;margin-left: 24px;">
-    <h2>Chức năng</h2>
-    <ul class="sidebar-menu">
-        <li><a href="/home">🏠 Trang chủ</a></li>
-        <li>
-            <a href="#" class="toggle-submenu">👨‍🎓 Thông tin người dùng ⬇</a>
-            <ul class="submenu">
-                <li><a th:href="@{/profile}">➣ Thông tin cá nhân</a></li>
-                <li><a th:href="@{/profile-information}">➣ Chỉnh sửa thông tin</a></li>
-                <li><a th:href="@{/dethis/ketquathi}">➣ Xem điểm thi</a></li>
-            </ul>
-        </li>
-        <li><a href="/userphongthi">🏫 Danh sách phòng thi</a></li>
-        <li><a href="/monthis">📖 Danh sách tài liệu</a></li>
-    </ul>
+    <h2 style="font-family: 'Times New Roman', serif;">
+        <span style="color: #00FFFF;">C</span><span style="color: #00F4F4;">h</span><span style="color: #00E9EA;">ứ</span><span style="color: #00DEE0;">c</span>
+        <span style="color: #00D3D6;"> </span>
+        <span style="color: #00D3D6;">n</span><span style="color: #00DEE0;">ă</span><span style="color: #00E9EA;">n</span><span style="color: #00F4F4;">g</span>
+    </h2>    <ul class="sidebar-menu">
+    <li><a href="/home">🏠 Trang chủ</a></li>
+    <li>
+        <a href="#" class="toggle-submenu">👨‍🎓 Thông tin người dùng ⬇</a>
+        <ul class="submenu">
+            <li><a th:href="@{/profile}">➣ Thông tin cá nhân</a></li>
+            <li><a th:href="@{/profile-information}">➣ Chỉnh sửa thông tin</a></li>
+            <li><a th:href="@{#}">➣ Xem điểm thi</a></li>
+        </ul>
+    </li>
+    <li><a href="/userphongthi">🏫 Danh sách phòng thi</a></li>
+    <li><a href="#">📖 Hướng dẫn thi</a></li>
+</ul>
 </div>
 
 <div class="content" id="content">
     <div class="container mt-5">
-        <h2 class="text-center">Tất Cả Kết Quả Thi</h2>
+        <h2 class="text-center">
+            <span style="color: #0000FF;">T</span><span style="color: #0000F5;">Ấ</span><span style="color: #0000EB;">T</span>
+            <span style="color: #0000CE;"> </span>
+            <span style="color: #0000E2;">C</span><span style="color: #0000D8;">Ả</span>
+            <span style="color: #0000A8;"> </span>
+            <span style="color: #0000C5;">K</span><span style="color: #0000BB;">Ế</span><span style="color: #0000B1;">T</span>
+            <span style="color: #0000A8;"> </span>
+            <span style="color: #00009E;">Q</span><span style="color: #000094;">U</span><span style="color: #00008B;">Ả</span>
+            <span style="color: #000094;"> </span>
+            <span style="color: #00009E;">T</span><span style="color: #0000A8;">H</span><span style="color: #0000B1;">I</span>
+        </h2>
 
         <table class="table table-striped mt-4" >
             <thead>
             <tr>
                 <th>Tên Đề Thi</th>
+                <th>Tên Môn Thi</th>
                 <th>Số Câu Đúng</th>
                 <th>Tổng Điểm</th>
             </tr>
@@ -185,6 +199,7 @@
             <tbody>
             <tr th:each="ketqua : ${ketquas}">
                 <td th:text="${ketqua.deThi.madethi}">Tên Đề Thi</td>
+                <td th:text="${ketqua.deThi.monthi.tenmonthi}">Tên Môn Thi</td>
                 <td th:text="${ketqua.diem} + ' / ' + ${ketqua.deThi.getTotalQuestions()}">Tổng Số Câu Hỏi Đúng</td>
                 <td th:text="${ketqua.calculateTotalPoints()}">Tổng Điểm</td> <!-- Hiển thị tổng điểm -->
             </tr>
@@ -194,18 +209,44 @@
 </div>
 
 <footer class="bg-primary text-white text-center py-4 mt-5">
-    <div class="container d-flex justify-content-between text-footer">
-        <div class="footer-left">
-            <h5 class="mb-0">Trắc nghiệm NTT</h5>
-            <p class="mb-0">© 2024 Tất cả quyền được bảo lưu.</p>
+    <div class="container d-flex" style="margin: 0px;">
+        <!-- Cột 1: Hình ảnh -->
+        <div class="footer-image" style="flex: 0 0 20%; max-width: 20%;">
+            <img th:src="@{/test/gif_logo.gif}" alt="GIF" height="110" width="180" style="max-width: 100%; height: auto; border-radius: 15px;">
+            <img th:src="@{/img/gvhs.png}" alt="" height="130" width="130">
         </div>
-        <div class="footer-content">
-            <h5 class="mb-0">Thông tin liên hệ</h5>
-            <p class="mb-0">Liên hệ: phanhieunghia1054@gmail.com</p>
+
+        <!-- Cột 2: Nội dung Trắc nghiệm NTT -->
+        <div class="footer-left" style="flex: 0 0 25%; max-width: 25%; text-align: center;">
+            <h3 class="mb-0" style="text-align: center;">Trắc nghiệm NTT</h3>
+            <br>
+            <p class="mb-0" style="line-height: 2.3;">Nền tảng thi trắc nghiệm online</p>
+            <p class="mb-0" style="line-height: 2.3;"> đáng tin cậy</p>
+            <p class="mb-0" style="line-height: 2.3;">© Website 2024 .</p>
+        </div>
+
+        <!-- Cột giữa: Thông tin thêm -->
+        <div class="footer-middle" style="flex: 0 0 25%; max-width: 25%; text-align: left;margin-left: 100px;">
+            <h3 class="mb-0">Tài nguyên:</h3>
+            <br>
+            <p class="mb-0" style="line-height: 2.3;">➢ Hướng dẫn chi tiết </p>
+            <p class="mb-0" style="line-height: 2.3;">➢ Giới thiệu </p>
+            <a href="/profile">
+                <p class="mb-0" style="color:white;line-height: 2.3;">➢ Thông tin người dùng</p>
+            </a>
+
+        </div>
+
+        <!-- Cột 3: Thông tin liên hệ -->
+        <div class="footer-content" style="flex: 0 0 30%; max-width: 30%; text-align: left; margin-left: 200px;">
+            <h3 class="mb-0">Thông tin liên hệ:</h3>
+            <br>
+            <p class="mb-0" style="line-height: 2.3;">🌐 Liên hệ: phanhieunghia1054@gmail.com</p>
+            <p class="mb-0" style="line-height: 2.3;">☎ Số điện thoại: 090525xxx</p>
+            <p class="mb-0" style="line-height: 2.3;">🏡 Địa chỉ: 9, Nguyễn Thị Minh Khai, Phường Bến Nghé, Quận 1, Hồ Chí Minh</p>
         </div>
     </div>
 </footer>
-
 
 <script th:src="@{/js/scripts.js}"></script>
 

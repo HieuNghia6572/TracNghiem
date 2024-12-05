@@ -87,19 +87,23 @@
 </header>
 <div class="sidebar" id="sidebar">
     <img th:src="@{/test/gif_logo.gif}" alt="GIF" height="110" width="180" style="max-width: 100%; height: auto; border-radius: 15px;margin-left: 24px;">
-    <h2>Chức năng</h2>
+    <h2 style="font-family: 'Times New Roman', serif;">
+        <span style="color: #00FFFF;">C</span><span style="color: #00F4F4;">h</span><span style="color: #00E9EA;">ứ</span><span style="color: #00DEE0;">c</span>
+        <span style="color: #00D3D6;"> </span>
+        <span style="color: #00D3D6;">n</span><span style="color: #00DEE0;">ă</span><span style="color: #00E9EA;">n</span><span style="color: #00F4F4;">g</span>
+    </h2>
     <ul class="sidebar-menu">
         <li><a href="/home">🏠 Trang chủ</a></li>
         <li>
             <a href="#" class="toggle-submenu">👨‍🎓 Thông tin người dùng ⬇</a>
             <ul class="submenu">
-                <li><a th:href="@{/profile}">➣ Thông tin cá nhân</a></li>
+                <li><a th:href="@{#}">➣ Thông tin cá nhân</a></li>
                 <li><a th:href="@{/profile-information}">➣ Chỉnh sửa thông tin</a></li>
                 <li><a th:href="@{/dethis/ketquathi}">➣ Xem điểm thi</a></li>
             </ul>
         </li>
         <li><a href="/userphongthi">🏫 Danh sách phòng thi</a></li>
-        <li><a href="/monthis">📖 Danh sách tài liệu</a></li>
+        <li><a href="/monthis">📖 Hướng dẫn thi</a></li>
     </ul>
 </div>
 
@@ -152,17 +156,43 @@
 </div>
 
 
-        <footer class="bg-primary text-white text-center py-4">
-    <div class="container d-flex justify-content-between text-footer">
-        <div class="footer-left">
-            <h5 class="mb-0">Trắc nghiệm NTT</h5>
-            <p class="mb-0">© 2024 Tất cả quyền được bảo lưu.</p>
-        </div>
-        <div class="footer-content">
-            <h5 class="mb-0">Thông tin liên hệ</h5>
-            <p class="mb-0">Liên hệ: phanhieunghia1054@gmail.com</p>
+<footer class="bg-primary text-white text-center py-4 mt-5">
+    <div class="container d-flex" style="margin: 0px;">
+        <!-- Cột 1: Hình ảnh -->
+        <div class="footer-image" style="flex: 0 0 20%; max-width: 20%;">
+            <img th:src="@{/test/gif_logo.gif}" alt="GIF" height="110" width="180" style="max-width: 100%; height: auto; border-radius: 15px;">
+            <img th:src="@{/img/gvhs.png}" alt="" height="130" width="130">
         </div>
 
+        <!-- Cột 2: Nội dung Trắc nghiệm NTT -->
+        <div class="footer-left" style="flex: 0 0 25%; max-width: 25%; text-align: center;">
+            <h3 class="mb-0" style="text-align: center;">Trắc nghiệm NTT</h3>
+            <br>
+            <p class="mb-0" style="line-height: 2.3;">Nền tảng thi trắc nghiệm online</p>
+            <p class="mb-0" style="line-height: 2.3;"> đáng tin cậy</p>
+            <p class="mb-0" style="line-height: 2.3;">© Website 2024 .</p>
+        </div>
+
+        <!-- Cột giữa: Thông tin thêm -->
+        <div class="footer-middle" style="flex: 0 0 25%; max-width: 25%; text-align: left;margin-left: 100px;">
+            <h3 class="mb-0">Tài nguyên:</h3>
+            <br>
+            <p class="mb-0" style="line-height: 2.3;">➢ Hướng dẫn chi tiết </p>
+            <p class="mb-0" style="line-height: 2.3;">➢ Giới thiệu </p>
+            <a href="/profile">
+                <p class="mb-0" style="color:white;line-height: 2.3;">➢ Thông tin người dùng</p>
+            </a>
+
+        </div>
+
+        <!-- Cột 3: Thông tin liên hệ -->
+        <div class="footer-content" style="flex: 0 0 30%; max-width: 30%; text-align: left; margin-left: 200px;">
+            <h3 class="mb-0">Thông tin liên hệ:</h3>
+            <br>
+            <p class="mb-0" style="line-height: 2.3;">🌐 Liên hệ: phanhieunghia1054@gmail.com</p>
+            <p class="mb-0" style="line-height: 2.3;">☎ Số điện thoại: 090525xxx</p>
+            <p class="mb-0" style="line-height: 2.3;">🏡 Địa chỉ: 9, Nguyễn Thị Minh Khai, Phường Bến Nghé, Quận 1, Hồ Chí Minh</p>
+        </div>
     </div>
 </footer>
 <script th:src="@{/js/scripts.js}"></script>
