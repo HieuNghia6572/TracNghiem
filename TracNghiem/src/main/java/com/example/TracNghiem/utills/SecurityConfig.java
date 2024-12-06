@@ -43,7 +43,9 @@ public class SecurityConfig {
                         .requestMatchers("/cauhois/edit/**","/cauhois", "/cauhois/add", "/cauhois/delete",
                                 "/cathis/add","/cathis","/cathis/edit/**","/cathis/delete",
                                 "/phongthis/add","/phongthis","/phongthis/edit/**","/phongthis/delete",
-                                "/monthis/add","/monthis","/monthis/edit/**","/monthis/delete")
+                                "/monthis/add","/monthis","/monthis/edit/**","/monthis/delete",
+                                "/dethis/add","/dethis","/dethis/edit/**","/dethis/delete",
+                                "/thongbaos/add","/thongbaos","/thongbaos/edit/**","/thongbaos/delete")
                         .hasAnyAuthority("ADMIN")
                         .anyRequest().authenticated()
                 ) .

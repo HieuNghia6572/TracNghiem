@@ -426,4 +426,8 @@ private void saveChiTietDeThi(Long deThiId, User user, Long id, String selectedA
         }
     }
 
+    @GetMapping("/huongdanthi")
+    public String showHuongDanThi() {
+        return "users/huongdanthi"; // Trả về trang huongdanthi.html
+    }
 }

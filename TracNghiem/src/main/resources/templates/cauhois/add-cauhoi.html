@@ -90,9 +90,21 @@
     </style>
 </head>
 <body>
-<section layout:fragment="content" class="container mt-5">
+<section layout:fragment="content" class="container mt-5" style="margin-top: 1rem !important;">
     <div class="form-frame"> <!-- Khung cho nội dung -->
-        <h3>Nhập câu hỏi và đáp án</h3>
+        <h1 style="text-align: center ">
+            <span style="color: #0000FF;">N</span><span style="color: #0000F4;">H</span><span style="color: #0000E9;">Ậ</span><span style="color: #0000DF;">P</span>
+            <span style="color: #0000D4;"> </span>
+            <span style="color: #0000CA;">C</span><span style="color: #0000BF;">Â</span><span style="color: #0000B5;">U</span>
+            <span style="color: #0000AA;"> </span>
+            <span style="color: #0000A0;">H</span><span style="color: #000095;">Ỏ</span><span style="color: #00008B;">I</span>
+            <span style="color: #000095;"> </span>
+            <span style="color: #0000A0;">V</span><span style="color: #0000AA;">À</span>
+            <span style="color: #0000B5;"> </span>
+            <span style="color: #0000BF;">Đ</span><span style="color: #0000CA;">Á</span><span style="color: #0000D4;">P</span>
+            <span style="color: #0000DF;"> </span>
+            <span style="color: #0000E9;">Á</span><span style="color: #0000F4;">N</span>
+        </h1>
         <form th:action="@{/cauhois/add}" th:object="${cauhoi}"  method="post"  enctype="multipart/form-data">
             <input type="hidden" th:field="*{id}"/> <!-- ID câu hỏi -->
 
@@ -153,8 +165,8 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-custom">Thêm Câu Hỏi</button>
-            <a th:href="@{/cauhois}" class="btn btn-link">Trở về</a>
+            <button type="submit" class="btn btn-primary">Thêm Câu Hỏi</button>
+            <a th:href="@{/cauhois}" class="btn btn-secondary">Trở về</a>
         </form>
     </div> <!-- Kết thúc khung -->
 </section>

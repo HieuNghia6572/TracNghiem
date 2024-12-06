@@ -89,68 +89,47 @@
     </style>
 </head>
 <body>
-<section layout:fragment="content" class="container mt-5">
-    <h1>Thêm ca thi mới</h1>
-    <form th:action="@{/cathis/add}" th:object="${cathi}" method="post" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="tencathi" class="form-label">Tên ca thi</label>
-            <input type="text" th:field="*{tencathi}" class="form-control" id="tencathi" required>
-            <div class="text-danger" th:if="${#fields.hasErrors('tencathi')}"
-                 th:errors="*{tencathi}"></div>
-        </div>
-        <div class="mb-3">
-            <select class="form-control" id="monthi" name="monthi.id">
-                <option value="">-- Chon Mon Thi --</option>
-                <option th:each="monthi : ${monthis}" th:value="${monthi.id}"
-                        th:text="${monthi.tenmonthi}"></option>
-            </select>
-        </div>
+<section layout:fragment="content" class="container mt-5" style="margin-top: 1rem !important;">
+    <div class="form-frame">
+        <h1 style="text-align: center ">
+            <span style="color: #0000FF;">T</span><span style="color: #0000E9;">H</span><span style="color: #0000D4;">Ê</span><span style="color: #0000BF;">M</span>
+            <span style="color: #0000AA;"> </span>
+            <span style="color: #000095;">C</span><span style="color: #000095;">A</span>
+            <span style="color: #0000AA;"> </span>
+            <span style="color: #0000BF;">T</span><span style="color: #0000D4;">H</span><span style="color: #0000E9;">I</span>
+        </h1>
+        <form th:action="@{/cathis/add}" th:object="${cathi}" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="tencathi" class="form-label">Tên ca thi</label>
+                <input type="text" th:field="*{tencathi}" class="form-control" id="tencathi" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('tencathi')}"
+                     th:errors="*{tencathi}"></div>
+            </div>
+            <div class="mb-3">
+                <select class="form-control" id="monthi" name="monthi.id">
+                    <option value="">-- Chọn Môn Thi --</option>
+                    <option th:each="monthi : ${monthis}" th:value="${monthi.id}"
+                            th:text="${monthi.tenmonthi}"></option>
+                </select>
+            </div>
 
-        <!--<div class="mb-3">
-            <label for="tenmonhoc" class="form-label">Tên môn học:</label>
-            <input type="text" th:field="*{tenmonhoc}" class="form-control" id="tenmonhoc" required>
-            <div class="text-danger" th:if="${#fields.hasErrors('tenmonhoc')}"
-                 th:errors="*{tenmonhoc}"></div>
-        </div>-->
+            <div class="mb-3">
+                <label for="tgbd" class="form-label">Thời gian bắt đầu:</label>
+                <input type="datetime-local" th:field="*{tgbd}" class="form-control" id="tgbd" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('tgbd')}"
+                     th:errors="*{tgbd}"></div>
+            </div>
+            <div class="mb-3">
+                <label for="tgkt" class="form-label">Thời gian kết thúc:</label>
+                <input type="datetime-local" th:field="*{tgkt}" class="form-control" id="tgkt" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('tgkt')}"
+                     th:errors="*{tgkt}"></div>
+            </div>
 
-        <div class="mb-3">
-            <label for="tgbd" class="form-label">Thời gian bắt đầu:</label>
-            <input type="datetime-local" th:field="*{tgbd}" class="form-control" id="tgbd" required>
-            <div class="text-danger" th:if="${#fields.hasErrors('tgbd')}"
-                 th:errors="*{tgbd}"></div>
-        </div>
-        <div class="mb-3">
-            <label for="tgkt" class="form-label">Thời gian kết thúc:</label>
-            <input type="datetime-local" th:field="*{tgkt}" class="form-control" id="tgkt" required>
-            <div class="text-danger" th:if="${#fields.hasErrors('tgkt')}"
-                 th:errors="*{tgkt}"></div>
-        </div>
-
-<!--        <select class="form-control" id="monthi" name="monthi.id">-->
-<!--            <option value=""> chon mon Thi</option>-->
-<!--            <option th:each="monthi : ${categories}" th:value="${monthi.id}"-->
-<!--                    th:text="${monthi.name}"></option>-->
-<!--        </select>-->
-
-        <!-- <div class="mb-3">
-             <label for="theloai" class="form-label">Thể loại:</label>
-             <select th:field="*{theloai}" class="form-control" id="theloai">
-                 <option th:each="theloai : ${theloais}"
-                         th:value="${theloai.id}" th:text="${theloai.ten}"></option>
-             </select>
-         </div>-->
-        <!--<div class="mb-3">
-            <label for="mota" class="form-label">Mô tả:</label>
-            <textarea th:field="*{mota}" class="form-control"
-                      id="mota"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="image"  class="form-label">Hình:</label>
-            <input type="file" id="image" name="image" class="form-control" />
-        </div>-->
-        <button type="submit" class="btn btn-primary">Thêm ca thi</button>
-        <a th:href="@{/cathis}" class="btn btn-link">Trở về</a>
-    </form>
+            <button type="submit" class="btn btn-primary">Thêm ca thi</button>
+            <a th:href="@{/cathis}" class="btn btn-secondary">Trở về</a>
+        </form>
+    </div>
 </section>
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">

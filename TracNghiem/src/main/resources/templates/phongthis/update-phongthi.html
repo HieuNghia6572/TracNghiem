@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-    <title>Cập nhật câu hoi</title>
+    <title>Cập nhật phòng thi</title>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
@@ -89,12 +89,21 @@
     </style>
 </head>
 <body>
-<section layout:fragment="content" class="container mt-5">
-    <h1>Chỉnh sửa câu hỏi</h1>
+<section layout:fragment="content" class="container mt-5" style="margin-top: 1rem !important;">
+    <div class="form-frame">
+        <h1 style="text-align: center ">
+            <span style="color: #0000FF;">C</span><span style="color: #0000F2;">H</span><span style="color: #0000E6;">Ỉ</span><span style="color: #0000DA;">N</span><span style="color: #0000CE;">H</span>
+            <span style="color: #0000C1;"> </span>
+            <span style="color: #0000B5;">S</span><span style="color: #0000A9;">Ử</span><span style="color: #00009D;">A</span>
+            <span style="color: #000091;"> </span>
+            <span style="color: #000091;">P</span><span style="color: #00009D;">H</span><span style="color: #0000A9;">Ò</span><span style="color: #0000B5;">N</span><span style="color: #0000C1;">G</span>
+            <span style="color: #0000CE;"> </span>
+            <span style="color: #0000DA;">T</span><span style="color: #0000E6;">H</span><span style="color: #0000F2;">I</span>
+        </h1>
     <form th:action="@{/phongthis/update/{id}(id=${phongthi.id})}"
           th:object="${phongthi}" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
         <div class="mb-3">
-            <label for="maPhong" class="form-label">Ma phòng thi:</label>
+            <label for="maPhong" class="form-label">Mã phòng thi:</label>
             <input type="text" th:field="*{maPhong}" class="form-control" id="maPhong" required>
             <div class="text-danger" th:if="${#fields.hasErrors('maPhong')}"
                  th:errors="*{maPhong}"></div>
@@ -105,24 +114,27 @@
             <div class="text-danger" th:if="${#fields.hasErrors('tenPhong')}"
                  th:errors="*{tenPhong}"></div>
         </div>
-        <!--<div class="mb-3">
-            &lt;!&ndash; <label for="tencathi" class="form-label">Tên  Môn Thi</label>&ndash;&gt;
-            <select class="form-control" id="cathi" name="cathi.id">
-                <option value="">&#45;&#45; Chon Ca Thi &#45;&#45;</option>
-                <option th:each="cathi : ${cathis}" th:value="${cathi.id}"
-                        th:text="${cathi.tencathi}"></option>
-            </select>
-        </div>-->
+
         <div class="mb-3">
-            <!--<label for="cauhoi" class="form-label">Mã cau hoi  </label>-->
+            <label for="cathi" class="form-label">Chỉnh Sửa Ca Thi:</label>
             <select th:field="*{cathi.id}" class="form-control"  id="cathi" name="cathi.id">
                 <option th:each="cathi : ${cathis}" th:value="${cathi.id}"
-                        th:text="${cathi.tencathi}" th:selected="${cathi.id ==phongthi.cathi.tencathi}"></option>
-
+                        th:text="${cathi.tencathi} + ' - ' + ${cathi.tgbd} + ' - ' + ${cathi.tgkt}" th:selected="${cathi.id ==phongthi.cathi.tencathi}"></option>
             </select>
+        </div>
 
-        </div>        <button type="submit" class="btn btn-primary">Cap Nhat</button>
+        <div class="mb-3">
+            <label for="dethi" class="form-label">Chỉnh Sửa Đề Thi:</label>
+            <select th:field="*{dethi.id}" class="form-control"  id="dethi" name="dethi.id">
+                <option th:each="dethi : ${dethis}" th:value="${dethi.id}"
+                        th:text="${dethi.madethi} + ' - ' + ${dethi.monthi.tenmonthi}" th:selected="${dethi.id ==phongthi.dethi.madethi}"></option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-custom">Cập nhật phòng thi</button>
+        <a th:href="@{/phongthis}" class="btn btn-secondary">Trở về</a>
     </form>
+    </div>
 </section>
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">

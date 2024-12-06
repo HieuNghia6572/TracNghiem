@@ -79,7 +79,15 @@
 
 <body>
 <section layout:fragment="content">
-    <h1>Danh sách Phòng Thi </h1>
+    <h1 style="text-align: center ;margin-bottom:-15px;margin-top:-15px">
+        <span style="color: #0000FF;">D</span><span style="color: #0000F2;">A</span><span style="color: #0000E6;">N</span><span style="color: #0000DA;">H</span>
+        <span style="color: #0000CE;"> </span>
+        <span style="color: #0000C1;">S</span><span style="color: #0000B5;">Á</span><span style="color: #0000A9;">C</span><span style="color: #00009D;">H</span>
+        <span style="color: #000091;"> </span>
+        <span style="color: #000091;">P</span><span style="color: #00009D;">H</span><span style="color: #0000A9;">Ò</span><span style="color: #0000B5;">N</span><span style="color: #0000C1;">G</span>
+        <span style="color: #0000CE;"> </span>
+        <span style="color: #0000DA;">T</span><span style="color: #0000E6;">H</span><span style="color: #0000F2;">I</span>
+    </h1>
     <section class="container mt-5">
     <table id="questionTable" class="table table-bordered table-hover">
         <thead class="table-dark">
@@ -87,7 +95,10 @@
             <th>ID</th>
             <th>Mã Phòng</th>
             <th>Tên Phòng</th>
+            <th>Môn Thi</th>
+            <th>Mã Đề Thi</th>
             <th>Ca Thi</th>
+            <th>Bắt Đầu - KếtThúc </th>
             <th>Chức Năng</th>
 
         </tr>
@@ -97,11 +108,10 @@
             <td th:text="${phongthi.id}"></td>
             <td th:text="${phongthi.maPhong}"></td>
             <td th:text="${phongthi.tenPhong}"></td>
+            <td th:text="${phongthi.dethi.monthi.tenmonthi}"></td>
+            <td th:text="${phongthi.dethi.madethi}"></td>
             <td th:text="${phongthi.cathi.tencathi}"></td>
-           <!-- <td th:text="${cathi.tencathi}"></td>-->
-
-            <!-- <td> <img th:src="${sanpham.ImgUrl}" width="100px" height="100px"></td>
-             <td th:text="${sanpham.theloai.ten}"></td>-->
+            <td th:text="${phongthi.cathi.tgbd} + ' - ' + ${phongthi.cathi.tgkt}"></td>
             <td>
                 <div>
                     <a th:href="@{/phongthis/edit/{id}(id=${phongthi.id})}" class="btn btn-success btn-sm">Chỉnh sửa</a>

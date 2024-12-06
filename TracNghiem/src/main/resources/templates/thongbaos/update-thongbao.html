@@ -89,8 +89,17 @@
     </style>
 </head>
 <body>
-<section layout:fragment="content" class="container mt-5">
-    <h1>Chỉnh sửa câu hỏi</h1>
+<section layout:fragment="content" class="container mt-5" style="margin-top: 1rem !important;">
+    <div class="form-frame">
+    <h1 style="text-align: center ">
+        <span style="color: #0000FF;">C</span><span style="color: #0000F3;">H</span><span style="color: #0000E7;">Ỉ</span><span style="color: #0000DC;">N</span><span style="color: #0000D0;">H</span>
+        <span style="color: #0000C5;"> </span>
+        <span style="color: #0000B9;">S</span><span style="color: #0000AD;">Ử</span><span style="color: #0000A2;">A</span>
+        <span style="color: #000096;"> </span>
+        <span style="color: #00008B;">T</span><span style="color: #000096;">H</span><span style="color: #0000A2;">Ô</span><span style="color: #0000AD;">N</span><span style="color: #0000B9;">G</span>
+        <span style="color: #0000C5;"> </span>
+        <span style="color: #0000D0;">B</span><span style="color: #0000DC;">Á</span><span style="color: #0000E7;">O</span>
+    </h1>
     <form th:action="@{/thongbaos/update/{id}(id=${thongbao.id})}"
           th:object="${thongbao}" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
         <div class="mb-3">
@@ -101,8 +110,11 @@
         </div>
 
 
-             <button type="submit" class="btn btn-primary">Cap Nhat</button>
+        <button type="submit" class="btn btn-custom">Cập nhật thông báo</button>
+        <a th:href="@{/thongbaos}" class="btn btn-secondary">Trở về</a>
+
     </form>
+    </div>
 </section>
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">

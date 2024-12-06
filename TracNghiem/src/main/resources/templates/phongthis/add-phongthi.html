@@ -90,8 +90,15 @@
     </style>
 </head>
 <body>
-<section layout:fragment="content" class="container mt-5">
-    <h1>Thêm Phòng Thi Mới</h1>
+<section layout:fragment="content" class="container mt-5" style="margin-top: 1rem !important;">
+    <div class="form-frame">
+        <h1 style="text-align: center ">
+            <span style="color: #0000FF;">T</span><span style="color: #0000EE;">H</span><span style="color: #0000DD;">Ê</span><span style="color: #0000CD;">M</span>
+            <span style="color: #0000BC;"> </span>
+            <span style="color: #0000AC;">P</span><span style="color: #00009B;">H</span><span style="color: #00008B;">Ò</span><span style="color: #00009B;">N</span><span style="color: #0000AC;">G</span>
+            <span style="color: #0000BC;"> </span>
+            <span style="color: #0000CD;">T</span><span style="color: #0000DD;">H</span><span style="color: #0000EE;">I</span>
+        </h1>
     <form th:action="@{/phongthis/add}" th:object="${phongthi}" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="maPhong" class="form-label">Mã Phòng:</label>
@@ -105,33 +112,28 @@
             <div class="text-danger" th:if="${#fields.hasErrors('tenPhong')}"
                  th:errors="*{tenPhong}"></div>
         </div>
-        <!--<div class="mb-3">
-            <select class="form-control" id="monthi" name="monthi.id">
-                <option value="">&#45;&#45; Chon Mon Thi &#45;&#45;</option>
-                <option th:each="monthi : ${monthis}" th:value="${monthi.id}"
-                        th:text="${monthi.tenmonthi}"></option>
-            </select>
-        </div>-->
+
         <div class="mb-3">
-           <!-- <label for="tencathi" class="form-label">Tên  Môn Thi</label>-->
+            <label for="cathi" class="form-label">Chọn Ca Thi:</label>
             <select class="form-control" id="cathi" name="cathi.id">
-                <option value="">-- Chon Ca Thi --</option>
+                <option value="">-- Chọn Ca Thi --</option>
                 <option th:each="cathi : ${cathis}" th:value="${cathi.id}"
-                        th:text="${cathi.tencathi}"></option>
+                        th:text="${cathi.tencathi} + ' - ' + ${cathi.tgbd} + ' - ' + ${cathi.tgkt}"></option>
             </select>
         </div>
 
         <div class="mb-3">
+            <label for="dethi" class="form-label">Chọn Đề Thi:</label>
             <select class="form-control" id="dethi" name="dethi.id">
-                <option value="">-- Chon De Thi --</option>
+                <option value="">-- Chọn Đề Thi --</option>
                 <option th:each="dethi : ${dethis}" th:value="${dethi.id}"
-                        th:text="${dethi.madethi}"></option>
+                        th:text="${dethi.madethi} + ' - ' + ${dethi.monthi.tenmonthi}"></option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Thêm Phòng Thi</button>
-        <a th:href="@{/phongthis}" class="btn btn-link">Trở về</a>
+        <a th:href="@{/phongthis}" class="btn btn-secondary">Trở về</a>
     </form>
-
+    </div>
 </section>
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">

@@ -90,9 +90,23 @@
     </style>
 </head>
 <body>
-<section layout:fragment="content" class="container mt-5">
+<section layout:fragment="content" class="container mt-5" style="margin-top: 1rem !important;">
     <div class="form-frame"> <!-- Khung cho nội dung -->
-        <h3>Chỉnh sửa câu hỏi và đáp án</h3>
+        <h1 style="text-align: center ">
+            <span style="color: #0000FF;">C</span><span style="color: #0000F6;">H</span><span style="color: #0000ED;">Ỉ</span><span style="color: #0000E5;">N</span><span style="color: #0000DC;">H</span>
+            <span style="color: #0000D4;"> </span>
+            <span style="color: #0000CB;">S</span><span style="color: #0000C2;">Ử</span><span style="color: #0000BA;">A</span>
+            <span style="color: #0000B1;"> </span>
+            <span style="color: #0000A9;">C</span><span style="color: #0000A0;">Â</span><span style="color: #000097;">U</span>
+            <span style="color: #00008F;"> </span>
+            <span style="color: #00008F;">H</span><span style="color: #000097;">Ỏ</span><span style="color: #0000A0;">I</span>
+            <span style="color: #0000A9;"> </span>
+            <span style="color: #0000B1;">V</span><span style="color: #0000BA;">À</span>
+            <span style="color: #0000C2;"> </span>
+            <span style="color: #0000CB;">Đ</span><span style="color: #0000D4;">Á</span><span style="color: #0000DC;">P</span>
+            <span style="color: #0000E5;"> </span>
+            <span style="color: #0000ED;">Á</span><span style="color: #0000F6;">N</span>
+        </h1>
         <form th:action="@{/cauhois/update/{id}(id=${cauhoi.id})}" method="post" th:object="${cauhoi}" enctype="multipart/form-data"> <!-- Đường dẫn đến controller -->
             <input type="hidden" th:field="*{id}"/> <!-- ID câu hỏi -->
 
@@ -139,9 +153,9 @@
             </div>
 
             <div class="form-group-cd">
-                <p><label class="form-label" for="capdo">Cap Do:</label></p>
-                <select th:field="*{capdoId}" class="form-control" id="capdo" name="capdoId">
-                    <option value="">-- Chon Cap Do --</option>
+                <p><label class="form-label" style="margin-top: 20px !important" for="capdo">Cấp độ:</label></p>
+                <select th:field="*{capdoId}" class="form-control" style="width:30% !important" id="capdo" name="capdoId">
+                    <option value="">-- Chọn cấp độ --</option>
                     <option th:each="capdo : ${capdos}" th:value="${capdo.id}"
                             th:text="${capdo.tencapdo}"></option>
                 </select>
@@ -158,8 +172,8 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-custom">Lưu Câu Hỏi</button>
-            <a th:href="@{/cauhois}" class="btn btn-link">Trở về</a>
+            <button type="submit" class="btn btn-custom">Cập nhật câu hỏi</button>
+            <a th:href="@{/cauhois}" class="btn btn-secondary">Trở về</a>
         </form>
     </div> <!-- Kết thúc khung -->
 </section>

@@ -62,6 +62,8 @@ public class PhongThiController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid phongthi Id: " + id));
         model.addAttribute("phongthi", phongThi);
         model.addAttribute("cathis", caThiService.getAllCaThi());
+        model.addAttribute("dethis", deThiService.getAllDeThi());
+
         return "phongthis/update-phongthi"; // Không cần dấu /
     }
 
