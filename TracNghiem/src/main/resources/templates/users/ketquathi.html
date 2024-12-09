@@ -56,6 +56,13 @@
             text-overflow: ellipsis;
             max-width: 150px;
         }
+        .highlight {
+            background-color: #ffeb3b; /* Màu nền vàng */
+            font-weight: bold;         /* Đậm chữ */
+            border: 1px solid #fbc02d; /* Viền màu vàng đậm */
+            text-align: center;        /* Căn giữa chữ */
+            border-radius: 4px;       /* Bo góc cho đẹp */
+        }
     </style>
     <style>
         .dataTables_info,
@@ -223,11 +230,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr style="text-">
                 <td th:text="${userDeThi.deThi.madethi}">Tên Đề Thi</td>
                 <td th:text="${userDeThi.deThi.monthi.tenmonthi}">Tên Môn Thi</td>
                 <td th:text="${userDeThi.diem} + ' / ' + ${userDeThi.deThi.getTotalQuestions()}">Tổng Số Câu Hỏi Đúng</td>
-                <td th:text="${userDeThi.calculateTotalPoints()}">Tổng Điểm</td> <!-- Hiển thị tổng điểm -->
+                <td class="highlight" style="width: 20%; display: inline-block;" th:text="${userDeThi.calculateTotalPoints()}">Tổng Điểm</td> <!-- Hiển thị tổng điểm -->
                 <!--<td th:text="${thoiGianLamBai}">Thời Gian Làm Bài</td>--> <!-- Hiển thị thời gian làm bài -->
             </tr>
             </tbody>
@@ -256,8 +263,12 @@
         <div class="footer-middle" style="flex: 0 0 25%; max-width: 25%; text-align: left;margin-left: 100px;">
             <h3 class="mb-0">Tài nguyên:</h3>
             <br>
-            <p class="mb-0" style="line-height: 2.3;">➢ Hướng dẫn chi tiết </p>
-            <p class="mb-0" style="line-height: 2.3;">➢ Giới thiệu </p>
+            <a href="/huongdanthi">
+                <p class="mb-0" style="line-height: 2.3;color:white">➢ Hướng dẫn chi tiết </p>
+            </a>
+            <a href="/userphongthi">
+                <p class="mb-0" style="line-height: 2.3;color:white">➢ Phòng thi </p>
+            </a>
             <a href="/profile">
                 <p class="mb-0" style="color:white;line-height: 2.3;">➢ Thông tin người dùng</p>
             </a>

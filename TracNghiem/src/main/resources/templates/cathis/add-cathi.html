@@ -105,13 +105,13 @@
                 <div class="text-danger" th:if="${#fields.hasErrors('tencathi')}"
                      th:errors="*{tencathi}"></div>
             </div>
-            <div class="mb-3">
-                <select class="form-control" id="monthi" name="monthi.id">
-                    <option value="">-- Chọn Môn Thi --</option>
-                    <option th:each="monthi : ${monthis}" th:value="${monthi.id}"
-                            th:text="${monthi.tenmonthi}"></option>
-                </select>
-            </div>
+<!--            <div class="mb-3">-->
+<!--                <select class="form-control" id="monthi" name="monthi.id">-->
+<!--                    <option value="">&#45;&#45; Chọn Môn Thi &#45;&#45;</option>-->
+<!--                    <option th:each="monthi : ${monthis}" th:value="${monthi.id}"-->
+<!--                            th:text="${monthi.tenmonthi}"></option>-->
+<!--                </select>-->
+<!--            </div>-->
 
             <div class="mb-3">
                 <label for="tgbd" class="form-label">Thời gian bắt đầu:</label>

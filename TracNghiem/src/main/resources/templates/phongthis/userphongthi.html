@@ -196,14 +196,14 @@
                     <option value="">Lọc theo ca thi</option>
                     <option th:each="caThi : ${cathis}" th:value="${caThi.tencathi}" th:text="${caThi.tencathi}"></option>
                 </select>
-                <select id="maPhongThiSelect" class="form-select1 ms-2 custom-select" onchange="searchCauhois()">
-                    <option value="">Lọc theo mã phòng thi</option>
-                    <option th:each="phongThi : ${phongthis}" th:value="${phongThi.maPhong}" th:text="${phongThi.maPhong}"></option>
-                </select>
-                <select id="soPhongThiSelect" class="form-select1 ms-2 custom-select" onchange="searchCauhois()">
-                    <option value="">Lọc theo số phòng thi</option>
-                    <option th:each="phongThi : ${phongthis}" th:value="${phongThi.tenPhong}" th:text="${phongThi.tenPhong}"></option>
-                </select>
+<!--                <select id="maPhongThiSelect" class="form-select1 ms-2 custom-select" onchange="searchCauhois()">-->
+<!--                    <option value="">Lọc theo mã phòng thi</option>-->
+<!--                    <option th:each="phongThi : ${phongthis}" th:value="${phongThi.maPhong}" th:text="${phongThi.maPhong}"></option>-->
+<!--                </select>-->
+<!--                <select id="soPhongThiSelect" class="form-select1 ms-2 custom-select" onchange="searchCauhois()">-->
+<!--                    <option value="">Lọc theo số phòng thi</option>-->
+<!--                    <option th:each="phongThi : ${phongthis}" th:value="${phongThi.tenPhong}" th:text="${phongThi.tenPhong}"></option>-->
+<!--                </select>-->
             </div>
         </div>
 
@@ -211,7 +211,7 @@
             <table id="questionTable" class="table table-bordered table-hover display">
                 <thead class="table-dark">
                 <tr>
-                    <th>ID</th>
+<!--                    <th>ID</th>-->
                     <th>Mã Phòng</th>
                     <th>Phòng Thi Số</th>
                     <th>Ca Thi</th>
@@ -222,19 +222,20 @@
                 </thead>
                 <tbody>
                 <tr th:each="phongthi : ${phongthis}">
-                    <td th:text="${phongthi.id}">1</td>
+<!--                    <td th:text="${phongthi.id}">1</td>-->
                     <td th:text="${phongthi.maPhong}">Mã Phòng</td>
                     <td th:text="${phongthi.tenPhong}">Tên Phòng</td>
                     <td th:text="${phongthi.cathi.tencathi}">Tên Ca</td>
                     <td th:text="${phongthi.cathi.tgbd} + ' - ' + ${phongthi.cathi.tgkt}">Thời Gian</td>
-                    <td th:text="${phongthi.cathi.monthi.tenmonthi}">Tên Môn Thi</td>
+                    <td th:text="${phongthi.dethi.monthi.tenmonthi}">Tên Môn Thi</td>
                     <td>
                        <!-- <a th:href="@{/hienthidethi/{id}(id=${phongthi.dethi.id})}" class="btn btn-success btn-sm">
                             Hiện Thi Đề Thi - Mã Đề: <span th:text="${phongthi.dethi.id}"></span>
                         </a>-->
                         <a th:href="@{/hienthidethi/{id}/{cathiId}(id=${phongthi.dethi.id}, cathiId=${phongthi.cathi.id})}" class="btn btn-success btn-sm">
-                            Hiện Thi Đề Thi - Mã Đề: <span th:text="${phongthi.dethi.id}"></span>
-                        </a>                    </td>
+                            ➣ Vào thi <!--<span th:text="${phongthi.dethi.id}"></span>-->
+                        </a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -262,8 +263,12 @@
             <div class="footer-middle" style="flex: 0 0 25%; max-width: 25%; text-align: left;margin-left: 100px;">
                 <h3 class="mb-0">Tài nguyên:</h3>
                 <br>
-                <p class="mb-0" style="line-height: 2.3;">➢ Hướng dẫn chi tiết </p>
-                <p class="mb-0" style="line-height: 2.3;">➢ Giới thiệu </p>
+                <a href="/huongdanthi">
+                    <p class="mb-0" style="line-height: 2.3;color:white">➢ Hướng dẫn chi tiết </p>
+                </a>
+                <a href="#">
+                    <p class="mb-0" style="line-height: 2.3;color:white">➢ Phòng thi </p>
+                </a>
                 <a href="/profile">
                     <p class="mb-0" style="color:white;line-height: 2.3;">➢ Thông tin người dùng</p>
                 </a>
@@ -326,9 +331,9 @@
 
             const table = $('#questionTable').DataTable();
 
-            table.column(3).search(caThiValue); // Cột Tên Ca
-            table.column(5).search(monThiValue); // Cột Tên Môn Thi
-            table.column(1).search(maPhongThiValue); // Cột Mã Phòng
+            table.column(2).search(caThiValue); // Cột Tên Ca
+            table.column(4).search(monThiValue); // Cột Tên Môn Thi
+            table.column(0).search(maPhongThiValue); // Cột Mã Phòng
             table.column(2).search(soPhongThiValue); // Cột Tên Phòng
 
             table.draw(); // Cập nhật lại bảng

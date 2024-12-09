@@ -131,7 +131,7 @@
             existingCauHoi.setDapanB(cauHoi.getDapanB());
             existingCauHoi.setDapanC(cauHoi.getDapanC());
             existingCauHoi.setDapanD(cauHoi.getDapanD());
-
+            existingCauHoi.setMonthiId(cauHoi.getMonthiId());
             // Xử lý tệp hình ảnh nếu có
             if (!imageFile.isEmpty()) {
                 try {

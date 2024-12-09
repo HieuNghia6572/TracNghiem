@@ -95,7 +95,7 @@
             <th>ID</th>
             <th>Tên ca thi</th>
            <!-- <th>Tên phòng thi </th>-->
-            <th>Ten môn học</th>
+<!--            <th>Ten môn học</th>-->
            <!-- <th>ten mon thi</th>-->
             <th>Thời gian bắt đầu thi</th>
             <th>Thời gian kết thúc thi</th>
@@ -109,7 +109,7 @@
             <td th:text="${cathi.id}"></td>
             <td th:text="${cathi.tencathi}"></td>
             <!--<td th:text="${cathi.tenmonhoc}"></td>-->
-            <td th:text="${cathi.monthi.tenmonthi}"></td>
+<!--            <td th:text="${cathi.monthi.tenmonthi}"></td>-->
             <!--<td th:text="${cathi.phongthi.tenPhong}"></td>-->
 
             <td th:text="${cathi.tgbd}"></td>
@@ -122,15 +122,6 @@
                     <a th:href="@{/cathis/delete/{id}(id=${cathi.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Xóa</a>
                 </div>
             </td>
-<!--            <td>-->
-<!--                <form th:action="@{/cart/add}" method="post">-->
-<!--                    <input type="number" name="quantity" min="1" value="1"-->
-<!--                           class="form-control d-inline-block" style="width: 70px;">-->
-<!--                    <input type="hidden" th:value="${cathi.id}"-->
-<!--                           name="productId"/>-->
-<!--                    <button type="submit" class="btn btn-warning btn-sm">Thêm vào giỏ hàng</button>-->
-<!--                </form>-->
-<!--            </td>-->
         </tr>
         </tbody>
     </table>
