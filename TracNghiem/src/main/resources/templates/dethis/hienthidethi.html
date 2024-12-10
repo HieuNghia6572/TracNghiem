@@ -9,32 +9,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <title>Hiển Thị Đề Thi</title>
-    <!--<script>
-        function startCountdown(duration) {
-            console.log("Bắt đầu đếm ngược với thời gian:", duration); // Log thời gian bắt đầu
-            let timer = duration * 60;  // Chuyển đổi phút thành giây
-            let interval = setInterval(function () {
-                let minutes = Math.floor(timer / 60);
-                let seconds = timer % 60;
-                document.getElementById("countdown").innerHTML = minutes + " phút " + seconds + " giây";
-
-                if (&#45;&#45;timer < 0) {
-                    clearInterval(interval);
-                    document.getElementById("countdown").innerHTML = "Đã hết thời gian!";
-                    // Thêm logic kết thúc bài thi hoặc chuyển trang nếu cần
-                     document.getElementById("saveBtn").click();
-                    // Tự động nộp bài khi hết thời gian (nếu có)
-                    document.getElementById("submitBtn").click();
-                }
-            }, 1000);
-        }
-
-        window.onload = function () {
-            let thoiLuong = [[${minutesLeft}]]; // Giá trị từ server
-            console.log("Thời gian còn lại (phút):", thoiLuong); // Log giá trị minutesLeft
-            startCountdown(thoiLuong);
-        };
-    </script>-->
     <script>
         function startCountdown(duration) {
             console.log("Bắt đầu đếm ngược với thời gian:", duration); // Log thời gian bắt đầu
@@ -77,9 +51,6 @@
         };
     </script>
     <style>
-
-
-
         body {
             padding:0px;
         }
@@ -217,6 +188,23 @@
         }
 
     </style>
+    <style>
+        .floating-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #ffffff; /* Màu nền của khung */
+            border: 1px solid #ccc; /* Đường viền */
+            border-radius: 5px; /* Bo góc */
+            padding: 10px; /* Khoảng cách bên trong */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Đổ bóng */
+        }
+
+        .floating-buttons button {
+            margin: 5px 0; /* Khoảng cách giữa các nút */
+            width: 100%; /* Chiều rộng nút */
+        }
+    </style>
     <title>Giao diện thi</title>
 </head>
 <body>
@@ -236,23 +224,26 @@
                 </p>
                 <div class="ml-3" style="color:black; margin-left: 100px !important ;font-weight: bold;">
                     <p class="mb-0">| Thời gian hiện tại: <span id="time"></span> |</p>
-                    <p class="mb-0">| Thời gian thi còn: <span id="countdown"></span> |</p>
-
-
+<!--                    <p class="mb-0">| Thời gian thi còn: <span id="countdown"></span> |</p>-->
                 </div>
-
-
             </div>
-
-
         </div>
     </div>
 </header>
 
 <div class="content" id="content">
     <div class="row" style="margin-right: 0px !important">
-        <div class="col-2" style="background-color: #f8f9fa;">
-
+        <div class="col-2" style="background-color: #f8f9fa; position: relative; padding: 20px;">
+            <div class="floating-buttons" style="background-color: #f8f9fa; position: fixed; width: 15%;">
+                <div class="chuy" style="color:red;font-size: 20px;font-weight: bold;">CHÚ Ý</div>
+                <table>
+                    <tbody>
+                    <tr th:each="thongbao : ${thongbaos}">
+                        <td th:utext="${thongbao.message}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="col-8">
             <h1 style="text-align: center" th:text="${'Mã đề: '+thongtinde.madethi}"></h1>
@@ -305,80 +296,21 @@
             </span>
                     </li>
                 </ul>
-                <button type="submit" class="save-progress" id="saveBtn">Lưu tiến trình</button>
+<!--                <button type="submit" class="save-progress" id="saveBtn">Lưu tiến trình</button>-->
+<!--                <button type="button" class="save-progress" id="saveBtn" onclick="saveProgress()">Lưu tiến trình</button>-->
             </form>
-            <button type="button" class="view-results" id="submitBtn" onclick="viewKetQuaThi()">Nộp Bài</button>
+<!--            <button type="button" class="view-results" id="submitBtn" onclick="viewKetQuaThi()">Nộp Bài</button>-->
         </div>
-        <div class="col-2"style="background-color: #f8f9fa;">
-
+        <div class="col-2" style="background-color:#f8f9fa" >
+            <div class="floating-buttons" style="background-color: #f8f9fa; position: fixed; right: 40px; top: 80%; transform: translateY(-50%);">
+                <p class="mb-0" style="font-weight: bold;">Thời gian thi còn: </p>
+                <a id="countdown" style="color: red;font-weight: bold;"></a>
+                <button type="button" class="save-progress" id="saveBtn" onclick="saveProgress()">Lưu tiến trình</button>
+                <button type="button" class="view-results" id="submitBtn" onclick="viewKetQuaThi()">Nộp Bài</button>
+            </div>
         </div>
     </div>
 </div>
-<!--<div class="content" id="content">
-    <div class="row">
-        <div class="col-2" style="background-color: #f8f9fa;">
-
-        </div>
-        <div class="col-8">
-            <h1 style="text-align: center" th:text="${'Mã đề: '+thongtinde.madethi}"></h1>
-            <h1 style="text-align: center" th:text="${'Tên môn thi: '+thongtinde.monthi.tenmonthi}"></h1>
-            <form id="quiz-form" method="post" action="/submitQuiz">
-                <input type="hidden" name="deThiId" th:value="${thongtinde.id}"/>
-
-
-
-                <input type="hidden" id="userId" th:value="${userId}" />
-                &lt;!&ndash; Gán giá trị cho deThiId &ndash;&gt;
-                <ul class="quiz">
-                    <li th:each="baithi, stat : ${chiTietDeThiList}" class="li-container">
-            <span class="part1">
-                <div class="questionz-container">
-                    <div class="duongke"></div>
-                    <h4 th:utext="${'Câu hỏi ' + (stat.index + 1) + ': ' + (baithi.cauHoi.ten != null ? baithi.cauHoi.ten : '')}"></h4>
-                </div>
-
-                <span class="image-part" th:if="${baithi.cauHoi != null and baithi.cauHoi.ImgUrl != null and baithi.cauHoi.ImgUrl != ''}" style="margin-left: 100px !important">
-                    <img th:src="${baithi.cauHoi.ImgUrl}" alt="Hình ảnh câu hỏi" height="110" width="110" />
-                </span>
-
-                <ul class="choices" style="margin-left: 50px !important">
-                    <li>
-                        <label class="choice-label">
-                            <input type="radio" th:name="${'question_' + baithi.id}" th:value="'A'" th:checked="${baithi.dapanchon == 'A'}" />
-                            <span th:text="${'A.  ' + (baithi.cauHoi.dapanA != null ? baithi.cauHoi.dapanA : '')}"></span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="choice-label">
-                            <input type="radio" th:name="${'question_' + baithi.id}" th:value="'B'" th:checked="${baithi.dapanchon == 'B'}" />
-                            <span th:text="${'B.  ' + (baithi.cauHoi.dapanB != null ? baithi.cauHoi.dapanB : '')}"></span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="choice-label">
-                            <input type="radio" th:name="${'question_' + baithi.id}" th:value="'C'" th:checked="${baithi.dapanchon == 'C'}" />
-                            <span th:text="${'C.  ' + (baithi.cauHoi.dapanC != null ? baithi.cauHoi.dapanC : '')}"></span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="choice-label">
-                            <input type="radio" th:name="${'question_' + baithi.id}" th:value="'D'" th:checked="${baithi.dapanchon == 'D'}" />
-                            <span th:text="${'D.  ' + (baithi.cauHoi.dapanD != null ? baithi.cauHoi.dapanD : '')}"></span>
-                        </label>
-                    </li>
-                </ul>
-            </span>
-                    </li>
-                </ul>
-                <button type="submit" class="save-progress">Lưu tiến trình</button>
-            </form>
-            <button type="button" class="view-results" onclick="viewKetQuaThi()">Nộp Bài</button>
-        </div>
-        <div class="col-2"style="background-color: #f8f9fa;">
-
-        </div>
-    </div>
-</div>-->
 
 <footer class="bg-primary text-white text-center" style="padding:20px">
     <div class="container d-flex" style="margin: 0px;">
@@ -459,14 +391,48 @@
     });
 }
 </script>
+<!--<script>-->
+<!--    function viewKetQuaThi() {-->
+<!--       var userId = document.getElementById('userId').value; // Lấy giá trị userId-->
+<!--       var deThiId = $('input[name="deThiId"]').val(); // Lấy giá trị deThiId-->
+<!--       window.location.href = "/ketquathi/" + userId + "/" + deThiId;-->
+<!--   }-->
+<!--</script>-->
 <script>
     function viewKetQuaThi() {
+       // Gọi hàm lưu tiến trình
+       saveProgress();
+
+       // Lấy giá trị userId và deThiId
        var userId = document.getElementById('userId').value; // Lấy giá trị userId
        var deThiId = $('input[name="deThiId"]').val(); // Lấy giá trị deThiId
-       window.location.href = "/ketquathi/" + userId + "/" + deThiId;
+
+       // Đặt độ trễ 2 giây trước khi chuyển hướng
+       setTimeout(function() {
+           window.location.href = "/ketquathi/" + userId + "/" + deThiId;
+       }, 2000); // 2000 milliseconds = 2 seconds
    }
 </script>
+<script>
+    // Giả sử bạn đã lưu userId hiện tại trong sessionStorage
+    var currentUserId = sessionStorage.getItem('currentUserId');
 
+    function resetRadioButtons() {
+        // Lặp qua tất cả các input radio và reset
+        $('input[type="radio"]').prop('checked', false);
+    }
+
+    $(document).ready(function() {
+    var userId = document.getElementById('userId').value; // Lấy giá trị userId mới
+
+    // Kiểm tra xem userId có khác với currentUserId không
+    if (currentUserId !== userId) {
+        // Nếu khác, reset radio buttons và lưu userId mới
+        resetRadioButtons();
+        sessionStorage.setItem('currentUserId', userId); // Cập nhật userId mới
+    }
+});
+</script>
 <!--toi day-->
 </body>
 </html>

@@ -138,6 +138,7 @@ public class CustomerController {
         List<ChiTietDeThi> chiTietDeThiList = chiTietDeThiService.findByDeThiId(deThiId);
 
         // Thêm thông tin vào model
+        model.addAttribute("thongbaos", thongBaoService.getAllThongBao());
         model.addAttribute("caThi", caThi);
         model.addAttribute("minutesLeft", minutesLeft);
         model.addAttribute("thoiLuong", thoiLuong);
