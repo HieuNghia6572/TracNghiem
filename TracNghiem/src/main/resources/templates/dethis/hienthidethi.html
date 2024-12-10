@@ -400,18 +400,24 @@
 <!--</script>-->
 <script>
     function viewKetQuaThi() {
-       // Gọi hàm lưu tiến trình
-       saveProgress();
+     // Hiển thị hộp thoại xác nhận
+     if (confirm('Bạn có muốn nộp bài?')) {
+         // Nếu người dùng chọn OK, lưu tiến trình trước khi nộp bài
+         saveProgress();
 
-       // Lấy giá trị userId và deThiId
-       var userId = document.getElementById('userId').value; // Lấy giá trị userId
-       var deThiId = $('input[name="deThiId"]').val(); // Lấy giá trị deThiId
+         // Lấy giá trị userId và deThiId
+         var userId = document.getElementById('userId').value; // Lấy giá trị userId
+         var deThiId = $('input[name="deThiId"]').val(); // Lấy giá trị deThiId
 
-       // Đặt độ trễ 2 giây trước khi chuyển hướng
-       setTimeout(function() {
-           window.location.href = "/ketquathi/" + userId + "/" + deThiId;
-       }, 2000); // 2000 milliseconds = 2 seconds
-   }
+         // Đặt độ trễ 2 giây trước khi chuyển hướng
+         setTimeout(function() {
+             window.location.href = "/ketquathi/" + userId + "/" + deThiId;
+         }, 2000); // 2000 milliseconds = 2 seconds
+     } else {
+         // Nếu người dùng chọn Cancel, không làm gì
+         return;
+     }
+ }
 </script>
 <script>
     // Giả sử bạn đã lưu userId hiện tại trong sessionStorage
