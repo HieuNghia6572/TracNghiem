@@ -21,6 +21,7 @@ public class CauHoi {
 
     private String ImgUrl;
 
+    @Lob // doi sang dang text
     @Column(name = "ten")
     @NotEmpty(message = "Tên không được để trống")
     private String ten;

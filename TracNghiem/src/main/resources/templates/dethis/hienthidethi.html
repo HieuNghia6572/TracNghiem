@@ -263,9 +263,13 @@
                     <h4 th:utext="${'Câu hỏi ' + (stat.index + 1) + ': ' + (baithi.cauHoi.ten != null ? baithi.cauHoi.ten : '')}"></h4>
                 </div>
 
-                <span class="image-part" th:if="${baithi.cauHoi != null and baithi.cauHoi.ImgUrl != null and baithi.cauHoi.ImgUrl != ''}" style="margin-left: 100px !important">
-                    <img th:src="${baithi.cauHoi.ImgUrl}" alt="Hình ảnh câu hỏi" height="110" width="110" />
-                </span>
+<!--                <span class="image-part" th:if="${baithi.cauHoi != null and baithi.cauHoi.ImgUrl != null and baithi.cauHoi.ImgUrl != ''}" style="margin-left: 100px !important">-->
+<!--                    <img th:src="${baithi.cauHoi.ImgUrl}" alt="Hình ảnh câu hỏi" height="110" width="110" />-->
+<!--                </span>-->
+
+                <div  th:if="${baithi.cauHoi != null and baithi.cauHoi.imgUrl != null and baithi.cauHoi.imgUrl != '' and baithi.cauHoi.imgUrl != 'Chưa có ảnh'}">
+                    <img style="margin-left: 100px;margin-bottom:20px !important" th:src="${baithi.cauHoi.imgUrl}" alt="Hình ảnh câu hỏi" height="140" width="140" />
+                </div>
 
                 <ul class="choices" style="margin-left: 50px !important">
                     <li>
@@ -396,6 +400,21 @@
 <!--       var userId = document.getElementById('userId').value; // Lấy giá trị userId-->
 <!--       var deThiId = $('input[name="deThiId"]').val(); // Lấy giá trị deThiId-->
 <!--       window.location.href = "/ketquathi/" + userId + "/" + deThiId;-->
+<!--   }-->
+<!--</script>-->
+<!--<script>-->
+<!--    function viewKetQuaThi() {-->
+<!--       // Gọi hàm lưu tiến trình-->
+<!--       saveProgress();-->
+
+<!--       // Lấy giá trị userId và deThiId-->
+<!--       var userId = document.getElementById('userId').value; // Lấy giá trị userId-->
+<!--       var deThiId = $('input[name="deThiId"]').val(); // Lấy giá trị deThiId-->
+
+<!--       // Đặt độ trễ 2 giây trước khi chuyển hướng-->
+<!--       setTimeout(function() {-->
+<!--           window.location.href = "/ketquathi/" + userId + "/" + deThiId;-->
+<!--       }, 2000); // 2000 milliseconds = 2 seconds-->
 <!--   }-->
 <!--</script>-->
 <script>

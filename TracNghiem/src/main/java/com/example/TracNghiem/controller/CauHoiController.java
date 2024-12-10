@@ -133,6 +133,15 @@
             existingCauHoi.setDapanD(cauHoi.getDapanD());
             existingCauHoi.setMonthiId(cauHoi.getMonthiId());
             // Xử lý tệp hình ảnh nếu có
+//            if (!imageFile.isEmpty()) {
+//                try {
+//                    String imageName = saveImage(imageFile);
+//                    existingCauHoi.setImgUrl("/img/" + imageName); // Cập nhật đường dẫn hình ảnh
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+            // Xử lý tệp hình ảnh nếu có
             if (!imageFile.isEmpty()) {
                 try {
                     String imageName = saveImage(imageFile);
@@ -140,6 +149,9 @@
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            } else {
+                // Nếu không chọn hình ảnh mới, xóa hình ảnh cũ
+                existingCauHoi.setImgUrl("Chưa có ảnh");
             }
 
             // Cập nhật danh sách chitietbaithi nếu cần

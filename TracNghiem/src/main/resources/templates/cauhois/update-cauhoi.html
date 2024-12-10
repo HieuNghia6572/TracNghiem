@@ -118,9 +118,17 @@
                 <label for="image">Hình ảnh:</label>
                 <input type="file" id="image"  name="image" class="form-control" />
             </div>
+<!--            <div class="form-group">-->
+<!--                <label for="image"class="w-10 me-3 mb-0">Hình ảnh hiện tại</label>-->
+<!--                <img th:src="@{${cauhoi.ImgUrl}}" width="150" height="150" alt="Sản phẩm" />-->
+<!--            </div>-->
             <div class="form-group">
-                <label for="image"class="w-10 me-3 mb-0">Hình ảnh hiện tại</label>
-                <img th:src="@{${cauhoi.ImgUrl}}" width="150" height="150" alt="Sản phẩm" />
+                <label for="image" class="w-10 me-3 mb-0">Hình ảnh hiện tại</label>
+                <div>
+                    <img th:src="@{${cauhoi.imgUrl}}" width="150" height="150" alt="Sản phẩm"
+                         th:if="${cauhoi.imgUrl != null && !cauhoi.imgUrl.isEmpty() && cauhoi.imgUrl != 'Chưa có ảnh'}" />
+                    <span th:if="${cauhoi.imgUrl == 'Chưa có ảnh' || cauhoi.imgUrl == null || cauhoi.imgUrl.isEmpty()}" class="text-danger">Chưa có ảnh</span>
+                </div>
             </div>
             <div class="form-group">
                 <label for="dapanA">Đáp án A:</label>
