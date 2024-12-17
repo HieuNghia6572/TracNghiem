@@ -19,6 +19,7 @@ import java.util.Optional;
 public class ChiTietDeThiService {
 
     private final IChiTietDeThiRepository chiTietDeThiRepository;
+    private final UserService userService;
 
     // Lấy tất cả các chi tiết đề thi
     public List<ChiTietDeThi> getAllChiTietDeThi() {
@@ -115,4 +116,10 @@ public class ChiTietDeThiService {
     public Optional<ChiTietDeThi> findByCauHoiIdAndUserIdAndCaThiId(Long cauHoiId, Long userId, Long caThiId) {
         return chiTietDeThiRepository.findByCauHoiIdAndUserIdAndCaThiId(cauHoiId, userId, caThiId);
     }
+
+    public List<ChiTietDeThi> getAllChiTietDeThiByUserAndIdDe(Long id){
+        User user = userService.getUserLogin();
+        return chiTietDeThiRepository.findAll().stream().filter(p-> p.getDeThi().getId().equals(id) && p.getUser().getId().equals(user.getId())).toList();
+    }
+
 }

@@ -50,6 +50,11 @@ public class User implements UserDetails {
     @Size(max = 250, message = "Address must not exceed 250 characters")
     private String address;
 
+    @Column(nullable = false)
+    private Boolean isDelete;
+
+    private String resetPasswordToken;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -58,6 +63,7 @@ public class User implements UserDetails {
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+
 
 
     @Override

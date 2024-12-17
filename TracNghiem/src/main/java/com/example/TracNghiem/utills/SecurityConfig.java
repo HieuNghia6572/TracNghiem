@@ -1,5 +1,6 @@
 package com.example.TracNghiem.utills;
 
+
 import com.example.TracNghiem.services.UserService;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -12,15 +13,23 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+
 @Configuration // Đánh dấu lớp này là một lớp cấu hình cho Spring Context.
 @EnableWebSecurity // Kích hoạt tính năng bảo mật web của Spring Security.
 @RequiredArgsConstructor // Lombok tự động tạo constructor có tham số cho tất cả các trường final.
 public class SecurityConfig {
-    private final UserService userService; // Tiêm UserService vào lớp cấu hình này.
+    private final UserService userService;
+
+
+    // Tiêm UserService vào lớp cấu hình này.
     @Bean // Đánh dấu phương thức trả về một bean được quản lý bởi Spring Context.
     public UserDetailsService userDetailsService() {
         return new UserService(); // Cung cấp dịch vụ xử lý chi tiết người dùng.
     }
+
+
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(); // Bean mã hóa mật khẩu sử dụng BCrypt.
@@ -38,7 +47,7 @@ public class SecurityConfig {
                 .csrf(p -> p.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/images/**","/test/**", "/fonts/**", "/vendor/**","/img/**",
-                                "/Job Board DOC/**","/scss/**", "/css/**", "/", "/oauth/**", "/register", "/error")
+                                "/Job Board DOC/**","/scss/**", "/css/**", "/", "/oauth/**", "/register", "/error","/userForgot/**")
                         .permitAll()
                         .requestMatchers("/cauhois/edit/**","/cauhois", "/cauhois/add", "/cauhois/delete",
                                 "/cathis/add","/cathis","/cathis/edit/**","/cathis/delete",

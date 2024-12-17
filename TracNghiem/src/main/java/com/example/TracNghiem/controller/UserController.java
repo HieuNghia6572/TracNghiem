@@ -3,10 +3,12 @@ package com.example.TracNghiem.controller;
 import com.example.TracNghiem.entity.CauHoi;
 import com.example.TracNghiem.entity.MonThi;
 import com.example.TracNghiem.entity.User;
+import com.example.TracNghiem.services.ChiTietDeThiService;
 import com.example.TracNghiem.services.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.Banner;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final ChiTietDeThiService chiTietDeThiService;
     @GetMapping("/login")
     public String login() {
         return "users/login";
@@ -88,6 +91,14 @@ public class UserController {
         return "/users/profile-information";
     }
 
+    @GetMapping("chitietdethi/{id}")
+    public  String  getChitietdethi(Model model, @PathVariable Long id){
+        User user = userService.getUserLogin();
+        model.addAttribute("user",user);
+        model.addAttribute("chitiet", chiTietDeThiService.getAllChiTietDeThiByUserAndIdDe(id));
+        return "users/chitietdethi";
+    }
+
 
     @PostMapping("update-profile")
     public String UpdateProfile(@Valid User  user , BindingResult result) {
@@ -97,6 +108,11 @@ public class UserController {
         userService.updateUser(user);
         return "redirect:/home";
 
+    }
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable Long id , Model mode) {
+        userService.deleteUser(id);
+        return "redirect:/users-list";
     }
 
 

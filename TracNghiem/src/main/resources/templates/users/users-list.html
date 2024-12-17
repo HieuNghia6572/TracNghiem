@@ -88,6 +88,13 @@
                 <td>
                     <div>
                         <a th:href="@{/edit/{id}(id=${user.id})}" class="btn btn-success btn-sm">Chỉnh sửa</a>
+
+                        <a th:href="@{/delete/{id}(id=${user.id})}"
+                           style="background-color: #d13636; color: white; border: none; padding: 5px 10px; border-radius: 5px;"
+                           class="btn btn-sm " onclick="return confirm('Are you sure?')" >
+                            Xoá tài khoản
+                        </a>
+
                     </div>
                 </td>
             </tr>

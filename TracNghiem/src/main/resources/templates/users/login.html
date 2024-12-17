@@ -61,7 +61,9 @@
         <div th:if="${param.logout}" class="alert alert-success">
             Bạn đã được đăng xuất.
         </div>
-
+        <div th:if="${accountDeleted}" style="color:red;">
+            Tài khoản của bạn đã bị xóa. Liên hệ với quản trị viên để biết thêm chi tiết.
+        </div>
         <!-- Tên đăng nhập -->
         <div class="form-group mb-4">
             <i class="fa fa-user"></i>
@@ -74,10 +76,12 @@
             <input type="password" class="form-control" required id="password" name="password" placeholder="Mật khẩu">
         </div>
 
-        <!-- Nút Đăng nhập -->
-
+        <div class="form-group d-flex justify-content-end mb-0">
+            <a th:href="@{/userForgot/forgot_password}" class="text-info small" style="margin-bottom: 0;">Quên mật khẩu?</a>
+        </div>
         <div class="d-grid gap-2 form-action">
             <button type="submit" class="btn btn-primary btn-lg btn-block">Đăng nhập</button>
+        </div>
             <p class="mt-3 mb-0">Bạn không có tài khoản?
                 <a th:href="${'/register'}" class="text-info">Đăng ký ngay!</a>
             </p>
