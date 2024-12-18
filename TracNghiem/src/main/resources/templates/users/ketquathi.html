@@ -236,7 +236,7 @@
                 <td th:text="${userDeThi.deThi.madethi}">Tên Đề Thi</td>
                 <td th:text="${userDeThi.deThi.monthi.tenmonthi}">Tên Môn Thi</td>
                 <td th:text="${userDeThi.diem} + ' / ' + ${userDeThi.deThi.getTotalQuestions()}">Tổng Số Câu Hỏi Đúng</td>
-                <td class="highlight" style="width: 20%; display: inline-block;" th:text="${userDeThi.calculateTotalPoints()}">Tổng Điểm</td> <!-- Hiển thị tổng điểm -->
+                <td style="color:red;font-size: 20px" th:text="${userDeThi.calculateTotalPoints()}">Tổng Điểm</td> <!-- Hiển thị tổng điểm -->
                 <td>
                     <a th:href="@{/chitietdethi/{id}(id=${userDeThi.deThi.id})}" class="btn btn-success btn-sm">Xem Chi Tiết</a>
                 </td>

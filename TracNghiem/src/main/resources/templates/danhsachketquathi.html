@@ -209,8 +209,8 @@
                 <td th:text="${ketqua.deThi.madethi}">Tên Đề Thi</td>
                 <td th:text="${ketqua.deThi.monthi.tenmonthi}">Tên Môn Thi</td>
                 <td th:text="${ketqua.diem} + ' / ' + ${ketqua.deThi.getTotalQuestions()}">Tổng Số Câu Hỏi Đúng</td>
-                <td class="highlight" style="width: 20%; display: inline-block;" th:text="${ketqua.calculateTotalPoints()}">Tổng Điểm</td> <!-- Hiển thị tổng điểm -->
-                <td th:text="${ketqua.calculateTotalPoints()}">Tổng Điểm</td><!-- Hiển thị tổng điểm -->
+                <td  style="color:red;font-size: 20px" th:text="${ketqua.calculateTotalPoints()}">Tổng Điểm</td> <!-- Hiển thị tổng điểm -->
+<!--                <td th:text="${ketqua.calculateTotalPoints()}">Tổng Điểm</td>&lt;!&ndash; Hiển thị tổng điểm &ndash;&gt;-->
 
                 <td>
                      <a th:href="@{/chitietdethi/{id}(id=${ketqua.deThi.id})}" class="btn btn-success btn-sm">Xem Chi Tiết</a>
