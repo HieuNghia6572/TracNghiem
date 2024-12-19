@@ -92,7 +92,7 @@
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Đổ bóng khi chọn */
         }
     </style>
-    <title>Danh sách phòng thi</title>
+    <title>Kết quả thi</title>
 </head>
 <body>
 
@@ -194,14 +194,14 @@
             <span style="color: #00009E;">T</span><span style="color: #0000A8;">H</span><span style="color: #0000B1;">I</span>
         </h2>
 
-        <table class="table mt-4" >
-            <thead>
+        <table class="table table-bordered table-hover display" id="questionTable" >
+            <thead class="table-dark">
             <tr>
                 <th>Tên Đề Thi</th>
                 <th>Tên Môn Thi</th>
                 <th>Số Câu Đúng</th>
                 <th>Tổng Điểm</th>
-                <th>Chức Năng<th>
+                <th>Chức Năng</th>
             </tr>
             </thead>
             <tbody>
@@ -210,8 +210,6 @@
                 <td th:text="${ketqua.deThi.monthi.tenmonthi}">Tên Môn Thi</td>
                 <td th:text="${ketqua.diem} + ' / ' + ${ketqua.deThi.getTotalQuestions()}">Tổng Số Câu Hỏi Đúng</td>
                 <td  style="color:red;font-size: 20px" th:text="${ketqua.calculateTotalPoints()}">Tổng Điểm</td> <!-- Hiển thị tổng điểm -->
-<!--                <td th:text="${ketqua.calculateTotalPoints()}">Tổng Điểm</td>&lt;!&ndash; Hiển thị tổng điểm &ndash;&gt;-->
-
                 <td>
                      <a th:href="@{/chitietdethi/{id}(id=${ketqua.deThi.id})}" class="btn btn-success btn-sm">Xem Chi Tiết</a>
                 </td>
@@ -265,7 +263,37 @@
         </div>
     </div>
 </footer>
+<script>
+    $(document).ready(function() {
+        const table = $('#questionTable').DataTable({
+            language: {
+                "decimal":        "",
+                "emptyTable":     "Không có dữ liệu",
+                "info":           "Hiển thị _START_ đến _END_ của _TOTAL_ mục",
+                "infoEmpty":      "Hiển thị 0 đến 0 của 0 mục",
+                "infoFiltered":   "(lọc từ _MAX_ mục)",
+                "infoPostFix":    "",
+                "thousands":      ",",
+                "lengthMenu":     "Hiển thị _MENU_ mục",
+                "loadingRecords": "Đang tải...",
+                "processing":     "Đang xử lý...",
+                "search":         "Tìm kiếm:",
+                "zeroRecords":    "Không tìm thấy kết quả",
+                "paginate": {
+                    "first":      "Đầu",
+                    "last":       "Cuối",
+                    "next":       "Tiếp theo",
+                    "previous":   "Trước"
+                },
+                "aria": {
+                    "sortAscending":  ": sắp xếp tăng dần",
+                    "sortDescending": ": sắp xếp giảm dần"
+                }
+            }
+        });
 
+    });
+</script>
 <script th:src="@{/js/scripts.js}"></script>
 
 

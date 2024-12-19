@@ -208,13 +208,19 @@
             <span style="color: #00009E;">Q</span><span style="color: #000094;">U</span><span style="color: #00008B;">Ả</span>
             <span style="color: #000094;"> </span>
             <span style="color: #00009E;">T</span><span style="color: #0000A8;">H</span><span style="color: #0000B1;">I</span>
+            <span style="color: #000094;"> </span>
+            <span style="color: #000094;">C</span><span style="color: #00008B;">H</span><span style="color: #00009E;">I</span>
+            <span style="color: #000094;"> </span>
+            <span style="color: #0000A8;">T</span><span style="color: #0000B1;">I</span><span style="color: #000094;">Ế</span><span style="color: #00009E;">T</span>
+
         </h2>
 
         <div class="message" th:if="${message}" th:text="${message}"></div>
 
-        <table class="table table-striped mt-4">
-            <thead>
+        <table class="table table-bordered table-hover display" id="questionTable">
+            <thead class="table-dark">
             <tr>
+                <th>Câu</th>
                 <th>Câu</th>
                 <th>Kết Quả</th>
             </tr>
@@ -222,15 +228,19 @@
             <tbody>
             <tr th:each="item, stat : ${chitiet}">
                 <td th:text="${stat.index + 1}"></td>
-                <td th:if="${item.cauHoi.dapandung==item.dapanchon}">
+                <td style="width: 85%;" th:utext="${item.cauHoi.ten}"></td>
+                <td style="text-align:center;" th:if="${item.cauHoi.dapandung==item.dapanchon}">
                     <img style="width:20px;height:20px" th:src="@{/img/hinhanhdungsai/dung.png}">
                 </td>
-                <td th:if="${item.cauHoi.dapandung!=item.dapanchon}">
+                <td style="text-align:center;" th:if="${item.cauHoi.dapandung!=item.dapanchon}">
                     <img style="width:20px;height:20px" th:src="@{/img/hinhanhdungsai/sai.png}">
                 </td>
             </tr>
             </tbody>
         </table>
+        <div style="margin-top: 20px; text-align: left;">
+            <button onclick="window.history.back();" class="btn btn-secondary" >Trở về trang trước</button>
+        </div>
     </div>
 </div>
 
