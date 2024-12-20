@@ -104,8 +104,12 @@
             <td th:text="${monthi.id}"></td>
             <td th:text="${monthi.mamonthi}"></td>
             <td th:text="${monthi.tenmonthi}"></td>
-            <td><img th:src="${monthi.ImgUrl}" width="100px" height="100px"> </td>
-            <!-- <td> <img th:src="${sanpham.ImgUrl}" width="100px" height="100px"></td>
+            <td>
+                <img th:src="${monthi.imgUrl != null && monthi.imgUrl != 'Chưa có ảnh' ? monthi.imgUrl : null}"
+                     width="100px" height="100px"
+                     th:if="${monthi.imgUrl != null && monthi.imgUrl != 'Chưa có ảnh'}" />
+                <span th:if="${monthi.imgUrl == 'Chưa có ảnh' || monthi.imgUrl == null}" class="text-danger">Chưa có ảnh</span>
+            </td>            <!-- <td> <img th:src="${sanpham.ImgUrl}" width="100px" height="100px"></td>
              <td th:text="${sanpham.theloai.ten}"></td>-->
             <td>
 
