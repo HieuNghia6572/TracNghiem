@@ -139,6 +139,25 @@
             display: flex; /* Sử dụng Flexbox để chia thành hai phần */
             justify-content: space-between; /* Căn giữa các phần tử */
             align-items: center; /* Căn giữa theo chiều dọc */
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        .li-container.dimmed {
+            opacity: 0.1;
+        }
+        .toggle-btn {
+            margin: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 10px; /* Bo góc */
+            background-color: #ffffe0; /* Màu nền vàng nhạt */
+            color: #000; /* Màu chữ đen */
+            border: 2px solid #000; /* Viền màu đen */
+            transition: background-color 0.3s; /* Hiệu ứng chuyển màu khi hover */
+        }
+
+        .toggle-btn:hover {
+            background-color: #ffeeba; /* Màu nền khi hover (nâu nhạt) */
         }
 
         .part1 {
@@ -243,6 +262,7 @@
                     </tr>
                     </tbody>
                 </table>
+                <button class="toggle-btn">Bật/Tắt làm mờ</button>
             </div>
         </div>
         <div class="col-8">
@@ -457,6 +477,48 @@
         sessionStorage.setItem('currentUserId', userId); // Cập nhật userId mới
     }
 });
+</script>
+<script>
+    const listItems = document.querySelectorAll('.li-container');
+    let dimmingEnabled = true; // Biến kiểm soát tính năng làm mờ
+
+    // Hàm để làm mờ các phần tử
+    function dimItems() {
+        if (dimmingEnabled) {
+            listItems.forEach(item => {
+                item.classList.add('dimmed');
+            });
+        }
+    }
+
+    // Hàm để bật/tắt tính năng làm mờ
+    document.querySelector('.toggle-btn').addEventListener('click', () => {
+        dimmingEnabled = !dimmingEnabled;
+        if (dimmingEnabled) {
+            dimItems(); // Làm mờ nếu đang bật
+        } else {
+            listItems.forEach(item => {
+                item.classList.remove('dimmed'); // Bỏ làm mờ
+            });
+        }
+    });
+
+    // Sự kiện khi di chuột vào/ra
+    listItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            if (dimmingEnabled) {
+                item.classList.remove('dimmed');
+            }
+        });
+        item.addEventListener('mouseleave', () => {
+            if (dimmingEnabled) {
+                item.classList.add('dimmed');
+            }
+        });
+    });
+
+    // Khởi tạo làm mờ ban đầu
+    dimItems();
 </script>
 <!--toi day-->
 </body>
